@@ -81,6 +81,7 @@
           <el-table-column label="手机号码" align="center" key="phonenumber" prop="phonenumber" v-if="columns[6].visible" width="120" />
           <el-table-column label="状态" align="center" key="status" prop="status" v-if="columns[7].visible" :show-overflow-tooltip="true" />
           
+          
           <el-table-column
             label="操作"
             align="center"
@@ -146,12 +147,8 @@ export default {
       open: false,
       // 院系名称
       deptName: undefined,
-      // 默认密码
-      initPassword: undefined,
       // 日期范围
       dateRange: [],
-      // 职位选项
-      postOptions: [],
       // 角色选项
       roleOptions: [],
       // 表单参数
@@ -175,11 +172,11 @@ export default {
         { key: 0, label: `用户编号`, visible: true },
         { key: 1, label: `用户名称`, visible: true },
         { key: 2, label: `用户昵称`, visible: true },
-        { key: 3, label: `归属院系`, visible: true },
-        { key: 4, label: `手机号码`, visible: true },
-        { key: 5, label: `状态`, visible: true },
-        { key: 6, label: `创建时间`, visible: true },
-        { key: 7, label: `登录IP`, visible: true }
+        { key: 3, label: `性别`, visible: true },
+        { key: 4, label: `班级`, visible: true },
+        { key: 5, label: `院系`, visible: true },
+        { key: 6, label: `手机电话`, visible: true },
+        { key: 7, label: `状态`, visible: true }
       ],
       // 表单校验
       rules: {

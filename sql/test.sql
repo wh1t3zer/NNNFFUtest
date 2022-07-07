@@ -142,6 +142,30 @@ create table sys_menu (
 ) engine=innodb auto_increment=2000 comment = '菜单权限表';
 
 -- ----------------------------
+-- 6、综测用户信息表
+-- ----------------------------
+drop table if exists test_user;
+create table test_user (
+  user_id           bigint(20)      not null auto_increment    comment '用户ID',
+  user_name         varchar(30)     not null                   comment '用户账号',
+  nick_name         varchar(30)     not null                   comment '用户姓名',
+  phonenumber       varchar(11)     default ''                 comment '手机号码',
+  class             char(10)        not null                   comment '班级',
+  sex               char(1)         default '0'                comment '用户性别（0男 1女 2未知）',
+  del_flag          char(1)         default '0'                comment '删除标志（0代表存在 2代表删除）',
+  create_time       datetime                                   comment '创建时间',
+  update_by         varchar(64)     default ''                 comment '更新者',
+  update_time       datetime                                   comment '更新时间',
+  primary key (user_id)
+) engine=innodb auto_increment=100 comment = '综测用户信息表';
+
+-- ----------------------------
+-- 初始化-用户信息表数据
+-- ----------------------------
+insert into test_user values(1,  '2020170029', 梁, '13000000000', '20计算机一班' ,'0',  '0', sysdate(), 'admin', sysdate());
+
+
+-- ----------------------------
 -- 初始化-菜单信息表数据
 -- ----------------------------
 -- 一级菜单
@@ -223,14 +247,6 @@ insert into sys_menu values('1045', '日志导出', '501', '3', '#', '', '', 1, 
 insert into sys_menu values('1046', '在线查询', '109', '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:query',       '#', 'admin', sysdate(), '', null, '');
 insert into sys_menu values('1047', '批量强退', '109', '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:batchLogout', '#', 'admin', sysdate(), '', null, '');
 insert into sys_menu values('1048', '单条强退', '109', '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:forceLogout', '#', 'admin', sysdate(), '', null, '');
--- 定时任务按钮
--- insert into sys_menu values('1049', '任务查询', '110', '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:query',          '#', 'admin', sysdate(), '', null, '');
--- insert into sys_menu values('1050', '任务新增', '110', '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:add',            '#', 'admin', sysdate(), '', null, '');
--- insert into sys_menu values('1051', '任务修改', '110', '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:edit',           '#', 'admin', sysdate(), '', null, '');
--- insert into sys_menu values('1052', '任务删除', '110', '4', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:remove',         '#', 'admin', sysdate(), '', null, '');
--- insert into sys_menu values('1053', '状态修改', '110', '5', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:changeStatus',   '#', 'admin', sysdate(), '', null, '');
--- insert into sys_menu values('1054', '任务导出', '110', '7', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:job:export',         '#', 'admin', sysdate(), '', null, '');
-
 
 -- ----------------------------
 -- 6、用户和角色关联表  用户N-1角色
