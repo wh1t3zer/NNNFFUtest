@@ -110,6 +110,10 @@ export default {
       loading: true,
       // 选中数组
       ids: [],
+      // 非单个禁用
+      single: false,
+      // 非多个禁用
+      multiple: true,
       // 显示搜索条件
       showSearch: true,
       // 总条数
