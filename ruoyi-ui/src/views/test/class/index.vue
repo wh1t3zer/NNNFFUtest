@@ -22,10 +22,9 @@
               @keyup.enter.native="handleQuery"
             />
           </el-form-item>
-          
+
           <el-form-item>
             <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
-            <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
           </el-form-item>
         </el-form>
 
@@ -63,7 +62,7 @@
           <el-table-column label="院系" align="center" key="deptName" prop="dept.deptName" v-if="columns[5].visible" :show-overflow-tooltip="true" />
           <el-table-column label="手机号码" align="center" key="phonenumber" prop="phonenumber" v-if="columns[6].visible" width="120" />
           <el-table-column label="状态" align="center" key="status" prop="status" v-if="columns[7].visible" :show-overflow-tooltip="true" />
-          
+
           <el-table-column
             label="操作"
             align="center"
@@ -71,7 +70,7 @@
             class-name="small-padding fixed-width"
           >
             <template slot-scope="scope" v-if="scope.row.userId !== 1">
-              
+
               <el-button
                 size="mini"
                 type="text"
@@ -97,24 +96,20 @@
 </template>
 
 <script>
-import { listUser, getUser, delUser, addUser, updateUser, resetUserPwd, changeUserStatus } from "@/api/system/user";
+import { TestUser, getTestUser } from "@/api/test/class";
 import { getToken } from "@/utils/auth";
 
 
 
 export default {
-  name: "User",
-  dicts: ['sys_normal_disable', 'sys_user_sex'],
+  name: "user",
+  dicts: [ 'sys_user_sex'],
   data() {
     return {
       // 遮罩层
       loading: true,
       // 选中数组
       ids: [],
-      // 非单个禁用
-      single: false,
-      // 非多个禁用
-      multiple: true,
       // 显示搜索条件
       showSearch: true,
       // 总条数
@@ -123,56 +118,46 @@ export default {
       userList: null,
       // 弹出层标题
       title: "",
-      // 部门树选项
-      deptOptions: undefined,
       // 是否显示弹出层
       open: false,
       // 院系名称
       deptName: undefined,
-      // 默认密码
-      initPassword: undefined,
-      // 日期范围
-      dateRange: [],
-      // 职位选项
-      postOptions: [],
-      // 角色选项
-      roleOptions: [],
       // 表单参数
       form: {},
       defaultProps: {
         children: "children",
         label: "label"
       },
-      
+
       // 查询参数
       queryParams: {
         pageNum: 1,
         pageSize: 10,
         userName: undefined,
-        phonenumber: undefined,
+        nickName: undefined,
         status: undefined,
         deptId: undefined
       },
       // 列信息
       columns: [
         { key: 0, label: `用户编号`, visible: true },
-        { key: 1, label: `用户名称`, visible: true },
-        { key: 2, label: `用户昵称`, visible: true },
-        { key: 3, label: `归属院系`, visible: true },
-        { key: 4, label: `手机号码`, visible: true },
-        { key: 5, label: `状态`, visible: true },
-        { key: 6, label: `创建时间`, visible: true },
-        { key: 7, label: `登录IP`, visible: true }
+        { key: 1, label: `学号`, visible: true },
+        { key: 2, label: `姓名`, visible: true },
+        { key: 3, label: `性别`, visible: true },
+        { key: 4, label: `班级`, visible: true },
+        { key: 5, label: `院系`, visible: true },
+        { key: 6, label: `手机号码`, visible: true },
+        { key: 7, label: `状态`, visible: true }
       ],
       // 表单校验
       rules: {
-        
+
       }
     };
   },
   created() {
     this.getList();
-    
+
   },
   methods: {
     /** 查询用户列表 */
@@ -198,36 +183,11 @@ export default {
     // 取消按钮
     cancel() {
       this.open = false;
-      this.reset();
-    },
-    // 表单重置
-    reset() {
-      this.form = {
-        userId: undefined,
-        deptId: undefined,
-        userName: undefined,
-        nickName: undefined,
-        password: undefined,
-        phonenumber: undefined,
-        email: undefined,
-        sex: undefined,
-        status: "0",
-        remark: undefined,
-        postIds: [],
-        roleIds: []
-      };
-      this.resetForm("form");
     },
     /** 搜索按钮操作 */
     handleQuery() {
       this.queryParams.pageNum = 1;
       this.getList();
-    },
-    /** 重置按钮操作 */
-    resetQuery() {
-      this.dateRange = [];
-      this.resetForm("queryForm");
-      this.handleQuery();
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
@@ -235,7 +195,7 @@ export default {
       this.single = selection.length != 1;
       this.multiple = !selection.length;
     },
-    
+
   }
 };
 </script>
