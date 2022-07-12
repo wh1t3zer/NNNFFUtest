@@ -282,19 +282,11 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <!-- <el-col :span="12">
-            <el-form-item label="角色">
-              <el-select v-model="form.roleIds"  single placeholder="请选择角色">
-                <el-option
-                  v-for="item in roleOptions"
-                  :key="item.roleId"
-                  :label="item.roleName"
-                  :value="item.roleId"
-                  :disabled="item.status == 1"
-                ></el-option>
-              </el-select>
+          <el-col :span="12">
+            <el-form-item label="专业" prop="major">
+              <el-input v-model="form.major" placeholder="请输入专业名称" maxlength="15" />
             </el-form-item>
-          </el-col> -->
+          </el-col>
         </el-row>
         <el-row>
           <el-col :span="24">
@@ -452,7 +444,14 @@ export default {
             message: "请输入正确的手机号码",
             trigger: "blur"
           }
-        ]
+        ],
+        major: [
+          {
+            pattern: /^[\u0391-\uFFE5]+$/,
+            message: "请输入正确的专业",
+            trigger: "blur",
+          }
+        ],
       }
     };
   },
