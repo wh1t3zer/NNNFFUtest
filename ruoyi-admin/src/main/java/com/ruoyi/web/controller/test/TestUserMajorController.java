@@ -1,24 +1,17 @@
 package com.ruoyi.web.controller.test;
 
-import java.util.List;
-import javax.servlet.http.HttpServletResponse;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.test.domain.TestUser;
 import com.ruoyi.test.service.ITestUserService;
-import com.ruoyi.common.core.page.TableDataInfo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * testController
@@ -27,8 +20,8 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @date 2022-07-12
  */
 @RestController
-@RequestMapping("/test/class")
-public class TestUserController extends BaseController
+@RequestMapping("/test/major")
+public class TestUserMajorController extends BaseController
 {
     @Autowired
     private ITestUserService testUserService;
@@ -36,7 +29,8 @@ public class TestUserController extends BaseController
     /**
      * 查询test列表
      */
-    @PreAuthorize("@ss.hasPermi('test:test:list')")
+    @PreAuthorize("@ss.hasPermi('test:major:list')")
+//    @PreAuthorize("@ss.hasRole('instructor')")
     @GetMapping("/list")
     public TableDataInfo list(TestUser testUser)
     {
@@ -50,7 +44,8 @@ public class TestUserController extends BaseController
     /**
      * 获取test详细信息
      */
-    @PreAuthorize("@ss.hasPermi('test:test:query')")
+    @PreAuthorize("@ss.hasPermi('test:major:query')")
+//    @PreAuthorize("@ss.hasRole('instructor','boss')")
     @GetMapping(value = "/{userId}")
     public AjaxResult getInfo(@PathVariable("userId") Long userId)
     {
@@ -60,7 +55,8 @@ public class TestUserController extends BaseController
     /**
      * 修改test
      */
-    @PreAuthorize("@ss.hasPermi('test:test:edit')")
+    @PreAuthorize("@ss.hasPermi('test:major:edit')")
+//    @PreAuthorize("@ss.hasRole('instructor','boss')")
     @Log(title = "test", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody TestUser testUser)
@@ -71,7 +67,8 @@ public class TestUserController extends BaseController
     /**
      * 删除test
      */
-    @PreAuthorize("@ss.hasPermi('test:test:remove')")
+    @PreAuthorize("@ss.hasPermi('test:major:remove')")
+//    @PreAuthorize("@ss.hasRole('instructor','boss')")
     @Log(title = "test", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{userIds}")
     public AjaxResult remove(@PathVariable Long[] userIds)

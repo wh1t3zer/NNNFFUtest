@@ -32,8 +32,8 @@ public class TestUser extends BaseEntity
     /** sex */
     private String sex;
 
-    /** del_flag */
-    private String delFlag;
+    /** status */
+    private String status;
 
     public void setUserId(Long userId) 
     {
@@ -89,14 +89,14 @@ public class TestUser extends BaseEntity
     {
         return sex;
     }
-    public void setDelFlag(String delFlag) 
+    public void setstatus(String status)
     {
-        this.delFlag = delFlag;
+        this.status = status;
     }
 
-    public String getDelFlag() 
+    public String getStatus()
     {
-        return delFlag;
+        return status;
     }
 
     @Override
@@ -108,7 +108,7 @@ public class TestUser extends BaseEntity
             .append("phonenumber", getPhonenumber())
             .append("classname", getclassname())
             .append("sex", getSex())
-            .append("delFlag", getDelFlag())
+            .append("status", getStatus())
             .append("createTime", getCreateTime())
             .append("updateBy", getUpdateBy())
             .append("updateTime", getUpdateTime())

@@ -111,9 +111,9 @@ create table sys_role (
 -- 初始化-角色信息表数据
 -- ----------------------------
 insert into sys_role values('1', '超级管理员',  'admin',  1, 1, 1, 1, '0', '0', 'admin', sysdate(), '', null, '超级管理员');
-insert into sys_role values('2', '系主任',    'boss', 2, 3, 1, 1, '0', '0', 'admin', sysdate(), '', null, '系主任');
+insert into sys_role values('2', '系主任',    'boss', 2, 1, 1, 1, '0', '0', 'admin', sysdate(), '', null, '系主任');
 insert into sys_role values('3', '辅导员',    'instructor', 3, 3, 1, 1, '0', '0', 'admin', sysdate(), '', null, '辅导员');
-insert into sys_role values('4', '班长',    'monitor', 4, 4, 1, 1, '0', '0', 'admin', sysdate(), '', null, '班长');
+insert into sys_role values('4', '班长',    'monitor', 4, 3, 1, 1, '0', '0', 'admin', sysdate(), '', null, '班长');
 -- ----------------------------
 -- 5、菜单权限表
 -- ----------------------------
@@ -151,7 +151,7 @@ create table test_user (
   nick_name         varchar(30)     not null                   comment '用户姓名',
   phonenumber       varchar(11)     default ''                 comment '手机号码',
   class             char(10)        not null                   comment '班级',
-  sex               char(1)         default '0'                comment '用户性别（0男 1女 2未知）',
+  sex               char(1)         default '0'                comment '用户性别（0男 1女 ）',
   del_flag          char(1)         default '0'                comment '删除标志（0代表存在 2代表删除）',
   create_time       datetime                                   comment '创建时间',
   update_by         varchar(64)     default ''                 comment '更新者',
