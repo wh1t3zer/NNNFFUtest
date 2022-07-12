@@ -57,7 +57,8 @@
           <el-table-column label="用户id" align="center" key="userId" prop="userId" v-if="columns[0].visible" />
           <el-table-column label="学号" align="center" key="userName" prop="userName" v-if="columns[1].visible" :show-overflow-tooltip="true" />
           <el-table-column label="姓名" align="center" key="nickName" prop="nickName" v-if="columns[2].visible" :show-overflow-tooltip="true" />
-          <el-table-column label="性别" align="center" key="sex" prop="sex" v-if="columns[3].visible" :show-overflow-tooltip="true" />
+          <!-- <el-table-column label="性别" align="center" key="sex" prop="sex" v-if="columns[3].visible" :show-overflow-tooltip="true" /> -->
+          <el-table-column label="性别" align="center" key="sex" prop="sex" :formatter="changesex" />
           <el-table-column label="班级" align="center" key="classname" prop="classname" v-if="columns[4].visible" :show-overflow-tooltip="true" />
           <!-- <el-table-column label="院系" align="center" key="deptName" prop="dept.deptName" v-if="columns[5].visible" :show-overflow-tooltip="true" /> -->
           <el-table-column label="手机号码" align="center" key="phonenumber" prop="phonenumber" v-if="columns[6].visible" width="120" />
@@ -198,7 +199,15 @@ export default {
       this.single = selection.length != 1;
       this.multiple = !selection.length;
     },
-
+    //格式化性别
+    changesex(row,index){
+      if(row.sex=="0"){
+        return "男";
+      }
+      if(row.sex=="1"){
+        return "女";
+      }
+    },
   }
 };
 </script>
