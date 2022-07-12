@@ -23,7 +23,7 @@ create table sys_dept (
 -- ----------------------------
 -- 初始化-部门院系表数据
 -- ----------------------------
-insert into sys_dept values(100,  0, '0',         '南方学院',   0, '喻', '15888888888', 'ry@qq.com', '0', '0', 'admin', sysdate(), '', null);
+insert into sys_dept values(100,  0, '0',         '南方学院',   0, '喻', '15888888888', 'zdnf@nfu.com', '0', '0', 'admin', sysdate(), '', null);
 
 
 -- ----------------------------
@@ -33,7 +33,7 @@ drop table if exists sys_user;
 create table sys_user (
   user_id           bigint(20)      not null auto_increment    comment '用户ID',
   dept_id           bigint(20)      default null               comment '院系ID',
-  post_id           bigint(20)      default null               comment '职位ID',
+  major             char(10)        default null               comment '专业名称',
   user_name         varchar(30)     not null                   comment '用户账号',
   nick_name         varchar(30)     not null                   comment '用户姓名',
   user_type         varchar(2)      default '00'               comment '用户类型（00系统用户）',
@@ -57,7 +57,7 @@ create table sys_user (
 -- ----------------------------
 -- 初始化-用户信息表数据
 -- ----------------------------
-insert into sys_user values(1,  100, 1,'admin', 'test', '00', 'test@163.com', '13000000000', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', sysdate(), 'admin', sysdate(), '', null, '管理员');
+insert into sys_user values(1,  100, null,'admin', 'test', '00', 'test@163.com', '13000000000', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', sysdate(), 'admin', sysdate(), '', null, '管理员');
 
 -- ----------------------------
 -- 3、职位信息表
@@ -152,7 +152,7 @@ create table test_user (
   phonenumber       varchar(11)     default ''                 comment '手机号码',
   class             char(10)        not null                   comment '班级',
   sex               char(1)         default '0'                comment '用户性别（0男 1女 ）',
-  del_flag          char(1)         default '0'                comment '删除标志（0代表存在 2代表删除）',
+  status          char(1)         default '0'                comment '状态（0代表通过 1代表驳回）',
   create_time       datetime                                   comment '创建时间',
   update_by         varchar(64)     default ''                 comment '更新者',
   update_time       datetime                                   comment '更新时间',

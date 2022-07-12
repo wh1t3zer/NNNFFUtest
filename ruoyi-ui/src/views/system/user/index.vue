@@ -360,7 +360,7 @@ export default {
       // 选中数组
       ids: [],
       // 非单个禁用
-      single: false,
+      single: true,
       // 非多个禁用
       multiple: true,
       // 显示搜索条件
@@ -526,7 +526,7 @@ export default {
         status: "0",
         remark: undefined,
         postIds: [],
-        roleIds: []
+        //roleIds: []
       };
       this.resetForm("form");
     },
@@ -582,7 +582,7 @@ export default {
         this.postOptions = response.posts;
         this.roleOptions = response.roles;
         this.form.postIds = response.postIds;
-        this.form.roleIds = response.roleIds;
+        //this.form.roleIds = response.roleIds;
         this.open = true;
         this.title = "修改用户";
         this.form.password = "";
