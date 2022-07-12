@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.test.mapper.TestUserMapper">
+    
+    <resultMap type="TestUser" id="TestUserResult">
+        <result property="userId"    column="user_id"    />
+        <result property="userName"    column="user_name"    />
+        <result property="nickName"    column="nick_name"    />
+        <result property="phonenumber"    column="phonenumber"    />
+        <result property="classname"    column="Class"    />
+        <result property="sex"    column="sex"    />
+        <result property="delFlag"    column="del_flag"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateBy"    column="update_by"    />
+        <result property="updateTime"    column="update_time"    />
+    </resultMap>
+
+    <sql id="selectTestUserVo">
+        select user_id, user_name, nick_name, phonenumber, Class, sex, del_flag, create_time, update_by, update_time from test_user
+    </sql>
+
+    <select id="selectTestUserList" parameterType="TestUser" resultMap="TestUserResult">
+        <include refid="selectTestUserVo"/>
+        <where>  
+            <if test="userName != null  and userName != ''"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="nickName != null  and nickName != ''"> and nick_name like concat('%', #{nickName}, '%')</if>
+            <if test="phonenumber != null "> and phonenumber = #{phonenumber}</if>
+            <if test="classname != null  and classname != ''"> and Class = #{classname}</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+        </where>
+    </select>
+    
+    <select id="selectTestUserByUserId" parameterType="Long" resultMap="TestUserResult">
+        <include refid="selectTestUserVo"/>
+        where user_id = #{userId}
+    </select>
+        
+
+
+    <update id="updateTestUser" parameterType="TestUser">
+        update test_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userName != null and userName != ''">user_name = #{userName},</if>
+            <if test="nickName != null and nickName != ''">nick_name = #{nickName},</if>
+            <if test="phonenumber != null">phonenumber = #{phonenumber},</if>
+            <if test="classname != null and classname != ''">Class = #{classname},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="delFlag != null">del_flag = #{delFlag},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+        </trim>
+        where user_id = #{userId}
+    </update>
+
+    <delete id="deleteTestUserByUserId" parameterType="Long">
+        delete from test_user where user_id = #{userId}
+    </delete>
+
+    <delete id="deleteTestUserByUserIds" parameterType="String">
+        delete from test_user where user_id in 
+        <foreach item="userId" collection="array" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </delete>
+</mapper>

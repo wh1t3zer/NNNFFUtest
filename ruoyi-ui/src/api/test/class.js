@@ -4,7 +4,7 @@ import { parseStrEmpty } from "@/utils/ruoyi";
 //查询综测班级用户列表
 export function TestUser(query) {
   return request({
-    url: '/test/class',
+    url: '/test/class/list',
     method: 'get',
     params: query
   })

@@ -52,14 +52,14 @@
             >驳回</el-button>
           </el-col>
         </el-row>
-        <el-table v-loading="loading" :data="userList" @selection-change="handleSelectionChange">
+        <el-table v-loading="loading" :data="testList" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="50" align="center" />
           <el-table-column label="用户id" align="center" key="userId" prop="userId" v-if="columns[0].visible" />
           <el-table-column label="学号" align="center" key="userName" prop="userName" v-if="columns[1].visible" :show-overflow-tooltip="true" />
           <el-table-column label="姓名" align="center" key="nickName" prop="nickName" v-if="columns[2].visible" :show-overflow-tooltip="true" />
           <el-table-column label="性别" align="center" key="sex" prop="sex" v-if="columns[3].visible" :show-overflow-tooltip="true" />
-          <el-table-column label="班级" align="center" key="class" prop="class" v-if="columns[4].visible" :show-overflow-tooltip="true" />
-          <el-table-column label="院系" align="center" key="deptName" prop="dept.deptName" v-if="columns[5].visible" :show-overflow-tooltip="true" />
+          <el-table-column label="班级" align="center" key="classname" prop="classname" v-if="columns[4].visible" :show-overflow-tooltip="true" />
+          <!-- <el-table-column label="院系" align="center" key="deptName" prop="dept.deptName" v-if="columns[5].visible" :show-overflow-tooltip="true" /> -->
           <el-table-column label="手机号码" align="center" key="phonenumber" prop="phonenumber" v-if="columns[6].visible" width="120" />
           <el-table-column label="状态" align="center" key="status" prop="status" v-if="columns[7].visible" :show-overflow-tooltip="true" />
 
@@ -96,14 +96,13 @@
 </template>
 
 <script>
-import { TestUser, getTestUser } from "@/api/test/institute";
+import { TestUser, getTestUser } from "@/api/test/class";
 import { getToken } from "@/utils/auth";
 
 
 
 export default {
   name: "user",
-  dicts: [ 'sys_user_sex'],
   data() {
     return {
       // 遮罩层
@@ -119,7 +118,7 @@ export default {
       // 总条数
       total: 0,
       // 用户表格数据
-      userList: null,
+      testList: [],
       // 弹出层标题
       title: "",
       // 是否显示弹出层
@@ -167,8 +166,8 @@ export default {
     /** 查询用户列表 */
     getList() {
       this.loading = true;
-      listUser(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-          this.userList = response.rows;
+      TestUser(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+          this.testList = response.rows;
           this.total = response.total;
           this.loading = false;
         }
