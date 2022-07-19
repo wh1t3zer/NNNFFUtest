@@ -25,8 +25,8 @@ export function backUser(userId,status) {
     status
   }
   return request({
-    url: '/test/class/' + userId,
-    method: 'get',
+    url: '/test/class/backUser' + userId,
+    method: 'put',
     data: data
   })
 }

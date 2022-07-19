@@ -43,11 +43,5 @@ public interface ITestUserService
      */
     public int deleteTestUserByUserIds(Long[] userIds);
 
-    /**
-     * 删除test信息
-     * 
-     * @param userId test主键
-     * @return 结果
-     */
-    public int deleteTestUserByUserId(Long userId);
+
 }

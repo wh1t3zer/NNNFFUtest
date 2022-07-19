@@ -69,15 +69,5 @@ public class TestUserServiceImpl implements ITestUserService
         return testUserMapper.deleteTestUserByUserIds(userIds);
     }
 
-    /**
-     * 删除test信息
-     * 
-     * @param userId test主键
-     * @return 结果
-     */
-    @Override
-    public int deleteTestUserByUserId(Long userId)
-    {
-        return testUserMapper.deleteTestUserByUserId(userId);
-    }
+
 }

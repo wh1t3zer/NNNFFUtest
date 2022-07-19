@@ -36,6 +36,7 @@ create table sys_user (
   major             char(10)        default null               comment '专业名称',
   user_name         varchar(30)     not null                   comment '用户账号',
   nick_name         varchar(30)     not null                   comment '用户姓名',
+  classname         char(10)        not null                   comment '班级',    
   user_type         varchar(2)      default '00'               comment '用户类型（00系统用户）',
   email             varchar(50)     default ''                 comment '用户邮箱',
   phonenumber       varchar(11)     default ''                 comment '手机号码',
@@ -57,7 +58,7 @@ create table sys_user (
 -- ----------------------------
 -- 初始化-用户信息表数据
 -- ----------------------------
-insert into sys_user values(1,  100, null,'admin', 'test', '00', 'test@163.com', '13000000000', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', sysdate(), 'admin', sysdate(), '', null, '管理员');
+insert into sys_user values(1,  100, null,'admin', 'test', '', '00', 'test@163.com', '13000000000', '1', '', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2', '0', '0', '127.0.0.1', sysdate(), 'admin', sysdate(), '', null, '管理员');
 
 -- ----------------------------
 -- 3、职位信息表

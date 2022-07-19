@@ -75,4 +75,16 @@ public class TestUserClassController extends BaseController
     {
         return toAjax(testUserService.deleteTestUserByUserIds(userIds));
     }
+
+
+    /**
+     * 驳回学生申请
+     */
+    @PreAuthorize("@ss.hasPermi('test:class:back')")
+    @Log(title = "test", businessType = BusinessType.UPDATE)
+    @PutMapping("backUser/{userId}")
+    public AjaxResult backUser(@RequestBody TestUser testUser)
+    {
+        return toAjax(testUserService.updateTestUser(testUser));
+    }
 }
