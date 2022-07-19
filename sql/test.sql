@@ -152,7 +152,7 @@ create table test_user (
   phonenumber       varchar(11)     default ''                 comment '手机号码',
   class             char(10)        not null                   comment '班级',
   sex               char(1)         default '0'                comment '用户性别（0男 1女 ）',
-  status          char(1)         default '0'                comment '状态（0代表通过 1代表驳回）',
+  status          char(1)         default '0'                comment '状态（0代表审核中 1代表通过，2代表驳回）',
   create_time       datetime                                   comment '创建时间',
   update_by         varchar(64)     default ''                 comment '更新者',
   update_time       datetime                                   comment '更新时间',
@@ -247,6 +247,13 @@ insert into sys_menu values('1045', '日志导出', '501', '3', '#', '', '', 1, 
 insert into sys_menu values('1046', '在线查询', '109', '1', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:query',       '#', 'admin', sysdate(), '', null, '');
 insert into sys_menu values('1047', '批量强退', '109', '2', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:batchLogout', '#', 'admin', sysdate(), '', null, '');
 insert into sys_menu values('1048', '单条强退', '109', '3', '#', '', '', 1, 0, 'F', '0', '0', 'monitor:online:forceLogout', '#', 'admin', sysdate(), '', null, '');
+-- 综测管理按钮
+insert into sys_menu values('1049', '辅导员通过', '112', '1', '#', '', '', 1, 0, 'F', '0', '0', 'test:major:access', '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1050', '辅导员驳回', '112', '2', '#', '', '', 1, 0, 'F', '0', '0', 'test:major:back', '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1051', '班长通过', '113', '1', '#', '', '', 1, 0, 'F', '0', '0', 'test:class:access', '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1052', '班长驳回', '113', '2', '#', '', '', 1, 0, 'F', '0', '0', 'test:class:back', '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1053', '系主任通过', '114', '1', '#', '', '', 1, 0, 'F', '0', '0', 'test:institute:access', '#', 'admin', sysdate(), '', null, '');
+insert into sys_menu values('1054', '系主任驳回', '114', '2', '#', '', '', 1, 0, 'F', '0', '0', 'test:institute:back', '#', 'admin', sysdate(), '', null, '');
 
 -- ----------------------------
 -- 6、用户和角色关联表  用户N-1角色

@@ -141,9 +141,10 @@
           <el-table-column label="学工号" align="center" key="userName" prop="userName" v-if="columns[1].visible" :show-overflow-tooltip="true" width="120" />
           <el-table-column label="姓名" align="center" key="nickName" prop="nickName" v-if="columns[2].visible" :show-overflow-tooltip="true" />
           <el-table-column label="归属院系" align="center" key="deptName" prop="dept.deptName" v-if="columns[3].visible" :show-overflow-tooltip="true" />
-          <el-table-column label="登录IP" align="center" key="loginIp" prop="loginIp" v-if="columns[7].visible" :show-overflow-tooltip="true" />
-          <el-table-column label="手机号码" align="center" key="phonenumber" prop="phonenumber" v-if="columns[4].visible" width="120" />
-          <el-table-column label="状态" align="center" key="status" v-if="columns[5].visible">
+          <el-table-column label="专业" align="center" key="major" prop="major" v-if="columns[4].visible" :show-overflow-tooltip="true" width="120"/>
+          <el-table-column label="登录IP" align="center" key="loginIp" prop="loginIp" v-if="columns[5].visible" :show-overflow-tooltip="true" />
+          <el-table-column label="手机号码" align="center" key="phonenumber" prop="phonenumber" v-if="columns[6].visible" width="120" />
+          <el-table-column label="状态" align="center" key="status" v-if="columns[7].visible">
             <template slot-scope="scope">
               <el-switch
                 v-model="scope.row.status"
@@ -153,7 +154,7 @@
               ></el-switch>
             </template>
           </el-table-column>
-          <el-table-column label="创建时间" align="center" prop="createTime" v-if="columns[6].visible" width="160">
+          <el-table-column label="创建时间" align="center" prop="createTime" v-if="columns[8].visible" width="160">
             <template slot-scope="scope">
               <span>{{ parseTime(scope.row.createTime) }}</span>
             </template>
@@ -284,7 +285,7 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="专业" prop="major">
-              <el-input v-model="form.major" placeholder="请输入专业名称" maxlength="15" />
+              <el-input v-model="form.major" placeholder="用户为辅导员填学生不填" maxlength="15" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -413,16 +414,20 @@ export default {
         { key: 1, label: `用户名称`, visible: true },
         { key: 2, label: `用户昵称`, visible: true },
         { key: 3, label: `归属院系`, visible: true },
-        { key: 4, label: `手机号码`, visible: true },
-        { key: 5, label: `状态`, visible: true },
-        { key: 6, label: `创建时间`, visible: true },
-        { key: 7, label: `登录IP`, visible: true }
+        { key: 4, label: `专业`, visible: true },
+        { key: 5, label: `登录IP`, visible: false },
+        { key: 6, label: `手机号码`, visible: true },
+        { key: 7, label: `状态`, visible: true },
+        { key: 8, label: `创建时间`, visible: true }
       ],
       // 表单校验
       rules: {
         userName: [
           { required: true, message: "用户名称不能为空", trigger: "blur" },
           { min: 2, max: 20, message: '用户名称长度必须介于 2 和 20 之间', trigger: 'blur' }
+        ],
+        deptId: [
+          { required: true, message: "院系不能为空", trigger: "blur" },
         ],
         nickName: [
           { required: true, message: "用户昵称不能为空", trigger: "blur" }

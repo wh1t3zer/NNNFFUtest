@@ -17,3 +17,29 @@ export function getTestUser(userId) {
     method: 'get'
   })
 }
+
+// 驳回学生申请
+export function backUser(userId,status) {
+  const data = {
+    userId,
+    status
+  }
+  return request({
+    url: '/test/class/' + userId,
+    method: 'get',
+    data: data
+  })
+}
+
+// 通过学生申请
+export function accessUser(userId,status) {
+  const data = {
+    userId,
+    status
+  }
+  return request({
+    url: '/test/class/' + userId,
+    method: 'put',
+    data: data
+  })
+}

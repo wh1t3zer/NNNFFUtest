@@ -36,8 +36,8 @@
               icon="el-icon-check"
               size="mini"
               :disabled="multiple"
-              @click=""
-              v-hasPermi="['monitor']"
+              @click="handleAccess"
+              v-hasPermi="['test:class:access']"
             >通过</el-button>
           </el-col>
           <el-col :span="1.5">
@@ -47,8 +47,8 @@
               icon="el-icon-back"
               size="mini"
               :disabled="multiple"
-              @click=""
-              v-hasPermi="['monitor']"
+              @click="handleBack"
+              v-hasPermi="['test:class:back']"
             >驳回</el-button>
           </el-col>
         </el-row>
@@ -64,8 +64,9 @@
           <el-table-column label="手机号码" align="center" key="phonenumber" prop="phonenumber" v-if="columns[6].visible" width="120" />
           <el-table-column label="状态" align="center" key="status" prop="status"  >
             <template slot-scope="scope">
-              <el-tag type="success" effect="dark" v-if="scope.row.status==0">通过</el-tag>
-              <el-tag type="warning" effect="dark" v-if="scope.row.status==1">驳回</el-tag>
+              <el-tag type="info" effect="dark" v-if="scope.row.status==0">审核中</el-tag>
+              <el-tag type="success" effect="dark" v-if="scope.row.status==1">通过</el-tag>
+              <el-tag type="warning" effect="dark" v-if="scope.row.status==2">驳回</el-tag>
             </template>
           </el-table-column>
 
@@ -75,14 +76,14 @@
             width="160"
             class-name="small-padding fixed-width"
           >
-            <template slot-scope="scope" v-if="scope.row.userId !== 1">
+            <template slot-scope="scope" >
 
               <el-button
                 size="mini"
                 type="text"
                 icon="el-icon-d-arrow-right"
-                @click="handleDelete(scope.row)"
-                v-hasPermi="['system:user:edit']"
+                @click="handleDetail(scope.row)"
+                v-hasPermi="['test:test:edit']"
               >编辑</el-button>
             </template>
           </el-table-column>
@@ -98,11 +99,39 @@
       </el-col>
     </el-row>
 
+    <!-- 添加或修改用户配置对话框 -->
+    <el-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
+      <el-form ref="form" :model="form"  label-width="80px">
+        <el-row>
+          
+        </el-row>
+        <el-row>
+          
+        </el-row>
+        <el-row>
+          
+        </el-row>
+        <el-row>
+          
+        </el-row>
+        <el-row>
+          
+        </el-row>
+        <el-row>
+          
+        </el-row>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="submitForm">确 定</el-button>
+        <el-button @click="cancel">取 消</el-button>
+      </div>
+    </el-dialog>
+
   </div>
 </template>
 
 <script>
-import { TestUser, getTestUser } from "@/api/test/class";
+import { TestUser, getTestUser,  backUser, accessUser } from "@/api/test/class";
 import { getToken } from "@/utils/auth";
 import EditTable from "../../tool/gen/editTable.vue";
 
@@ -202,7 +231,7 @@ export default {
             this.multiple = !selection.length;
         },
         //格式化性别
-        changesex(row, index) {
+        changesex(row) {
             if (row.sex == "0") {
                 return "男";
             }
@@ -210,6 +239,45 @@ export default {
                 return "女";
             }
         },
+        handleDetail(row){
+          const userId = row.userId || this.ids;
+          getUser(userId).then(response => {
+            this.form = response.data;
+            // this.postOptions = response.posts;
+            // this.roleOptions = response.roles;
+            // this.form.postIds = response.postIds;
+            //this.form.roleIds = response.roleIds;
+            this.open = true;
+            this.title = "详细页";
+          });
+        },
+        /** 驳回按钮操作 */
+      handleBack(row) {
+          let text = row.status === "2";
+          const userIds = row.userId || this.ids;
+          const status = row.status || this.ids.status
+          this.$modal.confirm('确认要驳回所选项的申请吗？').then(function() {
+          return backUser(userIds, status);
+          }).then(() => {
+        this.$modal.msgSuccess(text + "成功");
+          }).catch(function() {
+        row.status = row.status === "2";
+          });
+        this.getList()
+        },
+      handleAccess(row) {
+          let text = row.status === "1";
+          const userIds = row.userId || this.ids;
+          const status = row.status || this.ids.status
+          this.$modal.confirm('确认要通过所选项的申请吗？').then(function() {
+          return accessUser(userIds, status);
+          }).then(() => {
+        this.$modal.msgSuccess(text + "成功");
+          }).catch(function() {
+        row.status = row.status === "1";
+          });
+        this.getList()
+        }
     },
     components: { EditTable }
 };

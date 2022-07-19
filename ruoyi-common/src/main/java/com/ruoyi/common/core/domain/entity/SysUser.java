@@ -43,6 +43,14 @@ public class SysUser extends BaseEntity
     @Excel(name = "用户邮箱")
     private String email;
 
+    /** 用户专业 */
+    @Excel(name = "用户专业")
+    private String major;
+
+    /** 用户班级 */
+    @Excel(name = "用户班级")
+    private String classname;
+
     /** 手机号码 */
     @Excel(name = "手机号码")
     private String phonenumber;
@@ -169,6 +177,28 @@ public class SysUser extends BaseEntity
     public void setEmail(String email)
     {
         this.email = email;
+    }
+
+    @Size(min = 0, max = 10, message = "专业长度不能超过10个字符")
+    public String getmajor()
+    {
+        return major;
+    }
+
+    public void setmajor(String major)
+    {
+        this.major = major;
+    }
+
+    @Size(min = 0, max = 10, message = "班级长度不能超过10个字符")
+    public String getclassname()
+    {
+        return classname;
+    }
+
+    public void setclassname(String classname)
+    {
+        this.classname = classname;
     }
 
     @Size(min = 0, max = 11, message = "手机号码长度不能超过11个字符")
@@ -322,6 +352,8 @@ public class SysUser extends BaseEntity
             .append("userName", getUserName())
             .append("nickName", getNickName())
             .append("email", getEmail())
+            .append("major", getmajor())
+            .append("class", getClass())
             .append("phonenumber", getPhonenumber())
             .append("sex", getSex())
             .append("avatar", getAvatar())
