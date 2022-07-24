@@ -134,9 +134,6 @@
 import { TestUser, getTestUser,  backUser, accessUser } from "@/api/test/class";
 import { getToken } from "@/utils/auth";
 import EditTable from "../../tool/gen/editTable.vue";
-
-
-
 export default {
     name: "user",
     data() {
@@ -243,27 +240,31 @@ export default {
           const userId = row.userId || this.ids;
           getUser(userId).then(response => {
             this.form = response.data;
-            // this.postOptions = response.posts;
-            // this.roleOptions = response.roles;
-            // this.form.postIds = response.postIds;
-            //this.form.roleIds = response.roleIds;
+            
             this.open = true;
             this.title = "详细页";
           });
         },
         /** 驳回按钮操作 */
-      handleBack(row) {
-          let text = row.status === "2";
-          const userIds = row.userId || this.ids;
-          const status = row.status || this.ids.status
-          this.$modal.confirm('确认要驳回所选项的申请吗？').then(function() {
-          return backUser(userIds, status);
-          }).then(() => {
-        this.$modal.msgSuccess(text + "成功");
-          }).catch(function() {
-        row.status = row.status === "2";
-          });
-        this.getList()
+      handleBack(row1) {
+          let text = row1.status;
+          const userIds = row1.userId || this.ids;
+          
+          getTestUser(userIds).then(response =>{
+            console.log(response.data)
+          })
+           console.log(userIds)
+        //   this.$modal.confirm('确认要驳回所选项的申请吗？').then(
+        //   getTestUser(userIds)
+        //   ).then(response => {
+        // // this.getList()
+        // // this.$modal.msgSuccess(text + "成功");
+        //   console.log(response.data)
+        //   }).then(function(){
+        //     return backUser(userId,status)
+        //   }).catch(function() {
+        //   row.status = row.status === "2";
+        //   });
         },
       handleAccess(row) {
           let text = row.status === "1";
@@ -272,11 +273,11 @@ export default {
           this.$modal.confirm('确认要通过所选项的申请吗？').then(function() {
           return accessUser(userIds, status);
           }).then(() => {
+        this.getList()
         this.$modal.msgSuccess(text + "成功");
           }).catch(function() {
         row.status = row.status === "1";
           });
-        this.getList()
         }
     },
     components: { EditTable }

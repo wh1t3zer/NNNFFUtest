@@ -18,20 +18,22 @@ export function getTestUser(userId) {
   })
 }
 
-// 驳回学生申请
+//驳回学生申请
 export function backUser(userId,status) {
   const data = {
-    userId,
-    status
+    // userId,
+    // status
+    infoIdList:infoId.join(','),
+    status:status
   }
   return request({
-    url: '/test/class/backUser' + userId,
+    url: '/test/class/backUser',
     method: 'put',
     data: data
   })
 }
 
-// 通过学生申请
+//通过学生申请
 export function accessUser(userId,status) {
   const data = {
     userId,
@@ -43,3 +45,4 @@ export function accessUser(userId,status) {
     data: data
   })
 }
+

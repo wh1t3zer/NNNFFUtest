@@ -57,15 +57,15 @@
           <el-table-column label="用户id" align="center" key="userId" prop="userId" v-if="columns[0].visible" />
           <el-table-column label="学号" align="center" key="userName" prop="userName" v-if="columns[1].visible" :show-overflow-tooltip="true" />
           <el-table-column label="姓名" align="center" key="nickName" prop="nickName" v-if="columns[2].visible" :show-overflow-tooltip="true" />
-          <!-- <el-table-column label="性别" align="center" key="sex" prop="sex" v-if="columns[3].visible" :show-overflow-tooltip="true" /> -->
           <el-table-column label="性别" align="center" key="sex" prop="sex" :formatter="changesex" />
           <el-table-column label="班级" align="center" key="classname" prop="classname" v-if="columns[4].visible" :show-overflow-tooltip="true" />
           <!-- <el-table-column label="院系" align="center" key="deptName" prop="dept.deptName" v-if="columns[5].visible" :show-overflow-tooltip="true" /> -->
           <el-table-column label="手机号码" align="center" key="phonenumber" prop="phonenumber" v-if="columns[6].visible" width="120" />
           <el-table-column label="状态" align="center" key="status" prop="status"  >
             <template slot-scope="scope">
-              <el-tag type="success" effect="dark" v-if="scope.row.status==0">通过</el-tag>
-              <el-tag type="warning" effect="dark" v-if="scope.row.status==1">驳回</el-tag>
+              <el-tag type="info" effect="dark" v-if="scope.row.status==0">审核中</el-tag>
+              <el-tag type="success" effect="dark" v-if="scope.row.status==1">通过</el-tag>
+              <el-tag type="warning" effect="dark" v-if="scope.row.status==2">驳回</el-tag>
             </template>
           </el-table-column>
 
