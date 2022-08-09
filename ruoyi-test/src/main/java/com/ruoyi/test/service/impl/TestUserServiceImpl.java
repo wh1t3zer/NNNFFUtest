@@ -10,19 +10,19 @@ import com.ruoyi.test.service.ITestUserService;
 
 /**
  * testService业务层处理
- * 
+ *
  * @author nfca
  * @date 2022-07-12
  */
 @Service
-public class TestUserServiceImpl implements ITestUserService 
+public class TestUserServiceImpl implements ITestUserService
 {
     @Autowired
     private TestUserMapper testUserMapper;
 
     /**
      * 查询test
-     * 
+     *
      * @param userId test主键
      * @return test
      */
@@ -34,7 +34,7 @@ public class TestUserServiceImpl implements ITestUserService
 
     /**
      * 查询test列表
-     * 
+     *
      * @param testUser test
      * @return test
      */
@@ -46,7 +46,7 @@ public class TestUserServiceImpl implements ITestUserService
 
     /**
      * 修改test
-     * 
+     *
      * @param testUser test
      * @return 结果
      */
@@ -59,7 +59,20 @@ public class TestUserServiceImpl implements ITestUserService
 
     /**
      * 批量删除test
-     * 
+     *
+     * @param userIds 需要删除的test主键
+     * @return 结果
+     */
+    @Override
+    public int backTestUser(TestUser testUser)
+    {
+        testUser.setUpdateTime(DateUtils.getNowDate());
+        return testUserMapper.backTestUser(testUser);
+    }
+
+    /**
+     * 批量删除test
+     *
      * @param userIds 需要删除的test主键
      * @return 结果
      */
@@ -68,6 +81,5 @@ public class TestUserServiceImpl implements ITestUserService
     {
         return testUserMapper.deleteTestUserByUserIds(userIds);
     }
-
 
 }

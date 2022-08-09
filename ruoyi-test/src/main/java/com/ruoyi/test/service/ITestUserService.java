@@ -44,4 +44,5 @@ public interface ITestUserService
     public int deleteTestUserByUserIds(Long[] userIds);
 
 
+    public int backTestUser(TestUser testUser);
 }

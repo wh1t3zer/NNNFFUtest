@@ -43,13 +43,6 @@ public interface TestUserMapper
      */
     public int updateTestUser(TestUser testUser);
 
-    /**
-     * 删除test
-     * 
-     * @param userId test主键
-     * @return 结果
-     */
-    public int deleteTestUserByUserId(Long userId);
 
     /**
      * 批量删除test
@@ -58,4 +51,7 @@ public interface TestUserMapper
      * @return 结果
      */
     public int deleteTestUserByUserIds(Long[] userIds);
+
+
+    public int backTestUser(TestUser testUser);
 }

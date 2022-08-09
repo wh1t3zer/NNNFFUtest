@@ -121,10 +121,10 @@ public class TestUserClassController extends BaseController
      * 驳回学生申请
      */
     @PreAuthorize("@ss.hasPermi('test:class:back')")
-    @Log(title = "test", businessType = BusinessType.UPDATE)
-    @PutMapping("backUser/{userId}")
-    public AjaxResult backUser(@RequestBody TestUser testUser)
+    @Log(title = "back", businessType = BusinessType.UPDATE)
+    @PutMapping("backUser")
+    public AjaxResult backTestUser(@RequestBody TestUser testUser)
     {
-        return toAjax(testUserService.updateTestUser(testUser));
+        return toAjax(testUserService.backTestUser(testUser));
     }
 }
