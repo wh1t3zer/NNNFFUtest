@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.test.mapper.StudentMapper">
+<!--
+    private Integer id;
+    private String name;
+    private Integer no;
+    private Integer grade;
+    private Integer classId;
+    private String major;
+    private Integer mid;
+    private Integer cid;
+    private String status;
+-->
+
+    <resultMap type="Student" id="StudentResult" >
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="no" column="no"/>
+        <result property="grade" column="grade"/>
+        <result property="classId" column="classId"/>
+        <result property="major" column="major"/>
+        <result property="mid" column="mid"/>
+        <result property="cid" column="cid"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+
+    <sql id="selectStudentVo">
+        select id,name,no,grade,classId,major,mid,cid,status from student where (grade = 19 or grade = 20)
+    </sql>
+
+    <select id="selectAllStudentList" resultType="com.ruoyi.test.domain.Student">
+        <include refid="selectStudentVo"/>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="no != null  and no != ''"> and no like concat('%', #{no}, '%')</if>
+    </select>
+
+    <select id="selectTestUserByUserId" parameterType="int" resultMap="StudentResult">
+        <include refid="selectStudentVo"/>
+        and no = #{no}
+    </select>
+
+
+</mapper>

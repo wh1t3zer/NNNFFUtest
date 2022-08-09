@@ -64,8 +64,9 @@
           <el-table-column label="手机号码" align="center" key="phonenumber" prop="phonenumber" v-if="columns[6].visible" width="120" />
           <el-table-column label="状态" align="center" key="status" prop="status"  >
             <template slot-scope="scope">
-              <el-tag type="success" effect="dark" v-if="scope.row.status==0">通过</el-tag>
-              <el-tag type="warning" effect="dark" v-if="scope.row.status==1">驳回</el-tag>
+              <el-tag type="info" effect="dark" v-if="scope.row.status==0">审核中</el-tag>
+              <el-tag type="success" effect="dark" v-if="scope.row.status==1">通过</el-tag>
+              <el-tag type="warning" effect="dark" v-if="scope.row.status==2">驳回</el-tag>
             </template>
           </el-table-column>
 
@@ -166,7 +167,6 @@ export default {
   },
   created() {
     this.getList();
-
   },
   methods: {
     /** 查询用户列表 */
