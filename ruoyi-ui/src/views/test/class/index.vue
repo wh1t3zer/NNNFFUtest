@@ -6,17 +6,17 @@
         <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
           <el-form-item label="学号" prop="userName">
             <el-input
-              v-model="queryParams.userName"
+              v-model="queryParams.no"
               placeholder="请输入学号"
               clearable
               style="width: 240px"
               @keyup.enter.native="handleQuery"
             />
           </el-form-item>
-          <el-form-item label="手机号码" prop="phonenumber">
+          <el-form-item label="学生姓名" prop="name">
             <el-input
-              v-model="queryParams.phonenumber"
-              placeholder="请输入手机号码"
+              v-model="queryParams.name"
+              placeholder="请输入学生姓名"
               clearable
               style="width: 240px"
               @keyup.enter.native="handleQuery"
@@ -25,6 +25,9 @@
 
           <el-form-item>
             <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
+          </el-form-item>
+          <el-form-item>
+            <el-button type="warning" icon="el-icon-refresh" size="mini" @click="reset">重置</el-button>
           </el-form-item>
         </el-form>
 
@@ -54,14 +57,14 @@
         </el-row>
         <el-table v-loading="loading" :data="testList" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="50" align="center" />
-          <el-table-column label="用户id" align="center" key="userId" prop="userId" v-if="columns[0].visible" />
-          <el-table-column label="学号" align="center" key="userName" prop="userName" v-if="columns[1].visible" :show-overflow-tooltip="true" />
-          <el-table-column label="姓名" align="center" key="nickName" prop="nickName" v-if="columns[2].visible" :show-overflow-tooltip="true" />
+<!--          <el-table-column label="用户id" align="center" key="userId" prop="userId" v-if="columns[0].visible" />-->
+          <el-table-column label="学号" align="center" key="no" prop="no" v-if="columns[1].visible" :show-overflow-tooltip="true" />
+          <el-table-column label="姓名" align="center" key="name" prop="name" v-if="columns[2].visible" :show-overflow-tooltip="true" />
           <!-- <el-table-column label="性别" align="center" key="sex" prop="sex" v-if="columns[3].visible" :show-overflow-tooltip="true" /> -->
-          <el-table-column label="性别" align="center" key="sex" prop="sex" :formatter="changesex" />
-          <el-table-column label="班级" align="center" key="classname" prop="classname" v-if="columns[4].visible" :show-overflow-tooltip="true" />
+          <el-table-column label="年级" align="center" key="grade" prop="grade"/>
+          <el-table-column label="班级" align="center" key="classId" prop="classId" v-if="columns[4].visible" :show-overflow-tooltip="true" />
           <!-- <el-table-column label="院系" align="center" key="deptName" prop="dept.deptName" v-if="columns[5].visible" :show-overflow-tooltip="true" /> -->
-          <el-table-column label="手机号码" align="center" key="phonenumber" prop="phonenumber" v-if="columns[6].visible" width="120" />
+          <el-table-column label="专业" align="center" key="major" prop="major" v-if="columns[6].visible" width="120" />
           <el-table-column label="状态" align="center" key="status" prop="status"  >
             <template slot-scope="scope">
               <el-tag type="info" effect="dark" v-if="scope.row.status==0">审核中</el-tag>
@@ -77,14 +80,7 @@
             class-name="small-padding fixed-width"
           >
             <template slot-scope="scope" >
-
-              <el-button
-                size="mini"
-                type="text"
-                icon="el-icon-d-arrow-right"
-                @click="handleDetail(scope.row)"
-                v-hasPermi="['test:test:edit']"
-              >编辑</el-button>
+              <el-button type="success" @click="handleEdit(scope.row)">编辑<i class="el-icon-edit"></i></el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -99,34 +95,63 @@
       </el-col>
     </el-row>
 
-    <!-- 添加或修改用户配置对话框 -->
-    <el-dialog :title="title" :visible.sync="open" width="600px" append-to-body>
-      <el-form ref="form" :model="form"  label-width="80px">
-        <el-row>
-          
-        </el-row>
-        <el-row>
-          
-        </el-row>
-        <el-row>
-          
-        </el-row>
-        <el-row>
-          
-        </el-row>
-        <el-row>
-          
-        </el-row>
-        <el-row>
-          
-        </el-row>
+    <el-dialog title="详情页" :visible.sync="outerVisible">
+      <el-form label-width="100px" :disabled="true">
+        <el-form-item label="用户名">
+          <el-input v-model="form.name" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="学号">
+          <el-input v-model="form.no" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="班级">
+          <el-input v-model="form.classId" autocomplete="off"></el-input>
+        </el-form-item>
+
+        <el-form-item
+          label="加分图"
+          prop="images"
+          width="180">
+            <template slot-scope="scope">
+              <!--   :src 里面写的是nfca那边传来的图片   -->
+              <img :src="form" style="width:100px;height:50px;"/>
+
+            </template>
+        </el-form-item>
+
       </el-form>
+      <el-dialog
+        width="50%"
+        title="驳回理由"
+        :visible.sync="innerVisible"
+        append-to-body>
+        <el-input
+          placeholder="请输入驳回原因"
+          v-model="reason"
+          clearable>
+        </el-input>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="innerVisible = false" type="info">取消</el-button>
+          <el-popconfirm
+            style="margin-left: 5px"
+            confirm-button-text='确定'
+            cancel-button-text='取消'
+            icon="el-icon-info"
+            icon-color="red"
+            title="您确定要驳回吗？"
+            @confirm="double"
+          >
+            <el-button  type="danger" slot="reference">确定</el-button>
+          </el-popconfirm>
+
+        </div>
+      </el-dialog>
       <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="submitForm">确 定</el-button>
-        <el-button @click="cancel">取 消</el-button>
+        <el-button @click="outerVisible = false" type="info">取消</el-button>
+        <el-button type="warning" @click="innerVisible = true">驳回</el-button>
+        <!--<el-button @click="dialogFormVisible = false" type="warning">驳回</el-button>-->
+        <el-button @click="outerVisible = false" type="success">通过</el-button>
       </div>
     </el-dialog>
-
   </div>
 </template>
 
@@ -134,10 +159,13 @@
 import { TestUser, getTestUser,  backUser, accessUser } from "@/api/test/class";
 import { getToken } from "@/utils/auth";
 import EditTable from "../../tool/gen/editTable.vue";
+
 export default {
     name: "user",
     data() {
         return {
+            //驳回原因
+            reason:'',
             // 遮罩层
             loading: true,
             // 选中数组
@@ -168,10 +196,9 @@ export default {
             queryParams: {
                 pageNum: 1,
                 pageSize: 10,
-                userName: undefined,
-                nickName: undefined,
+                no: undefined,
+                name: undefined,
                 status: undefined,
-                deptId: undefined
             },
             // 列信息
             columns: [
@@ -185,7 +212,10 @@ export default {
                 { key: 7, label: `状态`, visible: true }
             ],
             // 表单校验
-            rules: {}
+            rules: {},
+          //dialogFormVisible : false,
+          outerVisible: false,
+          innerVisible: false
         };
     },
     created() {
@@ -199,8 +229,11 @@ export default {
                 this.testList = response.rows;
                 this.total = response.total;
                 this.loading = false;
+                console.log(this.testList)  //一页的数据
+                console.log(this.total)     //总数据数量
             });
         },
+
         // 筛选节点
         filterNode(value, data) {
             if (!value)
@@ -218,8 +251,9 @@ export default {
         },
         /** 搜索按钮操作 */
         handleQuery() {
-            this.queryParams.pageNum = 1;
-            this.getList();
+
+          this.queryParams.pageNum = 1;
+          this.getList();
         },
         // 多选框选中数据
         handleSelectionChange(selection) {
@@ -245,6 +279,11 @@ export default {
             this.title = "详细页";
           });
         },
+      /*
+      * ID查询学生
+      * */
+
+
         /** 驳回按钮操作 */
       handleBack(row1) {
           let text = row1.status;
@@ -273,12 +312,31 @@ export default {
           this.$modal.confirm('确认要通过所选项的申请吗？').then(function() {
           return accessUser(userIds, status);
           }).then(() => {
+
+      this.$modal.msgSuccess(text + "成功");
+        }).catch(function() {
+      row.status = row.status === "1";
+        });
+      this.getList()
+      },
+      //编辑
+      handleEdit(row){
+        this.form = Object.assign({},row)
+        //this.dialogFormVisible = true
+        this.outerVisible = true
+      },
+      double(){
+        this.innerVisible = false;
+        this.outerVisible = false
+      },
+      //重置按钮
+      reset(){
+        this.queryParams.name =''
+        this.queryParams.no =''
         this.getList()
-        this.$modal.msgSuccess(text + "成功");
-          }).catch(function() {
-        row.status = row.status === "1";
-          });
-        }
+      }
+
+
     },
     components: { EditTable }
 };

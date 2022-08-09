@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
 Vue.use(Router)
 
 /* Layout */
@@ -71,6 +70,11 @@ export const constantRoutes = [
         component: () => import('@/views/index'),
         name: 'Index',
         meta: { title: '首页', icon: 'dashboard', affix: true }
+      },
+      {
+        path: 'test',
+        name: 'about',
+        component: () => import('../views/test/institute/index'),
       }
     ]
   },
@@ -162,6 +166,7 @@ export const dynamicRoutes = [
       }
     ]
   },
+
 ]
 
 // 防止连续点击多次路由报错

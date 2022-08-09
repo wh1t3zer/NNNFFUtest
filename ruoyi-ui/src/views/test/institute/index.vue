@@ -29,7 +29,7 @@
         </el-form>
 
         <el-row :gutter="10" class="mb8">
-            <el-col :span="1.5">
+          <el-col :span="1.5">
             <el-button
               type="success"
               plain
@@ -54,8 +54,8 @@
         </el-row>
         <el-table v-loading="loading" :data="testList" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="50" align="center" />
-          <el-table-column label="用户id" align="center" key="userId" prop="userId" v-if="columns[0].visible" />
-          <el-table-column label="学号" align="center" key="userName" prop="userName" v-if="columns[1].visible" :show-overflow-tooltip="true" />
+<!--          <el-table-column label="用户id" align="center" key="userId" prop="userId" v-if="columns[0].visible" />-->
+          <el-table-column label="学号" align="center" key="no" prop="no" v-if="columns[1].visible" :show-overflow-tooltip="true" />
           <el-table-column label="姓名" align="center" key="nickName" prop="nickName" v-if="columns[2].visible" :show-overflow-tooltip="true" />
           <el-table-column label="性别" align="center" key="sex" prop="sex" :formatter="changesex" />
           <el-table-column label="班级" align="center" key="classname" prop="classname" v-if="columns[4].visible" :show-overflow-tooltip="true" />
@@ -76,14 +76,7 @@
             class-name="small-padding fixed-width"
           >
             <template slot-scope="scope" >
-
-              <el-button
-                size="mini"
-                type="text"
-                icon="el-icon-d-arrow-right"
-                @click="handleDetail(scope.row)"
-                v-hasPermi="['test:test:edit']"
-              >编辑</el-button>
+              <el-button type="success" @click="handleEdit(scope.row)">编辑<i class="el-icon-edit"></i></el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -98,13 +91,38 @@
       </el-col>
     </el-row>
 
+    <el-dialog title="详情页" :visible.sync="dialogFormVisible" width="50%" >
+      <el-form label-width="100px" :disabled="true">
+        <el-form-item label="用户名">
+          <el-input v-model="form.nickName" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="学号">
+          <el-input v-model="form.userName" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="班级">
+          <el-input v-model="form.classname" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="电话">
+          <el-input v-model="form.phonenumber" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="加分图">
+
+         </el-form-item>
+
+
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false" type="info">取消</el-button>
+        <el-button @click="dialogFormVisible = false" type="warning">驳回</el-button>
+        <el-button @click="dialogFormVisible = false" type="success">通过</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import { TestUser, getTestUser } from "@/api/test/institute";
-import { getToken } from "@/utils/auth";
-
+  import { TestUser, getTestUser } from "@/api/test/institute";
+  import { getToken } from "@/utils/auth";
 
 
 export default {
@@ -137,7 +155,6 @@ export default {
         children: "children",
         label: "label"
       },
-
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -161,12 +178,12 @@ export default {
       // 表单校验
       rules: {
 
-      }
+      },
+      dialogFormVisible:false,
     };
   },
   created() {
     this.getList();
-
   },
   methods: {
     /** 查询用户列表 */
@@ -176,8 +193,10 @@ export default {
           this.testList = response.rows;
           this.total = response.total;
           this.loading = false;
+          console.log(this.testList)
         }
       );
+
     },
     // 筛选节点
     filterNode(value, data) {
@@ -213,6 +232,12 @@ export default {
         return "女";
       }
     },
+    //编辑
+    handleEdit(row){
+      this.form = Object.assign({},row)
+      this.dialogFormVisible = true
+    }
+
   }
 };
 </script>
