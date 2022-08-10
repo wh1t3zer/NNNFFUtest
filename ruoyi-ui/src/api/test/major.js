@@ -17,3 +17,11 @@ export function getTestUser(userId) {
     method: 'get'
   })
 }
+
+// 用户详情页跳转
+export function toDetail(userId) {
+  return request({
+    url: '/test/major/detail/' + userId,
+    method: 'get'
+  })
+}

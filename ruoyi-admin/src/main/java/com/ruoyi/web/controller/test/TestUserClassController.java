@@ -7,8 +7,11 @@ import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.test.domain.Student;
 import com.ruoyi.test.domain.TestUser;
+import com.ruoyi.test.domain.Testersoure;
 import com.ruoyi.test.mapper.StudentMapper;
+import com.ruoyi.test.service.IStudentService;
 import com.ruoyi.test.service.ITestUserService;
+import com.ruoyi.test.service.ITestersoureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +31,15 @@ public class TestUserClassController extends BaseController
     @Autowired
     private ITestUserService testUserService;
 
+
+    @Autowired
+    private IStudentService studentService;
+
     @Autowired
     private StudentMapper studentMapper;
+
+    @Autowired
+    private ITestersoureService testersoureService;
     /**
      * 查询test列表
      */
@@ -123,8 +133,49 @@ public class TestUserClassController extends BaseController
     @PreAuthorize("@ss.hasPermi('test:class:back')")
     @Log(title = "back", businessType = BusinessType.UPDATE)
     @PutMapping("backUser")
-    public AjaxResult backTestUser(@RequestBody TestUser testUser)
+    /*public AjaxResult backTestUser(@RequestBody TestUser testUser)
     {
         return toAjax(testUserService.backTestUser(testUser));
+    }*/
+    public AjaxResult backTestUser(@RequestBody Testersoure testersoure){
+        Student student = new Student();
+        student.setStatus("2");
+        student.setNo(testersoure.getNo());
+        studentService.updateStatusByNo(student);
+        return toAjax(testersoureService.updateReasonByNo(testersoure));
     }
+
+    /**
+     * 驳回学生申请
+     */
+    @PreAuthorize("@ss.hasPermi('test:class:access')")
+    @Log(title = "access", businessType = BusinessType.UPDATE)
+    @PutMapping("/{nos}")
+    public AjaxResult accessUser(@PathVariable String nos){
+        //System.out.println("aaaaah::  " + nos );
+        return toAjax(studentService.updateStatusByNos(nos));
+
+    }
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

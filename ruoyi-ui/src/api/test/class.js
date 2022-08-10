@@ -18,13 +18,21 @@ export function getTestUser(userId) {
   })
 }
 
-//驳回学生申请
-export function backUser(userId,status) {
+
+/**
+ * 驳回学生申请
+ * @param no 学生学号
+ * @param reason 驳回原因
+ * @returns {*}
+ */
+export function backUser(no,reason) {
   const data = {
+    no,
+    reason,
     // userId,
     // status
-    infoIdList:infoId.join(','),
-    status:status
+    //infoIdList:infoId.join(','),
+    //status:status
   }
   return request({
     url: '/test/class/backUser',
@@ -33,16 +41,20 @@ export function backUser(userId,status) {
   })
 }
 
-//通过学生申请
-export function accessUser(userId,status) {
+/**
+ * 通过学生申请
+ * nos 为所选学生no数组
+ * @param nos
+ * @returns {*}
+ */
+export function accessUser(nos) {
   const data = {
-    userId,
-    status
+    nos,
   }
   return request({
-    url: '/test/class/' + userId,
+    url: '/test/class/' + parseStrEmpty(nos),
     method: 'put',
-    data: data
+    //data: data
   })
 }
 

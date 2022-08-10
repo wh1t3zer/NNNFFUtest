@@ -596,6 +596,7 @@ export default {
     /** 删除按钮操作 */
     handleDelete(row) {
       const roleIds = row.roleId || this.ids;
+
       this.$modal.confirm('是否确认删除角色编号为"' + roleIds + '"的数据项？').then(function() {
         return delRole(roleIds);
       }).then(() => {

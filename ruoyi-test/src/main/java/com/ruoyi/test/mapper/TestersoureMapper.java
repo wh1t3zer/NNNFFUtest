@@ -11,5 +11,7 @@ public interface TestersoureMapper {
     @Select("select * from testerSoure")
     List<Testersoure> findAll();
 
+    int updateReasonByNo(Testersoure testersoure);
+
 
 }

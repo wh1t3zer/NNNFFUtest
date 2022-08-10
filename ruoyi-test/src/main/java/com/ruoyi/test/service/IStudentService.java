@@ -11,4 +11,9 @@ public interface IStudentService {
     public List<Student> selectAllStudents(Student student);
 
     public Student selectTestUserByUserId(Integer no);
+
+    public int updateStatusByNo(Student student);
+
+    public int updateStatusByNos(String nos);
+
 }

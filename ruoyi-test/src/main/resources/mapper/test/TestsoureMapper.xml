@@ -3,6 +3,46 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.test.mapper.TestersoureMapper">
+    <resultMap type="TesterSoure" id="TestersoureResult">
+        <result property="id"    column="id"    />
+        <result property="no"    column="no"    />
+        <result property="score"    column="score"    />
+        <result property="module"    column="module"    />
+        <result property="title"    column="title"    />
+        <result property="detail"    column="detail"    />
+        <result property="reason"    column="reason"    />
+        <result property="adopter2"    column="adopter2"    />
+        <result property="adopter"    column="adopter"    />
+        <result property="operator"    column="operator"    />
+        <result property="updateTime"    column="updateTime"    />
+        <result property="createTime"    column="createTime"    />
+    </resultMap>
+    
+    <update id="updateReasonByNo" parameterType="com.ruoyi.test.domain.Testersoure">
+        update testerSoure set reason = #{reason} where no = #{no}
+    </update>
+    
     
 
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

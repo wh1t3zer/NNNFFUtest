@@ -43,5 +43,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         and no = #{no}
     </select>
 
+    <update id="updateStatusByNo" parameterType="com.ruoyi.test.domain.Student">
+        update student set status = #{status} where no = #{no}
+    </update>
+
+
+    <update id="updateStatusByNos" parameterType="string">
+        update student set status = 1 where no in
+        <foreach collection="nos.split(',')" separator="," open="(" close=")" item="no">
+            #{no}
+        </foreach>
+    </update>
 
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -33,17 +33,18 @@
 
         <el-row :gutter="10" class="mb8">
             <el-col :span="1.5">
+
             <el-button
               type="success"
               plain
               icon="el-icon-check"
               size="mini"
               :disabled="multiple"
-              @click="handleAccess"
+              @click="handleSuccess"
               v-hasPermi="['test:class:access']"
             >通过</el-button>
           </el-col>
-          <el-col :span="1.5">
+          <el-col :span="1.5" >
             <el-button
               type="danger"
               plain
@@ -51,7 +52,7 @@
               size="mini"
               :disabled="multiple"
               @click="handleBack"
-              v-hasPermi="['test:class:back']"
+            v-hasPermi="['test:class:back']"
             >驳回</el-button>
           </el-col>
         </el-row>
@@ -133,14 +134,14 @@
           <el-button @click="innerVisible = false" type="info">取消</el-button>
           <el-popconfirm
             style="margin-left: 5px"
-            confirm-button-text='确定'
+            confirm-button-text='确定咯'
             cancel-button-text='取消'
             icon="el-icon-info"
             icon-color="red"
             title="您确定要驳回吗？"
-            @confirm="double"
+            @confirm="double(form.no,reason)"
           >
-            <el-button  type="danger" slot="reference">确定</el-button>
+            <el-button  type="danger" slot="reference" >确定</el-button>
           </el-popconfirm>
 
         </div>
@@ -170,6 +171,7 @@ export default {
             loading: true,
             // 选中数组
             ids: [],
+            nos:[],
             // 非单个禁用
             single: false,
             // 非多个禁用
@@ -258,6 +260,7 @@ export default {
         // 多选框选中数据
         handleSelectionChange(selection) {
             this.ids = selection.map(item => item.userId);
+            this.nos = selection.map(item => item.no);
             this.single = selection.length != 1;
             this.multiple = !selection.length;
         },
@@ -274,7 +277,7 @@ export default {
           const userId = row.userId || this.ids;
           getUser(userId).then(response => {
             this.form = response.data;
-            
+
             this.open = true;
             this.title = "详细页";
           });
@@ -284,15 +287,21 @@ export default {
       * */
 
 
-        /** 驳回按钮操作 */
-      handleBack(row1) {
-          let text = row1.status;
-          const userIds = row1.userId || this.ids;
-          
-          getTestUser(userIds).then(response =>{
+
+      /**
+       * 驳回按钮操作
+       * @param no 学生学号
+       * @param reason 驳回原因
+       */
+      handleBack(no,reason) {
+        backUser(no,reason);
+        this.handleQuery();
+          /*getTestUser(userIds).then(response =>{
             console.log(response.data)
           })
-           console.log(userIds)
+           console.log(userIds)*/
+
+
         //   this.$modal.confirm('确认要驳回所选项的申请吗？').then(
         //   getTestUser(userIds)
         //   ).then(response => {
@@ -305,8 +314,18 @@ export default {
         //   row.status = row.status === "2";
         //   });
         },
-      handleAccess(row) {
-          let text = row.status === "1";
+
+      /**
+       * 通过按钮
+       * @param row
+       */
+      handleSuccess(row) {
+        const nos = row.no || this.nos;
+
+        accessUser(nos)
+        this.handleQuery();
+
+          /*let text = row.status === "1";
           const userIds = row.userId || this.ids;
           const status = row.status || this.ids.status
           this.$modal.confirm('确认要通过所选项的申请吗？').then(function() {
@@ -317,15 +336,18 @@ export default {
         }).catch(function() {
       row.status = row.status === "1";
         });
-      this.getList()
+      this.getList()*/
       },
       //编辑
       handleEdit(row){
+        //const nos = row.no;
+
         this.form = Object.assign({},row)
         //this.dialogFormVisible = true
         this.outerVisible = true
       },
-      double(){
+      double(no,reason){
+        this.handleBack(no,reason)
         this.innerVisible = false;
         this.outerVisible = false
       },

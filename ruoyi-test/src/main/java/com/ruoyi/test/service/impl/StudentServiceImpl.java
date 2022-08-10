@@ -5,9 +5,11 @@ import com.ruoyi.test.domain.TestUser;
 import com.ruoyi.test.mapper.StudentMapper;
 import com.ruoyi.test.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class StudentServiceImpl implements IStudentService {
 
     @Autowired
@@ -21,6 +23,16 @@ public class StudentServiceImpl implements IStudentService {
     @Override
     public Student selectTestUserByUserId(Integer no) {
         return studentMapper.selectTestUserByUserId(no);
+    }
+
+    @Override
+    public int updateStatusByNo(Student student) {
+        return studentMapper.updateStatusByNo(student);
+    }
+
+    @Override
+    public int updateStatusByNos(String nos) {
+        return studentMapper.updateStatusByNos(nos);
     }
 
 

@@ -19,5 +19,83 @@ public class Testersoure {
     private Integer adopter2;
     private Integer operator;
 
+    public String getId() {
+        return id;
+    }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public Integer getNo() {
+        return no;
+    }
+
+    public void setNo(Integer no) {
+        this.no = no;
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
+    public String getModule() {
+        return module;
+    }
+
+    public void setModule(String module) {
+        this.module = module;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    public Integer getAdopter() {
+        return adopter;
+    }
+
+    public void setAdopter(Integer adopter) {
+        this.adopter = adopter;
+    }
+
+    public Integer getAdopter2() {
+        return adopter2;
+    }
+
+    public void setAdopter2(Integer adopter2) {
+        this.adopter2 = adopter2;
+    }
+
+    public Integer getOperator() {
+        return operator;
+    }
+
+    public void setOperator(Integer operator) {
+        this.operator = operator;
+    }
 }

@@ -12,6 +12,10 @@ public interface StudentMapper {
     // ID查询学生
     public Student selectTestUserByUserId(Integer no);
 
+    public int updateStatusByNo(Student student);
+
+
+    public int updateStatusByNos(String nos);
 
 
 }

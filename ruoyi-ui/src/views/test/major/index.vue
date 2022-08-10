@@ -79,6 +79,7 @@
             <template slot-scope="scope" >
 
               <el-button
+                id="DetailBtn"
                 size="mini"
                 type="text"
                 icon="el-icon-d-arrow-right"
@@ -100,10 +101,14 @@
     </el-row>
 
   </div>
+
 </template>
 
+
+
+
 <script>
-import { TestUser, getTestUser } from "@/api/test/major";
+import { TestUser, getTestUser ,toDetail} from "@/api/test/major";
 import { getToken } from "@/utils/auth";
 
 
@@ -198,6 +203,19 @@ export default {
       this.queryParams.pageNum = 1;
       this.getList();
     },
+
+    /**
+     * 详情页编辑按钮
+     * @param selection
+     */
+    handleDetail(row){
+      const userId = row.userId || this.ids;
+    //  window.location.href="/test/class";
+      toDetail(userId);
+      alert("hhhhhhhhh"  + userId)
+    },
+
+
     // 多选框选中数据
     handleSelectionChange(selection) {
       this.ids = selection.map(item => item.userId);
@@ -216,3 +234,20 @@ export default {
   }
 };
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

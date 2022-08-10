@@ -9,6 +9,7 @@ import com.ruoyi.test.domain.TestUser;
 import com.ruoyi.test.service.ITestUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -75,4 +76,37 @@ public class TestUserMajorController extends BaseController
     {
         return toAjax(testUserService.deleteTestUserByUserIds(userIds));
     }
+
+
+
+    @RequestMapping(value = "/detail/{userId}")
+    public String detailTest(@PathVariable("userId") Long userId, Model model)
+    {
+        System.out.println("hhhhhhhhhhhhhhhhhh  " + userId + "  nnnnnn");
+        System.out.println("nimade");
+        return "redirect:test/class";
+
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
