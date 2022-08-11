@@ -42,7 +42,7 @@ export function backUser(no,reason) {
 }
 
 /**
- * 通过学生申请
+ * 批量通过学生申请
  * nos 为所选学生no数组
  * @param nos
  * @returns {*}
@@ -57,4 +57,32 @@ export function accessUser(nos) {
     //data: data
   })
 }
+
+
+/**
+ * 通过单个学生
+ * @param no 学生学号
+ * @returns {*}
+ */
+export function accessUser2(no) {
+  const data = {
+    no,
+  }
+  return request({
+    url: '/test/class/accessUser2',
+    method: 'put',
+    data: data
+  })
+}
+
+
+
+
+
+
+
+
+
+
+
 

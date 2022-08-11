@@ -146,36 +146,27 @@ public class TestUserClassController extends BaseController
     }
 
     /**
-     * 驳回学生申请
+     * 批量通过学生申请
      */
     @PreAuthorize("@ss.hasPermi('test:class:access')")
     @Log(title = "access", businessType = BusinessType.UPDATE)
     @PutMapping("/{nos}")
     public AjaxResult accessUser(@PathVariable String nos){
-        //System.out.println("aaaaah::  " + nos );
         return toAjax(studentService.updateStatusByNos(nos));
+    }
 
+    /**
+     * 通过单个学生
+     */
+    @PreAuthorize("@ss.hasPermi('test:class:access2')")
+    @Log(title = "access2", businessType = BusinessType.UPDATE)
+    @PutMapping("accessUser2")
+    public AjaxResult accessUser2(@RequestBody Student student){
+        student.setStatus("1");
+        return toAjax(studentService.updateStatusByNo(student));
     }
 
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

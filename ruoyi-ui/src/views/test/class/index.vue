@@ -40,7 +40,7 @@
               icon="el-icon-check"
               size="mini"
               :disabled="multiple"
-              @click="handleSuccess"
+              @click="handleAccess"
               v-hasPermi="['test:class:access']"
             >通过</el-button>
           </el-col>
@@ -150,14 +150,14 @@
         <el-button @click="outerVisible = false" type="info">取消</el-button>
         <el-button type="warning" @click="innerVisible = true">驳回</el-button>
         <!--<el-button @click="dialogFormVisible = false" type="warning">驳回</el-button>-->
-        <el-button @click="outerVisible = false" type="success">通过</el-button>
+        <el-button @click="handleAccess2(form.no)" type="success">通过</el-button>
       </div>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import { TestUser, getTestUser,  backUser, accessUser } from "@/api/test/class";
+import { TestUser, getTestUser,  backUser, accessUser,accessUser2 } from "@/api/test/class";
 import { getToken } from "@/utils/auth";
 import EditTable from "../../tool/gen/editTable.vue";
 
@@ -316,10 +316,10 @@ export default {
         },
 
       /**
-       * 通过按钮
+       * 批量通过按钮
        * @param row
        */
-      handleSuccess(row) {
+      handleAccess(row) {
         const nos = row.no || this.nos;
 
         accessUser(nos)
@@ -338,6 +338,19 @@ export default {
         });
       this.getList()*/
       },
+
+      /**
+       * 通过按钮
+       * @param no 学生学号
+       */
+      handleAccess2(no){
+        accessUser2(no)
+        this.handleQuery();
+        this.outerVisible = false
+
+      },
+
+
       //编辑
       handleEdit(row){
         //const nos = row.no;
