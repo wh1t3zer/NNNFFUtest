@@ -3,8 +3,8 @@
     <el-row :gutter="20">
       <!--班级学生数据-->
       <el-col :span="24" :xs="24">
-        <el-form :model="queryParams" ref="queryForm" size="small" :inline="true" v-show="showSearch" label-width="68px">
-          <el-form-item label="学号" prop="userName">
+        <el-form :model="queryParams" ref="queryParams" size="small" :rules="rules" :inline="true" v-show="showSearch" label-width="68px">
+          <el-form-item label="学号" prop="no">
             <el-input
               v-model="queryParams.no"
               placeholder="请输入学号"
@@ -13,6 +13,7 @@
               @keyup.enter.native="handleQuery"
             />
           </el-form-item>
+
           <el-form-item label="学生姓名" prop="name">
             <el-input
               v-model="queryParams.name"
@@ -23,8 +24,21 @@
             />
           </el-form-item>
 
+          <el-form-item  prop="status" label="状态">
+            <el-select v-model="value" clearable placeholder="请选择" @change="selectStatus(value)" >
+              <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+                >
+              </el-option>
+            </el-select>
+          </el-form-item>
+
+
           <el-form-item>
-            <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
+            <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery('queryParams')">搜索</el-button>
           </el-form-item>
           <el-form-item>
             <el-button type="warning" icon="el-icon-refresh" size="mini" @click="reset">重置</el-button>
@@ -125,10 +139,14 @@
         title="驳回理由"
         :visible.sync="innerVisible"
         append-to-body>
+
         <el-input
-          placeholder="请输入驳回原因"
+          type="textarea"
+          placeholder="请输入内容"
           v-model="reason"
-          clearable>
+          maxlength="100"
+          show-word-limit
+        >
         </el-input>
         <div slot="footer" class="dialog-footer">
           <el-button @click="innerVisible = false" type="info">取消</el-button>
@@ -160,11 +178,28 @@
 import { TestUser, getTestUser,  backUser, accessUser,accessUser2 } from "@/api/test/class";
 import { getToken } from "@/utils/auth";
 import EditTable from "../../tool/gen/editTable.vue";
+import * as ElementUI from "element-ui";
+
+
+ElementUI.Dialog.props.closeOnClickModal.default = false; //弹框点及其他区域不关闭
+
 
 export default {
     name: "user",
     data() {
         return {
+          options: [
+            {
+            value: '通过',
+            label: '通过'
+          }, {
+            value: '驳回',
+            label: '驳回'
+          }, {
+            value: '审核中',
+            label: '审核中'
+          }],
+          value: '',
             //驳回原因
             reason:'',
             // 遮罩层
@@ -198,9 +233,16 @@ export default {
             queryParams: {
                 pageNum: 1,
                 pageSize: 10,
-                no: undefined,
+                no:'',
                 name: undefined,
                 status: undefined,
+            },
+            // 表单校验
+            rules: {
+              no:[
+                { pattern: /^[0-9]{0,11}$/, message:"请输入正确的学号", trigger:"blur" },
+                { min: 1, max: 10, message: '请输入正确的学号长度', trigger: 'blur' }
+                ]
             },
             // 列信息
             columns: [
@@ -213,9 +255,6 @@ export default {
                 { key: 6, label: `手机号码`, visible: true },
                 { key: 7, label: `状态`, visible: true }
             ],
-            // 表单校验
-            rules: {},
-          //dialogFormVisible : false,
           outerVisible: false,
           innerVisible: false
         };
@@ -252,10 +291,16 @@ export default {
             this.open = false;
         },
         /** 搜索按钮操作 */
-        handleQuery() {
-
-          this.queryParams.pageNum = 1;
-          this.getList();
+        handleQuery(formName) {
+          this.$refs[formName].validate((valid) => {
+            if (valid) {
+              this.queryParams.pageNum = 1;
+              this.getList();
+            } else {
+              console.log('error submit!!');
+              return false;
+            }
+          });
         },
         // 多选框选中数据
         handleSelectionChange(selection) {
@@ -368,7 +413,13 @@ export default {
       reset(){
         this.queryParams.name =''
         this.queryParams.no =''
+        this.value = ''
         this.getList()
+      },
+
+      //选择状态按钮
+      selectStatus(value){
+        console.log(value)
       }
 
 
