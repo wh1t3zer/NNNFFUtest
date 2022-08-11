@@ -75,14 +75,3 @@ export function accessUser2(no) {
   })
 }
 
-
-
-
-
-
-
-
-
-
-
-
