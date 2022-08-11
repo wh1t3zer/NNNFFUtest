@@ -8,7 +8,6 @@ import com.ruoyi.common.enums.BusinessType;
 import com.ruoyi.test.domain.Student;
 import com.ruoyi.test.domain.TestUser;
 import com.ruoyi.test.domain.Testersoure;
-import com.ruoyi.test.mapper.StudentMapper;
 import com.ruoyi.test.service.IStudentService;
 import com.ruoyi.test.service.ITestUserService;
 import com.ruoyi.test.service.ITestersoureService;
@@ -36,9 +35,6 @@ public class TestUserClassController extends BaseController
     private IStudentService studentService;
 
     @Autowired
-    private StudentMapper studentMapper;
-
-    @Autowired
     private ITestersoureService testersoureService;
     /**
      * 查询test列表
@@ -62,7 +58,7 @@ public class TestUserClassController extends BaseController
     public TableDataInfo list(Student student)
     {
         startPage();
-        List<Student> list = studentMapper.selectAllStudentList(student);
+        List<Student> list = studentService.selectAllStudents(student);
         return getDataTable(list);
     }
 
@@ -94,7 +90,7 @@ public class TestUserClassController extends BaseController
     @GetMapping(value = "/{no}")
     public AjaxResult getInfo(@PathVariable("no") Integer no)
     {
-        return AjaxResult.success(studentMapper.selectTestUserByUserId(no));
+        return AjaxResult.success(studentService.selectTestUserByUserId(no));
     }
 
 
