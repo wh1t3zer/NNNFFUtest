@@ -9,7 +9,7 @@
               v-model="queryParams.no"
               placeholder="请输入学号"
               clearable
-              style="width: 240px"
+              style="width: 200px"
               @keyup.enter.native="handleQuery"
             />
           </el-form-item>
@@ -19,7 +19,7 @@
               v-model="queryParams.name"
               placeholder="请输入学生姓名"
               clearable
-              style="width: 240px"
+              style="width: 200px"
               @keyup.enter.native="handleQuery"
             />
           </el-form-item>
@@ -181,7 +181,7 @@ import EditTable from "../../tool/gen/editTable.vue";
 import * as ElementUI from "element-ui";
 
 
-ElementUI.Dialog.props.closeOnClickModal.default = false; //弹框点及其他区域不关闭
+ElementUI.Dialog.props.closeOnClickModal.default = true; //弹框点及其他区域不关闭
 
 
 export default {
@@ -240,7 +240,7 @@ export default {
             // 表单校验
             rules: {
               no:[
-                { pattern: /^[0-9]{0,11}$/, message:"请输入正确的学号", trigger:"blur" },
+                { pattern: /^[0-9]$/, message:"请输入正确的学号", trigger:"blur" },
                 { min: 1, max: 10, message: '请输入正确的学号长度', trigger: 'blur' }
                 ]
             },
@@ -293,12 +293,14 @@ export default {
         /** 搜索按钮操作 */
         handleQuery(formName) {
           this.$refs[formName].validate((valid) => {
-            if (valid) {
+            if (!valid) {
               this.queryParams.pageNum = 1;
               this.getList();
-            } else {
               console.log('error submit!!');
               return false;
+            } else {
+              this.queryParams.pageNum = 1;
+              this.getList();
             }
           });
         },
