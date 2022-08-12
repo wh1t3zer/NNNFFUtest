@@ -12,7 +12,7 @@
               v-model="queryParams.no"
               placeholder="请输入学号"
               clearable
-              style="width: 240px"
+              style="width: 200px"
               @keyup.enter.native="handleQuery"
             />
           </el-form-item>
@@ -22,7 +22,7 @@
               v-model="queryParams.name"
               placeholder="请输入学生姓名"
               clearable
-              style="width: 240px"
+              style="width: 200px"
               @keyup.enter.native="handleQuery"
             />
           </el-form-item>
@@ -70,7 +70,7 @@
               size="mini"
               :disabled="multiple"
               @click="handleAccess"
-              v-hasPermi="['test:class:access']"
+              v-hasPermi="['test:institute:access']"
             >通过</el-button>
           </el-col>
           <el-col :span="1.5" >
@@ -81,7 +81,7 @@
               size="mini"
               :disabled="multiple"
               @click="handleBack"
-              v-hasPermi="['test:class:back']"
+              v-hasPermi="['test:institute:back']"
             >驳回</el-button>
           </el-col>
         </el-row>
@@ -279,7 +279,7 @@
         // 表单校验
         rules: {
           no:[
-            { pattern: /^[0-9]{0,11}$/, message:"请输入正确的学号", trigger:"blur" },
+            { pattern: /^[0-9]$/, message:"请输入正确的学号", trigger:"blur" },
             { min: 1, max: 10, message: '请输入正确的学号长度', trigger: 'blur' }
           ]
         },
