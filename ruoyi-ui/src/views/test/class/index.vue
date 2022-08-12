@@ -268,6 +268,10 @@ export default {
         /** 查询用户列表 */
         getList() {
             this.loading = true;
+            const classId = this.$store.state.user.classname;
+            const major = this.$store.state.user.major;
+            this.queryParams.major=major
+            this.queryParams.classId=classId
             TestUser(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
                 this.testList = response.rows;
                 this.total = response.total;

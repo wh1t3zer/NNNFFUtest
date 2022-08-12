@@ -95,33 +95,6 @@ public class TestUserMajorController extends BaseController
 
 
 
-
-
-    /**
-     * 修改test
-     */
-    @PreAuthorize("@ss.hasPermi('test:major:edit')")
-//    @PreAuthorize("@ss.hasRole('instructor','boss','monitor')")
-    @Log(title = "test", businessType = BusinessType.UPDATE)
-    @PutMapping
-    public AjaxResult edit(@RequestBody TestUser testUser)
-    {
-        return toAjax(testUserService.updateTestUser(testUser));
-    }
-
-    /**
-     * 删除test
-     */
-    @PreAuthorize("@ss.hasPermi('test:major:remove')")
-//    @PreAuthorize("@ss.hasRole('instructor','boss','monitor')")
-    @Log(title = "test", businessType = BusinessType.DELETE)
-    @DeleteMapping("/{userIds}")
-    public AjaxResult remove(@PathVariable Long[] userIds)
-    {
-        return toAjax(testUserService.deleteTestUserByUserIds(userIds));
-    }
-
-
     /**
      * 驳回学生申请
      */
