@@ -395,6 +395,7 @@ export default {
       row.status = row.status === "1";
         });
       this.getList()*/
+        this.getList()
       },
 
       /**

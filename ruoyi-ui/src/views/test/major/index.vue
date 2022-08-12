@@ -27,13 +27,13 @@
             />
           </el-form-item>
           <br>
-          <el-form-item  prop="major" label="专业">
-            <el-select v-model="majorValue" clearable placeholder="请选择" @change="selectMajor(majorValue)" style="width: 240px" >
+          <el-form-item  prop="class" label="班级">
+            <el-select v-model="classValue" clearable placeholder="请选择" @change="selectClass(classValue)" style="width: 240px" >
               <el-option
-                v-for="item in majorOptions"
-                :key="item.majorValue"
-                :label="item.majorValue"
-                :value="item.majorValue"
+                v-for="item in classOptions"
+                :key="item.classValue"
+                :label="item.classValue"
+                :value="item.classValue"
               >
               </el-option>
             </el-select>
@@ -215,30 +215,30 @@
             label: '审核中'
           }],
         value: '',
-        majorOptions: [
+        classOptions: [
           {
-            majorValue: '计算机科学与技术',
+            classValue: '计算机科学与技术',
             label: '计算机科学与技术'
           }, {
-            majorValue: '数据科学与大数据技术',
+            classValue: '数据科学与大数据技术',
             label: '数据科学与大数据技术'
           },{
-            majorValue: '电子信息科学与技术',
+            classValue: '电子信息科学与技术',
             label: '电子信息科学与技术'
           },{
-            majorValue: '电气工程及其自动化',
+            classValue: '电气工程及其自动化',
             label: '电气工程及其自动化'
           },{
-            majorValue: '软件工程',
+            classValue: '软件工程',
             label: '软件工程'
           },{
-            majorValue: '智能科学与技术',
+            classValue: '智能科学与技术',
             label: '智能科学与技术'
           }, {
-            majorValue: '通信工程',
+            classValue: '通信工程',
             label: '通信工程'
           }],
-        majorValue: '',
+        classValue: '',
         //驳回原因
         reason:'',
         // 遮罩层
@@ -461,8 +461,8 @@
         console.log(value)
       },
       //选择状态按钮
-      selectMajor(majorValue){
-        console.log(majorValue)
+      selectClass(classValue){
+        console.log(classValue)
       }
 
 
