@@ -9,7 +9,7 @@
               v-model="queryParams.no"
               placeholder="请输入学号"
               clearable
-              style="width: 240px"
+              style="width: 200px"
               @keyup.enter.native="handleQuery"
             />
           </el-form-item>
@@ -19,7 +19,7 @@
               v-model="queryParams.name"
               placeholder="请输入学生姓名"
               clearable
-              style="width: 240px"
+              style="width: 200px"
               @keyup.enter.native="handleQuery"
             />
           </el-form-item>
