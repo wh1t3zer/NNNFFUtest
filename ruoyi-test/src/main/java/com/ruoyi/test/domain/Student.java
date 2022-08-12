@@ -15,7 +15,8 @@ public class Student {
     private Integer room;
     private String CEE;
     private String birthday;
-    private Integer classId;
+    //private Integer classId;
+    private String classId;
     private String major;
     private Integer mid;
     private Integer cid;

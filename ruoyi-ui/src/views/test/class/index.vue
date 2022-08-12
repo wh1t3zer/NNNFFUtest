@@ -25,12 +25,13 @@
           </el-form-item>
 
           <el-form-item  prop="status" label="状态">
-            <el-select v-model="value" clearable placeholder="请选择" @change="selectStatus(value)" >
+            <el-select v-model="queryParams.status" clearable placeholder="请选择" @change="selectStatus(value)" >
               <el-option
                 v-for="item in options"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value"
+                @keyup.enter.native="handleQuery"
                 >
               </el-option>
             </el-select>
@@ -159,7 +160,7 @@
             title="您确定要驳回吗？"
             @confirm="double(form.no,reason)"
           >
-            <el-button  type="danger" slot="reference" >确定</el-button>
+            <el-button  type="danger" slot="reference">确定</el-button>
           </el-popconfirm>
 
         </div>
@@ -186,6 +187,7 @@ ElementUI.Dialog.props.closeOnClickModal.default = true; //弹框点及其他区
 
 export default {
     name: "user",
+
     data() {
         return {
           options: [
@@ -342,7 +344,12 @@ export default {
        */
       handleBack(no,reason) {
         backUser(no,reason);
-        this.handleQuery();
+        //this.handleQuery();
+
+
+
+
+
           /*getTestUser(userIds).then(response =>{
             console.log(response.data)
           })
@@ -370,7 +377,7 @@ export default {
         const nos = row.no || this.nos;
 
         accessUser(nos)
-        this.handleQuery();
+        //this.handleQuery();
 
           /*let text = row.status === "1";
           const userIds = row.userId || this.ids;
@@ -392,12 +399,8 @@ export default {
        */
       handleAccess2(no){
         accessUser2(no)
-        this.handleQuery();
         this.outerVisible = false
-
       },
-
-
       //编辑
       handleEdit(row){
         //const nos = row.no;
@@ -408,8 +411,10 @@ export default {
       },
       double(no,reason){
         this.handleBack(no,reason)
+
         this.innerVisible = false;
-        this.outerVisible = false
+        this.outerVisible = false;
+
       },
       //重置按钮
       reset(){
@@ -420,12 +425,19 @@ export default {
       },
 
       //选择状态按钮
+
       selectStatus(value){
+
         console.log(value)
+
       }
-
-
     },
     components: { EditTable }
 };
+
+
 </script>
+
+
+
+

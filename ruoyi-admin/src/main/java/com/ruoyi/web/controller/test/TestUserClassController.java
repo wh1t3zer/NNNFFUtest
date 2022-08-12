@@ -59,7 +59,7 @@ public class TestUserClassController extends BaseController
     {
         startPage();
         List<Student> list = studentService.selectAllStudents(student);
-        return getDataTable(list);
+         return getDataTable(list);
     }
 
     /*
@@ -92,9 +92,6 @@ public class TestUserClassController extends BaseController
     {
         return AjaxResult.success(studentService.selectTestUserByUserId(no));
     }
-
-
-
 
 
     /**
@@ -139,7 +136,6 @@ public class TestUserClassController extends BaseController
         studentService.updateStatusByNo(student);
         return toAjax(testersoureService.updateReasonByNo(testersoure));
     }
-
     /**
      * 批量通过学生申请
      */
@@ -160,7 +156,6 @@ public class TestUserClassController extends BaseController
         student.setStatus("1");
         return toAjax(studentService.updateStatusByNo(student));
     }
-
 
 
 }
