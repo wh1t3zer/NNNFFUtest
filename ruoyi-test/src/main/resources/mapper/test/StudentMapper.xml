@@ -50,8 +50,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <if test="status == '通过'"> and s.status like 1</if>
         <if test="status == '驳回'"> and s.status like 2</if>
         <if test="status == '审核中'"> and s.status like 0</if>
-        <if test="major != null and major != ''">and major = #{major}</if>
-<!--        <if test="classId != null and classId != ''">and c.name = #{classId}</if>-->
+        <if test="major != null  and major != ''"> and s.major = #{major}</if>
+        <if test="classId != null  and classId != ''"> and c.name = #{classId}</if>
+
     </select>
 
 

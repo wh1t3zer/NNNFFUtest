@@ -269,6 +269,7 @@ export default {
         getList() {
             this.loading = true;
             const classId = this.$store.state.user.classname;
+
             const major = this.$store.state.user.major;
             this.queryParams.major=major
             this.queryParams.classId=classId
@@ -348,7 +349,7 @@ export default {
        */
       handleBack(no,reason) {
         backUser(no,reason);
-        //this.handleQuery();
+        this.getList();
 
 
 
@@ -381,7 +382,7 @@ export default {
         const nos = row.no || this.nos;
 
         accessUser(nos)
-        //this.handleQuery();
+        this.getList();
 
           /*let text = row.status === "1";
           const userIds = row.userId || this.ids;

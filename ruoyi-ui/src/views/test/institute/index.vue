@@ -28,24 +28,26 @@
           </el-form-item>
           <br>
           <el-form-item  prop="major" label="专业">
-            <el-select v-model="majorValue" clearable placeholder="请选择" @change="selectMajor(majorValue)" style="width: 240px" >
+            <el-select v-model="queryParams.major" clearable placeholder="请选择" @change="selectMajor(majorValue)" style="width: 240px" >
               <el-option
                 v-for="item in majorOptions"
                 :key="item.majorValue"
                 :label="item.majorValue"
                 :value="item.majorValue"
+                @keyup.enter.native="handleQuery"
               >
               </el-option>
             </el-select>
           </el-form-item>
 
           <el-form-item  prop="status" label="状态">
-            <el-select v-model="value" clearable placeholder="请选择" @change="selectStatus(value)" style="width: 240px">
+            <el-select v-model="queryParams.status" clearable placeholder="请选择" @change="selectStatus(value)" style="width: 240px">
               <el-option
                 v-for="item in options"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value"
+                @keyup.enter.native="handleQuery"
               >
               </el-option>
             </el-select>
@@ -275,6 +277,7 @@
           no:'',
           name: undefined,
           status: undefined,
+          major: undefined,
         },
         // 表单校验
         rules: {
