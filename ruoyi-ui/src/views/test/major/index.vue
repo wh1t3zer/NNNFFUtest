@@ -73,7 +73,7 @@
               v-hasPermi="['test:major:access']"
             >通过</el-button>
           </el-col>
-          <el-col :span="1.5" >
+          <!-- <el-col :span="1.5" >
             <el-button
               type="danger"
               plain
@@ -83,7 +83,7 @@
               @click="handleBack"
               v-hasPermi="['test:major:back']"
             >驳回</el-button>
-          </el-col>
+          </el-col> -->
         </el-row>
         <el-table v-loading="loading" :data="testList" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="50" align="center" />

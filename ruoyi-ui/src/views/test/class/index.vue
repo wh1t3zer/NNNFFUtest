@@ -59,7 +59,7 @@
               v-hasPermi="['test:class:access']"
             >通过</el-button>
           </el-col>
-          <el-col :span="1.5" >
+          <!-- <el-col :span="1.5" >
             <el-button
               type="danger"
               plain
@@ -69,7 +69,7 @@
               @click="handleBack"
             v-hasPermi="['test:class:back']"
             >驳回</el-button>
-          </el-col>
+          </el-col> -->
         </el-row>
         <el-table v-loading="loading" :data="testList" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="50" align="center" />
@@ -400,6 +400,7 @@ export default {
       handleAccess2(no){
         accessUser2(no)
         this.outerVisible = false
+        this.getList()
       },
       //编辑
       handleEdit(row){
