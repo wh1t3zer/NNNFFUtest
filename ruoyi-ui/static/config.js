@@ -183,55 +183,55 @@ export const classOptionsini = {
 
     {
       classValue: '19软件1班',
-      label: '19软件1班'
+      label: '19软工1班'
     },
     {
       classValue: '19软件2班',
-      label: '19软件2班'
+      label: '19软工2班'
     },
     {
       classValue: '19软件3班',
-      label: '19软件3班'
+      label: '19软工3班'
     },
     {
       classValue: '19软件4班',
-      label: '19软件4班'
+      label: '19软工4班'
     },
     {
       classValue: '19软件5班',
-      label: '19软件5班'
+      label: '19软工5班'
     },
     {
       classValue: '19软件6班',
-      label: '19软件6班'
+      label: '19软工6班'
     },
     {
       classValue: '19软件7班',
-      label: '19软件7班'
+      label: '19软工7班'
     },
     {
       classValue: '19软件8班',
-      label: '19软件8班'
+      label: '19软工8班'
     },
     {
       classValue: '19软件9班',
-      label: '19软件9班'
+      label: '19软工9班'
     },
     {
       classValue: '19软件10班',
-      label: '19软件10班'
+      label: '19软工10班'
     },
     {
       classValue: '19软件11班',
-      label: '19软件11班'
+      label: '19软工11班'
     },
     {
       classValue: '19软件12班',
-      label: '19软件12班'
+      label: '19软工12班'
     },
     {
       classValue: '19软件13班',
-      label: '19软件13班'
+      label: '19软工13班'
     },
     {
       classValue: '19计算机1班',
