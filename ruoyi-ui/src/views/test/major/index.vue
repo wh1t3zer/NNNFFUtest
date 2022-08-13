@@ -306,6 +306,8 @@
       /** 查询用户列表 */
       getList() {
         this.loading = true;
+        const major = this.$store.state.user.major;
+        this.queryParams.major=major
         TestUser(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
           this.testList = response.rows;
           this.total = response.total;

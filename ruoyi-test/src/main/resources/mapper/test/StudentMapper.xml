@@ -37,11 +37,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <sql id="selectStudentAllMajor">
         and major in('计算机科学与技术','电子信息科学与技术','通信工程','电气工程及其自动化','软件工程','智能科学与技术','数据科学与大数据技术')
     </sql>
-    <!--<select id="selectAllStudentList" resultType="com.ruoyi.test.domain.Student">
-        <include refid="selectStudentVo"/>
-            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
-            <if test="no != null  and no != ''"> and no like concat('%', #{no}, '%')</if>
-    </select>-->
+
 
     <select id="selectAllStudentList" resultType="com.ruoyi.test.domain.Student">
         select
@@ -56,7 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <if test="status == '驳回'"> and s.status = 2</if>
         <if test="status == '审核中'"> and s.status = 0</if>
         <if test="majorValue != null  and majorValue != ''"> and s.major = #{majorValue}</if>
-<!--        <if test="classId != null  and classId != ''"> and c.name = #{classId}</if>-->
+        <if test="classValue != null  and classValue != ''"> and c.name = #{classValue}</if>
         <if test="major == null or major == ''">
             <include refid="selectStudentAllMajor"></include>
         </if>
@@ -75,7 +71,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <if test="status == '通过'"> and s.status = 1</if>
         <if test="status == '驳回'"> and s.status = 2</if>
         <if test="status == '审核中'"> and s.status = 0</if>
-        <if test="major != null  and major != ''"> and s.major = #{major}</if>
+        <if test="major != null  and major != ''">
+            and s.major in
+            <foreach collection="major.split(',')" item="major" separator="," open="(" close=")">
+                #{major}
+            </foreach>
+        </if>
         <if test="classValue !=null and classValue!= ''"> and c.name=#{classValue}</if>
 
     </select>
@@ -98,6 +99,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             and c.name in
             <foreach collection="classId.split(',')" item="classId" separator="," open="(" close=")">
                 #{classId}
+            </foreach>
+        </if>
+        /*专业筛选*/
+        <if test="major != null  and major != ''">
+            and s.major in
+            <foreach collection="major.split(',')" item="major" separator="," open="(" close=")">
+                #{major}
             </foreach>
         </if>
 

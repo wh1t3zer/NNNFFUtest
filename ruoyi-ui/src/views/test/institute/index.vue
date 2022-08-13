@@ -26,6 +26,18 @@
               @keyup.enter.native="handleQuery"
             />
           </el-form-item>
+
+          <el-form-item  prop="class" label="班级">
+            <el-select v-model="queryParams.classValue" clearable placeholder="请选择" @change="selectClass(classValue)" style="width: 200px" >
+              <el-option
+                v-for="item in classOptions"
+                :key="item.classValue"
+                :label="item.classValue"
+                :value="item.classValue"
+              >
+              </el-option>
+            </el-select>
+          </el-form-item>
           <br>
           <el-form-item  prop="major" label="专业">
             <el-select v-model="queryParams.majorValue" clearable placeholder="请选择" @change="selectMajor(majorValue)" style="width: 200px" >
@@ -186,6 +198,7 @@
   import EditTable from "../../tool/gen/editTable.vue";
   import * as ElementUI from "element-ui";
   import {majorOptionsini} from "../../../../static/config.js"
+  import {classOptionsini} from "../../../../static/config.js"
 
 
   ElementUI.Dialog.props.closeOnClickModal.default = false; //弹框点及其他区域不关闭
@@ -231,6 +244,8 @@
         //     label: '通信工程'
         //   }],
 
+        classOptions:classOptionsini.classOptions,
+        classValue: '',
         majorOptions: majorOptionsini.majorOptions,
         majorValue: '',
         //驳回原因
@@ -426,6 +441,10 @@
       //选择专业状态按钮
       selectMajor(majorValue){
         console.log(majorValue)
+      },
+      //选择状态按钮
+      selectClass(classValue){
+        console.log(classValue)
       }
 
 
