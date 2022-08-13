@@ -179,7 +179,6 @@ public class SysUser extends BaseEntity
         this.email = email;
     }
 
-    @Size(min = 0, max = 10, message = "专业长度不能超过10个字符")
     public String getmajor()
     {
         return major;
@@ -190,7 +189,6 @@ public class SysUser extends BaseEntity
         this.major = major;
     }
 
-    @Size(min = 0, max = 10, message = "班级长度不能超过10个字符")
     public String getclassname()
     {
         return classname;

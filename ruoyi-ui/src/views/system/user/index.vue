@@ -285,9 +285,27 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="专业" prop="major">
-              <el-input v-model="form.major" placeholder="用户为辅导员填学生不填" maxlength="15" />
+              <el-input v-model="form.major" placeholder="请输入专业"  />
             </el-form-item>
           </el-col>
+          <el-col :span="12">
+            <el-form-item label="班级" prop="classname">
+              <el-input v-model="form.classname" placeholder="请输入班级"  />
+            </el-form-item>
+          </el-col>
+
+           <el-tooltip>
+            <div slot="content" style="width: 200px; height: auto; padding:5px;" > 
+                <span>1、若专业：用户为辅导员填学生不填</span> <br>
+                <span>2、若班级：用户为班长填辅导员不填</span><br>
+                <span>3、若存在分班现象，则班长用户可输入多个班级，中间逗号隔开</span><br>
+                <span>4、若存在辅导员负责多个专业，则辅导员用户可输入多个专业，中间逗号隔开</span><br>
+            </div>
+            <span>
+             <i class="el-icon-question" style="margin-top: 10px;"/>
+             </span>
+        </el-tooltip>
+
         </el-row>
         <el-row>
           <el-col :span="24">
