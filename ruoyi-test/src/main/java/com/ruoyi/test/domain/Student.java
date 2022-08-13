@@ -25,6 +25,8 @@ public class Student {
     private String alipay;
     private String GPA;
     private String status;
+    private String classValue;
+    private String majorValue;
 
     public Integer getId() {
         return id;
@@ -161,4 +163,16 @@ public class Student {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getClassValue() {
+        return classValue;
+    }
+
+    public void setClassValue(String classValue) { this.classValue = classValue; }
+
+    public String getMajorValue() {
+        return majorValue;
+    }
+
+    public void setMajorValue(String majorValue) { this.majorValue = majorValue; }
 }

@@ -28,7 +28,7 @@
           </el-form-item>
           <br>
           <el-form-item  prop="class" label="班级">
-            <el-select v-model="classValue" clearable placeholder="请选择" @change="selectClass(classValue)" style="width: 200px" >
+            <el-select v-model="queryParams.classValue" clearable placeholder="请选择" @change="selectClass(classValue)" style="width: 200px" >
               <el-option
                 v-for="item in classOptions"
                 :key="item.classValue"
@@ -40,7 +40,7 @@
           </el-form-item>
 
           <el-form-item  prop="status" label="状态">
-            <el-select v-model="value" clearable placeholder="请选择" @change="selectStatus(value)" style="width: 200px">
+            <el-select v-model="queryParams.status" clearable placeholder="请选择" @change="selectStatus(value)" style="width: 200px">
               <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -194,7 +194,7 @@
   import { getToken } from "@/utils/auth";
   import EditTable from "../../tool/gen/editTable.vue";
   import * as ElementUI from "element-ui";
-
+  import {classOptionsini} from "../../../../static/config.js"
 
   ElementUI.Dialog.props.closeOnClickModal.default = false; //弹框点及其他区域不关闭
 
@@ -215,29 +215,30 @@
             label: '审核中'
           }],
         value: '',
-        classOptions: [
-          {
-            classValue: '计算机科学与技术',
-            label: '计算机科学与技术'
-          }, {
-            classValue: '数据科学与大数据技术',
-            label: '数据科学与大数据技术'
-          },{
-            classValue: '电子信息科学与技术',
-            label: '电子信息科学与技术'
-          },{
-            classValue: '电气工程及其自动化',
-            label: '电气工程及其自动化'
-          },{
-            classValue: '软件工程',
-            label: '软件工程'
-          },{
-            classValue: '智能科学与技术',
-            label: '智能科学与技术'
-          }, {
-            classValue: '通信工程',
-            label: '通信工程'
-          }],
+        // classOptions: [
+        //   {
+        //     classValue: '计算机科学与技术',
+        //     label: '计算机科学与技术'
+        //   }, {
+        //     classValue: '数据科学与大数据技术',
+        //     label: '数据科学与大数据技术'
+        //   },{
+        //     classValue: '电子信息科学与技术',
+        //     label: '电子信息科学与技术'
+        //   },{
+        //     classValue: '电气工程及其自动化',
+        //     label: '电气工程及其自动化'
+        //   },{
+        //     classValue: '软件工程',
+        //     label: '软件工程'
+        //   },{
+        //     classValue: '智能科学与技术',
+        //     label: '智能科学与技术'
+        //   }, {
+        //     classValue: '通信工程',
+        //     label: '通信工程'
+        //   }],
+        classOptions:classOptionsini.classOptions,
         classValue: '',
         //驳回原因
         reason:'',

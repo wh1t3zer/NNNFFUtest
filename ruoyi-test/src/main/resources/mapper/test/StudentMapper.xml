@@ -21,6 +21,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="no" column="no"/>
         <result property="grade" column="grade"/>
         <result property="classId" column="classId"/>
+        <result property="classValue" column="classValue"/>
+        <result property="majorValue" column="majorValue"/>
         <result property="major" column="major"/>
         <result property="mid" column="mid"/>
         <result property="cid" column="cid"/>
@@ -50,7 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <if test="status == '通过'"> and s.status = 1</if>
         <if test="status == '驳回'"> and s.status = 2</if>
         <if test="status == '审核中'"> and s.status = 0</if>
-<!--        <if test="major != null  and major != ''"> and s.major = #{major}</if>-->
+        <if test="majorValue != null  and majorValue != ''"> and s.major = #{majorValue}</if>
 <!--        <if test="classId != null  and classId != ''"> and c.name = #{classId}</if>-->
 
     </select>
@@ -69,7 +71,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <if test="status == '驳回'"> and s.status = 2</if>
         <if test="status == '审核中'"> and s.status = 0</if>
         <if test="major != null  and major != ''"> and s.major = #{major}</if>
-
+        <if test="classValue !=null and classValue!= ''"> and c.name=#{classValue}</if>
     </select>
 
 
@@ -86,7 +88,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <if test="status == '通过'"> and s.status = 1</if>
         <if test="status == '驳回'"> and s.status = 2</if>
         <if test="status == '审核中'"> and s.status = 0</if>
-        <if test="classId != null  and classId != ''"> and c.name like concat(#{classId}, '%')</if>
+        <if test="classId != null  and classId != ''"> and c.name =#{classId}</if>
 
     </select>
 

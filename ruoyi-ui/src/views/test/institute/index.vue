@@ -28,7 +28,7 @@
           </el-form-item>
           <br>
           <el-form-item  prop="major" label="专业">
-            <el-select v-model="queryParams.major" clearable placeholder="请选择" @change="selectMajor(majorValue)" style="width: 200px" >
+            <el-select v-model="queryParams.majorValue" clearable placeholder="请选择" @change="selectMajor(majorValue)" style="width: 200px" >
               <el-option
                 v-for="item in majorOptions"
                 :key="item.majorValue"
@@ -185,6 +185,7 @@
   import { getToken } from "@/utils/auth";
   import EditTable from "../../tool/gen/editTable.vue";
   import * as ElementUI from "element-ui";
+  import {majorOptionsini} from "../../../../static/config.js"
 
 
   ElementUI.Dialog.props.closeOnClickModal.default = false; //弹框点及其他区域不关闭
@@ -206,29 +207,31 @@
             label: '审核中'
           }],
         value: '',
-        majorOptions: [
-          {
-            majorValue: '计算机科学与技术',
-            label: '计算机科学与技术'
-          }, {
-            majorValue: '数据科学与大数据技术',
-            label: '数据科学与大数据技术'
-          },{
-            majorValue: '电子信息科学与技术',
-            label: '电子信息科学与技术'
-          },{
-            majorValue: '电气工程及其自动化',
-            label: '电气工程及其自动化'
-          },{
-            majorValue: '软件工程',
-            label: '软件工程'
-          },{
-            majorValue: '智能科学与技术',
-            label: '智能科学与技术'
-          }, {
-            majorValue: '通信工程',
-            label: '通信工程'
-          }],
+        // majorOptions: [
+        //   {
+        //     majorValue: '计算机科学与技术',
+        //     label: '计算机科学与技术'
+        //   }, {
+        //     majorValue: '数据科学与大数据技术',
+        //     label: '数据科学与大数据技术'
+        //   },{
+        //     majorValue: '电子信息科学与技术',
+        //     label: '电子信息科学与技术'
+        //   },{
+        //     majorValue: '电气工程及其自动化',
+        //     label: '电气工程及其自动化'
+        //   },{
+        //     majorValue: '软件工程',
+        //     label: '软件工程'
+        //   },{
+        //     majorValue: '智能科学与技术',
+        //     label: '智能科学与技术'
+        //   }, {
+        //     majorValue: '通信工程',
+        //     label: '通信工程'
+        //   }],
+
+        majorOptions: majorOptionsini.majorOptions,
         majorValue: '',
         //驳回原因
         reason:'',
@@ -420,7 +423,7 @@
       selectStatus(value){
         console.log(value)
       },
-      //选择状态按钮
+      //选择专业状态按钮
       selectMajor(majorValue){
         console.log(majorValue)
       }
