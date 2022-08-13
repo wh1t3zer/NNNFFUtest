@@ -58,7 +58,7 @@ public class TestUserClassController extends BaseController
     public TableDataInfo list(Student student)
     {
         startPage();
-        List<Student> list = studentService.selectAllStudents(student);
+        List<Student> list = studentService.selectClassStudents(student);
          return getDataTable(list);
     }
 

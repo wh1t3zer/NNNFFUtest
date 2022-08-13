@@ -28,7 +28,7 @@
           </el-form-item>
           <br>
           <el-form-item  prop="class" label="班级">
-            <el-select v-model="classValue" clearable placeholder="请选择" @change="selectClass(classValue)" style="width: 240px" >
+            <el-select v-model="classValue" clearable placeholder="请选择" @change="selectClass(classValue)" style="width: 200px" >
               <el-option
                 v-for="item in classOptions"
                 :key="item.classValue"
@@ -40,7 +40,7 @@
           </el-form-item>
 
           <el-form-item  prop="status" label="状态">
-            <el-select v-model="value" clearable placeholder="请选择" @change="selectStatus(value)" style="width: 240px">
+            <el-select v-model="value" clearable placeholder="请选择" @change="selectStatus(value)" style="width: 200px">
               <el-option
                 v-for="item in options"
                 :key="item.value"
@@ -279,7 +279,7 @@
         // 表单校验
         rules: {
           no:[
-            { pattern: /^[0-9]$/, message:"请输入正确的学号", trigger:"blur" },
+            { pattern: /^[0-9]*$/, message:"请输入正确的学号", trigger:"blur" },
             { min: 1, max: 10, message: '请输入正确的学号长度', trigger: 'blur' }
           ]
         },
@@ -310,7 +310,6 @@
           this.total = response.total;
           this.loading = false;
           console.log(this.testList)  //一页的数据
-          console.log(this.total)     //总数据数量
         });
       },
 
@@ -379,24 +378,7 @@
        */
       handleBack(no,reason) {
         backUser(no,reason);
-        this.handleQuery();
-        /*getTestUser(userIds).then(response =>{
-          console.log(response.data)
-        })
-         console.log(userIds)*/
-
-
-        //   this.$modal.confirm('确认要驳回所选项的申请吗？').then(
-        //   getTestUser(userIds)
-        //   ).then(response => {
-        // // this.getList()
-        // // this.$modal.msgSuccess(text + "成功");
-        //   console.log(response.data)
-        //   }).then(function(){
-        //     return backUser(userId,status)
-        //   }).catch(function() {
-        //   row.status = row.status === "2";
-        //   });
+        this.getList();
       },
 
       /**
@@ -406,21 +388,8 @@
       handleAccess(row) {
         const nos = row.no || this.nos;
 
-        accessUser(nos)
-        this.handleQuery();
-
-        /*let text = row.status === "1";
-        const userIds = row.userId || this.ids;
-        const status = row.status || this.ids.status
-        this.$modal.confirm('确认要通过所选项的申请吗？').then(function() {
-        return accessUser(userIds, status);
-        }).then(() => {
-
-    this.$modal.msgSuccess(text + "成功");
-      }).catch(function() {
-    row.status = row.status === "1";
-      });
-    this.getList()*/
+        accessUser(nos);
+        this.getList();
       },
 
       /**
@@ -429,9 +398,8 @@
        */
       handleAccess2(no){
         accessUser2(no)
-        this.handleQuery();
         this.outerVisible = false
-
+        this.getList();
       },
 
 

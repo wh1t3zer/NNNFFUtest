@@ -47,15 +47,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where (s.grade = 19 or s.grade = 20)
         <if test="name != null  and name != ''"> and s.name like concat('%', #{name}, '%')</if>
         <if test="no != null  and no != ''"> and no like concat('%', #{no}, '%')</if>
-        <if test="status == '通过'"> and s.status like 1</if>
-        <if test="status == '驳回'"> and s.status like 2</if>
-        <if test="status == '审核中'"> and s.status like 0</if>
-        <if test="major != null  and major != ''"> and s.major = #{major}</if>
-        <if test="classId != null  and classId != ''"> and c.name = #{classId}</if>
+        <if test="status == '通过'"> and s.status = 1</if>
+        <if test="status == '驳回'"> and s.status = 2</if>
+        <if test="status == '审核中'"> and s.status = 0</if>
+<!--        <if test="major != null  and major != ''"> and s.major = #{major}</if>-->
+<!--        <if test="classId != null  and classId != ''"> and c.name = #{classId}</if>-->
 
     </select>
 
 
+    <select id="selectMajorStudentList" resultType="com.ruoyi.test.domain.Student">
+        select
+        s.id,s.name,s.no,s.grade,c.name as classid,s.major,s.mid,s.cid ,s.status
+        from student s
+        join classes c
+        on c.id=s.classid
+        where (s.grade = 19 or s.grade = 20)
+        <if test="name != null  and name != ''"> and s.name like concat('%', #{name}, '%')</if>
+        <if test="no != null  and no != ''"> and no like concat('%', #{no}, '%')</if>
+        <if test="status == '通过'"> and s.status = 1</if>
+        <if test="status == '驳回'"> and s.status = 2</if>
+        <if test="status == '审核中'"> and s.status = 0</if>
+        <if test="major != null  and major != ''"> and s.major = #{major}</if>
+
+    </select>
+
+
+
+    <select id="selectClassStudentList" resultType="com.ruoyi.test.domain.Student">
+        select
+        s.id,s.name,s.no,s.grade,c.name as classid,s.major,s.mid,s.cid ,s.status
+        from student s
+        join classes c
+        on c.id=s.classid
+        where (s.grade = 19 or s.grade = 20)
+        <if test="name != null  and name != ''"> and s.name like concat('%', #{name}, '%')</if>
+        <if test="no != null  and no != ''"> and no like concat('%', #{no}, '%')</if>
+        <if test="status == '通过'"> and s.status = 1</if>
+        <if test="status == '驳回'"> and s.status = 2</if>
+        <if test="status == '审核中'"> and s.status = 0</if>
+        <if test="classId != null  and classId != ''"> and c.name like concat(#{classId}, '%')</if>
+
+    </select>
 
 
     <select id="selectTestUserByUserId" parameterType="int" resultMap="StudentResult">

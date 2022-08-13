@@ -242,7 +242,7 @@ export default {
             // 表单校验
             rules: {
               no:[
-                { pattern: /^[0-9]$/, message:"请输入正确的学号", trigger:"blur" },
+                { pattern: /^[0-9]*$/, message:"请输入正确的学号", trigger:"blur" },
                 { min: 1, max: 10, message: '请输入正确的学号长度', trigger: 'blur' }
                 ]
             },
@@ -278,7 +278,6 @@ export default {
                 this.total = response.total;
                 this.loading = false;
                 console.log(this.testList)  //一页的数据
-                console.log(this.total)     //总数据数量
             });
         },
 
@@ -300,15 +299,13 @@ export default {
         /** 搜索按钮操作 */
         handleQuery(formName) {
           this.$refs[formName].validate((valid) => {
-            if (!valid) {
-              this.queryParams.pageNum = 1;
-              this.getList();
-              console.log('error submit!!');
-              return false;
-            } else {
-              this.queryParams.pageNum = 1;
-              this.getList();
-            }
+            if (valid) {
+            this.queryParams.pageNum = 1;
+            this.getList();
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
           });
         },
         // 多选框选中数据
@@ -383,20 +380,7 @@ export default {
 
         accessUser(nos)
         this.getList();
-
-          /*let text = row.status === "1";
-          const userIds = row.userId || this.ids;
-          const status = row.status || this.ids.status
-          this.$modal.confirm('确认要通过所选项的申请吗？').then(function() {
-          return accessUser(userIds, status);
-          }).then(() => {
-
-      this.$modal.msgSuccess(text + "成功");
-        }).catch(function() {
-      row.status = row.status === "1";
-        });
-      this.getList()*/
-        this.getList()
+        // this.getList();
       },
 
       /**

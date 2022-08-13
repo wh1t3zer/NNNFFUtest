@@ -481,11 +481,6 @@ export default {
           this.userList = response.rows;
           this.total = response.total;
           this.loading = false;
-          // const classname = this.$store.state.user.classname;
-          // const major = this.$store.state.user.major;
-          // console.log(this.$store.state.user)
-          // console.log(classname)
-          // console.log(major)
         }
       );
     },

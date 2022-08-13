@@ -10,6 +10,11 @@ public interface IStudentService {
     * */
     public List<Student> selectAllStudents(Student student);
 
+    public List<Student> selectClassStudents(Student student);
+
+    public List<Student> selectMajorStudents(Student student);
+
+
     public Student selectTestUserByUserId(Integer no);
 
     public int updateStatusByNo(Student student);
