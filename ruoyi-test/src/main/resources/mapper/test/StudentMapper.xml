@@ -34,6 +34,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select id,name,no,grade,classId,major,mid,cid,status from student where (grade = 19 or grade = 20)
     </sql>
 
+    <sql id="selectStudentAllMajor">
+        and major in('计算机科学与技术','电子信息科学与技术','通信工程','电气工程及其自动化','软件工程','智能科学与技术','数据科学与大数据技术')
+    </sql>
     <!--<select id="selectAllStudentList" resultType="com.ruoyi.test.domain.Student">
         <include refid="selectStudentVo"/>
             <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
@@ -54,7 +57,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <if test="status == '审核中'"> and s.status = 0</if>
         <if test="majorValue != null  and majorValue != ''"> and s.major = #{majorValue}</if>
 <!--        <if test="classId != null  and classId != ''"> and c.name = #{classId}</if>-->
-
+        <if test="major == null or major == ''">
+            <include refid="selectStudentAllMajor"></include>
+        </if>
     </select>
 
 
@@ -72,6 +77,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <if test="status == '审核中'"> and s.status = 0</if>
         <if test="major != null  and major != ''"> and s.major = #{major}</if>
         <if test="classValue !=null and classValue!= ''"> and c.name=#{classValue}</if>
+
     </select>
 
 
@@ -88,7 +94,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <if test="status == '通过'"> and s.status = 1</if>
         <if test="status == '驳回'"> and s.status = 2</if>
         <if test="status == '审核中'"> and s.status = 0</if>
-        <if test="classId != null  and classId != ''"> and c.name =#{classId}</if>
+        <if test="classId != null  and classId != ''">
+            and c.name in
+            <foreach collection="classId.split(',')" item="classId" separator="," open="(" close=")">
+                #{classId}
+            </foreach>
+        </if>
+
 
     </select>
 
