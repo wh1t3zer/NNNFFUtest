@@ -26,6 +26,19 @@
               @keyup.enter.native="handleQuery"
             />
           </el-form-item>
+
+          <el-form-item  prop="class" label="年级">
+            <el-select v-model="queryParams.gradeValue" clearable placeholder="请选择" @change="selectClass(gradeValue)" style="width: 200px" >
+              <el-option
+                v-for="item in gradeOptions"
+                :key="item.gradeValue"
+                :label="item.gradeValue"
+                :value="item.gradeValue"
+              >
+              </el-option>
+            </el-select>
+          </el-form-item>
+
           <br>
           <el-form-item  prop="class" label="班级">
             <el-select v-model="queryParams.classValue" clearable placeholder="请选择" @change="selectClass(classValue)" style="width: 200px" >
@@ -195,6 +208,7 @@
   import EditTable from "../../tool/gen/editTable.vue";
   import * as ElementUI from "element-ui";
   import {classOptionsini} from "../../../../static/config.js"
+  import {gradeOptionsini} from "../../../../static/config.js"
 
   ElementUI.Dialog.props.closeOnClickModal.default = false; //弹框点及其他区域不关闭
 
@@ -240,6 +254,8 @@
         //   }],
         classOptions:classOptionsini.classOptions,
         classValue: '',
+        gradeOptions:gradeOptionsini.gradeOptions,
+        gradeValue:'',
         //驳回原因
         reason:'',
         // 遮罩层
@@ -431,9 +447,14 @@
       selectStatus(value){
         console.log(value)
       },
-      //选择状态按钮
+      //选班级态按钮
       selectClass(classValue){
         console.log(classValue)
+      },
+
+      //选择状态按钮
+      selectGrade(gradeValue){
+        console.log(gradeValue)
       }
 
 

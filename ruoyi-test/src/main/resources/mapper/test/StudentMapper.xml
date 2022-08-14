@@ -45,7 +45,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         from student s
         join classes c
         on c.id=s.classid
-        where (s.grade = 19 or s.grade = 20)
+        where
+        <if test="gradeValue == null  || gradeValue == ''">
+            (s.grade = 19 or s.grade = 20)
+        </if>
+        <if test="gradeValue != null  and gradeValue != ''">
+            s.grade = #{gradeValue}
+        </if>
         <if test="name != null  and name != ''"> and s.name like concat('%', #{name}, '%')</if>
         <if test="no != null  and no != ''"> and no like concat('%', #{no}, '%')</if>
         <if test="status == '通过'"> and s.status = 1</if>
@@ -65,7 +71,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         from student s
         join classes c
         on c.id=s.classid
-        where (s.grade = 19 or s.grade = 20)
+        where
+        <if test="gradeValue == null  || gradeValue == ''">
+             (s.grade = 19 or s.grade = 20)
+        </if>
+        <if test="gradeValue != null  and gradeValue != ''">
+            s.grade = #{gradeValue}
+        </if>
         <if test="name != null  and name != ''"> and s.name like concat('%', #{name}, '%')</if>
         <if test="no != null  and no != ''"> and no like concat('%', #{no}, '%')</if>
         <if test="status == '通过'"> and s.status = 1</if>
@@ -90,6 +102,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         join classes c
         on c.id=s.classid
         where (s.grade = 19 or s.grade = 20)
+
         <if test="name != null  and name != ''"> and s.name like concat('%', #{name}, '%')</if>
         <if test="no != null  and no != ''"> and no like concat('%', #{no}, '%')</if>
         <if test="status == '通过'"> and s.status = 1</if>
@@ -108,8 +121,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 #{major}
             </foreach>
         </if>
-
-
     </select>
 
 

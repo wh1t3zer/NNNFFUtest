@@ -400,8 +400,15 @@ export const classOptionsini = {
       classValue: '19通信5班',
       label: '19通信5班'
     },
-
-
-
   ],
+}
+export const gradeOptionsini = {
+  gradeOptions: [
+    {
+      gradeValue: '19',
+      label: '19'
+    }, {
+      gradeValue: '20',
+      label: '20'
+    }],
 }

@@ -27,6 +27,7 @@ public class Student {
     private String status;
     private String classValue;
     private String majorValue;
+    private String gradeValue;
 
     public Integer getId() {
         return id;

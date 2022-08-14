@@ -65,6 +65,18 @@
             </el-select>
           </el-form-item>
 
+          <el-form-item  prop="class" label="年级">
+            <el-select v-model="queryParams.gradeValue" clearable placeholder="请选择" @change="selectClass(gradeValue)" style="width: 200px" >
+              <el-option
+                v-for="item in gradeOptions"
+                :key="item.gradeValue"
+                :label="item.gradeValue"
+                :value="item.gradeValue"
+              >
+              </el-option>
+            </el-select>
+          </el-form-item>
+
 
           <el-form-item style="margin-left:20px">
             <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery('queryParams')">搜索</el-button>
@@ -199,7 +211,7 @@
   import * as ElementUI from "element-ui";
   import {majorOptionsini} from "../../../../static/config.js"
   import {classOptionsini} from "../../../../static/config.js"
-
+  import {gradeOptionsini} from "../../../../static/config.js"
 
   ElementUI.Dialog.props.closeOnClickModal.default = false; //弹框点及其他区域不关闭
 
@@ -248,6 +260,8 @@
         classValue: '',
         majorOptions: majorOptionsini.majorOptions,
         majorValue: '',
+        gradeOptions:gradeOptionsini.gradeOptions,
+        gradeValue:'',
         //驳回原因
         reason:'',
         // 遮罩层
