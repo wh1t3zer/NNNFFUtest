@@ -112,16 +112,38 @@
     </el-row>
 
     <el-dialog title="详情页" :visible.sync="outerVisible">
-      <el-form label-width="100px" :disabled="true">
+      <el-form label-width="70px" :disabled="true">
+      <el-row>
+        <el-col :span="12">
         <el-form-item label="用户名">
           <el-input v-model="form.name" autocomplete="off"></el-input>
         </el-form-item>
+        </el-col>
+        
+        <el-col :span="12">
         <el-form-item label="学号">
           <el-input v-model="form.no" autocomplete="off"></el-input>
         </el-form-item>
+         </el-col>
+
+         <el-col :span="12">
         <el-form-item label="班级">
           <el-input v-model="form.classId" autocomplete="off"></el-input>
         </el-form-item>
+         </el-col>
+
+         <el-col :span="12">
+        <el-form-item label="班级">
+          <el-input v-model="form.classId" autocomplete="off"></el-input>
+        </el-form-item>
+        </el-col>
+
+        <el-col :span="12">
+        <el-form-item label="班级">
+          <el-input v-model="form.classId" autocomplete="off"></el-input>
+        </el-form-item>
+        </el-col>
+        </el-row>
 
         <el-form-item
           label="加分图"
