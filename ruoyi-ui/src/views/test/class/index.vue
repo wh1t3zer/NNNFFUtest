@@ -492,17 +492,18 @@ export default {
        * @param module 奖项模块
        */
       handleGetAwards(no,module){
-        getAwards(no,module).then(response => {
+
+          getAwards(no,module).then(response => {
           return response;
         });
 
       },
 
+
       //编辑
       handleEdit(row){
-
-        alert("awaaard:" + this.handleGetAwards(2020170251, 'competition'))
-
+        var a = this.handleGetAwards(2020170246, 'competition');
+        alert("奖项：" + a)
 
         this.form = Object.assign({},row)
         //this.dialogFormVisible = true

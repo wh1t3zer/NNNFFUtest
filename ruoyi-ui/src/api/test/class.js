@@ -82,7 +82,7 @@ export function getAwards(no,module) {
   }
   return request({
     url: '/test/class/getAwards',
-    method: 'put',
+    method: 'post',
     data: data
   })
 }

@@ -115,29 +115,6 @@ public class TestUserClassController extends BaseController
         return toAjax(testersoureService.updateReasonByNo(testersoure));
     }
 
-    /**
-     * 查询奖项
-     * @param testersoure
-     * @return
-     */
-    @PreAuthorize("@ss.hasPermi('test:class:getAwards')")
-    @RequestMapping("/getAwards")
-    public String handleGetAwards(@RequestBody Testersoure testersoure){
-        System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
-        List<Testersoure> testersoureList = testersoureService.getAwardsListByModuleAndNo(testersoure);
-        //拼接奖项内容title为 xxx,xxx,xxx 格式
-        String title = "";
-        for(int i = 0; i < testersoureList.size(); i++){
-            title += testersoureList.get(i).getTitle();
-            title += ",";
-        }
-        title = title.substring(0,title.length() - 1);
-        System.out.println("title33  ==  " + title);
-        return title;
-
-    }
-
-
 
     /**
      * 批量通过学生申请
