@@ -40,7 +40,9 @@ public class TestersoureController {
             title += testersoureList.get(i).getTitle();
             title += ",";
         }
-        title = title.substring(0,title.length() - 1);
+        if (title != "") {
+            title = title.substring(0,title.length() - 1);
+        }
         return title;
 
     }

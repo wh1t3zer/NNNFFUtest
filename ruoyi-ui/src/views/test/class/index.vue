@@ -123,7 +123,7 @@
 
         <el-col :span="12">
         <el-form-item label="学号">
-          <el-input v-model="form.status" autocomplete="off"></el-input>
+          <el-input v-model="form.no" autocomplete="off"></el-input>
         </el-form-item>
          </el-col>
 
@@ -135,86 +135,86 @@
                基础性素质测评<br><br>
         <el-col :span="12">
           <el-form-item label="1、政治素质">
-            <el-input v-model="form.classId" autocomplete="off"></el-input>
+            <el-input v-model="this.politics" autocomplete="off"></el-input>
           </el-form-item>
         </el-col>
 
         <el-col :span="12">
           <el-form-item label="2、思想素质">
-            <el-input v-model="form.classId" autocomplete="off"></el-input>
+            <el-input v-model="this.ideology" autocomplete="off"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="3、道德素质">
-            <el-input v-model="form.classId" autocomplete="off"></el-input>
+            <el-input v-model="this.morality" autocomplete="off"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="4、组织素质">
-            <el-input v-model="form.classId" autocomplete="off"></el-input>
+            <el-input v-model="this.organ" autocomplete="off"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="5、法纪素质">
-            <el-input v-model="form.classId" autocomplete="off"></el-input>
+            <el-input v-model="this.law" autocomplete="off"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="6、学习与生活素质">
-            <el-input v-model="form.classId" autocomplete="off"></el-input>
+            <el-input v-model="this.learning" autocomplete="off"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="7、实践与创新素质">
-            <el-input v-model="form.classId" autocomplete="off"></el-input>
+            <el-input v-model="this.development" autocomplete="off"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="8、科学文化素质">
-            <el-input v-model="form.classId" autocomplete="off"></el-input>
+            <el-input v-model="this.scientific" autocomplete="off"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="9、身体素质">
-            <el-input v-model="form.classId" autocomplete="off"></el-input>
+            <el-input v-model="this.physical" autocomplete="off"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="10、心理素质">
-            <el-input v-model="form.classId" autocomplete="off"></el-input>
+            <el-input v-model="this.mental" autocomplete="off"></el-input>
           </el-form-item>
         </el-col>
 
 
         <el-col :span="12">
           <el-form-item label="11、荣誉称号加分">
-            <el-input v-model="form.classId" autocomplete="off"></el-input>
+            <el-input v-model="this.honorary" autocomplete="off"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="12、文体艺术等竞赛或活动加分">
-            <el-input v-model="form.classId" autocomplete="off"></el-input>
+            <el-input v-model="this.competition" autocomplete="off"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="13、社会工作加分">
-            <el-input v-model="form.classId" autocomplete="off"></el-input>
+            <el-input v-model="this.socialWork" autocomplete="off"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="14、知识与技能加分">
-            <el-input v-model="form.classId" autocomplete="off"></el-input>
+            <el-input v-model="this.knowl" autocomplete="off"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="15、日常操行减分">
-            <el-input v-model="form.classId" autocomplete="off"></el-input>
+            <el-input v-model="this.daily" autocomplete="off"></el-input>
           </el-form-item>
         </el-col>
 
         <el-col :span="12">
           <el-form-item label="16、achievement">
-            <el-input v-model="form.classId" autocomplete="off"></el-input>
+            <el-input v-model="this.achievement" autocomplete="off"></el-input>
           </el-form-item>
         </el-col>
         </el-row>
@@ -283,7 +283,6 @@ ElementUI.Dialog.props.closeOnClickModal.default = true; //弹框点及其他区
 
 export default {
     name: "user",
-    awards: "",
     data() {
         return {
           options: [
@@ -305,6 +304,7 @@ export default {
             // 选中数组
             ids: [],
             nos:[],
+
             // 非单个禁用
             single: false,
             // 非多个禁用
@@ -315,6 +315,23 @@ export default {
             total: 0,
             // 用户表格数据
             testList: [],
+            //用户奖项数据
+            politics: "",
+            ideology: "",
+            morality: "",
+            organ: "",
+            law: "",
+            learning: "",
+            development: "",
+            scientific: "",
+            physical: "",
+            mental: "",
+            honorary: "",
+            competition: "",
+            socialWork: "",
+            knowl: "",
+            daily: "",
+            achievement: "",
             // 弹出层标题
             title: "",
             // 是否显示弹出层
@@ -473,7 +490,7 @@ export default {
 
         accessUser(nos)
         this.getList();
-        // this.getList();
+
       },
 
       /**
@@ -490,11 +507,63 @@ export default {
        * 查询奖项内容
        * @param no 学号
        * @param module 奖项模块
+       * @moduleParam
+       *
+       * 代码笨重 后期修改
        */
-      handleGetAwards(no,module){
-
-          getAwards(no,module).then(response => {
-          return response;
+        async handleGetAwards (no,module,moduleParam){
+            await getAwards(no,module).then(response => {
+              moduleParam = moduleParam + ""
+              switch (moduleParam){
+                case "politics":
+                  this.politics = response;
+                  break;
+                case "morality":
+                  this.morality = response;
+                  break;
+                case "organ":
+                  this.organ = response;
+                  break;
+                case "law":
+                  this.law = response;
+                  break;
+                case "learning":
+                  this.learning = response;
+                  break;
+                case "development":
+                  this.development = response;
+                  break;
+                case "scientific":
+                  this.scientific = response;
+                  break;
+                case "physical":
+                  this.physical = response;
+                  break;
+                case "mental":
+                  this.mental = response;
+                  break;
+                case "honorary":
+                  this.honorary = response;
+                  break;
+                case "competition":
+                  this.competition = response;
+                  break;
+                case "socialWork":
+                  this.socialWork = response;
+                  break;
+                case "knowl":
+                  this.knowl = response;
+                  break;
+                case "daily":
+                  this.daily = response;
+                  break;
+                case "politics":
+                  this.politics = response;
+                  break;
+                case "achievement":
+                  this.achievement = response;
+                  break;
+              }
         });
 
       },
@@ -502,12 +571,28 @@ export default {
 
       //编辑
       handleEdit(row){
-        var a = this.handleGetAwards(2020170246, 'competition');
-        alert("奖项：" + a)
+        this.handleGetAwards(row.no, 'politics',"politics");
+        this.handleGetAwards(row.no, 'ideology',"ideology");
+        this.handleGetAwards(row.no, 'morality',"morality");
+        this.handleGetAwards(row.no, 'organ',"organ");
+        this.handleGetAwards(row.no, 'law',"law");
+        this.handleGetAwards(row.no, 'learning',"learning");
+        this.handleGetAwards(row.no, 'development',"development");
+        this.handleGetAwards(row.no, 'scientific',"scientific");
+        this.handleGetAwards(row.no, 'physical',"physical");
+        this.handleGetAwards(row.no, 'mental',"mental");
+        this.handleGetAwards(row.no, 'honorary',"honorary");
+        this.handleGetAwards(row.no, 'competition',"competition");
+        this.handleGetAwards(row.no, 'socialWork',"socialWork");
+        this.handleGetAwards(row.no, 'knowl',"knowl");
+        this.handleGetAwards(row.no, 'daily',"daily");
+        this.handleGetAwards(row.no, 'achievement',"achievement");
+
 
         this.form = Object.assign({},row)
-        //this.dialogFormVisible = true
         this.outerVisible = true
+
+
       },
       double(no,reason){
         this.handleBack(no,reason)
