@@ -13,5 +13,6 @@ public interface TestersoureMapper {
 
     int updateReasonByNo(Testersoure testersoure);
 
+    List<Testersoure> queryTitlesListByModelAndNo(Testersoure testersoure);
 
 }

@@ -115,14 +115,15 @@
       <el-form label-width="70px" :disabled="true">
       <el-row>
         <el-col :span="12">
-        <el-form-item label="用户名">
-          <el-input v-model="form.name" autocomplete="off"></el-input>
+        <el-form-item label="用户名" >
+
+          <el-input v-model="form.name" autocomplete="off" ></el-input>
         </el-form-item>
         </el-col>
-        
+
         <el-col :span="12">
         <el-form-item label="学号">
-          <el-input v-model="form.no" autocomplete="off"></el-input>
+          <el-input v-model="form.status" autocomplete="off"></el-input>
         </el-form-item>
          </el-col>
 
@@ -131,17 +132,90 @@
           <el-input v-model="form.classId" autocomplete="off"></el-input>
         </el-form-item>
          </el-col>
-
-         <el-col :span="12">
-        <el-form-item label="班级">
-          <el-input v-model="form.classId" autocomplete="off"></el-input>
-        </el-form-item>
+               基础性素质测评<br><br>
+        <el-col :span="12">
+          <el-form-item label="1、政治素质">
+            <el-input v-model="form.classId" autocomplete="off"></el-input>
+          </el-form-item>
         </el-col>
 
         <el-col :span="12">
-        <el-form-item label="班级">
-          <el-input v-model="form.classId" autocomplete="off"></el-input>
-        </el-form-item>
+          <el-form-item label="2、思想素质">
+            <el-input v-model="form.classId" autocomplete="off"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="3、道德素质">
+            <el-input v-model="form.classId" autocomplete="off"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="4、组织素质">
+            <el-input v-model="form.classId" autocomplete="off"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="5、法纪素质">
+            <el-input v-model="form.classId" autocomplete="off"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="6、学习与生活素质">
+            <el-input v-model="form.classId" autocomplete="off"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="7、实践与创新素质">
+            <el-input v-model="form.classId" autocomplete="off"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="8、科学文化素质">
+            <el-input v-model="form.classId" autocomplete="off"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="9、身体素质">
+            <el-input v-model="form.classId" autocomplete="off"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="10、心理素质">
+            <el-input v-model="form.classId" autocomplete="off"></el-input>
+          </el-form-item>
+        </el-col>
+
+
+        <el-col :span="12">
+          <el-form-item label="11、荣誉称号加分">
+            <el-input v-model="form.classId" autocomplete="off"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="12、文体艺术等竞赛或活动加分">
+            <el-input v-model="form.classId" autocomplete="off"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="13、社会工作加分">
+            <el-input v-model="form.classId" autocomplete="off"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="14、知识与技能加分">
+            <el-input v-model="form.classId" autocomplete="off"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="15、日常操行减分">
+            <el-input v-model="form.classId" autocomplete="off"></el-input>
+          </el-form-item>
+        </el-col>
+
+        <el-col :span="12">
+          <el-form-item label="16、achievement">
+            <el-input v-model="form.classId" autocomplete="off"></el-input>
+          </el-form-item>
         </el-col>
         </el-row>
 
@@ -198,7 +272,7 @@
 </template>
 
 <script>
-import { TestUser, getTestUser,  backUser, accessUser,accessUser2 } from "@/api/test/class";
+import { TestUser, getTestUser,  backUser, accessUser, accessUser2, getAwards} from "@/api/test/class";
 import { getToken } from "@/utils/auth";
 import EditTable from "../../tool/gen/editTable.vue";
 import * as ElementUI from "element-ui";
@@ -209,7 +283,7 @@ ElementUI.Dialog.props.closeOnClickModal.default = true; //弹框点及其他区
 
 export default {
     name: "user",
-
+    awards: "",
     data() {
         return {
           options: [
@@ -291,7 +365,6 @@ export default {
         getList() {
             this.loading = true;
             const classId = this.$store.state.user.classname;
-
             const major = this.$store.state.user.major;
             this.queryParams.major=major
             this.queryParams.classId=classId
@@ -302,6 +375,7 @@ export default {
                 console.log(this.testList)  //一页的数据
             });
         },
+
 
         // 筛选节点
         filterNode(value, data) {
@@ -350,7 +424,6 @@ export default {
           const userId = row.userId || this.ids;
           getUser(userId).then(response => {
             this.form = response.data;
-
             this.open = true;
             this.title = "详细页";
           });
@@ -369,8 +442,6 @@ export default {
       handleBack(no,reason) {
         backUser(no,reason);
         this.getList();
-
-
 
 
 
@@ -414,9 +485,24 @@ export default {
         this.outerVisible = false
         this.getList()
       },
+
+      /**
+       * 查询奖项内容
+       * @param no 学号
+       * @param module 奖项模块
+       */
+      handleGetAwards(no,module){
+        getAwards(no,module).then(response => {
+          return response;
+        });
+
+      },
+
       //编辑
       handleEdit(row){
-        //const nos = row.no;
+
+        alert("awaaard:" + this.handleGetAwards(2020170251, 'competition'))
+
 
         this.form = Object.assign({},row)
         //this.dialogFormVisible = true

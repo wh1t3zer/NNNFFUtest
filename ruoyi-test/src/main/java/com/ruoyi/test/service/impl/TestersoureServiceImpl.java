@@ -6,6 +6,8 @@ import com.ruoyi.test.service.ITestersoureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class TestersoureServiceImpl implements ITestersoureService {
@@ -16,5 +18,10 @@ public class TestersoureServiceImpl implements ITestersoureService {
     @Override
     public int updateReasonByNo(Testersoure testersoure) {
         return testersoureMapper.updateReasonByNo(testersoure);
+    }
+
+    @Override
+    public List<Testersoure> getAwardsListByModuleAndNo(Testersoure testersoure) {
+        return testersoureMapper.queryTitlesListByModelAndNo(testersoure);
     }
 }

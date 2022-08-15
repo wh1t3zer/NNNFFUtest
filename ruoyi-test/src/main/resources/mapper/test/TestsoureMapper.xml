@@ -21,6 +21,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id="updateReasonByNo" parameterType="com.ruoyi.test.domain.Testersoure">
         update testerSoure set reason = #{reason} where no = #{no}
     </update>
+
+    <select id="queryTitlesListByModelAndNo" parameterType="com.ruoyi.test.domain.Testersoure" resultMap="TestersoureResult">
+        select no,module,title from testerSoure where module = #{module} and no = #{no}
+    </select>
     
     
 

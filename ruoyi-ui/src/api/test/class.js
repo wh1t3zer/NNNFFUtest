@@ -29,10 +29,6 @@ export function backUser(no,reason) {
   const data = {
     no,
     reason,
-    // userId,
-    // status
-    //infoIdList:infoId.join(','),
-    //status:status
   }
   return request({
     url: '/test/class/backUser',
@@ -54,7 +50,6 @@ export function accessUser(nos) {
   return request({
     url: '/test/class/' + parseStrEmpty(nos),
     method: 'put',
-    //data: data
   })
 }
 
@@ -70,6 +65,23 @@ export function accessUser2(no) {
   }
   return request({
     url: '/test/class/accessUser2',
+    method: 'put',
+    data: data
+  })
+}
+
+/**
+ * 查询奖项内容
+ * @param no 学号
+ * @param module 奖项模块
+ */
+export function getAwards(no,module) {
+  const data = {
+    no,
+    module,
+  }
+  return request({
+    url: '/test/class/getAwards',
     method: 'put',
     data: data
   })
