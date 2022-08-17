@@ -8,6 +8,6 @@ public interface ITestersoureService {
 
     int updateReasonByNo(Testersoure testersoure);
 
-    List<Testersoure> getAwardsListByModuleAndNo(Testersoure testersoure);
+    List<Testersoure> getAwardListByNo(Testersoure testersoure);
 
 }

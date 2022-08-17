@@ -27,13 +27,13 @@ public class TestersoureController {
 
     /**
      * 查询奖项
-     * @param testersoure
+     * @param
      * @return
      */
     @PreAuthorize("@ss.hasPermi('test:class:getAwards')")
     @PostMapping("/getAwards")
-    public String handleGetAwards(@RequestBody Testersoure testersoure){
-        List<Testersoure> testersoureList = testersoureService.getAwardsListByModuleAndNo(testersoure);
+    public List<Testersoure> handleGetAwards(@RequestBody Testersoure testersoure){
+        /*List<Testersoure> testersoureList = testersoureService.getAwardsListByModuleAndNo(testersoure);
         //拼接奖项内容title为 xxx,xxx,xxx 格式
         String title = "";
         for(int i = 0; i < testersoureList.size(); i++){
@@ -43,7 +43,9 @@ public class TestersoureController {
         if (title != "") {
             title = title.substring(0,title.length() - 1);
         }
-        return title;
+        return title;*/
+
+        return testersoureService.getAwardListByNo(testersoure);
 
     }
 

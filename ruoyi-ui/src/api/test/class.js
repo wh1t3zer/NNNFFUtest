@@ -75,10 +75,9 @@ export function accessUser2(no) {
  * @param no 学号
  * @param module 奖项模块
  */
-export function getAwards(no,module) {
+export function getAwards(no) {
   const data = {
     no,
-    module,
   }
   return request({
     url: '/test/class/getAwards',

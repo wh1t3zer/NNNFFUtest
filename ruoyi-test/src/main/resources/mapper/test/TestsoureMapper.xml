@@ -22,31 +22,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update testerSoure set reason = #{reason} where no = #{no}
     </update>
 
-    <select id="queryTitlesListByModelAndNo" parameterType="com.ruoyi.test.domain.Testersoure" resultMap="TestersoureResult">
-        select no,module,title from testerSoure where module = #{module} and no = #{no}
+
+
+    <select id="queryTitlesListByNo" parameterType="com.ruoyi.test.domain.Testersoure" resultMap="TestersoureResult">
+        select GROUP_CONCAT(t.id SEPARATOR',') as id,t.module,GROUP_CONCAT(t.title SEPARATOR',') as title
+        from testerSoure t
+        where no = #{no}
+        GROUP BY t.module
     </select>
-    
-    
+
 
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

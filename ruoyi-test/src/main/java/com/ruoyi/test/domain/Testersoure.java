@@ -98,4 +98,20 @@ public class Testersoure {
     public void setOperator(Integer operator) {
         this.operator = operator;
     }
+
+    @Override
+    public String toString() {
+        return "Testersoure{" +
+                "id='" + id + '\'' +
+                ", no=" + no +
+                ", score=" + score +
+                ", module='" + module + '\'' +
+                ", title='" + title + '\'' +
+                ", detail='" + detail + '\'' +
+                ", reason='" + reason + '\'' +
+                ", adopter=" + adopter +
+                ", adopter2=" + adopter2 +
+                ", operator=" + operator +
+                '}';
+    }
 }

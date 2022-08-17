@@ -20,8 +20,9 @@ public class TestersoureServiceImpl implements ITestersoureService {
         return testersoureMapper.updateReasonByNo(testersoure);
     }
 
+
     @Override
-    public List<Testersoure> getAwardsListByModuleAndNo(Testersoure testersoure) {
-        return testersoureMapper.queryTitlesListByModelAndNo(testersoure);
+    public List<Testersoure> getAwardListByNo(Testersoure testersoure) {
+        return testersoureMapper.queryTitlesListByNo(testersoure);
     }
 }

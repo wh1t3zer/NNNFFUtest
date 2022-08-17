@@ -111,8 +111,8 @@
       </el-col>
     </el-row>
 
-    <el-dialog title="详情页" :visible.sync="outerVisible">
-      <el-form label-width="70px" :disabled="true">
+    <el-dialog title="详情页" :visible.sync="outerVisible" >
+      <el-form label-width="70px" :disabled="true" v-loading="loading" :data="awardsList">
       <el-row>
         <el-col :span="12">
         <el-form-item label="用户名" >
@@ -138,6 +138,7 @@
             <el-input v-model="this.politics" autocomplete="off"></el-input>
           </el-form-item>
         </el-col>
+
 
         <el-col :span="12">
           <el-form-item label="2、思想素质">
@@ -225,8 +226,7 @@
           width="180">
             <template slot-scope="scope">
               <!--   :src 里面写的是nfca那边传来的图片   -->
-              <img :src="form" style="width:100px;height:50px;"/>
-
+              <img src="https://static-nfuca-1302505692.cos.ap-guangzhou.myqcloud.com/img/upload/thumbnail/000f84ee42700e65216e3b8743882639.jpg" style="width:270px;height:150px;"/>
             </template>
         </el-form-item>
 
@@ -316,6 +316,7 @@ export default {
             // 用户表格数据
             testList: [],
             //用户奖项数据
+            awardsList: [],
             politics: "",
             ideology: "",
             morality: "",
@@ -511,89 +512,102 @@ export default {
        *
        * 代码笨重 后期修改
        */
-        async handleGetAwards (no,module,moduleParam){
-            await getAwards(no,module).then(response => {
-              moduleParam = moduleParam + ""
-              switch (moduleParam){
-                case "politics":
-                  this.politics = response;
-                  break;
-                case "morality":
-                  this.morality = response;
-                  break;
-                case "organ":
-                  this.organ = response;
-                  break;
-                case "law":
-                  this.law = response;
-                  break;
-                case "learning":
-                  this.learning = response;
-                  break;
-                case "development":
-                  this.development = response;
-                  break;
-                case "scientific":
-                  this.scientific = response;
-                  break;
-                case "physical":
-                  this.physical = response;
-                  break;
-                case "mental":
-                  this.mental = response;
-                  break;
-                case "honorary":
-                  this.honorary = response;
-                  break;
-                case "competition":
-                  this.competition = response;
-                  break;
-                case "socialWork":
-                  this.socialWork = response;
-                  break;
-                case "knowl":
-                  this.knowl = response;
-                  break;
-                case "daily":
-                  this.daily = response;
-                  break;
-                case "politics":
-                  this.politics = response;
-                  break;
-                case "achievement":
-                  this.achievement = response;
-                  break;
-              }
-        });
+       async handleGetAwards(no){
+         this.resetAwards();
+         await getAwards(no).then(response => {
+           this.awardsList = response;
+           for(var i = 0; i < this.awardsList.length; i++){
 
+             switch (this.awardsList[i].module){
+               case "politics":
+                 this.politics = this.awardsList[i].title;
+                 break;
+               case "morality":
+                 this.morality = this.awardsList[i].title;
+                 break;
+               case "organ":
+                 this.organ = this.awardsList[i].title;
+                 break;
+               case "law":
+                 this.law = this.awardsList[i].title;
+                 break;
+               case "learning":
+                 this.learning = this.awardsList[i].title;
+                 break;
+               case "development":
+                 this.development = this.awardsList[i].title;
+                 break;
+               case "scientific":
+                 this.scientific = this.awardsList[i].title;
+                 break;
+               case "physical":
+                 this.physical = this.awardsList[i].title;
+                 break;
+               case "mental":
+                 this.mental = this.awardsList[i].title;
+                 break;
+               case "honorary":
+                 this.honorary = this.awardsList[i].title;
+                 break;
+               case "competition":
+                 this.competition = this.awardsList[i].title;
+                 break;
+               case "socialWork":
+                 this.socialWork = this.awardsList[i].title;
+                 break;
+               case "knowl":
+                 this.knowl = this.awardsList[i].title;
+                 break;
+               case "daily":
+                 this.daily = this.awardsList[i].title;
+                 break;
+               case "ideology":
+                 this.ideology = this.awardsList[i].title;
+                 break;
+               case "achievement":
+                 this.achievement = this.awardsList[i].title;
+                 break;
+             }
+
+           }
+         })
       },
+
 
 
       //编辑
       handleEdit(row){
-        this.handleGetAwards(row.no, 'politics',"politics");
-        this.handleGetAwards(row.no, 'ideology',"ideology");
-        this.handleGetAwards(row.no, 'morality',"morality");
-        this.handleGetAwards(row.no, 'organ',"organ");
-        this.handleGetAwards(row.no, 'law',"law");
-        this.handleGetAwards(row.no, 'learning',"learning");
-        this.handleGetAwards(row.no, 'development',"development");
-        this.handleGetAwards(row.no, 'scientific',"scientific");
-        this.handleGetAwards(row.no, 'physical',"physical");
-        this.handleGetAwards(row.no, 'mental',"mental");
-        this.handleGetAwards(row.no, 'honorary',"honorary");
-        this.handleGetAwards(row.no, 'competition',"competition");
-        this.handleGetAwards(row.no, 'socialWork',"socialWork");
-        this.handleGetAwards(row.no, 'knowl',"knowl");
-        this.handleGetAwards(row.no, 'daily',"daily");
-        this.handleGetAwards(row.no, 'achievement',"achievement");
 
-
+        this.handleGetAwards(row.no);
         this.form = Object.assign({},row)
         this.outerVisible = true
 
 
       },
+
+      /**
+       * 重置奖项列表值
+       */
+      resetAwards(){
+        this.achievement = "";
+        this.politics = "";
+        this.ideology = "";
+        this.morality = "";
+        this.organ = "";
+        this.law = "";
+        this.learning = "";
+        this.development = "";
+        this.scientific = "";
+        this.physical = "";
+        this.mental = "";
+        this.honorary = "";
+        this.competition = "";
+        this.socialWork = "";
+        this.knowl = "";
+        this.daily = "";
+      },
+
+
       double(no,reason){
         this.handleBack(no,reason)
 
