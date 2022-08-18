@@ -1,5 +1,6 @@
 package com.ruoyi.test.mapper;
 
+import com.ruoyi.test.domain.TestUser;
 import com.ruoyi.test.domain.Testersoure;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -8,8 +9,8 @@ import java.util.List;
 
 @Mapper
 public interface TestersoureMapper {
-    @Select("select * from testerSoure")
-    List<Testersoure> findAll();
+//    @Select("select * from testerSoure")
+
 
     int updateReasonByNo(Testersoure testersoure);
 
@@ -18,4 +19,5 @@ public interface TestersoureMapper {
 
 
 
+//    List<Testersoure> selectTestUserByNo(Testersoure testersoure);
 }

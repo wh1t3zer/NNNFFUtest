@@ -36,18 +36,6 @@ public class TestUserClassController extends BaseController
 
     @Autowired
     private ITestersoureService testersoureService;
-    /**
-     * 查询test列表
-     */
-/*    @PreAuthorize("@ss.hasPermi('test:class:list')")
-//    @PreAuthorize("@ss.hasRole('instructor','boss','monitor')")
-    @GetMapping("/list")
-    public TableDataInfo list(TestUser testUser)
-    {
-        startPage();
-        List<TestUser> list = testUserService.selectTestUserList(testUser);
-        return getDataTable(list);
-    }*/
 
     /**
      * 查询学生列表
@@ -62,28 +50,6 @@ public class TestUserClassController extends BaseController
          return getDataTable(list);
     }
 
-    /*
-    *  ID查询学生
-    * */
-    /*@PreAuthorize("@ss.hasRole('boss')")
-    @GetMapping(value = "/{no}")
-    public AjaxResult getInfo(@PathVariable("no") Integer no)
-    {
-        return AjaxResult.success(studentMapper.selectStudentByUserId(no));
-    }*/
-
-
-
-    /**
-     * 获取test详细信息
-     */
-    /*@PreAuthorize("@ss.hasPermi('test:class:query')")
-//    @PreAuthorize("@ss.hasRole('instructor','boss','monitor')")
-    @GetMapping(value = "/{userId}")
-    public AjaxResult getInfo(@PathVariable("userId") Long userId)
-    {
-        return AjaxResult.success(testUserService.selectTestUserByUserId(userId));
-    }*/
 
     @PreAuthorize("@ss.hasPermi('test:class:query')")
 //    @PreAuthorize("@ss.hasRole('instructor','boss','monitor')")
@@ -92,9 +58,6 @@ public class TestUserClassController extends BaseController
     {
         return AjaxResult.success(studentService.selectTestUserByUserId(no));
     }
-
-
-
 
 
     /**
@@ -137,6 +100,19 @@ public class TestUserClassController extends BaseController
         return toAjax(studentService.updateStatusByNo(student));
     }
 
+
+    /**
+     * 查询奖项
+     * @param
+     * @return
+     */
+    @PreAuthorize("@ss.hasPermi('test:class:getAwards')")
+    @PostMapping("/getAwards")
+    public List<Testersoure> handleGetAwards(@RequestBody Testersoure testersoure){
+
+        return testersoureService.getAwardListByNo(testersoure);
+
+    }
 
 }
 

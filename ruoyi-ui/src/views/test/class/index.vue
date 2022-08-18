@@ -59,17 +59,6 @@
               v-hasPermi="['test:class:access']"
             >通过</el-button>
           </el-col>
-          <!-- <el-col :span="1.5" >
-            <el-button
-              type="danger"
-              plain
-              icon="el-icon-back"
-              size="mini"
-              :disabled="multiple"
-              @click="handleBack"
-            v-hasPermi="['test:class:back']"
-            >驳回</el-button>
-          </el-col> -->
         </el-row>
         <el-table v-loading="loading" :data="testList" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="50" align="center" />
@@ -111,8 +100,8 @@
       </el-col>
     </el-row>
 
-    <el-dialog title="详情页" :visible.sync="outerVisible" >
-      <el-form label-width="70px" :disabled="true" v-loading="loading" :data="awardsList">
+    <el-dialog title="详情页" :visible.sync="outerVisible" custom-class="getdialogstyle" >
+      <el-form label-width="160px" :disabled="true" v-loading="loading" :data="awardsList">
       <el-row>
         <el-col :span="12">
         <el-form-item label="用户名" >
@@ -132,90 +121,89 @@
           <el-input v-model="form.classId" autocomplete="off"></el-input>
         </el-form-item>
          </el-col>
-               基础性素质测评<br><br>
         <el-col :span="12">
           <el-form-item label="1、政治素质">
-            <el-input v-model="this.politics" autocomplete="off"></el-input>
+            <el-input v-model="this.politics" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" ></el-input>
           </el-form-item>
         </el-col>
 
 
         <el-col :span="12">
           <el-form-item label="2、思想素质">
-            <el-input v-model="this.ideology" autocomplete="off"></el-input>
+            <el-input v-model="this.ideology" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="3、道德素质">
-            <el-input v-model="this.morality" autocomplete="off"></el-input>
+            <el-input v-model="this.morality" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="4、组织素质">
-            <el-input v-model="this.organ" autocomplete="off"></el-input>
+            <el-input v-model="this.organ" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="5、法纪素质">
-            <el-input v-model="this.law" autocomplete="off"></el-input>
+            <el-input v-model="this.law" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="6、学习与生活素质">
-            <el-input v-model="this.learning" autocomplete="off"></el-input>
+            <el-input v-model="this.learning" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="7、实践与创新素质">
-            <el-input v-model="this.development" autocomplete="off"></el-input>
+            <el-input v-model="this.development" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="8、科学文化素质">
-            <el-input v-model="this.scientific" autocomplete="off"></el-input>
+            <el-input v-model="this.scientific" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="9、身体素质">
-            <el-input v-model="this.physical" autocomplete="off"></el-input>
+            <el-input v-model="this.physical" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="10、心理素质">
-            <el-input v-model="this.mental" autocomplete="off"></el-input>
+            <el-input v-model="this.mental" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
           </el-form-item>
         </el-col>
 
 
         <el-col :span="12">
           <el-form-item label="11、荣誉称号加分">
-            <el-input v-model="this.honorary" autocomplete="off"></el-input>
+            <el-input v-model="this.honorary" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="12、文体艺术等竞赛或活动加分">
-            <el-input v-model="this.competition" autocomplete="off"></el-input>
+            <el-input v-model="this.competition" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="13、社会工作加分">
-            <el-input v-model="this.socialWork" autocomplete="off"></el-input>
+            <el-input v-model="this.socialWork" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="14、知识与技能加分">
-            <el-input v-model="this.knowl" autocomplete="off"></el-input>
+            <el-input v-model="this.knowl" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="15、日常操行减分">
-            <el-input v-model="this.daily" autocomplete="off"></el-input>
+            <el-input v-model="this.daily" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
           </el-form-item>
         </el-col>
 
         <el-col :span="12">
-          <el-form-item label="16、achievement">
-            <el-input v-model="this.achievement" autocomplete="off"></el-input>
+          <el-form-item label="16、期末成绩">
+            <el-input v-model="this.achievement" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" ></el-input>
           </el-form-item>
         </el-col>
         </el-row>
@@ -226,10 +214,10 @@
           width="180">
             <template slot-scope="scope">
               <!--   :src 里面写的是nfca那边传来的图片   -->
-              <img src="https://static-nfuca-1302505692.cos.ap-guangzhou.myqcloud.com/img/upload/thumbnail/000f84ee42700e65216e3b8743882639.jpg" style="width:270px;height:150px;"/>
+              <!-- <img src="https://static-nfuca-1302505692.cos.ap-guangzhou.myqcloud.com/img/upload/thumbnail/000f84ee42700e65216e3b8743882639.jpg" style="width:270px;height:150px;"/> -->
+  <img src="https://static-nfuca-1302505692.cos.ap-guangzhou.myqcloud.com/img/upload/thumbnail/rcAOE4kUjIZgjtrsRBNB1dLG4qI2w22Z.jpg" style="width:270px;height:150px;" />
             </template>
         </el-form-item>
-
       </el-form>
       <el-dialog
         width="50%"
@@ -271,6 +259,18 @@
   </div>
 </template>
 
+<style>
+  .getdialogstyle{
+    width: 80%;
+  }
+  .spanStyle{
+    display: inline-block;
+    white-space: normal;
+    width: 100px;
+    overflow: hidden; /*超出的文本隐藏*/
+    text-overflow: ellipsis; /* 溢出用省略号*/
+  }
+</style>
 <script>
 import { TestUser, getTestUser,  backUser, accessUser, accessUser2, getAwards} from "@/api/test/class";
 import { getToken } from "@/utils/auth";
@@ -333,6 +333,7 @@ export default {
             knowl: "",
             daily: "",
             achievement: "",
+            img:[],
             // 弹出层标题
             title: "",
             // 是否显示弹出层
@@ -460,26 +461,6 @@ export default {
       handleBack(no,reason) {
         backUser(no,reason);
         this.getList();
-
-
-
-          /*getTestUser(userIds).then(response =>{
-            console.log(response.data)
-          })
-           console.log(userIds)*/
-
-
-        //   this.$modal.confirm('确认要驳回所选项的申请吗？').then(
-        //   getTestUser(userIds)
-        //   ).then(response => {
-        // // this.getList()
-        // // this.$modal.msgSuccess(text + "成功");
-        //   console.log(response.data)
-        //   }).then(function(){
-        //     return backUser(userId,status)
-        //   }).catch(function() {
-        //   row.status = row.status === "2";
-        //   });
         },
 
       /**
@@ -565,10 +546,11 @@ export default {
                  this.ideology = this.awardsList[i].title;
                  break;
                case "achievement":
-                 this.achievement = this.awardsList[i].title;
+                 this.achievement = this.awardsList[i].detail;
                  break;
              }
-
+             this.img=this.awardsList[i].id+'.jpg'
+             console.log(this.img)
            }
          })
       },
@@ -577,7 +559,6 @@ export default {
 
       //编辑
       handleEdit(row){
-
         this.handleGetAwards(row.no);
         this.form = Object.assign({},row)
         this.outerVisible = true

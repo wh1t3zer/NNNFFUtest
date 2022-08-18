@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
     <select id="queryTitlesListByNo" parameterType="com.ruoyi.test.domain.Testersoure" resultMap="TestersoureResult">
-        select GROUP_CONCAT(t.id SEPARATOR',') as id,t.module,GROUP_CONCAT(t.title SEPARATOR',') as title
+        select GROUP_CONCAT(t.id SEPARATOR',') as id,t.module,GROUP_CONCAT(t.title SEPARATOR',') as title,t.module,GROUP_CONCAT(t.detail SEPARATOR',') as detail
         from testerSoure t
         where no = #{no}
         GROUP BY t.module

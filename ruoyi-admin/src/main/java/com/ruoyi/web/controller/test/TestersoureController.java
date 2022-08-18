@@ -10,43 +10,35 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/test/class")
-@Slf4j
+
 public class TestersoureController {
     @Autowired
     private TestersoureMapper testersoureMapper;
 
     @Autowired
     private ITestersoureService testersoureService;
-
-    @GetMapping("/findAll")
-    public List<Testersoure> index(){
-        return testersoureMapper.findAll();
-    }
-
     /**
      * 查询奖项
      * @param
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('test:class:getAwards')")
-    @PostMapping("/getAwards")
-    public List<Testersoure> handleGetAwards(@RequestBody Testersoure testersoure){
-        /*List<Testersoure> testersoureList = testersoureService.getAwardsListByModuleAndNo(testersoure);
-        //拼接奖项内容title为 xxx,xxx,xxx 格式
-        String title = "";
-        for(int i = 0; i < testersoureList.size(); i++){
-            title += testersoureList.get(i).getTitle();
-            title += ",";
-        }
-        if (title != "") {
-            title = title.substring(0,title.length() - 1);
-        }
-        return title;*/
-
-        return testersoureService.getAwardListByNo(testersoure);
-
-    }
+//    @PreAuthorize("@ss.hasPermi('test:class:getAwards')")
+//    @PostMapping("/getAwards")
+//    public List<Testersoure> handleGetAwards(@RequestBody Testersoure testersoure){
+//        /*List<Testersoure> testersoureList = testersoureService.getAwardsListByModuleAndNo(testersoure);
+//        //拼接奖项内容title为 xxx,xxx,xxx 格式
+//        String title = "";
+//        for(int i = 0; i < testersoureList.size(); i++){
+//            title += testersoureList.get(i).getTitle();
+//            title += ",";
+//        }
+//        if (title != "") {
+//            title = title.substring(0,title.length() - 1);
+//        }
+//        return title;*/
+//
+//        return testersoureService.getAwardListByNo(testersoure);
+//
+//    }
 
 }

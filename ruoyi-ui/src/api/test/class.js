@@ -10,14 +10,6 @@ export function TestUser(query) {
   })
 }
 
-// 查询用户详细
-export function getTestUser(userId) {
-  return request({
-    url: '/test/class/' + parseStrEmpty(userId),
-    method: 'get'
-  })
-}
-
 
 /**
  * 驳回学生申请
