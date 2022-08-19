@@ -172,7 +172,7 @@ insert into test_user values(1,  '2020170029', '梁', '13000000000', '20计算�
 -- 一级菜单
 insert into sys_menu values('1', '系统管理', '0', '1', 'system',           null, '', 1, 0, 'M', '0', '0', 'system', 'system',   'admin', sysdate(), '', null, '系统管理目录');
 insert into sys_menu values('2', '系统监控', '0', '2', 'monitor',          null, '', 1, 0, 'M', '0', '0', 'monitor', 'monitor',  'admin', sysdate(), '', null, '系统监控目录');
-insert into sys_menu values('3', '综测评比', '0', '3', 'test',             null, '', 1, 0, 'M', '0', '0', 'test', 'test',     'admin', sysdate(), '', null, '综合测评目录');
+insert into sys_menu values('3', '综测评比', '0', '3', 'test',             null, '', 1, 0, 'M', '0', '0', 'test', 'list',     'admin', sysdate(), '', null, '综合测评目录');
 
 
 -- 二级菜单
@@ -189,9 +189,9 @@ insert into sys_menu values('109',  '在线用户', '2',   '1', 'online',     'm
 insert into sys_menu values('110',  '服务监控', '2',   '2', 'server',     'monitor/server/index',     '', 1, 0, 'C', '0', '0', 'monitor:server:list',     'server',        'admin', sysdate(), '', null, '服务监控菜单');
 insert into sys_menu values('111',  '缓存监控', '2',   '3', 'cache',      'monitor/cache/index',      '', 1, 0, 'C', '0', '0', 'monitor:cache:list',      'redis',         'admin', sysdate(), '', null, '缓存监控菜单');
 -- insert into sys_menu values('116',  '系统接口', '3',   '3', 'swagger',    'tool/swagger/index',       '', 1, 0, 'C', '0', '0' , 'tool:swagger:list',       'swagger',       'admin', sysdate(), '', null, '系统接口菜单');
-insert into sys_menu values('112',  '专业管理', '3',   '1', 'major',    'test/major/index',       '', 1, 0, 'C', '0', '0', 'test:major:list',       'test',       'admin', sysdate(), '', null, '专业管理列表');
-insert into sys_menu values('113',  '班级管理', '3',   '2', 'class',    'test/class/index',       '', 1, 0, 'C', '0', '0', 'test:class:list',       'test',       'admin', sysdate(), '', null, '班级管理列表');
-insert into sys_menu values('114',  '院系管理', '3',   '3', 'institute',    'test/institute/index',   '', 1, 0, 'C', '0', '0', 'test:institute:list',       'test',       'admin', sysdate(), '', null, '院系管理列表');
+insert into sys_menu values('112',  '专业管理', '3',   '1', 'major',    'test/major/index',       '', 1, 0, 'C', '0', '0', 'test:major:list',       'server',       'admin', sysdate(), '', null, '专业管理列表');
+insert into sys_menu values('113',  '班级管理', '3',   '2', 'class',    'test/class/index',       '', 1, 0, 'C', '0', '0', 'test:class:list',       'people',       'admin', sysdate(), '', null, '班级管理列表');
+insert into sys_menu values('114',  '院系管理', '3',   '3', 'institute',    'test/institute/index',   '', 1, 0, 'C', '0', '0', 'test:institute:list',       'chart',       'admin', sysdate(), '', null, '院系管理列表');
 -- 三级菜单
 insert into sys_menu values('500',  '操作日志', '108', '1', 'operlog',    'monitor/operlog/index',    '', 1, 0, 'C', '0', '0', 'monitor:operlog:list',    'form',          'admin', sysdate(), '', null, '操作日志菜单');
 insert into sys_menu values('501',  '登录日志', '108', '2', 'logininfor', 'monitor/logininfor/index', '', 1, 0, 'C', '0', '0', 'monitor:logininfor:list', 'logininfor',    'admin', sysdate(), '', null, '登录日志菜单');
