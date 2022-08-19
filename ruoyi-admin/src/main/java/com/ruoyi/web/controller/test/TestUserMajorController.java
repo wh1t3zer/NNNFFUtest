@@ -135,6 +135,19 @@ public class TestUserMajorController extends BaseController
     }
 
 
+    /**
+     * 查询奖项
+     * @param
+     * @return
+     */
+    @PreAuthorize("@ss.hasPermi('test:major:getAwards')")
+    @PostMapping("/getAwards")
+    public List<Testersoure> handleGetAwards(@RequestBody Testersoure testersoure){
+
+        return testersoureService.getAwardListByNo(testersoure);
+
+    }
+
 
 }
 

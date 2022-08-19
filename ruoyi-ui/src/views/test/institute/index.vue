@@ -140,28 +140,134 @@
       </el-col>
     </el-row>
 
-    <el-dialog title="详情页" :visible.sync="outerVisible">
-      <el-form label-width="100px" :disabled="true">
-        <el-form-item label="用户名">
-          <el-input v-model="form.name" autocomplete="off"></el-input>
+    <el-dialog title="详情页" :visible.sync="outerVisible" custom-class="getdialogstyle">
+      <el-form label-width="160px" :disabled="true" v-loading="loading" :data="awardsList" >
+      <el-row>
+        <el-col :span="12">
+        <el-form-item label="用户名" >
+
+          <el-input v-model="form.name" autocomplete="off" ></el-input>
         </el-form-item>
+        </el-col>
+
+        <el-col :span="12">
         <el-form-item label="学号">
           <el-input v-model="form.no" autocomplete="off"></el-input>
         </el-form-item>
+         </el-col>
+
+         <el-col :span="12">
         <el-form-item label="班级">
           <el-input v-model="form.classId" autocomplete="off"></el-input>
         </el-form-item>
+         </el-col>
+        <el-col :span="12">
+          <el-form-item label="1、政治素质">
+            <el-input v-model="this.politics" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" ></el-input>
+          </el-form-item>
+        </el-col>
 
-        <el-form-item
-          label="加分图"
-          prop="images"
-          width="180">
-          <template slot-scope="scope">
-            <!--   :src 里面写的是nfca那边传来的图片   -->
-            <img :src="form" style="width:100px;height:50px;"/>
 
-          </template>
+        <el-col :span="12">
+          <el-form-item label="2、思想素质">
+            <el-input v-model="this.ideology" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="3、道德素质">
+            <el-input v-model="this.morality" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="4、组织素质">
+            <el-input v-model="this.organ" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="5、法纪素质">
+            <el-input v-model="this.law" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="6、学习与生活素质">
+            <el-input v-model="this.learning" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="7、实践与创新素质">
+            <el-input v-model="this.development" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="8、科学文化素质">
+            <el-input v-model="this.scientific" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="9、身体素质">
+            <el-input v-model="this.physical" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="10、心理素质">
+            <el-input v-model="this.mental" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+          </el-form-item>
+        </el-col>
+
+
+        <el-col :span="12">
+          <el-form-item label="11、荣誉称号加分">
+            <el-input v-model="this.honorary" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="12、文体艺术等竞赛或活动加分">
+            <el-input v-model="this.competition" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="13、社会工作加分">
+            <el-input v-model="this.socialWork" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="14、知识与技能加分">
+            <el-input v-model="this.knowl" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="15、日常操行减分">
+            <el-input v-model="this.daily" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+          </el-form-item>
+        </el-col>
+
+        <el-col :span="12">
+          <el-form-item label="16、期末成绩">
+            <el-input v-model="this.achievement" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" ></el-input>
+            <el-label >加权平均分为：</el-label>
+            <el-label style="color:red">{{this.score}}/100</el-label>
+            <el-label>{{this.totalscore}}</el-label>
+          </el-form-item>
+        </el-col>
+
+        </el-row>
+
+        <el-form-item label="加分图">
         </el-form-item>
+        <el-form-item
+
+          prop="images"
+          width="180"
+          v-for="images in img"
+          >
+            <template slot-scope="scope" v-for="index in images">
+              <!--   :src 里面写的是nfca那边传来的图片   -->
+              <img src="https://static.nfuca.com/img/upload/thumbnail/000f84ee42700e65216e3b8743882639.jpg" style="width:270px;height:150px;"/>            
+           <!-- <img :src="'https://static-nfuca-1302505692.cos.ap-guangzhou.myqcloud.com/img/upload/thumbnail/' + images +'.jpg'" style="width:270px;height:150px;"/>  -->
+      </template>
+              
+        </el-form-item>
+
 
       </el-form>
       <el-dialog
@@ -203,9 +309,13 @@
     </el-dialog>
   </div>
 </template>
-
+<style>
+  .getdialogstyle{
+    width: 80%;
+  }
+</style>
 <script>
-  import { TestUser, getTestUser,  backUser, accessUser,accessUser2 } from "@/api/test/institute";
+  import { TestUser, backUser, accessUser,accessUser2,getAwards } from "@/api/test/institute";
   import { getToken } from "@/utils/auth";
   import EditTable from "../../tool/gen/editTable.vue";
   import * as ElementUI from "element-ui";
@@ -213,7 +323,7 @@
   import {classOptionsini} from "../../../../static/config.js"
   import {gradeOptionsini} from "../../../../static/config.js"
 
-  ElementUI.Dialog.props.closeOnClickModal.default = false; //弹框点及其他区域不关闭
+  ElementUI.Dialog.props.closeOnClickModal.default = true; //弹框点及其他区域不关闭
 
 
   export default {
@@ -232,29 +342,6 @@
             label: '审核中'
           }],
         value: '',
-        // majorOptions: [
-        //   {
-        //     majorValue: '计算机科学与技术',
-        //     label: '计算机科学与技术'
-        //   }, {
-        //     majorValue: '数据科学与大数据技术',
-        //     label: '数据科学与大数据技术'
-        //   },{
-        //     majorValue: '电子信息科学与技术',
-        //     label: '电子信息科学与技术'
-        //   },{
-        //     majorValue: '电气工程及其自动化',
-        //     label: '电气工程及其自动化'
-        //   },{
-        //     majorValue: '软件工程',
-        //     label: '软件工程'
-        //   },{
-        //     majorValue: '智能科学与技术',
-        //     label: '智能科学与技术'
-        //   }, {
-        //     majorValue: '通信工程',
-        //     label: '通信工程'
-        //   }],
 
         classOptions:classOptionsini.classOptions,
         classValue: '',
@@ -287,6 +374,29 @@
         deptName: undefined,
         // 表单参数
         form: {},
+        //用户奖项数据
+        awardsList: [],
+        politics: "",
+        ideology: "",
+        morality: "",
+        organ: "",
+        law: "",
+        learning: "",
+        development: "",
+        scientific: "",
+        physical: "",
+        mental: "",
+        honorary: "",
+        competition: "",
+        socialWork: "",
+        knowl: "",
+        daily: "",
+        achievement: "",
+        img:"",
+        images:"",
+        score:"",
+        socre1:"",
+        totalscore:"",
         defaultProps: {
           children: "children",
           label: "label"
@@ -426,14 +536,112 @@
         this.getList();
       },
 
+      /**
+       * 查询奖项内容
+       * @param no 学号
+       * @param module 奖项模块
+       * @moduleParam
+       *
+       * 代码笨重 后期修改
+       */
+       async handleGetAwards(no){
+         this.resetAwards();
+         await getAwards(no).then(response => {
+           this.awardsList = response;
+           for(var i = 0; i < this.awardsList.length; i++){
+
+             switch (this.awardsList[i].module){
+               case "politics":
+                 this.politics = this.awardsList[i].title;
+                 break;
+               case "morality":
+                 this.morality = this.awardsList[i].title;
+                 break;
+               case "organ":
+                 this.organ = this.awardsList[i].title;
+                 break;
+               case "law":
+                 this.law = this.awardsList[i].title;
+                 break;
+               case "learning":
+                 this.learning = this.awardsList[i].title;
+                 break;
+               case "development":
+                 this.development = this.awardsList[i].title;
+                 break;
+               case "scientific":
+                 this.scientific = this.awardsList[i].title;
+                 break;
+               case "physical":
+                 this.physical = this.awardsList[i].title;
+                 break;
+               case "mental":
+                 this.mental = this.awardsList[i].title;
+                 break;
+               case "honorary":
+                 this.honorary = this.awardsList[i].title;
+                 break;
+               case "competition":
+                 this.competition = this.awardsList[i].title;
+                 break;
+               case "socialWork":
+                 this.socialWork = this.awardsList[i].title;
+                 break;
+               case "knowl":
+                 this.knowl = this.awardsList[i].title;
+                 break;
+               case "daily":
+                 this.daily = this.awardsList[i].title;
+                 break;
+               case "ideology":
+                 this.ideology = this.awardsList[i].title;
+                 break;
+               case "achievement":
+                 this.achievement = this.awardsList[i].detail;
+                 this.score=this.awardsList[i].score/100;
+                 break;
+             }
+              // var images=this.awardsList[i].id.split(',')
+           //  console.log(this.images)
+           this.img=this.splitJoin(this.awardsList[i].id)
+           console.log(this.img)
+           }
+            console.log(this.awardsList)
+         })
+      },
 
       //编辑
       handleEdit(row){
-        //const nos = row.no;
-
+        this.handleGetAwards(row.no);
         this.form = Object.assign({},row)
         //this.dialogFormVisible = true
         this.outerVisible = true
+      },
+
+      /**
+       * 重置奖项列表值
+       */
+      resetAwards(){
+        this.achievement = "";
+        this.politics = "";
+        this.ideology = "";
+        this.morality = "";
+        this.organ = "";
+        this.law = "";
+        this.learning = "";
+        this.development = "";
+        this.scientific = "";
+        this.physical = "";
+        this.mental = "";
+        this.honorary = "";
+        this.competition = "";
+        this.socialWork = "";
+        this.knowl = "";
+        this.daily = "";
+        this.score = "";
+        this.img = "";
+        this.score1 = "";
+        this.totalscore = "";
       },
       double(no,reason){
         this.handleBack(no,reason)
@@ -447,7 +655,10 @@
         this.value = ''
         this.getList()
       },
-
+      //截取多张图片id
+        splitJoin(imgId){
+      	return imgId.split(',');
+      },
       //选择状态按钮
       selectStatus(value){
         console.log(value)
@@ -460,8 +671,6 @@
       selectClass(classValue){
         console.log(classValue)
       }
-
-
     },
     components: { EditTable }
   };

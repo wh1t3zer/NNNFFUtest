@@ -25,11 +25,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
     <select id="queryTitlesListByNo" parameterType="com.ruoyi.test.domain.Testersoure" resultMap="TestersoureResult">
-        select GROUP_CONCAT(t.id SEPARATOR',') as id,t.module,GROUP_CONCAT(t.title SEPARATOR',') as title,t.module,GROUP_CONCAT(t.detail SEPARATOR',') as detail
-        from testerSoure t
-        where no = #{no}
-        GROUP BY t.module
+<!--        select GROUP_CONCAT(t.id SEPARATOR',') as id,t.module,GROUP_CONCAT(t.title SEPARATOR',') as title,t.module,GROUP_CONCAT(t.detail SEPARATOR',') as detail,t.module,GROUP_CONCAT(t.score SEPARATOR',') as score-->
+<!--        from testerSoure t-->
+<!--        where no = #{no}-->
+<!--        GROUP BY t.module-->
+<!--        select t.id ,t.score,t.module,t.detail,t.title,t.operator,tm.name as name from testerSoure t join testerMember tm on (tm.no=t.operator)  where t.no=#{no}-->
+        select t.id ,t.score,t.module,t.detail,t.title,t.operator from testerSoure t   where no=#{no} 
     </select>
+
 
 
 </mapper>

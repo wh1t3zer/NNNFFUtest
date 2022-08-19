@@ -76,5 +76,20 @@ export function accessUser2(no) {
   })
 }
 
+/**
+ * 查询奖项内容
+ * @param no 学号
+ * @param module 奖项模块
+ */
+ export function getAwards(no) {
+  const data = {
+    no,
+  }
+  return request({
+    url: '/test/institute/getAwards',
+    method: 'post',
+    data: data
+  })
+}
 
 

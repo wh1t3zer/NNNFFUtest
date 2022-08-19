@@ -204,20 +204,26 @@
         <el-col :span="12">
           <el-form-item label="16、期末成绩">
             <el-input v-model="this.achievement" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" ></el-input>
+            <el-label >加权平均分为：</el-label>
+            <el-label style="color:red">{{this.score}}/100</el-label>
+            <el-label>{{this.totalscore}}</el-label>
           </el-form-item>
         </el-col>
-        </el-row>
 
-        <el-form-item
-          label="加分图"
-          prop="images"
-          width="180">
-            <template slot-scope="scope">
-              <!--   :src 里面写的是nfca那边传来的图片   -->
-              <!-- <img src="https://static-nfuca-1302505692.cos.ap-guangzhou.myqcloud.com/img/upload/thumbnail/000f84ee42700e65216e3b8743882639.jpg" style="width:270px;height:150px;"/> -->
-  <img src="https://static-nfuca-1302505692.cos.ap-guangzhou.myqcloud.com/img/upload/thumbnail/rcAOE4kUjIZgjtrsRBNB1dLG4qI2w22Z.jpg" style="width:270px;height:150px;" />
-            </template>
+        </el-row>
+        
+        <el-form-item label="加分图">
         </el-form-item>
+        <el-row :gutter="20">
+        <!-- <img  v-for="(images,index) in img" :key="index" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + img[index]" style="width:270px;height:150px;"/> -->
+        <template>
+        <div v-for="(imgs, index) in img">
+        <img  :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + img[index].id+'.jpg'" style="width:270px;height:150px;"/>
+        </div>
+        </template>
+
+      </el-row>
+
       </el-form>
       <el-dialog
         width="50%"
@@ -263,16 +269,9 @@
   .getdialogstyle{
     width: 80%;
   }
-  .spanStyle{
-    display: inline-block;
-    white-space: normal;
-    width: 100px;
-    overflow: hidden; /*超出的文本隐藏*/
-    text-overflow: ellipsis; /* 溢出用省略号*/
-  }
 </style>
 <script>
-import { TestUser, getTestUser,  backUser, accessUser, accessUser2, getAwards} from "@/api/test/class";
+import { TestUser,  backUser, accessUser, accessUser2, getAwards} from "@/api/test/class";
 import { getToken } from "@/utils/auth";
 import EditTable from "../../tool/gen/editTable.vue";
 import * as ElementUI from "element-ui";
@@ -334,6 +333,9 @@ export default {
             daily: "",
             achievement: "",
             img:[],
+            score:"",
+            socre1:"",
+            totalscore:"",
             // 弹出层标题
             title: "",
             // 是否显示弹出层
@@ -497,61 +499,75 @@ export default {
          this.resetAwards();
          await getAwards(no).then(response => {
            this.awardsList = response;
+           console.log(this.awardsList)
+          
            for(var i = 0; i < this.awardsList.length; i++){
-
              switch (this.awardsList[i].module){
                case "politics":
-                 this.politics = this.awardsList[i].title;
+                 this.politics = this.politics+' '+this.awardsList[i].title;
                  break;
                case "morality":
-                 this.morality = this.awardsList[i].title;
+                 this.morality = this.morality+' '+this.awardsList[i].title;
                  break;
                case "organ":
-                 this.organ = this.awardsList[i].title;
+                 this.organ = this.organ+' '+this.awardsList[i].title
                  break;
                case "law":
-                 this.law = this.awardsList[i].title;
+                 this.law = this.law+' '+this.awardsList[i].title;
                  break;
                case "learning":
                  this.learning = this.awardsList[i].title;
                  break;
                case "development":
-                 this.development = this.awardsList[i].title;
+                 this.development = this.development+' '+this.awardsList[i].title;
                  break;
                case "scientific":
-                 this.scientific = this.awardsList[i].title;
+                 this.scientific = this.scientific+' '+this.awardsList[i].title;
                  break;
                case "physical":
-                 this.physical = this.awardsList[i].title;
+                 this.physical = this.physical+' '+this.awardsList[i].title;
                  break;
                case "mental":
-                 this.mental = this.awardsList[i].title;
+                 this.mental = this.mental+' '+this.awardsList[i].title;
                  break;
                case "honorary":
-                 this.honorary = this.awardsList[i].title;
+                 this.honorary = this.honorary+' '+this.awardsList[i].title;
                  break;
                case "competition":
-                 this.competition = this.awardsList[i].title;
+                 this.competition = this.competition+' '+this.awardsList[i].title;
                  break;
                case "socialWork":
-                 this.socialWork = this.awardsList[i].title;
+                 this.socialWork = this.socialWork+' '+this.awardsList[i].title
                  break;
                case "knowl":
-                 this.knowl = this.awardsList[i].title;
+                 this.knowl = this.knowl+' '+this.awardsList[i].title
                  break;
                case "daily":
-                 this.daily = this.awardsList[i].title;
+                 this.daily = this.daily+' '+this.awardsList[i].title
+                 this.awardsList[i].id=""
                  break;
                case "ideology":
-                 this.ideology = this.awardsList[i].title;
+                 this.ideology = this.ideology+' '+this.awardsList[i].title
                  break;
                case "achievement":
                  this.achievement = this.awardsList[i].detail;
+                 this.score=this.awardsList[i].score/100;
+                 this.awardsList[i].id=""
                  break;
              }
-             this.img=this.awardsList[i].id+'.jpg'
-             console.log(this.img)
+            //  if(this.awardsList.model=='achievement'){
+            //  delete this.awardsList[0].id
+            //  }
+              // console.log(this.imgid)
+          //  console.log(this.score1)
+          // if(this.awardsList[i].id=''){
+          //   // delete this.awardsList[i].id
+          // }
            }
+           let result = this.awardsList.map(current => {return {id: current.id}});
+          console.log(result)
+          console.log(this.awardsList)
+           this.img=result
          })
       },
 
@@ -586,6 +602,10 @@ export default {
         this.socialWork = "";
         this.knowl = "";
         this.daily = "";
+        this.score = "";
+        this.imgid = "";
+        this.score1 = "";
+        this.totalscore = "";
       },
 
 
