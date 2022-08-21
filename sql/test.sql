@@ -33,10 +33,10 @@ drop table if exists sys_user;
 create table sys_user (
   user_id           bigint(20)      not null auto_increment    comment '用户ID',
   dept_id           bigint(20)      default null               comment '院系ID',
-  major             char(10)        default null               comment '专业名称',
+  major             char(30)        default null               comment '专业名称',
   user_name         varchar(30)     not null                   comment '用户账号',
   nick_name         varchar(30)     not null                   comment '用户姓名',
-  classname         char(10)        not null                   comment '班级',    
+  classname         char(30)        default null               comment '班级',    
   user_type         varchar(2)      default '00'               comment '用户类型（00系统用户）',
   email             varchar(50)     default ''                 comment '用户邮箱',
   phonenumber       varchar(11)     default ''                 comment '手机号码',

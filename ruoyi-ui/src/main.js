@@ -5,6 +5,14 @@ import Cookies from 'js-cookie'
 import Element from 'element-ui'
 import './assets/styles/element-variables.scss'
 
+import  Viewer  from 'v-viewer'
+import 'viewerjs/dist/viewer.css'
+Vue.use(Viewer)
+Viewer.setDefaults({
+  title:false,
+  toolbar:true
+})
+
 import '@/assets/styles/index.scss' // global css
 import '@/assets/styles/ruoyi.scss' // ruoyi css
 import App from './App'

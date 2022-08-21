@@ -30,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!--        where no = #{no}-->
 <!--        GROUP BY t.module-->
 <!--        select t.id ,t.score,t.module,t.detail,t.title,t.operator,tm.name as name from testerSoure t join testerMember tm on (tm.no=t.operator)  where t.no=#{no}-->
-        select t.id ,t.score,t.module,t.detail,t.title,t.operator from testerSoure t   where no=#{no} 
+        select t.id ,t.score,t.module,t.detail,t.title,t.operator from testerSoure t   where no=#{no}
     </select>
 
 

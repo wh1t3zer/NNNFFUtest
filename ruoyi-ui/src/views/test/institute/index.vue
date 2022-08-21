@@ -252,21 +252,19 @@
 
         </el-row>
 
-        <el-form-item label="加分图">
+       <el-form-item label="加分图">
+          <el-form-item label="(单击图片可预览)">
+          </el-form-item>
         </el-form-item>
-        <el-form-item
+        <el-row >
+        <!-- <img  v-for="(images,index) in img" :key="index" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + img[index]" style="width:270px;height:150px;"/> -->
+        <template>
+        <div v-for="(imgs, index) in img" v-viewer="{movable:false}">
+        <img  :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + img[index].id+'.jpg'" style="width:270px;height:150px;"/>
+        </div>
+        </template>
 
-          prop="images"
-          width="180"
-          v-for="images in img"
-          >
-            <template slot-scope="scope" v-for="index in images">
-              <!--   :src 里面写的是nfca那边传来的图片   -->
-              <img src="https://static.nfuca.com/img/upload/thumbnail/000f84ee42700e65216e3b8743882639.jpg" style="width:270px;height:150px;"/>            
-           <!-- <img :src="'https://static-nfuca-1302505692.cos.ap-guangzhou.myqcloud.com/img/upload/thumbnail/' + images +'.jpg'" style="width:270px;height:150px;"/>  -->
-      </template>
-              
-        </el-form-item>
+      </el-row>
 
 
       </el-form>
@@ -599,15 +597,15 @@
                case "achievement":
                  this.achievement = this.awardsList[i].detail;
                  this.score=this.awardsList[i].score/100;
+                 this.awardsList[i].id="";
                  break;
              }
-              // var images=this.awardsList[i].id.split(',')
-           //  console.log(this.images)
-           this.img=this.splitJoin(this.awardsList[i].id)
-           console.log(this.img)
            }
-            console.log(this.awardsList)
-         })
+          let result = this.awardsList.map(current => {return {id: current.id}});
+          console.log(result)
+          console.log(this.awardsList)
+          this.img=result         
+          })
       },
 
       //编辑

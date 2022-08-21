@@ -101,7 +101,7 @@
     </el-row>
 
     <el-dialog title="详情页" :visible.sync="outerVisible" custom-class="getdialogstyle" >
-      <el-form label-width="160px" :disabled="true" v-loading="loading" :data="awardsList">
+      <el-form label-width="120px" :disabled="true" v-loading="loading" :data="awardsList">
       <el-row>
         <el-col :span="12">
         <el-form-item label="用户名" >
@@ -213,11 +213,13 @@
         </el-row>
         
         <el-form-item label="加分图">
+          <el-form-item label="(单击图片可预览)">
+          </el-form-item>
         </el-form-item>
-        <el-row :gutter="20">
+        <el-row >
         <!-- <img  v-for="(images,index) in img" :key="index" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + img[index]" style="width:270px;height:150px;"/> -->
         <template>
-        <div v-for="(imgs, index) in img">
+        <div v-for="(imgs, index) in img" v-viewer="{movable:false}">
         <img  :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + img[index].id+'.jpg'" style="width:270px;height:150px;"/>
         </div>
         </template>
