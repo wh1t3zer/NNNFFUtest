@@ -247,7 +247,9 @@
         <!-- <img  v-for="(images,index) in img" :key="index" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + img[index]" style="width:270px;height:150px;"/> -->
         <template>
         <div v-for="(imgs, index) in img" v-viewer="{movable:false}">
-        <img  :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + img[index].id+'.jpg'" style="width:270px;height:150px;"/>
+          <ul id="yihangxianshiduotu">
+            <li><img  :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + img[index].id+'.jpg'" style="width:270px;height:150px;"/></li>
+          </ul>
         </div>
         </template>
 
@@ -298,6 +300,17 @@
 <style>
   .getdialogstyle{
     width: 80%;
+  }
+  #yihangxianshiduotu li
+  {
+    float: left;
+    display: inline;
+  }
+
+  img{
+    width: 300px;
+    height: 200px;
+    margin: 10px;
   }
 </style>
 <script>
@@ -518,7 +531,7 @@
         this.outerVisible = false
         this.getList();
       },
-      
+
       /**
        * 查询奖项内容
        * @param no 学号
