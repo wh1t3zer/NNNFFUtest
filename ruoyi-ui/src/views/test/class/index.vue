@@ -410,7 +410,7 @@ export default {
                 this.testList = response.rows;
                 this.total = response.total;
                 this.loading = false;
-                console.log(this.testList)  //一页的数据
+               // console.log(this.testList)  //一页的数据
             });
         },
 
@@ -516,8 +516,6 @@ export default {
          this.resetAwards();
          await getAwards(no).then(response => {
            this.awardsList = response;
-           console.log(this.awardsList)
-
            for(var i = 0; i < this.awardsList.length; i++){
              switch (this.awardsList[i].module){
                case "politics":
@@ -534,6 +532,7 @@ export default {
                  break;
                case "learning":
                  this.learning = this.awardsList[i].title;
+                 this.awardsList[i].id='';
                  break;
                case "development":
                  this.development = this.development+' '+this.awardsList[i].title;
@@ -561,7 +560,7 @@ export default {
                  break;
                case "daily":
                  this.daily = this.daily+' '+this.awardsList[i].title
-                 this.awardsList[i].id=""
+                 this.awardsList[i].id='';
                  break;
                case "ideology":
                  this.ideology = this.ideology+' '+this.awardsList[i].title
@@ -569,25 +568,23 @@ export default {
                case "achievement":
                  this.achievement = this.awardsList[i].detail;
                  this.score=this.awardsList[i].score/100;
-                 this.awardsList[i].id=""
+                 this.awardsList[i].id='';
                  break;
              }
-            //  if(this.awardsList.model=='achievement'){
-            //  delete this.awardsList[0].id
-            //  }
-              // console.log(this.imgid)
-          //  console.log(this.score1)
-          // if(this.awardsList[i].id=''){
-          //   // delete this.awardsList[i].id
-          // }
            }
+           
            let result = this.awardsList.map(current => {return {id: current.id}});
-          console.log(result)
-          console.log(this.awardsList)
+            for(let i=result.length-1;i>=0;i--){
+              if(result[i].id==""){
+             //   console.log(i)
+                result.splice(i,1)
+              }
+            }
+
+         // console.log(result)
            this.img=result
          })
       },
-
 
 
       //编辑
@@ -595,9 +592,9 @@ export default {
         this.handleGetAwards(row.no);
         this.form = Object.assign({},row)
         this.outerVisible = true
-
-
       },
+
+      
 
       /**
        * 重置奖项列表值
