@@ -225,9 +225,9 @@
         <el-row >
         <!-- <img  v-for="(images,index) in img" :key="index" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + img[index]" style="width:270px;height:150px;"/> -->
         <template>
-        <div v-for="(imgs, index) in img" v-viewer="{movable:false}">
+        <div v-for="(imgs, index) in img" v-viewer="{movable:true}">
           <ul id="yihangxianshiduotu">
-            <li><img  :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + img[index].id+'.jpg'" style="width:270px;height:150px;"/></li>
+            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + img[index].id+'.jpg'" style="width:270px;height:150px;"/></li>
           </ul>
         </div>
         </template>
@@ -557,9 +557,6 @@ export default {
                case "honorary":
                  this.honorary = this.honorary+' '+this.awardsList[i].title;
                  this.totalscore=this.awardsList[i].score
-
-                console.log(arr)
-                console.log(addScore)
                  break;
                case "competition":
                  this.competition = this.competition+' '+this.awardsList[i].title;
@@ -600,25 +597,13 @@ export default {
             * 计算总评成绩
             * @type {number}
             */
-           console.log("未加权平均分"+this.score*100)
-           console.log("已加权平均分"+this.score)
            var totalscore=0;
            var total = 0;
            for (var i = 0; i < this.awardsList.length; i++) {
-             console.log(this.awardsList[i].score)
              total += this.awardsList[i].score
            }
-           console.log("所有分数为"+total)
            this.totalscore = (((total-this.score*100)*0.15)/100 + (this.score*0.85)).toFixed(2)
-           console.log("综测总评的totalscore为"+this.totalscore)
          })
-      },
-
-      //求和
-      getSum(val){
-        var sum=0;
-        sum+=item;
-        getsum.innerHTML=sum;
       },
 
 
