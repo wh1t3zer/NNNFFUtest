@@ -576,7 +576,6 @@
                  break;
                case "learning":
                  this.learning = this.awardsList[i].title;
-                 this.awardsList[i].id='';
                  break;
                case "development":
                  this.development = this.awardsList[i].title;
@@ -604,7 +603,6 @@
                  break;
                case "daily":
                  this.daily = this.awardsList[i].title;
-                 this.awardsList[i].id='';
                  break;
                case "ideology":
                  this.ideology = this.awardsList[i].title;
@@ -617,12 +615,8 @@
              }
            }
           let result = this.awardsList.map(current => {return {id: current.id}});
-            for(let i=result.length-1;i>=0;i--){
-              if(result[i].id==""){
-             //   console.log(i)
-                result.splice(i,1)
-              }
-            }
+          console.log(result)
+          console.log(this.awardsList)
           this.img=result
           })
       },
