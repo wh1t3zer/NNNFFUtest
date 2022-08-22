@@ -128,7 +128,7 @@
     </el-row>
 
     <el-dialog title="详情页" :visible.sync="outerVisible" custom-class="getdialogstyle">
-      <el-form label-width="160px" :disabled="true" v-loading="loading" :data="awardsList">
+      <el-form label-width="120px" :disabled="true" v-loading="loading" :data="awardsList">
       <el-row>
         <el-col :span="12">
         <el-form-item label="用户名" >
@@ -233,7 +233,12 @@
             <el-input v-model="this.achievement" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" ></el-input>
             <el-label >加权平均分为：</el-label>
             <el-label style="color:red">{{this.score}}/100</el-label>
-            <el-label>{{this.totalscore}}</el-label>
+            <!-- <el-label>{{this.totalscore}}</el-label> -->
+          </el-form-item>
+        </el-col>
+        <el-col span="12">
+          <el-form-item label="17、总评">
+            <el-label style="color: red">总评为：{{ this.totalscore }}</el-label>
           </el-form-item>
         </el-col>
 
@@ -577,6 +582,7 @@
                  break;
                case "honorary":
                  this.honorary = this.awardsList[i].title;
+                 this.totalscore=this.awardsList[i].score;
                  break;
                case "competition":
                  this.competition = this.awardsList[i].title;
@@ -609,7 +615,24 @@
               }
             }
            this.img=result
+           /**
+            * 计算总评成绩
+            * @type {number}
+            */
+           console.log("未加权平均分"+this.score*100)
+           console.log("已加权平均分"+this.score)
+           var totalscore=0;
+           var total = 0;
+           for (var i = 0; i < this.awardsList.length; i++) {
+             console.log(this.awardsList[i].score)
+             total += this.awardsList[i].score
+           }
+           console.log("所有分数为"+total)
+           this.totalscore = (((total-this.score*100)*0.15)/100 + (this.score*0.85)).toFixed(2)
+           console.log("综测总评的totalscore为"+this.totalscore)
          })
+        
+         
       },
 
       //编辑
