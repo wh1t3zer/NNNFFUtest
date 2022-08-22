@@ -4,16 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	
-    <groupId>com.ruoyi</groupId>
-    <artifactId>ruoyi</artifactId>
+    <groupId>com.test</groupId>
+    <artifactId>nfca</artifactId>
     <version>3.8.2</version>
 
-    <name>ruoyi</name>
+    <name>nfca</name>
     <url>http://www.ruoyi.vip</url>
-    <description>若依管理系统</description>
+    <description>信息管理系统</description>
     
     <properties>
-        <ruoyi.version>3.8.2</ruoyi.version>
+        <nfca.version>3.8.2</nfca.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
@@ -153,39 +153,39 @@
 
             <!-- 定时任务-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-quartz</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.test</groupId>
+                <artifactId>nfca-quartz</artifactId>
+                <version>${nfca.version}</version>
             </dependency>
 
            
 
             <!-- 核心模块-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-framework</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.test</groupId>
+                <artifactId>nfca-framework</artifactId>
+                <version>${nfca.version}</version>
             </dependency>
 
             <!-- 系统模块-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-system</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.test</groupId>
+                <artifactId>nfca-system</artifactId>
+                <version>${nfca.version}</version>
             </dependency>
 
             <!-- 通用工具-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-common</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.test</groupId>
+                <artifactId>nfca-common</artifactId>
+                <version>${nfca.version}</version>
             </dependency>
 
             <!-- 综测-->
             <dependency>
-                <groupId>com.ruoyi</groupId>
-                <artifactId>ruoyi-test</artifactId>
-                <version>${ruoyi.version}</version>
+                <groupId>com.test</groupId>
+                <artifactId>nfca-test</artifactId>
+                <version>${nfca.version}</version>
             </dependency>
 
 
@@ -221,12 +221,12 @@
     </dependencyManagement>
 
     <modules>
-        <module>ruoyi-admin</module>
-        <module>ruoyi-framework</module>
-        <module>ruoyi-system</module>
-        <module>ruoyi-quartz</module>
-        <module>ruoyi-common</module>
-        <module>ruoyi-test</module>
+        <module>nfca-admin</module>
+        <module>nfca-framework</module>
+        <module>nfca-system</module>
+        <module>nfca-quartz</module>
+        <module>nfca-common</module>
+        <module>nfca-test</module>
     </modules>
     <packaging>pom</packaging>
 
