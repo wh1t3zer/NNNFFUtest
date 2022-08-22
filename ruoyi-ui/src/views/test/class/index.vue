@@ -177,7 +177,7 @@
 
         <el-col :span="12">
           <el-form-item label="11、荣誉称号加分">
-            <el-input v-model="this.honorary" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+            <el-input v-model="this.honorary" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" id="getsum"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="12">
@@ -359,6 +359,7 @@ export default {
             score:"",
             socre1:"",
             totalscore:"",
+            addScore:"",
             // 弹出层标题
             title: "",
             // 是否显示弹出层
@@ -522,6 +523,7 @@ export default {
          this.resetAwards();
          await getAwards(no).then(response => {
            this.awardsList = response;
+           console.log(this.awardsList)
            for(var i = 0; i < this.awardsList.length; i++){
              switch (this.awardsList[i].module){
                case "politics":
@@ -554,6 +556,10 @@ export default {
                  break;
                case "honorary":
                  this.honorary = this.honorary+' '+this.awardsList[i].title;
+                 this.totalscore=this.awardsList[i].score
+
+                console.log(arr)
+                console.log(addScore)
                  break;
                case "competition":
                  this.competition = this.competition+' '+this.awardsList[i].title;
@@ -606,6 +612,13 @@ export default {
            this.totalscore = (((total-this.score*100)*0.15)/100 + (this.score*0.85)).toFixed(2)
            console.log("综测总评的totalscore为"+this.totalscore)
          })
+      },
+
+      //求和
+      getSum(val){
+        var sum=0;
+        sum+=item;
+        getsum.innerHTML=sum;
       },
 
 
@@ -668,6 +681,7 @@ export default {
 
       }
     },
+
     components: { EditTable }
 };
 
