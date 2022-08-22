@@ -29,7 +29,7 @@
 
           <el-form-item  prop="class" label="年级">
             <el-select v-model="queryParams.gradeValue" clearable placeholder="请选择" @change="selectClass(gradeValue)" style="width: 200px" >
-              <el-option
+              <el-option @click.native="handleQuery('queryParams')"
                 v-for="item in gradeOptions"
                 :key="item.gradeValue"
                 :label="item.gradeValue"
@@ -42,7 +42,7 @@
           <br>
           <el-form-item  prop="class" label="班级">
             <el-select v-model="queryParams.classValue" clearable placeholder="请选择" @change="selectClass(classValue)" style="width: 200px" >
-              <el-option
+              <el-option @click.native="handleQuery('queryParams')"
                 v-for="item in classOptions"
                 :key="item.classValue"
                 :label="item.classValue"
@@ -54,7 +54,7 @@
 
           <el-form-item  prop="status" label="状态">
             <el-select v-model="queryParams.status" clearable placeholder="请选择" @change="selectStatus(value)" style="width: 200px">
-              <el-option
+              <el-option @click.native="handleQuery('queryParams')"
                 v-for="item in options"
                 :key="item.value"
                 :label="item.label"

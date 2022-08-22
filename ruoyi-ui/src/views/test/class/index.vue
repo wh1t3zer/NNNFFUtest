@@ -26,7 +26,7 @@
 
           <el-form-item  prop="status" label="状态">
             <el-select v-model="queryParams.status" clearable placeholder="请选择" @change="selectStatus(value)" >
-              <el-option
+              <el-option @click.native="handleQuery('queryParams')"
                 v-for="item in options"
                 :key="item.value"
                 :label="item.label"
