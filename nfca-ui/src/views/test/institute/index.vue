@@ -140,136 +140,134 @@
       </el-col>
     </el-row>
 
-    <el-dialog title="详情页" :visible.sync="outerVisible" custom-class="getdialogstyle">
-      <el-form label-width="120px" :disabled="true" v-loading="loading" :data="awardsList" >
-      <el-row>
+    <el-dialog title="详情页" :visible.sync="outerVisible" custom-class="getdialogstyle" >
+      <el-form label-width="120px" :disabled="true" v-loading="loading" :data="awardsList">
+      <!-- <el-row :gutter="24"> -->
         <el-col :span="12">
-        <el-form-item label="用户名" >
 
+        <el-row >
+        <el-form-item label="用户名" >
           <el-input v-model="form.name" autocomplete="off" ></el-input>
         </el-form-item>
-        </el-col>
-
-        <el-col :span="12">
+        </el-row>
+        <el-row >
         <el-form-item label="学号">
           <el-input v-model="form.no" autocomplete="off"></el-input>
         </el-form-item>
-         </el-col>
-
-         <el-col :span="12">
+         </el-row>
+         <el-row >
         <el-form-item label="班级">
           <el-input v-model="form.classId" autocomplete="off"></el-input>
         </el-form-item>
-         </el-col>
-        <el-col :span="12">
+         </el-row>
+        <el-row >
           <el-form-item label="1、政治素质">
             <el-input v-model="this.politics" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" ></el-input>
           </el-form-item>
-        </el-col>
-
-
-        <el-col :span="12">
+        </el-row>
+        <el-row >
           <el-form-item label="2、思想素质">
             <el-input v-model="this.ideology" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
           </el-form-item>
-        </el-col>
-        <el-col :span="12">
+        </el-row>
+        <el-row >
           <el-form-item label="3、道德素质">
             <el-input v-model="this.morality" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
           </el-form-item>
-        </el-col>
-        <el-col :span="12">
+        </el-row>
+        <el-row >
           <el-form-item label="4、组织素质">
             <el-input v-model="this.organ" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
           </el-form-item>
-        </el-col>
-        <el-col :span="12">
+        </el-row>
+        <el-row >
           <el-form-item label="5、法纪素质">
             <el-input v-model="this.law" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
           </el-form-item>
-        </el-col>
-        <el-col :span="12">
+        </el-row>
+        <el-row >
           <el-form-item label="6、学习与生活素质">
             <el-input v-model="this.learning" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
           </el-form-item>
-        </el-col>
-        <el-col :span="12">
+        </el-row>
+        <el-row >
           <el-form-item label="7、实践与创新素质">
             <el-input v-model="this.development" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
           </el-form-item>
-        </el-col>
-        <el-col :span="12">
+        </el-row>
+        <el-row >
           <el-form-item label="8、科学文化素质">
             <el-input v-model="this.scientific" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
           </el-form-item>
-        </el-col>
-        <el-col :span="12">
+        </el-row>
+        <el-row >
           <el-form-item label="9、身体素质">
             <el-input v-model="this.physical" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
           </el-form-item>
-        </el-col>
-        <el-col :span="12">
+        </el-row>
+        <el-row >
           <el-form-item label="10、心理素质">
             <el-input v-model="this.mental" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
           </el-form-item>
-        </el-col>
-        <el-col :span="12">
+        </el-row>
+        <el-row>
           <el-form-item label="11、荣誉称号加分">
-            <el-input v-model="this.honorary" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+            <el-input v-model="this.honorary" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" id="getsum"></el-input>
           </el-form-item>
-        </el-col>
-        <el-col :span="12">
+        </el-row>
+        <el-row>
           <el-form-item label="12、文体艺术等竞赛或活动加分">
             <el-input v-model="this.competition" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
           </el-form-item>
-        </el-col>
-        <el-col :span="12">
+        </el-row>
+        <el-row>
           <el-form-item label="13、社会工作加分">
             <el-input v-model="this.socialWork" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
           </el-form-item>
-        </el-col>
-        <el-col :span="12">
+        </el-row>
+        <el-row>
           <el-form-item label="14、知识与技能加分">
             <el-input v-model="this.knowl" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
           </el-form-item>
-        </el-col>
-        <el-col :span="12">
+        </el-row>
+        <el-row>
           <el-form-item label="15、日常操行减分">
             <el-input v-model="this.daily" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
           </el-form-item>
-        </el-col>
-
-        <el-col :span="12">
+        </el-row>
+        <el-row>
           <el-form-item label="16、期末成绩">
             <el-input v-model="this.achievement" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" ></el-input>
             <el-label >加权平均分为：</el-label>
             <el-label style="color:red">{{this.score}}/100</el-label>
-            <!-- <el-label>{{this.totalscore}}</el-label> -->
           </el-form-item>
-        </el-col>
-        <el-col span="12">
+        </el-row>
+        <el-row>
           <el-form-item label="17、总评">
             <el-label style="color: red">总评为：{{ this.totalscore }}</el-label>
           </el-form-item>
+        </el-row>
+        <!-- </el-row> -->
         </el-col>
 
-        </el-row>
 
-       <el-form-item label="加分图">
+        <el-form-item label="加分图">
           <el-form-item label="(单击图片可预览)">
-          </el-form-item>
-        </el-form-item>
-        <el-row >
+
+             <el-col :span="12">
         <!-- <img  v-for="(images,index) in img" :key="index" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + img[index]" style="width:270px;height:150px;"/> -->
         <template>
         <div v-for="(imgs, index) in img" v-viewer="{movable:true}">
           <ul id="yihangxianshiduotu">
-            <li><img  :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + img[index].id+'.jpg'" style="width:270px;height:150px;"/></li>
+            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + img[index].id+'.jpg'" style="width:270px;height:150px;"/></li>
           </ul>
         </div>
         </template>
 
-      </el-row>
+         </el-col>
+          </el-form-item>
+        </el-form-item>
+       
 
 
       </el-form>
@@ -298,7 +296,7 @@
             title="您确定要驳回吗？"
             @confirm="double(form.no,reason)"
           >
-            <el-button  type="danger" slot="reference" >确定</el-button>
+            <el-button  type="danger" slot="reference">确定</el-button>
           </el-popconfirm>
 
         </div>
