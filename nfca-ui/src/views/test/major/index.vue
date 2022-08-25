@@ -723,11 +723,6 @@
         console.log(gradeValue)
       }
     },
-    //截取逗号
-        splitJoin(res){
-      	return res.split(',');
-
-      },
     components: { EditTable }
   };
 </script>

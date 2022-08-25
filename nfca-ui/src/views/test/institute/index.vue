@@ -722,10 +722,6 @@
         this.value = ''
         this.getList()
       },
-      //截取多张图片id
-        splitJoin(imgId){
-      	return imgId.split(',');
-      },
       //选择状态按钮
       selectStatus(value){
         console.log(value)

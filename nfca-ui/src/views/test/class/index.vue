@@ -103,7 +103,7 @@
     <el-dialog title="详情页" :visible.sync="outerVisible" custom-class="getdialogstyle" >
       <el-form label-width="120px" :disabled="true" v-loading="loading" :data="awardsList">
       <!-- <el-row :gutter="24"> -->
-        <el-col :span="12">
+        <el-col >
 
         <el-row >
         <el-form-item label="用户名" >
@@ -302,6 +302,7 @@
         </el-col>
 
 
+   
        
 
 
