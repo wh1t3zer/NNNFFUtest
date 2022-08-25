@@ -103,7 +103,7 @@
     <el-dialog title="详情页" :visible.sync="outerVisible" custom-class="getdialogstyle" >
       <el-form label-width="120px" :disabled="true" v-loading="loading" :data="awardsList">
       <!-- <el-row :gutter="24"> -->
-        <el-col >
+        <el-col :span="12">
 
         <el-row >
         <el-form-item label="用户名" >
@@ -275,7 +275,7 @@
         <template>
         <div v-for="(imgs, index) in knowlid" v-viewer="{movable:true}">
           <ul id="yihangxianshiduotu">
-            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + knowlid[index]+'.jpg'" style="width:270px;height:150px;"/></li>
+            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + organid[index]+'.jpg'" style="width:270px;height:150px;"/></li>
           </ul>
         </div>
         </template>
@@ -302,7 +302,6 @@
         </el-col>
 
 
-        
        
 
 
