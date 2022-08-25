@@ -30,10 +30,10 @@
           <el-form-item  prop="class" label="年级">
             <el-select v-model="queryParams.gradeValue" clearable placeholder="请选择" @change="selectClass(gradeValue)" style="width: 200px" >
               <el-option @click.native="handleQuery('queryParams')"
-                v-for="item in gradeOptions"
-                :key="item.gradeValue"
-                :label="item.gradeValue"
-                :value="item.gradeValue"
+                         v-for="item in gradeOptions"
+                         :key="item.gradeValue"
+                         :label="item.gradeValue"
+                         :value="item.gradeValue"
               >
               </el-option>
             </el-select>
@@ -43,10 +43,10 @@
           <el-form-item  prop="class" label="班级">
             <el-select v-model="queryParams.classValue" clearable placeholder="请选择" @change="selectClass(classValue)" style="width: 200px" >
               <el-option @click.native="handleQuery('queryParams')"
-                v-for="item in classOptions"
-                :key="item.classValue"
-                :label="item.classValue"
-                :value="item.classValue"
+                         v-for="item in classOptions"
+                         :key="item.classValue"
+                         :label="item.classValue"
+                         :value="item.classValue"
               >
               </el-option>
             </el-select>
@@ -55,10 +55,10 @@
           <el-form-item  prop="status" label="状态">
             <el-select v-model="queryParams.status" clearable placeholder="请选择" @change="selectStatus(value)" style="width: 200px">
               <el-option @click.native="handleQuery('queryParams')"
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
+                         v-for="item in options"
+                         :key="item.value"
+                         :label="item.label"
+                         :value="item.value"
               >
               </el-option>
             </el-select>
@@ -127,134 +127,134 @@
       </el-col>
     </el-row>
 
-   <el-dialog title="详情页" :visible.sync="outerVisible" custom-class="getdialogstyle" >
+    <el-dialog title="详情页" :visible.sync="outerVisible" custom-class="getdialogstyle" >
       <el-form label-width="120px" :disabled="true" v-loading="loading" :data="awardsList">
-      <!-- <el-row :gutter="24"> -->
+        <!-- <el-row :gutter="24"> -->
         <el-col :span="12">
 
-        <el-row >
-        <el-form-item label="用户名" >
-          <el-input v-model="form.name" autocomplete="off" ></el-input>
-        </el-form-item>
-        </el-row>
-        <el-row >
-        <el-form-item label="学号">
-          <el-input v-model="form.no" autocomplete="off"></el-input>
-        </el-form-item>
-         </el-row>
-         <el-row >
-        <el-form-item label="班级">
-          <el-input v-model="form.classId" autocomplete="off"></el-input>
-        </el-form-item>
-         </el-row>
-        <el-row >
-          <el-form-item label="1、政治素质">
-            <el-input v-model="this.politics" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" ></el-input>
-          </el-form-item>
-        </el-row>
-        <el-row >
-          <el-form-item label="2、思想素质">
-            <el-input v-model="this.ideology" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-          </el-form-item>
-        </el-row>
-        <el-row >
-          <el-form-item label="3、道德素质">
-            <el-input v-model="this.morality" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-          </el-form-item>
-        </el-row>
-        <el-row >
-          <el-form-item label="4、组织素质">
-            <el-input v-model="this.organ" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-          </el-form-item>
-        </el-row>
-        <el-row >
-          <el-form-item label="5、法纪素质">
-            <el-input v-model="this.law" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-          </el-form-item>
-        </el-row>
-        <el-row >
-          <el-form-item label="6、学习与生活素质">
-            <el-input v-model="this.learning" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-          </el-form-item>
-        </el-row>
-        <el-row >
-          <el-form-item label="7、实践与创新素质">
-            <el-input v-model="this.development" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-          </el-form-item>
-        </el-row>
-        <el-row >
-          <el-form-item label="8、科学文化素质">
-            <el-input v-model="this.scientific" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-          </el-form-item>
-        </el-row>
-        <el-row >
-          <el-form-item label="9、身体素质">
-            <el-input v-model="this.physical" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-          </el-form-item>
-        </el-row>
-        <el-row >
-          <el-form-item label="10、心理素质">
-            <el-input v-model="this.mental" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-          </el-form-item>
-        </el-row>
-        <el-row>
-          <el-form-item label="11、荣誉称号加分">
-            <el-input v-model="this.honorary" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" id="getsum"></el-input>
-          </el-form-item>
-        </el-row>
-        <el-row>
-          <el-form-item label="12、文体艺术等竞赛或活动加分">
-            <el-input v-model="this.competition" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-          </el-form-item>
-        </el-row>
-        <el-row>
-          <el-form-item label="13、社会工作加分">
-            <el-input v-model="this.socialWork" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-          </el-form-item>
-        </el-row>
-        <el-row>
-          <el-form-item label="14、知识与技能加分">
-            <el-input v-model="this.knowl" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-          </el-form-item>
-        </el-row>
-        <el-row>
-          <el-form-item label="15、日常操行减分">
-            <el-input v-model="this.daily" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-          </el-form-item>
-        </el-row>
-        <el-row>
-          <el-form-item label="16、期末成绩">
-            <el-input v-model="this.achievement" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" ></el-input>
-            <el-label >加权平均分为：</el-label>
-            <el-label style="color:red">{{this.score}}/100</el-label>
-          </el-form-item>
-        </el-row>
-        <el-row>
-          <el-form-item label="17、总评">
-            <el-label style="color: red">总评为：{{ this.totalscore }}</el-label>
-          </el-form-item>
-        </el-row>
-        <!-- </el-row> -->
+          <el-row >
+            <el-form-item label="用户名" >
+              <el-input v-model="form.name" autocomplete="off" ></el-input>
+            </el-form-item>
+          </el-row>
+          <el-row >
+            <el-form-item label="学号">
+              <el-input v-model="form.no" autocomplete="off"></el-input>
+            </el-form-item>
+          </el-row>
+          <el-row >
+            <el-form-item label="班级">
+              <el-input v-model="form.classId" autocomplete="off"></el-input>
+            </el-form-item>
+          </el-row>
+          <el-row >
+            <el-form-item label="1、政治素质">
+              <el-input v-model="this.politics" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" ></el-input>
+            </el-form-item>
+          </el-row>
+          <el-row >
+            <el-form-item label="2、思想素质">
+              <el-input v-model="this.ideology" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+            </el-form-item>
+          </el-row>
+          <el-row >
+            <el-form-item label="3、道德素质">
+              <el-input v-model="this.morality" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+            </el-form-item>
+          </el-row>
+          <el-row >
+            <el-form-item label="4、组织素质">
+              <el-input v-model="this.organ" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+            </el-form-item>
+          </el-row>
+          <el-row >
+            <el-form-item label="5、法纪素质">
+              <el-input v-model="this.law" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+            </el-form-item>
+          </el-row>
+          <el-row >
+            <el-form-item label="6、学习与生活素质">
+              <el-input v-model="this.learning" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+            </el-form-item>
+          </el-row>
+          <el-row >
+            <el-form-item label="7、实践与创新素质">
+              <el-input v-model="this.development" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+            </el-form-item>
+          </el-row>
+          <el-row >
+            <el-form-item label="8、科学文化素质">
+              <el-input v-model="this.scientific" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+            </el-form-item>
+          </el-row>
+          <el-row >
+            <el-form-item label="9、身体素质">
+              <el-input v-model="this.physical" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+            </el-form-item>
+          </el-row>
+          <el-row >
+            <el-form-item label="10、心理素质">
+              <el-input v-model="this.mental" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+            </el-form-item>
+          </el-row>
+          <el-row>
+            <el-form-item label="11、荣誉称号加分">
+              <el-input v-model="this.honorary" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" id="getsum"></el-input>
+            </el-form-item>
+          </el-row>
+          <el-row>
+            <el-form-item label="12、文体艺术等竞赛或活动加分">
+              <el-input v-model="this.competition" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+            </el-form-item>
+          </el-row>
+          <el-row>
+            <el-form-item label="13、社会工作加分">
+              <el-input v-model="this.socialWork" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+            </el-form-item>
+          </el-row>
+          <el-row>
+            <el-form-item label="14、知识与技能加分">
+              <el-input v-model="this.knowl" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+            </el-form-item>
+          </el-row>
+          <el-row>
+            <el-form-item label="15、日常操行减分">
+              <el-input v-model="this.daily" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+            </el-form-item>
+          </el-row>
+          <el-row>
+            <el-form-item label="16、期末成绩">
+              <el-input v-model="this.achievement" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" ></el-input>
+              <el-label >加权平均分为：</el-label>
+              <el-label style="color:red">{{this.score}}/100</el-label>
+            </el-form-item>
+          </el-row>
+          <el-row>
+            <el-form-item label="17、总评">
+              <el-label style="color: red">总评为：{{ this.totalscore }}</el-label>
+            </el-form-item>
+          </el-row>
+          <!-- </el-row> -->
         </el-col>
 
 
         <el-form-item label="加分图">
           <el-form-item label="(单击图片可预览)">
 
-             <el-col :span="12">
-        <!-- <img  v-for="(images,index) in img" :key="index" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + img[index]" style="width:270px;height:150px;"/> -->
-        <template>
-        <div v-for="(imgs, index) in img" v-viewer="{movable:true}">
-          <ul id="yihangxianshiduotu">
-            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + img[index].id+'.jpg'" style="width:270px;height:150px;"/></li>
-          </ul>
-        </div>
-        </template>
+            <el-col :span="12">
+              <!-- <img  v-for="(images,index) in img" :key="index" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + img[index]" style="width:270px;height:150px;"/> -->
+              <template>
+                <div v-for="(imgs, index) in img" v-viewer="{movable:true}">
+                  <ul id="yihangxianshiduotu">
+                    <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + img[index].id+'.jpg'" style="width:270px;height:150px;"/></li>
+                  </ul>
+                </div>
+              </template>
 
-         </el-col>
+            </el-col>
           </el-form-item>
         </el-form-item>
-       
+
 
 
       </el-form>
@@ -385,6 +385,19 @@
         score:"",
         socre1:"",
         totalscore:"",
+        politicsid:[],
+        moralityid:[],
+        organid:[],
+        lawid:[],
+        developmentid:[],
+        scientificid:[],
+        physicalid:[],
+        mentalid:[],
+        honoraryid:[],
+        competitionid:[],
+        socialWorkid:[],
+        knowlid:[],
+        ideologyid:[],
         // 弹出层标题
         title: "",
         // 是否显示弹出层
@@ -541,89 +554,100 @@
        *
        * 代码笨重 后期修改
        */
-       async handleGetAwards(no){
-         this.resetAwards();
-         await getAwards(no).then(response => {
-           this.awardsList = response;
-           for(var i = 0; i < this.awardsList.length; i++){
-
-             switch (this.awardsList[i].module){
-               case "politics":
-                 this.politics = this.awardsList[i].title;
-                 break;
-               case "morality":
-                 this.morality = this.awardsList[i].title;
-                 break;
-               case "organ":
-                 this.organ = this.awardsList[i].title;
-                 break;
-               case "law":
-                 this.law = this.awardsList[i].title;
-                 break;
-               case "learning":
-                 this.learning = this.awardsList[i].title;
-                 this.awardsList[i].id='';
-                 break;
-               case "development":
-                 this.development = this.awardsList[i].title;
-                 break;
-               case "scientific":
-                 this.scientific = this.awardsList[i].title;
-                 break;
-               case "physical":
-                 this.physical = this.awardsList[i].title;
-                 break;
-               case "mental":
-                 this.mental = this.awardsList[i].title;
-                 break;
-               case "honorary":
-                 this.honorary = this.awardsList[i].title;
-                 this.totalscore=this.awardsList[i].score;
-                 break;
-               case "competition":
-                 this.competition = this.awardsList[i].title;
-                 break;
-               case "socialWork":
-                 this.socialWork = this.awardsList[i].title;
-                 break;
-               case "knowl":
-                 this.knowl = this.awardsList[i].title;
-                 break;
-               case "daily":
-                 this.daily = this.awardsList[i].title;
-                 this.awardsList[i].id='';
-                 break;
-               case "ideology":
-                 this.ideology = this.awardsList[i].title;
-                 break;
-               case "achievement":
-                 this.achievement = this.awardsList[i].detail;
-                 this.score=this.awardsList[i].score/100;
-                 this.awardsList[i].id=""
-                 break;
-             }
-           }
-            let result = this.awardsList.map(current => {return {id: current.id}});
-            for(let i=result.length-1;i>=0;i--){
-              if(result[i].id==""){
-             //   console.log(i)
-                result.splice(i,1)
-              }
+      async handleGetAwards(no){
+        this.resetAwards();
+        await getAwards(no).then(response => {
+          this.awardsList = response;
+          for(var i = 0; i < this.awardsList.length; i++){
+            switch (this.awardsList[i].module){
+              case "politics":
+                this.politics = this.politics+' '+this.awardsList[i].title;
+                this.politicsid.push(this.awardsList[i].id)
+                break;
+              case "morality":
+                this.morality = this.morality+' '+this.awardsList[i].title;
+                this.moralityid.push(this.awardsList[i].id)
+                break;
+              case "organ":
+                this.organ = this.organ+' '+this.awardsList[i].title
+                this.organid.push(this.awardsList[i].id)
+                break;
+              case "law":
+                this.law = this.law+' '+this.awardsList[i].title;
+                this.lawid.push(this.awardsList[i].id)
+                break;
+              case "learning":
+                this.learning = this.awardsList[i].title;
+                this.awardsList[i].id='';
+                break;
+              case "development":
+                this.development = this.development+' '+this.awardsList[i].title;
+                this.developmentid.push(this.awardsList[i].id)
+                break;
+              case "scientific":
+                this.scientific = this.scientific+' '+this.awardsList[i].title;
+                this.scientificid.push(this.awardsList[i].id)
+                break;
+              case "physical":
+                this.physical = this.physical+' '+this.awardsList[i].title;
+                this.physicalid.push(this.awardsList[i].id)
+                break;
+              case "mental":
+                this.mental = this.mental+' '+this.awardsList[i].title;
+                this.mentalid.push(this.awardsList[i].id)
+                break;
+              case "honorary":
+                this.honorary = this.honorary+' '+this.awardsList[i].title;
+                this.honoraryid.push(this.awardsList[i].id)
+                break;
+              case "competition":
+                this.competition = this.competition+' '+this.awardsList[i].title;
+                this.competitionid.push(this.awardsList[i].id)
+                break;
+              case "socialWork":
+                this.socialWork = this.socialWork+' '+this.awardsList[i].title;
+                this.socialWorkid.push(this.awardsList[i].id)
+                break;
+              case "knowl":
+                this.knowl = this.knowl+' '+this.awardsList[i].title;
+                this.knowlid.push(this.awardsList[i].id)
+                break;
+              case "daily":
+                this.daily = this.daily+' '+this.awardsList[i].title;
+                this.awardsList[i].id='';
+                break;
+              case "ideology":
+                this.ideology = this.ideology+' '+this.awardsList[i].title;
+                this.ideologyid.push(this.awardsList[i].id)
+                break;
+              case "achievement":
+                this.achievement = this.awardsList[i].detail;
+                this.score=this.awardsList[i].score/100;
+                this.awardsList[i].id='';
+                break;
             }
-           this.img=result
-           /**
-            * 计算总评成绩
-            * @type {number}
-            */
-           var totalscore=0;
-           var total = 0;
-           for (var i = 0; i < this.awardsList.length; i++) {
-             total += this.awardsList[i].score
-           }
-           this.totalscore = (((total-this.score*100)*0.15)/100 + (this.score*0.85)).toFixed(2)
-         })
-        
-         
+          }
+          let result = this.awardsList.map(current => {return {id: current.id}});
+          for(let i=result.length-1;i>=0;i--){
+            if(result[i].id==""){
+              //   console.log(i)
+              result.splice(i,1)
+            }
+          }
+          this.img=result
+          /**
+           * 计算总评成绩
+           * @type {number}
+           */
+          var totalscore=0;
+          var total = 0;
+          for (var i = 0; i < this.awardsList.length; i++) {
+            total += this.awardsList[i].score
+          }
+          this.totalscore = (((total-this.score*100)*0.15)/100 + (this.score*0.85)).toFixed(2)
+        })
+
+
       },
 
       //编辑
@@ -658,6 +682,19 @@
         this.img = "";
         this.score1 = "";
         this.totalscore = "";
+        this.developmentid=[];
+        this.competitionid=[];
+        this.scientificid=[];
+        this.socialWorkid=[];
+        this.physicalid=[];
+        this.ideologyid=[];
+        this.knowlid=[];
+        this.politicsid=[];
+        this.organid=[];
+        this.lawid=[];
+        this.mentalid=[];
+        this.moralityid=[];
+        this.honoraryid=[];
       },
       double(no,reason){
         this.handleBack(no,reason)
@@ -687,10 +724,10 @@
       }
     },
     //截取逗号
-        splitJoin(res){
-      	return res.split(',');
+    splitJoin(res){
+      return res.split(',');
 
-      },
+    },
     components: { EditTable }
   };
 </script>
