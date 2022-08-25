@@ -385,6 +385,19 @@
         score:"",
         socre1:"",
         totalscore:"",
+        politicsid:[],
+        moralityid:[],
+        organid:[],
+        lawid:[],
+        developmentid:[],
+        scientificid:[],
+        physicalid:[],
+        mentalid:[],
+        honoraryid:[],
+        competitionid:[],
+        socialWorkid:[],
+        knowlid:[],
+        ideologyid:[],
         // 弹出层标题
         title: "",
         // 是否显示弹出层
@@ -545,61 +558,72 @@
          this.resetAwards();
          await getAwards(no).then(response => {
            this.awardsList = response;
-           for(var i = 0; i < this.awardsList.length; i++){
-
+            for(var i = 0; i < this.awardsList.length; i++){
              switch (this.awardsList[i].module){
                case "politics":
-                 this.politics = this.awardsList[i].title;
+                 this.politics = this.politics+' '+this.awardsList[i].title;
+                 this.politicsid.push(this.awardsList[i].id)
                  break;
                case "morality":
-                 this.morality = this.awardsList[i].title;
+                 this.morality = this.morality+' '+this.awardsList[i].title;
+                 this.moralityid.push(this.awardsList[i].id)
                  break;
                case "organ":
-                 this.organ = this.awardsList[i].title;
+                 this.organ = this.organ+' '+this.awardsList[i].title
+                 this.organid.push(this.awardsList[i].id)
                  break;
                case "law":
-                 this.law = this.awardsList[i].title;
+                 this.law = this.law+' '+this.awardsList[i].title;
+                 this.lawid.push(this.awardsList[i].id)
                  break;
                case "learning":
                  this.learning = this.awardsList[i].title;
                  this.awardsList[i].id='';
                  break;
                case "development":
-                 this.development = this.awardsList[i].title;
+                 this.development = this.development+' '+this.awardsList[i].title;
+                 this.developmentid.push(this.awardsList[i].id)
                  break;
                case "scientific":
-                 this.scientific = this.awardsList[i].title;
+                 this.scientific = this.scientific+' '+this.awardsList[i].title;
+                 this.scientificid.push(this.awardsList[i].id)
                  break;
                case "physical":
-                 this.physical = this.awardsList[i].title;
+                 this.physical = this.physical+' '+this.awardsList[i].title;
+                 this.physicalid.push(this.awardsList[i].id)
                  break;
                case "mental":
-                 this.mental = this.awardsList[i].title;
+                 this.mental = this.mental+' '+this.awardsList[i].title;
+                 this.mentalid.push(this.awardsList[i].id)
                  break;
                case "honorary":
-                 this.honorary = this.awardsList[i].title;
-                 this.totalscore=this.awardsList[i].score;
+                 this.honorary = this.honorary+' '+this.awardsList[i].title;
+                 this.honoraryid.push(this.awardsList[i].id)
                  break;
                case "competition":
-                 this.competition = this.awardsList[i].title;
+                 this.competition = this.competition+' '+this.awardsList[i].title;
+                 this.competitionid.push(this.awardsList[i].id)
                  break;
                case "socialWork":
-                 this.socialWork = this.awardsList[i].title;
+                 this.socialWork = this.socialWork+' '+this.awardsList[i].title;
+                 this.socialWorkid.push(this.awardsList[i].id)
                  break;
                case "knowl":
-                 this.knowl = this.awardsList[i].title;
+                 this.knowl = this.knowl+' '+this.awardsList[i].title;
+                 this.knowlid.push(this.awardsList[i].id)
                  break;
                case "daily":
-                 this.daily = this.awardsList[i].title;
+                 this.daily = this.daily+' '+this.awardsList[i].title;
                  this.awardsList[i].id='';
                  break;
                case "ideology":
-                 this.ideology = this.awardsList[i].title;
+                 this.ideology = this.ideology+' '+this.awardsList[i].title;
+                 this.ideologyid.push(this.awardsList[i].id)
                  break;
                case "achievement":
                  this.achievement = this.awardsList[i].detail;
                  this.score=this.awardsList[i].score/100;
-                 this.awardsList[i].id=""
+                 this.awardsList[i].id='';
                  break;
              }
            }
@@ -658,6 +682,19 @@
         this.img = "";
         this.score1 = "";
         this.totalscore = "";
+        this.developmentid=[];
+        this.competitionid=[];
+        this.scientificid=[];
+        this.socialWorkid=[];
+        this.physicalid=[];
+        this.ideologyid=[];
+        this.knowlid=[];
+        this.politicsid=[];
+        this.organid=[];
+        this.lawid=[];
+        this.mentalid=[];
+        this.moralityid=[];
+        this.honoraryid=[];
       },
       double(no,reason){
         this.handleBack(no,reason)

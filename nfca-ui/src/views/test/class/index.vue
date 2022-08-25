@@ -103,133 +103,207 @@
     <el-dialog title="详情页" :visible.sync="outerVisible" custom-class="getdialogstyle" >
       <el-form label-width="120px" :disabled="true" v-loading="loading" :data="awardsList">
       <!-- <el-row :gutter="24"> -->
-        <el-col :span="12">
+        <el-col >
 
-          <el-descriptions title="学生基本信息">
-            <el-descriptions-item label="姓名">{{form.name}}</el-descriptions-item>
-            <el-descriptions-item label="学号">{{form.no}}</el-descriptions-item>
-            <el-descriptions-item label="班级">{{form.classId}}</el-descriptions-item>
-            {{this.politics}}
-            {{this.organ}}
-          </el-descriptions>
-
-          <el-descriptions title="基础性素质测评（满分60分）"></el-descriptions>
-
-          <el-row >
-            <el-form-item label="1、政治素质">
-              <el-input v-model="this.politics" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" ></el-input>
-            </el-form-item>
-          </el-row>
-          <el-row >
-            <el-form-item label="2、思想素质">
-              <el-input v-model="this.ideology" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-            </el-form-item>
-          </el-row>
-          <el-row >
-            <el-form-item label="3、道德素质">
-              <el-input v-model="this.morality" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-            </el-form-item>
-          </el-row>
-          <el-row >
-            <el-form-item label="4、组织素质">
-              <el-input v-model="this.organ" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-            </el-form-item>
-          </el-row>
-          <el-row >
-            <el-form-item label="5、法纪素质">
-              <el-input v-model="this.law" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-            </el-form-item>
-          </el-row>
-          <el-row >
-            <el-form-item label="6、学习与生活素质">
-              <el-input v-model="this.learning" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-            </el-form-item>
-          </el-row>
-          <el-row >
-            <el-form-item label="7、实践与创新素质">
-              <el-input v-model="this.development" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-            </el-form-item>
-          </el-row>
-          <el-row >
-            <el-form-item label="8、科学文化素质">
-              <el-input v-model="this.scientific" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-            </el-form-item>
-          </el-row>
-          <el-row >
-            <el-form-item label="9、身体素质">
-              <el-input v-model="this.physical" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-            </el-form-item>
-          </el-row>
-          <el-row >
-            <el-form-item label="10、心理素质">
-              <el-input v-model="this.mental" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-            </el-form-item>
-          </el-row>
-
-          <el-descriptions title="发展性素质测评（满分40 分）"></el-descriptions>
-
-          <el-row>
-            <el-form-item label="11、荣誉称号加分">
-              <el-input v-model="this.honorary" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" id="getsum"></el-input>
-            </el-form-item>
-          </el-row>
-          <el-row>
-            <el-form-item label="12、文体艺术等竞赛或活动加分">
-              <el-input v-model="this.competition" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-            </el-form-item>
-          </el-row>
-          <el-row>
-            <el-form-item label="13、社会工作加分">
-              <el-input v-model="this.socialWork" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-            </el-form-item>
-          </el-row>
-          <el-row>
-            <el-form-item label="14、知识与技能加分">
-              <el-input v-model="this.knowl" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-            </el-form-item>
-          </el-row>
-          <el-row>
-            <el-form-item label="15、日常操行减分">
-              <el-input v-model="this.daily" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-            </el-form-item>
-          </el-row>
-          <el-row>
-            <el-form-item label="16、期末成绩">
-              <el-input v-model="this.achievement" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" ></el-input>
-              <el-label >加权平均分为：</el-label>
-              <el-label style="color:#ff0000">{{this.score}}/100</el-label>
-            </el-form-item>
-          </el-row>
-          <el-row>
-            <el-form-item label="17、总评">
-              <el-label style="color: red">总评为：{{ this.totalscore }}</el-label>
-            </el-form-item>
-          </el-row>
-          <!-- </el-row> -->
+        <el-row >
+        <el-form-item label="用户名" >
+          <el-input v-model="form.name" autocomplete="off" ></el-input>
+        </el-form-item>
+        </el-row>
+        <el-row >
+        <el-form-item label="学号">
+          <el-input v-model="form.no" autocomplete="off"></el-input>
+        </el-form-item>
+         </el-row>
+         <el-row >
+        <el-form-item label="班级">
+          <el-input v-model="form.classId" autocomplete="off"></el-input>
+        </el-form-item>
+         </el-row>
+        <el-row >
+          <el-form-item label="1、政治素质">
+            <el-input v-model="this.politics" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" ></el-input>
+        <template>
+        <div v-for="(imgs, index) in politicsid" v-viewer="{movable:true}">
+          <ul id="yihangxianshiduotu">
+            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + politicsid[index]+'.jpg'" style="width:270px;height:150px;"/></li>
+          </ul>
+        </div>
+        </template>
+          </el-form-item>
+        </el-row>
+        <el-row >
+          <el-form-item label="2、思想素质">
+            <el-input v-model="this.ideology" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+        <template>
+        <div v-for="(imgs, index) in ideologyid" v-viewer="{movable:true}">
+          <ul id="yihangxianshiduotu">
+            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + ideologyid[index]+'.jpg'" style="width:270px;height:150px;"/></li>
+          </ul>
+        </div>
+        </template>
+          </el-form-item>
+        </el-row>
+        <el-row >
+          <el-form-item label="3、道德素质">
+            <el-input v-model="this.morality" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+        <template>
+        <div v-for="(imgs, index) in moralityid" v-viewer="{movable:true}">
+          <ul id="yihangxianshiduotu">
+            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + moralityid[index]+'.jpg'" style="width:270px;height:150px;"/></li>
+          </ul>
+        </div>
+        </template>
+          </el-form-item>
+        </el-row>
+        <el-row >
+          <el-form-item label="4、组织素质">
+            <el-input v-model="this.organ" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+        <template>
+        <div v-for="(imgs, index) in organid" v-viewer="{movable:true}">
+          <ul id="yihangxianshiduotu">
+            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + organid[index]+'.jpg'" style="width:270px;height:150px;"/></li>
+          </ul>
+        </div>
+        </template>
+          </el-form-item>
+        </el-row>
+        <el-row >
+          <el-form-item label="5、法纪素质">
+            <el-input v-model="this.law" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+        <template>
+        <div v-for="(imgs, index) in lawid" v-viewer="{movable:true}">
+          <ul id="yihangxianshiduotu">
+            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + lawid[index]+'.jpg'" style="width:270px;height:150px;"/></li>
+          </ul>
+        </div>
+        </template>
+          </el-form-item>
+        </el-row>
+        <el-row >
+          <el-form-item label="6、学习与生活素质">
+            <el-input v-model="this.learning" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+          </el-form-item>
+        </el-row>
+        <el-row >
+          <el-form-item label="7、实践与创新素质">
+            <el-input v-model="this.development" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+        <template>
+        <div v-for="(imgs, index) in developmentid" v-viewer="{movable:true}">
+          <ul id="yihangxianshiduotu">
+            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + developmentid[index]+'.jpg'" style="width:270px;height:150px;"/></li>
+          </ul>
+        </div>
+        </template>
+          </el-form-item>
+        </el-row>
+        <el-row >
+          <el-form-item label="8、科学文化素质">
+            <el-input v-model="this.scientific" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+        <template>
+        <div v-for="(imgs, index) in scientificid" v-viewer="{movable:true}">
+          <ul id="yihangxianshiduotu">
+            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + scientificid[index]+'.jpg'" style="width:270px;height:150px;"/></li>
+          </ul>
+        </div>
+        </template>
+          </el-form-item>
+        </el-row>
+        <el-row >
+          <el-form-item label="9、身体素质">
+            <el-input v-model="this.physical" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+        <template>
+        <div v-for="(imgs, index) in physicalid" v-viewer="{movable:true}">
+          <ul id="yihangxianshiduotu">
+            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + physicalid[index]+'.jpg'" style="width:270px;height:150px;"/></li>
+          </ul>
+        </div>
+        </template>
+          </el-form-item>
+        </el-row>
+        <el-row >
+          <el-form-item label="10、心理素质">
+            <el-input v-model="this.mental" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+        <template>
+        <div v-for="(imgs, index) in mentalid" v-viewer="{movable:true}">
+          <ul id="yihangxianshiduotu">
+            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + mentalid[index]+'.jpg'" style="width:270px;height:150px;"/></li>
+          </ul>
+        </div>
+        </template>
+          </el-form-item>
+        </el-row>
+        <el-row>
+          <el-form-item label="11、荣誉称号加分">
+            <el-input v-model="this.honorary" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" id="getsum"></el-input>
+        <template>
+        <div v-for="(imgs, index) in honoraryid" v-viewer="{movable:true}">
+          <ul id="yihangxianshiduotu">
+            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + honoraryid[index]+'.jpg'" style="width:270px;height:150px;"/></li>
+          </ul>
+        </div>
+        </template>
+          </el-form-item>
+        </el-row>
+        <el-row>
+          <el-form-item label="12、文体艺术等竞赛或活动加分">
+            <el-input v-model="this.competition" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+        <template>
+        <div v-for="(imgs, index) in competitionid" v-viewer="{movable:true}">
+          <ul id="yihangxianshiduotu">
+            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + competitionid[index]+'.jpg'" style="width:270px;height:150px;"/></li>
+          </ul>
+        </div>
+        </template>
+          </el-form-item>
+        </el-row>
+        <el-row>
+          <el-form-item label="13、社会工作加分">
+            <el-input v-model="this.socialWork" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+            <template>
+        <div v-for="(imgs, index) in socialWorkid" v-viewer="{movable:true}">
+          <ul id="yihangxianshiduotu">
+            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + socialWorkid[index]+'.jpg'" style="width:270px;height:150px;"/></li>
+          </ul>
+        </div>
+        </template>
+          </el-form-item>
+        </el-row>
+        <el-row>
+          <el-form-item label="14、知识与技能加分">
+            <el-input v-model="this.knowl" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+        <template>
+        <div v-for="(imgs, index) in knowlid" v-viewer="{movable:true}">
+          <ul id="yihangxianshiduotu">
+            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + knowlid[index]+'.jpg'" style="width:270px;height:150px;"/></li>
+          </ul>
+        </div>
+        </template>
+          </el-form-item>
+        </el-row>
+        <el-row>
+          <el-form-item label="15、日常操行减分">
+            <el-input v-model="this.daily" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
+          </el-form-item>
+        </el-row>
+        <el-row>
+          <el-form-item label="16、期末成绩">
+            <el-input v-model="this.achievement" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" ></el-input>
+            <el-label >加权平均分为：</el-label>
+            <el-label style="color:red">{{this.score}}/100</el-label>
+          </el-form-item>
+        </el-row>
+        <el-row>
+          <el-form-item label="17、总评">
+            <el-label style="color: red">总评为：{{ this.totalscore }}</el-label>
+          </el-form-item>
+        </el-row>
+        <!-- </el-row> -->
         </el-col>
 
 
-
-
-        <el-form-item label="加分图">
-          <el-form-item label="(单击图片可预览)">
-             <el-col :span="12">
-               <!-- <img  v-for="(images,index) in img" :key="index" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + img[index]" style="width:270px;height:150px;"/> -->
-              <template>
-                <div v-for="(imgs, index) in img" v-viewer="{movable:true}">
-                  <ul id="yihangxianshiduotu">
-                    {{index+1}}
-                    {{img[index].id}}
-                    <li>
-                      <el-image :z-index="9999" :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + img[index].id+'.jpg'" style="width:270px;height:150px;"/>
-                    </li>
-                  </ul>
-                </div>
-              </template>
-            </el-col>
-          </el-form-item>
-        </el-form-item>
-
+        
+       
 
 
       </el-form>
@@ -280,7 +354,8 @@
 
   #yihangxianshiduotu li
   {
-    display: block;
+    float: left;
+    display: inline;
   }
 
   img{
@@ -357,6 +432,19 @@ export default {
             socre1:"",
             totalscore:"",
             addScore:"",
+            politicsid:[],
+            moralityid:[],
+            organid:[],
+            lawid:[],
+            developmentid:[],
+            scientificid:[],
+            physicalid:[],
+            mentalid:[],
+            honoraryid:[],
+            competitionid:[],
+            socialWorkid:[],
+            knowlid:[],
+            ideologyid:[],
             // 弹出层标题
             title: "",
             // 是否显示弹出层
@@ -525,15 +613,19 @@ export default {
              switch (this.awardsList[i].module){
                case "politics":
                  this.politics = this.politics+' '+this.awardsList[i].title;
+                 this.politicsid.push(this.awardsList[i].id)
                  break;
                case "morality":
                  this.morality = this.morality+' '+this.awardsList[i].title;
+                 this.moralityid.push(this.awardsList[i].id)
                  break;
                case "organ":
                  this.organ = this.organ+' '+this.awardsList[i].title
+                 this.organid.push(this.awardsList[i].id)
                  break;
                case "law":
                  this.law = this.law+' '+this.awardsList[i].title;
+                 this.lawid.push(this.awardsList[i].id)
                  break;
                case "learning":
                  this.learning = this.awardsList[i].title;
@@ -541,35 +633,43 @@ export default {
                  break;
                case "development":
                  this.development = this.development+' '+this.awardsList[i].title;
+                 this.developmentid.push(this.awardsList[i].id)
                  break;
                case "scientific":
                  this.scientific = this.scientific+' '+this.awardsList[i].title;
+                 this.scientificid.push(this.awardsList[i].id)
                  break;
                case "physical":
                  this.physical = this.physical+' '+this.awardsList[i].title;
+                 this.physicalid.push(this.awardsList[i].id)
                  break;
                case "mental":
                  this.mental = this.mental+' '+this.awardsList[i].title;
+                 this.mentalid.push(this.awardsList[i].id)
                  break;
                case "honorary":
                  this.honorary = this.honorary+' '+this.awardsList[i].title;
-                 this.totalscore=this.awardsList[i].score
+                 this.honoraryid.push(this.awardsList[i].id)
                  break;
                case "competition":
                  this.competition = this.competition+' '+this.awardsList[i].title;
+                 this.competitionid.push(this.awardsList[i].id)
                  break;
                case "socialWork":
-                 this.socialWork = this.socialWork+' '+this.awardsList[i].title
+                 this.socialWork = this.socialWork+' '+this.awardsList[i].title;
+                 this.socialWorkid.push(this.awardsList[i].id)
                  break;
                case "knowl":
-                 this.knowl = this.knowl+' '+this.awardsList[i].title
+                 this.knowl = this.knowl+' '+this.awardsList[i].title;
+                 this.knowlid.push(this.awardsList[i].id)
                  break;
                case "daily":
-                 this.daily = this.daily+' '+this.awardsList[i].title
+                 this.daily = this.daily+' '+this.awardsList[i].title;
                  this.awardsList[i].id='';
                  break;
                case "ideology":
-                 this.ideology = this.ideology+' '+this.awardsList[i].title
+                 this.ideology = this.ideology+' '+this.awardsList[i].title;
+                 this.ideologyid.push(this.awardsList[i].id)
                  break;
                case "achievement":
                  this.achievement = this.awardsList[i].detail;
@@ -586,6 +686,7 @@ export default {
                 result.splice(i,1)
               }
             }
+            console.log(this.developmentid)
 
          // console.log(result)
            this.img=result
@@ -637,6 +738,19 @@ export default {
         this.imgid = "";
         this.score1 = "";
         this.totalscore = "";
+        this.developmentid=[];
+        this.competitionid=[];
+        this.scientificid=[];
+        this.socialWorkid=[];
+        this.physicalid=[];
+        this.ideologyid=[];
+        this.knowlid=[];
+        this.politicsid=[];
+        this.organid=[];
+        this.lawid=[];
+        this.mentalid=[];
+        this.moralityid=[];
+        this.honoraryid=[];
       },
 
 
