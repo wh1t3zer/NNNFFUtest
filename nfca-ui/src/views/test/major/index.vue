@@ -322,7 +322,7 @@
   import {classOptionsini} from "../../../../static/config.js"
   import {gradeOptionsini} from "../../../../static/config.js"
 
-  ElementUI.Dialog.props.closeOnClickModal.default = false; //弹框点及其他区域不关闭
+  ElementUI.Dialog.props.closeOnClickModal.default = true; //弹框点及其他区域不关闭
 
 
   export default {
