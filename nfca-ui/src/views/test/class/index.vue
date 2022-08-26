@@ -27,12 +27,12 @@
           <el-form-item  prop="status" label="状态">
             <el-select v-model="queryParams.status" clearable placeholder="请选择" @change="selectStatus(value)" >
               <el-option @click.native="handleQuery('queryParams')"
-                v-for="item in options"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value"
-                @keyup.enter.native="handleQuery"
-                >
+                         v-for="item in options"
+                         :key="item.value"
+                         :label="item.label"
+                         :value="item.value"
+                         @keyup.enter.native="handleQuery"
+              >
               </el-option>
             </el-select>
           </el-form-item>
@@ -47,7 +47,7 @@
         </el-form>
 
         <el-row :gutter="10" class="mb8">
-            <el-col :span="1.5">
+          <el-col :span="1.5">
 
             <el-button
               type="success"
@@ -62,7 +62,7 @@
         </el-row>
         <el-table v-loading="loading" :data="testList" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="50" align="center" />
-<!--          <el-table-column label="用户id" align="center" key="userId" prop="userId" v-if="columns[0].visible" />-->
+          <!--          <el-table-column label="用户id" align="center" key="userId" prop="userId" v-if="columns[0].visible" />-->
           <el-table-column label="学号" align="center" key="no" prop="no" v-if="columns[1].visible" :show-overflow-tooltip="true" />
           <el-table-column label="姓名" align="center" key="name" prop="name" v-if="columns[2].visible" :show-overflow-tooltip="true" />
           <!-- <el-table-column label="性别" align="center" key="sex" prop="sex" v-if="columns[3].visible" :show-overflow-tooltip="true" /> -->
@@ -101,209 +101,236 @@
     </el-row>
 
     <el-dialog title="详情页" :visible.sync="outerVisible" custom-class="getdialogstyle" >
-      <el-form label-width="120px" :disabled="true" v-loading="loading" :data="awardsList">
-      <!-- <el-row :gutter="24"> -->
-        <el-col >
+      <el-form label-width="120px"  v-loading="loading" :data="awardsList">
 
-        <el-row >
-        <el-form-item label="用户名" >
-          <el-input v-model="form.name" autocomplete="off" ></el-input>
-        </el-form-item>
-        </el-row>
-        <el-row >
-        <el-form-item label="学号">
-          <el-input v-model="form.no" autocomplete="off"></el-input>
-        </el-form-item>
-         </el-row>
-         <el-row >
-        <el-form-item label="班级">
-          <el-input v-model="form.classId" autocomplete="off"></el-input>
-        </el-form-item>
-         </el-row>
-        <el-row >
-          <el-form-item label="1、政治素质">
-            <el-input v-model="this.politics" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" ></el-input>
-        <template>
-        <div v-for="(imgs, index) in politicsid" v-viewer="{movable:true}">
-          <ul id="yihangxianshiduotu">
-            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + politicsid[index]+'.jpg'" style="width:270px;height:150px;"/></li>
-          </ul>
-        </div>
-        </template>
-          </el-form-item>
-        </el-row>
-        <el-row >
-          <el-form-item label="2、思想素质">
-            <el-input v-model="this.ideology" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-        <template>
-        <div v-for="(imgs, index) in ideologyid" v-viewer="{movable:true}">
-          <ul id="yihangxianshiduotu">
-            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + ideologyid[index]+'.jpg'" style="width:270px;height:150px;"/></li>
-          </ul>
-        </div>
-        </template>
-          </el-form-item>
-        </el-row>
-        <el-row >
-          <el-form-item label="3、道德素质">
-            <el-input v-model="this.morality" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-        <template>
-        <div v-for="(imgs, index) in moralityid" v-viewer="{movable:true}">
-          <ul id="yihangxianshiduotu">
-            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + moralityid[index]+'.jpg'" style="width:270px;height:150px;"/></li>
-          </ul>
-        </div>
-        </template>
-          </el-form-item>
-        </el-row>
-        <el-row >
-          <el-form-item label="4、组织素质">
-            <el-input v-model="this.organ" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-        <template>
-        <div v-for="(imgs, index) in organid" v-viewer="{movable:true}">
-          <ul id="yihangxianshiduotu">
-            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + organid[index]+'.jpg'" style="width:270px;height:150px;"/></li>
-          </ul>
-        </div>
-        </template>
-          </el-form-item>
-        </el-row>
-        <el-row >
-          <el-form-item label="5、法纪素质">
-            <el-input v-model="this.law" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-        <template>
-        <div v-for="(imgs, index) in lawid" v-viewer="{movable:true}">
-          <ul id="yihangxianshiduotu">
-            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + lawid[index]+'.jpg'" style="width:270px;height:150px;"/></li>
-          </ul>
-        </div>
-        </template>
-          </el-form-item>
-        </el-row>
-        <el-row >
-          <el-form-item label="6、学习与生活素质">
-            <el-input v-model="this.learning" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-          </el-form-item>
-        </el-row>
-        <el-row >
-          <el-form-item label="7、实践与创新素质">
-            <el-input v-model="this.development" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-        <template>
-        <div v-for="(imgs, index) in developmentid" v-viewer="{movable:true}">
-          <ul id="yihangxianshiduotu">
-            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + developmentid[index]+'.jpg'" style="width:270px;height:150px;"/></li>
-          </ul>
-        </div>
-        </template>
-          </el-form-item>
-        </el-row>
-        <el-row >
-          <el-form-item label="8、科学文化素质">
-            <el-input v-model="this.scientific" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-        <template>
-        <div v-for="(imgs, index) in scientificid" v-viewer="{movable:true}">
-          <ul id="yihangxianshiduotu">
-            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + scientificid[index]+'.jpg'" style="width:270px;height:150px;"/></li>
-          </ul>
-        </div>
-        </template>
-          </el-form-item>
-        </el-row>
-        <el-row >
-          <el-form-item label="9、身体素质">
-            <el-input v-model="this.physical" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-        <template>
-        <div v-for="(imgs, index) in physicalid" v-viewer="{movable:true}">
-          <ul id="yihangxianshiduotu">
-            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + physicalid[index]+'.jpg'" style="width:270px;height:150px;"/></li>
-          </ul>
-        </div>
-        </template>
-          </el-form-item>
-        </el-row>
-        <el-row >
-          <el-form-item label="10、心理素质">
-            <el-input v-model="this.mental" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-        <template>
-        <div v-for="(imgs, index) in mentalid" v-viewer="{movable:true}">
-          <ul id="yihangxianshiduotu">
-            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + mentalid[index]+'.jpg'" style="width:270px;height:150px;"/></li>
-          </ul>
-        </div>
-        </template>
-          </el-form-item>
-        </el-row>
-        <el-row>
-          <el-form-item label="11、荣誉称号加分">
-            <el-input v-model="this.honorary" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" id="getsum"></el-input>
-        <template>
-        <div v-for="(imgs, index) in honoraryid" v-viewer="{movable:true}">
-          <ul id="yihangxianshiduotu">
-            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + honoraryid[index]+'.jpg'" style="width:270px;height:150px;"/></li>
-          </ul>
-        </div>
-        </template>
-          </el-form-item>
-        </el-row>
-        <el-row>
-          <el-form-item label="12、文体艺术等竞赛或活动加分">
-            <el-input v-model="this.competition" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-        <template>
-        <div v-for="(imgs, index) in competitionid" v-viewer="{movable:true}">
-          <ul id="yihangxianshiduotu">
-            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + competitionid[index]+'.jpg'" style="width:270px;height:150px;"/></li>
-          </ul>
-        </div>
-        </template>
-          </el-form-item>
-        </el-row>
-        <el-row>
-          <el-form-item label="13、社会工作加分">
-            <el-input v-model="this.socialWork" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-            <template>
-        <div v-for="(imgs, index) in socialWorkid" v-viewer="{movable:true}">
-          <ul id="yihangxianshiduotu">
-            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + socialWorkid[index]+'.jpg'" style="width:270px;height:150px;"/></li>
-          </ul>
-        </div>
-        </template>
-          </el-form-item>
-        </el-row>
-        <el-row>
-          <el-form-item label="14、知识与技能加分">
-            <el-input v-model="this.knowl" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-        <template>
-        <div v-for="(imgs, index) in knowlid" v-viewer="{movable:true}">
-          <ul id="yihangxianshiduotu">
-            <li><el-image :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + knowlid[index]+'.jpg'" style="width:270px;height:150px;"/></li>
-          </ul>
-        </div>
-        </template>
-          </el-form-item>
-        </el-row>
-        <el-row>
-          <el-form-item label="15、日常操行减分">
-            <el-input v-model="this.daily" autocomplete="off" type="textarea" :autosize="{ minRows: 1}"></el-input>
-          </el-form-item>
-        </el-row>
-        <el-row>
-          <el-form-item label="16、期末成绩">
-            <el-input v-model="this.achievement" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" ></el-input>
-            <el-label >加权平均分为：</el-label>
-            <el-label style="color:red">{{this.score}}/100</el-label>
-          </el-form-item>
-        </el-row>
-        <el-row>
-          <el-form-item label="17、总评">
-            <el-label style="color: red">总评为：{{ this.totalscore }}</el-label>
-          </el-form-item>
-        </el-row>
-        <!-- </el-row> -->
+        <!-- <el-row :gutter="24"> -->
+        <el-col >
+          <el-descriptions title="用户信息">
+            <el-descriptions-item label="学生姓名">
+              <el-tag size="small">{{form.name}}</el-tag>
+            </el-descriptions-item>
+            <el-descriptions-item label="学号">
+              <el-tag size="small">{{form.no}}</el-tag>
+            </el-descriptions-item>
+            <el-descriptions-item label="班级">
+              <el-tag size="small">{{form.classId}}</el-tag>
+            </el-descriptions-item>
+          </el-descriptions>
+
+          <el-descriptions title="基础性素质测评（满分60分）"></el-descriptions>
+          <el-row >
+            <el-form-item label="1、政治素质">
+              <el-input v-model="this.politics" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" :disabled="true" style="width:350px; vertical-align: middle"/>
+              <el-input v-model="this.politicsScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}"  style="width:100px; vertical-align: middle "/>
+
+               <div v-for="(imgs, index) in politicsid" v-viewer="{movable:true}" style="display: inline;  vertical-align: middle">
+                  <ul id="yihangxianshiduotu" style="display: inline">
+                    <li style="display: inline"><el-image z-index="9999" :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + politicsid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
+                  </ul>
+                </div>
+
+            </el-form-item>
+          </el-row>
+
+          <el-row >
+            <el-form-item label="2、思想素质">
+              <template>
+                <el-input v-model="this.ideology" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" :disabled="true" style="width:350px; vertical-align: middle"/>
+                <el-input v-model="this.ideologyScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px;vertical-align: middle"/>
+                <div v-for="(imgs, index) in ideologyid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
+                  <ul id="yihangxianshiduotu">
+                    <li><el-image  z-index="9999" :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + ideologyid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
+                  </ul>
+                </div>
+              </template>
+            </el-form-item>
+          </el-row>
+          <el-row >
+            <el-form-item label="3、道德素质">
+              <el-input v-model="this.morality" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" :disabled="true"  style="width:350px; vertical-align: middle"/>
+              <el-input v-model="this.moralityScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px;vertical-align: middle"/>
+
+              <template>
+                <div v-for="(imgs, index) in moralityid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
+                  <ul id="yihangxianshiduotu">
+                    <li><el-image z-index="9999"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + moralityid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
+                  </ul>
+                </div>
+              </template>
+            </el-form-item>
+          </el-row>
+          <el-row >
+            <el-form-item label="4、组织素质">
+              <el-input v-model="this.organ" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
+              <el-input v-model="this.organScore1" style="width:100px; vertical-align: middle"/>
+
+              <template>
+                <div v-for="(imgs, index) in organid" v-viewer="{movable:true}"  style="display: inline;vertical-align: middle">
+                  <ul id="yihangxianshiduotu">
+                    <li><el-image z-index="9999"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + organid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
+                  </ul>
+                </div>
+              </template>
+            </el-form-item>
+          </el-row>
+          <el-row >
+            <el-form-item label="5、法纪素质">
+              <el-input v-model="this.law" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
+              <el-input v-model="this.lawScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>
+
+              <template>
+                <div v-for="(imgs, index) in lawid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
+                  <ul id="yihangxianshiduotu">
+                    <li><el-image z-index="9999"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + lawid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
+                  </ul>
+                </div>
+              </template>
+            </el-form-item>
+          </el-row>
+          <el-row >
+            <el-form-item label="6、学习与生活素质">
+              <el-input v-model="this.learning" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
+              <el-input v-model="this.learningScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>
+
+            </el-form-item>
+          </el-row>
+          <el-row >
+            <el-form-item label="7、实践与创新素质">
+              <el-input v-model="this.development" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
+              <el-input v-model="this.developmentScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>
+              <template>
+                <div v-for="(imgs, index) in developmentid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
+                  <ul id="yihangxianshiduotu">
+                    <li><el-image z-index="9999"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + developmentid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
+                  </ul>
+                </div>
+              </template>
+            </el-form-item>
+          </el-row>
+          <el-row >
+            <el-form-item label="8、科学文化素质">
+              <el-input v-model="this.scientific" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
+              <el-input v-model="this.scientificScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>
+
+              <template>
+                <div v-for="(imgs, index) in scientificid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
+                  <ul id="yihangxianshiduotu">
+                    <li><el-image z-index="9999"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + scientificid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
+                  </ul>
+                </div>
+              </template>
+            </el-form-item>
+          </el-row>
+          <el-row >
+            <el-form-item label="9、身体素质">
+              <el-input v-model="this.physical" autocomplete="off" type="textarea"  :disabled="true" :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
+              <el-input v-model="this.physicalScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>
+
+              <template>
+                <div v-for="(imgs, index) in physicalid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
+                  <ul id="yihangxianshiduotu">
+                    <li><el-image z-index="9999"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + physicalid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
+                  </ul>
+                </div>
+              </template>
+            </el-form-item>
+          </el-row>
+          <el-row >
+            <el-form-item label="10、心理素质">
+              <el-input v-model="this.mental" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
+              <el-input v-model="this.mentalScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>
+              <template>
+                <div v-for="(imgs, index) in mentalid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
+                  <ul id="yihangxianshiduotu">
+                    <li><el-image z-index="9999"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + mentalid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
+                  </ul>
+                </div>
+              </template>
+            </el-form-item>
+          </el-row>
+
+          <el-descriptions title="发展性素质测评（满分40 分）"></el-descriptions>
+
+          <el-row>
+            <el-form-item label="11、荣誉称号加分">
+              <el-input v-model="this.honorary" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
+              <el-input v-model="this.honoraryScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>
+              <template>
+                <div v-for="(imgs, index) in honoraryid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
+                  <ul id="yihangxianshiduotu">
+                    <li><el-image z-index="9999"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + honoraryid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
+                  </ul>
+                </div>
+              </template>
+            </el-form-item>
+          </el-row>
+          <el-row>
+            <el-form-item label="12、文体艺术等竞赛或活动加分">
+              <el-input v-model="this.competition" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
+              <el-input v-model="this.competitionScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>
+
+              <template>
+                <div v-for="(imgs, index) in competitionid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
+                  <ul id="yihangxianshiduotu">
+                    <li><el-image  z-index="9999" :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + competitionid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
+                  </ul>
+                </div>
+              </template>
+            </el-form-item>
+          </el-row>
+          <el-row>
+            <el-form-item label="13、社会工作加分">
+              <el-input v-model="this.socialWork" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
+              <el-input v-model="this.socialWorkScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px;vertical-align: middle"/>
+
+              <template>
+                <div v-for="(imgs, index) in socialWorkid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
+                  <ul id="yihangxianshiduotu">
+                    <li><el-image z-index="9999"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + socialWorkid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
+                  </ul>
+                </div>
+              </template>
+            </el-form-item>
+          </el-row>
+          <el-row>
+            <el-form-item label="14、知识与技能加分">
+              <el-input v-model="this.knowl" autocomplete="off" type="textarea"  :disabled="true" :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
+              <el-input v-model="this.knowlScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>
+
+              <template>
+                <div v-for="(imgs, index) in knowlid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
+                  <ul id="yihangxianshiduotu">
+                    <li><el-image  z-index="9999" :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + knowlid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
+                  </ul>
+                </div>
+              </template>
+            </el-form-item>
+          </el-row>
+          <el-row>
+            <el-form-item label="15、日常操行减分">
+              <el-input v-model="this.daily" autocomplete="off" type="textarea"  :disabled="true" :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
+              <el-input v-model="this.dailyScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>
+
+            </el-form-item>
+          </el-row>
+          <el-row>
+            <el-form-item label="16、期末成绩">
+              <el-input v-model="this.achievement" autocomplete="off" type="textarea"  :disabled="true" :autosize="{ minRows: 1}" ></el-input>
+              <el-label >加权平均分为：</el-label>
+              <el-label style="color:red">{{this.score}}/100</el-label>
+            </el-form-item>
+          </el-row>
+          <el-row>
+            <el-form-item label="17、总评">
+              <el-label style="color: red">总评为：{{ this.totalscore }}</el-label>
+            </el-form-item>
+          </el-row>
+          <!-- </el-row> -->
         </el-col>
 
 
-        
-       
+
+
 
 
       </el-form>
@@ -352,11 +379,15 @@
     width: 80%;
   }
 
-  #yihangxianshiduotu li
-  {
-    float: left;
+  #yihangxianshiduotu {
     display: inline;
   }
+
+  #yihangxianshiduotu li
+  {
+    display: inline;
+  }
+
 
   img{
     width: 300px;
@@ -366,21 +397,21 @@
 
 </style>
 <script>
-import { TestUser,  backUser, accessUser, accessUser2, getAwards} from "@/api/test/class";
-import { getToken } from "@/utils/auth";
-import EditTable from "../../tool/gen/editTable.vue";
-import * as ElementUI from "element-ui";
+  import { TestUser,  backUser, accessUser, accessUser2, getAwards} from "@/api/test/class";
+  import { getToken } from "@/utils/auth";
+  import EditTable from "../../tool/gen/editTable.vue";
+  import * as ElementUI from "element-ui";
 
 
-ElementUI.Dialog.props.closeOnClickModal.default = true; //弹框点及其他区域不关闭
+  ElementUI.Dialog.props.closeOnClickModal.default = true; //弹框点及其他区域不关闭
 
 
-export default {
+  export default {
     name: "user",
     data() {
-        return {
-          options: [
-            {
+      return {
+        options: [
+          {
             value: '通过',
             label: '通过'
           }, {
@@ -390,174 +421,216 @@ export default {
             value: '审核中',
             label: '审核中'
           }],
-          value: '',
-            //驳回原因
-            reason:'',
-            // 遮罩层
-            loading: true,
-            // 选中数组
-            ids: [],
-            nos:[],
+        value: '',
+        //驳回原因
+        reason:'',
+        // 遮罩层
+        loading: true,
+        // 选中数组
+        ids: [],
+        nos:[],
 
-            // 非单个禁用
-            single: false,
-            // 非多个禁用
-            multiple: true,
-            // 显示搜索条件
-            showSearch: true,
-            // 总条数
-            total: 0,
-            // 用户表格数据
-            testList: [],
-            //用户奖项数据
-            awardsList: [],
-            politics: "",
-            ideology: "",
-            morality: "",
-            organ: "",
-            law: "",
-            learning: "",
-            development: "",
-            scientific: "",
-            physical: "",
-            mental: "",
-            honorary: "",
-            competition: "",
-            socialWork: "",
-            knowl: "",
-            daily: "",
-            achievement: "",
-            img:[],
-            score:"",
-            socre1:"",
-            totalscore:"",
-            addScore:"",
-            politicsid:[],
-            moralityid:[],
-            organid:[],
-            lawid:[],
-            developmentid:[],
-            scientificid:[],
-            physicalid:[],
-            mentalid:[],
-            honoraryid:[],
-            competitionid:[],
-            socialWorkid:[],
-            knowlid:[],
-            ideologyid:[],
-            // 弹出层标题
-            title: "",
-            // 是否显示弹出层
-            open: false,
-            // 院系名称
-            deptName: undefined,
-            // 表单参数
-            form: {},
-            defaultProps: {
-                children: "children",
-                label: "label"
-            },
-            // 查询参数
-            queryParams: {
-                pageNum: 1,
-                pageSize: 10,
-                no:'',
-                name: undefined,
-                status: undefined,
-            },
-            // 表单校验
-            rules: {
-              no:[
-                { pattern: /^[0-9]*$/, message:"请输入正确的学号", trigger:"blur" },
-                { min: 1, max: 10, message: '请输入正确的学号长度', trigger: 'blur' }
-                ]
-            },
-            // 列信息
-            columns: [
-                { key: 0, label: `用户编号`, visible: true },
-                { key: 1, label: `学号`, visible: true },
-                { key: 2, label: `姓名`, visible: true },
-                { key: 3, label: `性别`, visible: true },
-                { key: 4, label: `班级`, visible: true },
-                { key: 5, label: `院系`, visible: true },
-                { key: 6, label: `手机号码`, visible: true },
-                { key: 7, label: `状态`, visible: true }
-            ],
-          outerVisible: false,
-          innerVisible: false
-        };
+        // 非单个禁用
+        single: false,
+        // 非多个禁用
+        multiple: true,
+        // 显示搜索条件
+        showSearch: true,
+        // 总条数
+        total: 0,
+        // 用户表格数据
+        testList: [],
+        //用户奖项数据
+        awardsList: [],
+        /*
+        * 各个小点的名称
+        * */
+        politics: "", //1、政治素质
+        ideology: "", //2、思想素质
+        morality: "", //3、道德素质
+        organ: "",  //4、组织素质
+        law: "",  //5、法纪素质
+        learning: "", //6、学习与生活素质
+        development: "",  //7、实践与创新素质
+        scientific: "", //8、科学文化素质
+        physical: "", //9、身体素质
+        mental: "", //10、心理素质
+        honorary: "", //11、荣誉称号加分
+        competition: "",  //12、文体艺术等竞赛或活动加分
+        socialWork: "", //13、社会工作加分
+        knowl: "",  //14、知识与技能加分
+        daily: "",  //15、日常操行减分
+        achievement: "",//16、期末成绩
+        img:[], //图片
+        score:"",//加权平均分
+        socre1:"",
+        totalscore:"",//总评
+        addScore:"",
+        politicsid:[],
+        moralityid:[],
+        organid:[],
+        lawid:[],
+        developmentid:[],
+        scientificid:[],
+        physicalid:[],
+        mentalid:[],
+        honoraryid:[],
+        competitionid:[],
+        socialWorkid:[],
+        knowlid:[],
+        ideologyid:[],
+        /*
+        * 各个小点的成绩数组
+        * */
+        politicsScore:[],
+        ideologyScore: [],
+        moralityScore: [],
+        organScore: [],
+        lawScore: [],
+        learningScore: [],
+        developmentScore: [],
+        scientificScore: [],
+        physicalScore: [],
+        mentalScore: [],
+        honoraryScore: [],
+        competitionScore: [],
+        socialWorkScore: [],
+        knowlScore: [],
+        dailyScore: [],
+        achievementScore: [],
+        /*
+        * 各个小点的成绩
+        * */
+        politicsScore1:0,
+        ideologyScore1: 0,
+        moralityScore1: 0,
+        organScore1: 0,
+        lawScore1: 0,
+        learningScore1: 0,
+        developmentScore1: 0,
+        scientificScore1: 0,
+        physicalScore1: 0,
+        mentalScore1: 0,
+        honoraryScore1: 0,
+        competitionScore1: 0,
+        socialWorkScore1: 0,
+        knowlScore1: 0,
+        dailyScore1: 0,
+        achievementScore1: 0,
+
+        // 弹出层标题
+        title: "",
+        // 是否显示弹出层
+        open: false,
+        // 院系名称
+        deptName: undefined,
+        // 表单参数
+        form: {},
+        defaultProps: {
+          children: "children",
+          label: "label"
+        },
+        // 查询参数
+        queryParams: {
+          pageNum: 1,
+          pageSize: 10,
+          no:'',
+          name: undefined,
+          status: undefined,
+        },
+        // 表单校验
+        rules: {
+          no:[
+            { pattern: /^[0-9]*$/, message:"请输入正确的学号", trigger:"blur" },
+            { min: 1, max: 10, message: '请输入正确的学号长度', trigger: 'blur' }
+          ]
+        },
+        // 列信息
+        columns: [
+          { key: 0, label: `用户编号`, visible: true },
+          { key: 1, label: `学号`, visible: true },
+          { key: 2, label: `姓名`, visible: true },
+          { key: 3, label: `性别`, visible: true },
+          { key: 4, label: `班级`, visible: true },
+          { key: 5, label: `院系`, visible: true },
+          { key: 6, label: `手机号码`, visible: true },
+          { key: 7, label: `状态`, visible: true }
+        ],
+        outerVisible: false,
+        innerVisible: false
+      };
     },
     created() {
-        this.getList();
+      this.getList();
     },
     methods: {
-        /** 查询用户列表 */
-        getList() {
-            this.loading = true;
-            const classId = this.$store.state.user.classname;
-            const major = this.$store.state.user.major;
-            this.queryParams.major=major
-            this.queryParams.classId=classId
-            TestUser(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-                this.testList = response.rows;
-                this.total = response.total;
-                this.loading = false;
-               // console.log(this.testList)  //一页的数据
-            });
-        },
+      /** 查询用户列表 */
+      getList() {
+        this.loading = true;
+        const classId = this.$store.state.user.classname;
+        const major = this.$store.state.user.major;
+        this.queryParams.major=major
+        this.queryParams.classId=classId
+        TestUser(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
+          this.testList = response.rows;
+          this.total = response.total;
+          this.loading = false;
+          // console.log(this.testList)  //一页的数据
+        });
+      },
 
 
-        // 筛选节点
-        filterNode(value, data) {
-            if (!value)
-                return true;
-            return data.label.indexOf(value) !== -1;
-        },
-        // 节点单击事件
-        handleNodeClick(data) {
-            this.queryParams.deptId = data.id;
-            this.handleQuery();
-        },
-        // 取消按钮
-        cancel() {
-            this.open = false;
-        },
-        /** 搜索按钮操作 */
-        handleQuery(formName) {
-          this.$refs[formName].validate((valid) => {
-            if (valid) {
+      // 筛选节点
+      filterNode(value, data) {
+        if (!value)
+          return true;
+        return data.label.indexOf(value) !== -1;
+      },
+      // 节点单击事件
+      handleNodeClick(data) {
+        this.queryParams.deptId = data.id;
+        this.handleQuery();
+      },
+      // 取消按钮
+      cancel() {
+        this.open = false;
+      },
+      /** 搜索按钮操作 */
+      handleQuery(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
             this.queryParams.pageNum = 1;
             this.getList();
           } else {
             console.log('error submit!!');
             return false;
           }
-          });
-        },
-        // 多选框选中数据
-        handleSelectionChange(selection) {
-            this.ids = selection.map(item => item.userId);
-            this.nos = selection.map(item => item.no);
-            this.single = selection.length != 1;
-            this.multiple = !selection.length;
-        },
-        //格式化性别
-        changesex(row) {
-            if (row.sex == "0") {
-                return "男";
-            }
-            if (row.sex == "1") {
-                return "女";
-            }
-        },
-        handleDetail(row){
-          const userId = row.userId || this.ids;
-          getUser(userId).then(response => {
-            this.form = response.data;
-            this.open = true;
-            this.title = "详细页";
-          });
-        },
+        });
+      },
+      // 多选框选中数据
+      handleSelectionChange(selection) {
+        this.ids = selection.map(item => item.userId);
+        this.nos = selection.map(item => item.no);
+        this.single = selection.length != 1;
+        this.multiple = !selection.length;
+      },
+      //格式化性别
+      changesex(row) {
+        if (row.sex == "0") {
+          return "男";
+        }
+        if (row.sex == "1") {
+          return "女";
+        }
+      },
+      handleDetail(row){
+        const userId = row.userId || this.ids;
+        getUser(userId).then(response => {
+          this.form = response.data;
+          this.open = true;
+          this.title = "详细页";
+        });
+      },
       /*
       * ID查询学生
       * */
@@ -572,7 +645,7 @@ export default {
       handleBack(no,reason) {
         backUser(no,reason);
         this.getList();
-        },
+      },
 
       /**
        * 批量通过按钮
@@ -604,104 +677,216 @@ export default {
        *
        * 代码笨重 后期修改
        */
-       async handleGetAwards(no){
-         this.resetAwards();
-         await getAwards(no).then(response => {
-           this.awardsList = response;
-           console.log(this.awardsList)
-           for(var i = 0; i < this.awardsList.length; i++){
-             switch (this.awardsList[i].module){
-               case "politics":
-                 this.politics = this.politics+' '+this.awardsList[i].title;
-                 this.politicsid.push(this.awardsList[i].id)
-                 break;
-               case "morality":
-                 this.morality = this.morality+' '+this.awardsList[i].title;
-                 this.moralityid.push(this.awardsList[i].id)
-                 break;
-               case "organ":
-                 this.organ = this.organ+' '+this.awardsList[i].title
-                 this.organid.push(this.awardsList[i].id)
-                 break;
-               case "law":
-                 this.law = this.law+' '+this.awardsList[i].title;
-                 this.lawid.push(this.awardsList[i].id)
-                 break;
-               case "learning":
-                 this.learning = this.awardsList[i].title;
-                 this.awardsList[i].id='';
-                 break;
-               case "development":
-                 this.development = this.development+' '+this.awardsList[i].title;
-                 this.developmentid.push(this.awardsList[i].id)
-                 break;
-               case "scientific":
-                 this.scientific = this.scientific+' '+this.awardsList[i].title;
-                 this.scientificid.push(this.awardsList[i].id)
-                 break;
-               case "physical":
-                 this.physical = this.physical+' '+this.awardsList[i].title;
-                 this.physicalid.push(this.awardsList[i].id)
-                 break;
-               case "mental":
-                 this.mental = this.mental+' '+this.awardsList[i].title;
-                 this.mentalid.push(this.awardsList[i].id)
-                 break;
-               case "honorary":
-                 this.honorary = this.honorary+' '+this.awardsList[i].title;
-                 this.honoraryid.push(this.awardsList[i].id)
-                 break;
-               case "competition":
-                 this.competition = this.competition+' '+this.awardsList[i].title;
-                 this.competitionid.push(this.awardsList[i].id)
-                 break;
-               case "socialWork":
-                 this.socialWork = this.socialWork+' '+this.awardsList[i].title;
-                 this.socialWorkid.push(this.awardsList[i].id)
-                 break;
-               case "knowl":
-                 this.knowl = this.knowl+' '+this.awardsList[i].title;
-                 this.knowlid.push(this.awardsList[i].id)
-                 break;
-               case "daily":
-                 this.daily = this.daily+' '+this.awardsList[i].title;
-                 this.awardsList[i].id='';
-                 break;
-               case "ideology":
-                 this.ideology = this.ideology+' '+this.awardsList[i].title;
-                 this.ideologyid.push(this.awardsList[i].id)
-                 break;
-               case "achievement":
-                 this.achievement = this.awardsList[i].detail;
-                 this.score=this.awardsList[i].score/100;
-                 this.awardsList[i].id='';
-                 break;
-             }
-           }
+      async handleGetAwards(no){
+        this.resetAwards();
+        this.resetScore();
+        await getAwards(no).then(response => {
+          this.awardsList = response;
+          console.log("---------------------")
+          console.log(this.awardsList)
+          console.log("---------------------")
 
-           let result = this.awardsList.map(current => {return {id: current.id}});
-            for(let i=result.length-1;i>=0;i--){
-              if(result[i].id==""){
-             //   console.log(i)
-                result.splice(i,1)
-              }
+          for(var i = 0; i < this.awardsList.length; i++){
+            switch (this.awardsList[i].module){
+              case "politics":
+                this.politics = this.politics+' '+this.awardsList[i].title;
+                this.politicsid.push(this.awardsList[i].id)
+
+                this.politicsScore.push(this.awardsList[i].score)
+                for (let j = 0; j < this.politicsScore.length; j++) {
+                  this.politicsScore1 = this.politicsScore[j]+this.politicsScore1
+                }
+                this.politicsScore1 = this.politicsScore1/100
+                break;
+              case "morality":
+                this.morality = this.morality+' '+this.awardsList[i].title;
+                this.moralityid.push(this.awardsList[i].id)
+
+                this.moralityScore.push(this.awardsList[i].score)
+                for (let j = 0; j < this.moralityScore.length; j++) {
+                  this.moralityScore1 = this.moralityScore[j]+this.moralityScore1
+                }
+                this.moralityScore1 = this.moralityScore1/100
+
+                break;
+              case "organ":
+                this.organ = this.organ+' '+this.awardsList[i].title
+                this.organid.push(this.awardsList[i].id)
+                this.organScore.push(this.awardsList[i].score)
+                for (let z = 0; z < this.organScore.length; z++) {
+                  this.organScore1 = this.organScore1+this.organScore[z]
+                }
+                this.organScore1 = this.organScore1/100
+                break;
+              case "law":
+                this.law = this.law+' '+this.awardsList[i].title;
+                this.lawid.push(this.awardsList[i].id)
+
+                this.lawScore.push(this.awardsList[i].score)
+                for (let j = 0; j < this.lawScore.length; j++) {
+                  this.lawScore1 = this.lawScore[j]+this.lawScore1
+                }
+                this.lawScore1 = this.lawScore1/100
+                break;
+              case "learning":
+                this.learning = this.awardsList[i].title;
+                this.awardsList[i].id='';
+
+                this.learningScore.push(this.awardsList[i].score)
+                for (let j = 0; j < this.learningScore.length; j++) {
+                  this.learningScore1 = this.learningScore[j]+this.learningScore1
+                }
+                this.learningScore1 = this.learningScore1/100
+
+                break;
+              case "development":
+                this.development = this.development+' '+this.awardsList[i].title;
+                this.developmentid.push(this.awardsList[i].id)
+
+                this.developmentScore.push(this.awardsList[i].score)
+                for (let j = 0; j < this.developmentScore.length; j++) {
+                  this.developmentScore1 = this.developmentScore[j]+this.developmentScore1
+                }
+                this.developmentScore1 = this.developmentScore1/100
+
+                break;
+              case "scientific":
+                this.scientific = this.scientific+' '+this.awardsList[i].title;
+                this.scientificid.push(this.awardsList[i].id)
+
+                this.scientificScore.push(this.awardsList[i].score)
+                for (let j = 0; j < this.scientificScore.length; j++) {
+                  this.scientificScore1 = this.scientificScore[j]+this.scientificScore1
+                }
+                this.scientificScore1 = this.scientificScore1/100
+
+
+                break;
+              case "physical":
+                this.physical = this.physical+' '+this.awardsList[i].title;
+                this.physicalid.push(this.awardsList[i].id)
+
+                this.physicalScore.push(this.awardsList[i].score)
+                for (let j = 0; j < this.physicalScore.length; j++) {
+                  this.physicalScore1 = this.physicalScore[j]+this.physicalScore1
+                }
+                this.physicalScore1 = this.physicalScore1/100
+
+
+                break;
+              case "mental":
+                this.mental = this.mental+' '+this.awardsList[i].title;
+                this.mentalid.push(this.awardsList[i].id)
+
+                this.mentalScore.push(this.awardsList[i].score)
+                for (let j = 0; j < this.mentalScore.length; j++) {
+                  this.mentalScore1 = this.mentalScore[j]+this.mentalScore1
+                }
+                this.mentalScore1 = this.mentalScore1/100
+
+
+                break;
+              case "honorary":
+                this.honorary = this.honorary+' '+this.awardsList[i].title;
+                this.honoraryid.push(this.awardsList[i].id)
+
+                this.honoraryScore.push(this.awardsList[i].score)
+                for (let j = 0; j < this.honoraryScore.length; j++) {
+                  this.honoraryScore1 = this.honoraryScore[j]+this.honoraryScore1
+                }
+                this.honoraryScore1 = this.honoraryScore1/100
+                break;
+              case "competition":
+                this.competition = this.competition+' '+this.awardsList[i].title;
+                this.competitionid.push(this.awardsList[i].id)
+                this.competitionScore.push(this.awardsList[i].score)
+                for (let j = 0; j < this.competitionScore.length; j++) {
+                  this.competitionScore1 = this.competitionScore[j]+this.competitionScore1
+                }
+                this.competitionScore1 = this.competitionScore1/100
+                break;
+              case "socialWork":
+                this.socialWork = this.socialWork+' '+this.awardsList[i].title;
+                this.socialWorkid.push(this.awardsList[i].id)
+
+                this.socialWorkScore.push(this.awardsList[i].score)
+                for (let j = 0; j < this.socialWorkScore.length; j++) {
+                  this.socialWorkScore1 = this.socialWorkScore[j]+this.socialWorkScore1
+                }
+                this.socialWorkScore1 = this.socialWorkScore1/100
+
+                break;
+              case "knowl":
+                this.knowl = this.knowl+' '+this.awardsList[i].title;
+                this.knowlid.push(this.awardsList[i].id)
+
+                this.knowlScore.push(this.awardsList[i].score)
+                for (let j = 0; j < this.knowlScore.length; j++) {
+                  this.knowlScore1 = this.knowlScore[j]+this.knowlScore1
+                }
+                this.knowlScore1 = this.knowlScore1/100
+
+                break;
+              case "daily":
+                this.daily = this.daily+' '+this.awardsList[i].title;
+                this.awardsList[i].id='';
+
+                this.dailyScore.push(this.awardsList[i].score)
+                for (let j = 0; j < this.dailyScore.length; j++) {
+                  this.dailyScore1 = this.dailyScore[j]+this.dailyScore1
+                }
+                this.dailyScore1 = this.dailyScore1/100
+
+                break;
+              case "ideology":
+                this.ideology = this.ideology+' '+this.awardsList[i].title;
+                this.ideologyid.push(this.awardsList[i].id)
+
+                this.ideologyScore.push(this.awardsList[i].score)
+                for (let j = 0; j < this.ideologyScore.length; j++) {
+                  this.ideologyScore1 = this.ideologyScore[j]+this.ideologyScore1
+                }
+                this.ideologyScore1 = this.ideologyScore1/100
+
+                break;
+              case "achievement":
+                this.achievement = this.awardsList[i].detail;
+                this.score=this.awardsList[i].score/100;
+                this.awardsList[i].id='';
+
+                this.achievementScore.push(this.awardsList[i].score)
+                for (let j = 0; j < this.achievementScore.length; j++) {
+                  this.achievementScore1 = this.achievementScore[j]+this.achievementScore1
+                }
+                this.achievementScore1 = this.achievementScore1/100
+
+                break;
             }
-            console.log(this.developmentid)
+          }
 
-         // console.log(result)
-           this.img=result
+          let result = this.awardsList.map(current => {return {id: current.id}});
+          for(let i=result.length-1;i>=0;i--){
+            if(result[i].id==""){
+              //   console.log(i)
+              result.splice(i,1)
+            }
+          }
+          console.log(this.developmentid)
 
-           /**
-            * 计算总评成绩
-            * @type {number}
-            */
-           var totalscore=0;
-           var total = 0;
-           for (var i = 0; i < this.awardsList.length; i++) {
-             total += this.awardsList[i].score
-           }
-           this.totalscore = (((total-this.score*100)*0.15)/100 + (this.score*0.85)).toFixed(2)
-         })
+          // console.log(result)
+          this.img=result
+
+          /**
+           * 计算总评成绩
+           * @type {number}
+           */
+          var totalscore=0;
+          var total = 0;
+          for (var i = 0; i < this.awardsList.length; i++) {
+            total += this.awardsList[i].score
+          }
+          this.totalscore = (((total-this.score*100)*0.15)/100 + (this.score*0.85)).toFixed(2)
+        })
       },
 
 
@@ -753,7 +938,45 @@ export default {
         this.honoraryid=[];
       },
 
+      /*
+      * 重置成绩
+      * */
+      resetScore(){
+        this.politicsScore=[],
+          this.ideologyScore= [],
+          this.moralityScore= [],
+          this.organScore= [],
+          this.lawScore= [],
+          this.learningScore= [],
+          this.developmentScore= [],
+          this.scientificScore= [],
+          this.physicalScore= [],
+          this.mentalScore= [],
+          this.honoraryScore= [],
+          this.competitionScore= [],
+          this.socialWorkScore= [],
+          this.knowlScore= [],
+          this.dailyScore= [],
+          this.achievementScore= [],
+          this.politicsScore1=0,
+          this.ideologyScore1= 0,
+          this.moralityScore1= 0,
+          this.organScore1= 0,
+          this.lawScore1= 0,
+          this.learningScore1= 0,
+          this.developmentScore1= 0,
+          this.scientificScore1= 0,
+          this.physicalScore1= 0,
+          this.mentalScore1= 0,
+          this.honoraryScore1= 0,
+          this.competitionScore1= 0,
+          this.socialWorkScore1= 0,
+          this.knowlScore1= 0,
+          this.dailyScore1= 0,
+          this.achievementScore1= 0
+      },
 
+      //驳回提示按钮
       double(no,reason){
         this.handleBack(no,reason)
 
@@ -779,11 +1002,10 @@ export default {
     },
 
     components: { EditTable }
-};
+  };
 
 
 </script>
-
 
 
 
