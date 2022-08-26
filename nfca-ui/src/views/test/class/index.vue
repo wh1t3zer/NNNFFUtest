@@ -101,7 +101,7 @@
     </el-row>
 
     <el-dialog title="详情页" :visible.sync="outerVisible" custom-class="getdialogstyle" >
-      <el-form label-width="120px" :disabled="true" v-loading="loading" :data="awardsList">
+      <el-form label-width="120px"  v-loading="loading" :data="awardsList">
 
         <!-- <el-row :gutter="24"> -->
         <el-col >
@@ -120,10 +120,10 @@
           <el-descriptions title="基础性素质测评（满分60分）"></el-descriptions>
           <el-row >
             <el-form-item label="1、政治素质">
-              <el-input v-model="this.politics" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" style="width:200px; margin-bottom: 66px"/>
-              <el-input v-model="this.politicsScore1" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" style="width:100px; margin-bottom: 66px"/>
+              <el-input v-model="this.politics" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" :disabled="true" style="width:350px; vertical-align: middle"/>
+              <el-input v-model="this.politicsScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}"  style="width:100px; vertical-align: middle "/>
 
-               <div v-for="(imgs, index) in politicsid" v-viewer="{movable:true}" style="display: inline">
+               <div v-for="(imgs, index) in politicsid" v-viewer="{movable:true}" style="display: inline;  vertical-align: middle">
                   <ul id="yihangxianshiduotu" style="display: inline">
                     <li style="display: inline"><el-image z-index="9999" :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + politicsid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
                   </ul>
@@ -135,9 +135,9 @@
           <el-row >
             <el-form-item label="2、思想素质">
               <template>
-                <el-input v-model="this.ideology" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" style="width:200px; margin-bottom: 66px"/>
-                <el-input v-model="this.ideologyScore1" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" style="width:100px; margin-bottom: 66px"/>
-                <div v-for="(imgs, index) in ideologyid" v-viewer="{movable:true}" style="display: inline">
+                <el-input v-model="this.ideology" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" :disabled="true" style="width:350px; vertical-align: middle"/>
+                <el-input v-model="this.ideologyScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px;vertical-align: middle"/>
+                <div v-for="(imgs, index) in ideologyid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
                     <li><el-image  z-index="9999" :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + ideologyid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
                   </ul>
@@ -147,11 +147,11 @@
           </el-row>
           <el-row >
             <el-form-item label="3、道德素质">
-              <el-input v-model="this.morality" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" style="width:200px; margin-bottom: 66px"/>
-              <el-input v-model="this.moralityScore1" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" style="width:100px; margin-bottom: 66px"/>
+              <el-input v-model="this.morality" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" :disabled="true"  style="width:350px; vertical-align: middle"/>
+              <el-input v-model="this.moralityScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px;vertical-align: middle"/>
 
               <template>
-                <div v-for="(imgs, index) in moralityid" v-viewer="{movable:true}">
+                <div v-for="(imgs, index) in moralityid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
                     <li><el-image z-index="9999"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + moralityid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
                   </ul>
@@ -161,11 +161,11 @@
           </el-row>
           <el-row >
             <el-form-item label="4、组织素质">
-              <el-input v-model="this.organ" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" style="width:200px; margin-bottom: 66px"/>
-              <el-input v-model="this.organScore1" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" style="width:100px; margin-bottom: 66px"/>
+              <el-input v-model="this.organ" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
+              <el-input v-model="this.organScore1" style="width:100px; vertical-align: middle"/>
 
               <template>
-                <div v-for="(imgs, index) in organid" v-viewer="{movable:true}"  style="display: inline">
+                <div v-for="(imgs, index) in organid" v-viewer="{movable:true}"  style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
                     <li><el-image z-index="9999"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + organid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
                   </ul>
@@ -175,11 +175,11 @@
           </el-row>
           <el-row >
             <el-form-item label="5、法纪素质">
-              <el-input v-model="this.law" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" style="width:200px; margin-bottom: 66px"/>
-              <el-input v-model="this.lawScore1" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" style="width:100px; margin-bottom: 66px"/>
+              <el-input v-model="this.law" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
+              <el-input v-model="this.lawScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>
 
               <template>
-                <div v-for="(imgs, index) in lawid" v-viewer="{movable:true}">
+                <div v-for="(imgs, index) in lawid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
                     <li><el-image z-index="9999"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + lawid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
                   </ul>
@@ -189,17 +189,17 @@
           </el-row>
           <el-row >
             <el-form-item label="6、学习与生活素质">
-              <el-input v-model="this.learning" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" style="width:200px; margin-bottom: 66px"/>
-              <el-input v-model="this.learningScore1" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" style="width:100px; margin-bottom: 66px"/>
+              <el-input v-model="this.learning" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
+              <el-input v-model="this.learningScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>
 
             </el-form-item>
           </el-row>
           <el-row >
             <el-form-item label="7、实践与创新素质">
-              <el-input v-model="this.development" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" style="width:200px; margin-bottom: 66px"/>
-              <el-input v-model="this.developmentScore1" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" style="width:100px; margin-bottom: 66px"/>
+              <el-input v-model="this.development" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
+              <el-input v-model="this.developmentScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>
               <template>
-                <div v-for="(imgs, index) in developmentid" v-viewer="{movable:true}">
+                <div v-for="(imgs, index) in developmentid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
                     <li><el-image z-index="9999"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + developmentid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
                   </ul>
@@ -209,11 +209,11 @@
           </el-row>
           <el-row >
             <el-form-item label="8、科学文化素质">
-              <el-input v-model="this.scientific" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" style="width:200px; margin-bottom: 66px"/>
-              <el-input v-model="this.scientifictScore1" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" style="width:100px; margin-bottom: 66px"/>
+              <el-input v-model="this.scientific" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
+              <el-input v-model="this.scientificScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>
 
               <template>
-                <div v-for="(imgs, index) in scientificid" v-viewer="{movable:true}">
+                <div v-for="(imgs, index) in scientificid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
                     <li><el-image z-index="9999"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + scientificid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
                   </ul>
@@ -223,11 +223,11 @@
           </el-row>
           <el-row >
             <el-form-item label="9、身体素质">
-              <el-input v-model="this.physical" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" style="width:200px; margin-bottom: 66px"/>
-              <el-input v-model="this.physicalScore1" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" style="width:100px; margin-bottom: 66px"/>
+              <el-input v-model="this.physical" autocomplete="off" type="textarea"  :disabled="true" :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
+              <el-input v-model="this.physicalScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>
 
               <template>
-                <div v-for="(imgs, index) in physicalid" v-viewer="{movable:true}">
+                <div v-for="(imgs, index) in physicalid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
                     <li><el-image z-index="9999"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + physicalid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
                   </ul>
@@ -237,11 +237,10 @@
           </el-row>
           <el-row >
             <el-form-item label="10、心理素质">
-              <el-input v-model="this.mental" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" style="width:200px; margin-bottom: 66px"/>
-              <el-input v-model="this.mentalScore1" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" style="width:100px; margin-bottom: 66px"/>
-
+              <el-input v-model="this.mental" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
+              <el-input v-model="this.mentalScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>
               <template>
-                <div v-for="(imgs, index) in mentalid" v-viewer="{movable:true}">
+                <div v-for="(imgs, index) in mentalid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
                     <li><el-image z-index="9999"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + mentalid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
                   </ul>
@@ -254,11 +253,10 @@
 
           <el-row>
             <el-form-item label="11、荣誉称号加分">
-              <el-input v-model="this.honorary" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" style="width:200px; margin-bottom: 66px"/>
-              <el-input v-model="this.honoraryScore1" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" style="width:100px; margin-bottom: 66px"/>
-
+              <el-input v-model="this.honorary" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
+              <el-input v-model="this.honoraryScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>
               <template>
-                <div v-for="(imgs, index) in honoraryid" v-viewer="{movable:true}">
+                <div v-for="(imgs, index) in honoraryid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
                     <li><el-image z-index="9999"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + honoraryid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
                   </ul>
@@ -268,11 +266,11 @@
           </el-row>
           <el-row>
             <el-form-item label="12、文体艺术等竞赛或活动加分">
-              <el-input v-model="this.competition" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" style="width:200px; margin-bottom: 66px"/>
-              <el-input v-model="this.competitionScore1" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" style="width:100px; margin-bottom: 66px"/>
+              <el-input v-model="this.competition" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
+              <el-input v-model="this.competitionScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>
 
               <template>
-                <div v-for="(imgs, index) in competitionid" v-viewer="{movable:true}">
+                <div v-for="(imgs, index) in competitionid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
                     <li><el-image  z-index="9999" :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + competitionid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
                   </ul>
@@ -282,11 +280,11 @@
           </el-row>
           <el-row>
             <el-form-item label="13、社会工作加分">
-              <el-input v-model="this.socialWork" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" style="width:200px; margin-bottom: 66px"/>
-              <el-input v-model="this.socialWorkScore1" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" style="width:100px; margin-bottom: 66px"/>
+              <el-input v-model="this.socialWork" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
+              <el-input v-model="this.socialWorkScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px;vertical-align: middle"/>
 
               <template>
-                <div v-for="(imgs, index) in socialWorkid" v-viewer="{movable:true}">
+                <div v-for="(imgs, index) in socialWorkid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
                     <li><el-image z-index="9999"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + socialWorkid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
                   </ul>
@@ -296,11 +294,11 @@
           </el-row>
           <el-row>
             <el-form-item label="14、知识与技能加分">
-              <el-input v-model="this.knowl" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" style="width:200px; margin-bottom: 66px"/>
-              <el-input v-model="this.knowlScore1" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" style="width:100px; margin-bottom: 66px"/>
+              <el-input v-model="this.knowl" autocomplete="off" type="textarea"  :disabled="true" :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
+              <el-input v-model="this.knowlScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>
 
               <template>
-                <div v-for="(imgs, index) in knowlid" v-viewer="{movable:true}">
+                <div v-for="(imgs, index) in knowlid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
                     <li><el-image  z-index="9999" :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + knowlid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
                   </ul>
@@ -310,14 +308,14 @@
           </el-row>
           <el-row>
             <el-form-item label="15、日常操行减分">
-              <el-input v-model="this.daily" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" style="width:200px; margin-bottom: 66px"/>
-              <el-input v-model="this.dailyScore1" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" style="width:100px; margin-bottom: 66px"/>
+              <el-input v-model="this.daily" autocomplete="off" type="textarea"  :disabled="true" :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
+              <el-input v-model="this.dailyScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>
 
             </el-form-item>
           </el-row>
           <el-row>
             <el-form-item label="16、期末成绩">
-              <el-input v-model="this.achievement" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" ></el-input>
+              <el-input v-model="this.achievement" autocomplete="off" type="textarea"  :disabled="true" :autosize="{ minRows: 1}" ></el-input>
               <el-label >加权平均分为：</el-label>
               <el-label style="color:red">{{this.score}}/100</el-label>
             </el-form-item>
