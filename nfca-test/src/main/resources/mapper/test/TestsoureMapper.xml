@@ -22,6 +22,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         update testerSoure set reason = #{reason} where no = #{no}
     </update>
 
+     <update id="updateScoreById" parameterType="com.ruoyi.test.domain.Testersoure">
+            update testerSoure set score = #{score} where id = #{id}
+        </update>
+
 
 
     <select id="queryTitlesListByNo" parameterType="com.ruoyi.test.domain.Testersoure" resultMap="TestersoureResult">

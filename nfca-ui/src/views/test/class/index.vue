@@ -3,7 +3,7 @@
     <el-row :gutter="20">
       <!--班级学生数据-->
       <el-col :span="24" :xs="24">
-        <el-form :model="queryParams" ref="queryParams" size="small" :rules="rules" :inline="true" v-show="showSearch" label-width="68px">
+        <el-form :model="queryParams" ref="queryParams" size="small" :rules="rules" :inline="true" v-show="showSearch" class="formMassage" label-width="68px">
           <el-form-item label="学号" prop="no">
             <el-input
               v-model="queryParams.no"
@@ -119,13 +119,13 @@
 
           <el-descriptions title="基础性素质测评（满分60分）"></el-descriptions>
           <el-row >
-            <el-form-item label="1、政治素质">
-              <el-input v-model="this.politics" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" :disabled="true" style="width:350px; vertical-align: middle"/>
-              <el-input v-model="this.politicsScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}"  style="width:100px; vertical-align: middle "/>
-
+            <el-form-item class="reMarginLeft">
+              <el-sl-panel class="TitleMsg" >1、政治素质 </el-sl-panel>
+              <el-input v-model="this.politics" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" :disabled="true" style="width:300px;margin-right: 5px;  vertical-align: middle"/>
+              <el-input-number v-model="this.politicsScore1" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
                <div v-for="(imgs, index) in politicsid" v-viewer="{movable:true}" style="display: inline;  vertical-align: middle">
                   <ul id="yihangxianshiduotu" style="display: inline">
-                    <li style="display: inline"><el-image z-index="9999" :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + politicsid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
+                    <li style="display: inline"><el-image z-index="3000" :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + politicsid[index]+'.jpg'" style="width:200px;height:150px;"/></li>
                   </ul>
                 </div>
 
@@ -133,116 +133,138 @@
           </el-row>
 
           <el-row >
-            <el-form-item label="2、思想素质">
+            <el-form-item class="reMarginLeft">
+              <el-sl-panel class="TitleMsg" >2、思想素质 </el-sl-panel>
+
               <template>
-                <el-input v-model="this.ideology" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" :disabled="true" style="width:350px; vertical-align: middle"/>
-                <el-input v-model="this.ideologyScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px;vertical-align: middle"/>
+                <el-input v-model="this.ideology" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" :disabled="true" class="inputMsg"/>
+                <el-input-number v-model="this.ideologyScore1" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+
                 <div v-for="(imgs, index) in ideologyid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
-                    <li><el-image  z-index="9999" :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + ideologyid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
+                    <li><el-image  z-index="3000" :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + ideologyid[index]+'.jpg'" style="width:200px;height:150px;"/></li>
                   </ul>
                 </div>
               </template>
             </el-form-item>
           </el-row>
           <el-row >
-            <el-form-item label="3、道德素质">
-              <el-input v-model="this.morality" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" :disabled="true"  style="width:350px; vertical-align: middle"/>
-              <el-input v-model="this.moralityScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px;vertical-align: middle"/>
+            <el-form-item  class="reMarginLeft">
+              <el-sl-panel class="TitleMsg" >3、道德素质</el-sl-panel>
+              <el-input v-model="this.morality" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" :disabled="true"  class="inputMsg"/>
+              <el-input-number v-model="this.moralityScore1" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
 
               <template>
                 <div v-for="(imgs, index) in moralityid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
-                    <li><el-image z-index="9999"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + moralityid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
+                    <li><el-image z-index="3000"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + moralityid[index]+'.jpg'" style="width:200px;height:150px;"/></li>
                   </ul>
                 </div>
               </template>
             </el-form-item>
           </el-row>
           <el-row >
-            <el-form-item label="4、组织素质">
-              <el-input v-model="this.organ" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
-              <el-input v-model="this.organScore1" style="width:100px; vertical-align: middle"/>
+            <el-form-item  class="reMarginLeft">
+
+              <el-sl-panel class="TitleMsg" >4、组织素质</el-sl-panel>
+              <el-input v-model="this.organ" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" class="inputMsg"/>
+<!--              <el-input v-model="this.organScore1" style="width:100px; vertical-align: middle"/>-->
+              <el-input-number v-model="this.organScore1" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
 
               <template>
                 <div v-for="(imgs, index) in organid" v-viewer="{movable:true}"  style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
-                    <li><el-image z-index="9999"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + organid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
+                    <li><el-image z-index="3000"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + organid[index]+'.jpg'" style="width:200px;height:150px;"/></li>
                   </ul>
                 </div>
               </template>
             </el-form-item>
           </el-row>
           <el-row >
-            <el-form-item label="5、法纪素质">
-              <el-input v-model="this.law" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
-              <el-input v-model="this.lawScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>
+            <el-form-item  class="reMarginLeft">
+
+              <el-sl-panel class="TitleMsg" >5、法纪素质</el-sl-panel>
+              <el-input v-model="this.law" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" class="inputMsg"/>
+              <el-input-number v-model="this.lawScore1" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
 
               <template>
                 <div v-for="(imgs, index) in lawid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
-                    <li><el-image z-index="9999"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + lawid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
+                    <li><el-image z-index="3000"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + lawid[index]+'.jpg'" style="width:200px;height:150px;"/></li>
                   </ul>
                 </div>
               </template>
             </el-form-item>
           </el-row>
           <el-row >
-            <el-form-item label="6、学习与生活素质">
-              <el-input v-model="this.learning" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
-              <el-input v-model="this.learningScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>
+            <el-form-item class="reMarginLeft" >
+
+              <el-sl-panel class="TitleMsg" >6、学习与生活素质 </el-sl-panel>
+              <el-input v-model="this.learning" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" class="inputMsg"/>
+              <el-input-number v-model="this.learningScore1" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
 
             </el-form-item>
           </el-row>
           <el-row >
-            <el-form-item label="7、实践与创新素质">
-              <el-input v-model="this.development" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
-              <el-input v-model="this.developmentScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>
+            <el-form-item class="reMarginLeft" >
+
+              <el-sl-panel class="TitleMsg" >7、实践与创新素质 </el-sl-panel>
+              <el-input v-model="this.development" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" class="inputMsg"/>
+              <el-input-number v-model="this.developmentScore1" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+
               <template>
                 <div v-for="(imgs, index) in developmentid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
-                    <li><el-image z-index="9999"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + developmentid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
+                    <li><el-image z-index="3000"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + developmentid[index]+'.jpg'" style="width:200px;height:150px;"/></li>
                   </ul>
                 </div>
               </template>
             </el-form-item>
           </el-row>
           <el-row >
-            <el-form-item label="8、科学文化素质">
-              <el-input v-model="this.scientific" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
-              <el-input v-model="this.scientificScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>
+            <el-form-item class="reMarginLeft">
+
+              <el-sl-panel class="TitleMsg" >8、科学文化素质 </el-sl-panel>
+              <el-input v-model="this.scientific" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" class="inputMsg"/>
+<!--              <el-input v-model="this.scientificScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>-->
+              <el-input-number v-model="this.scientificScore1" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
 
               <template>
                 <div v-for="(imgs, index) in scientificid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
-                    <li><el-image z-index="9999"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + scientificid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
+                    <li><el-image z-index="3000"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + scientificid[index]+'.jpg'" style="width:200px;height:150px;"/></li>
                   </ul>
                 </div>
               </template>
             </el-form-item>
           </el-row>
           <el-row >
-            <el-form-item label="9、身体素质">
-              <el-input v-model="this.physical" autocomplete="off" type="textarea"  :disabled="true" :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
-              <el-input v-model="this.physicalScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>
+            <el-form-item class="reMarginLeft">
+
+              <el-sl-panel class="TitleMsg" >9、身体素质 </el-sl-panel>
+              <el-input v-model="this.physical" autocomplete="off" type="textarea"  :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+              <el-input-number v-model="this.physicalScore1" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
 
               <template>
                 <div v-for="(imgs, index) in physicalid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
-                    <li><el-image z-index="9999"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + physicalid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
+                    <li><el-image z-index="3000"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + physicalid[index]+'.jpg'" style="width:200px;height:150px;"/></li>
                   </ul>
                 </div>
               </template>
             </el-form-item>
           </el-row>
           <el-row >
-            <el-form-item label="10、心理素质">
-              <el-input v-model="this.mental" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
-              <el-input v-model="this.mentalScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>
+            <el-form-item class="reMarginLeft">
+
+              <el-sl-panel class="TitleMsg" >10、心理素质 </el-sl-panel>
+              <el-input v-model="this.mental" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" class="inputMsg"/>
+              <el-input-number v-model="this.mentalScore1" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+
               <template>
                 <div v-for="(imgs, index) in mentalid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
-                    <li><el-image z-index="9999"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + mentalid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
+                    <li><el-image z-index="3000"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + mentalid[index]+'.jpg'" style="width:200px;height:150px;"/></li>
                   </ul>
                 </div>
               </template>
@@ -252,76 +274,89 @@
           <el-descriptions title="发展性素质测评（满分40 分）"></el-descriptions>
 
           <el-row>
-            <el-form-item label="11、荣誉称号加分">
-              <el-input v-model="this.honorary" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
-              <el-input v-model="this.honoraryScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>
+            <el-form-item class="reMarginLeft">
+
+              <el-sl-panel class="TitleMsg" >11、荣誉称号加分 </el-sl-panel>
+              <el-input v-model="this.honorary" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+              <el-input-number v-model="this.honoraryScore1" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+
               <template>
                 <div v-for="(imgs, index) in honoraryid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
-                    <li><el-image z-index="9999"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + honoraryid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
+                    <li><el-image z-index="3000"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + honoraryid[index]+'.jpg'" style="width:200px;height:150px;"/></li>
                   </ul>
                 </div>
               </template>
             </el-form-item>
           </el-row>
           <el-row>
-            <el-form-item label="12、文体艺术等竞赛或活动加分">
-              <el-input v-model="this.competition" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
-              <el-input v-model="this.competitionScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>
+            <el-form-item class="reMarginLeft">
+
+              <el-sl-panel class="TitleMsg" >12、文体艺术等竞赛或活动加分 </el-sl-panel>
+              <el-input v-model="this.competition" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" class="inputMsg"/>
+              <el-input-number v-model="this.competitionScore1" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
 
               <template>
                 <div v-for="(imgs, index) in competitionid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
-                    <li><el-image  z-index="9999" :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + competitionid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
+                    <li><el-image  z-index="3000" :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + competitionid[index]+'.jpg'" style="width:200px;height:150px;"/></li>
                   </ul>
                 </div>
               </template>
             </el-form-item>
           </el-row>
           <el-row>
-            <el-form-item label="13、社会工作加分">
-              <el-input v-model="this.socialWork" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
-              <el-input v-model="this.socialWorkScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px;vertical-align: middle"/>
+            <el-form-item class="reMarginLeft">
+
+              <el-sl-panel class="TitleMsg" >13、社会工作加分 </el-sl-panel>
+              <el-input v-model="this.socialWork" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" class="inputMsg"/>
+              <el-input-number v-model="this.socialWorkScore1" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
 
               <template>
                 <div v-for="(imgs, index) in socialWorkid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
-                    <li><el-image z-index="9999"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + socialWorkid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
+                    <li><el-image z-index="3000"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + socialWorkid[index]+'.jpg'" style="width:200px;height:150px;"/></li>
                   </ul>
                 </div>
               </template>
             </el-form-item>
           </el-row>
           <el-row>
-            <el-form-item label="14、知识与技能加分">
-              <el-input v-model="this.knowl" autocomplete="off" type="textarea"  :disabled="true" :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
-              <el-input v-model="this.knowlScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>
+            <el-form-item class="reMarginLeft">
+
+              <el-sl-panel class="TitleMsg" >14、知识与技能加分 </el-sl-panel>
+              <el-input v-model="this.knowl" autocomplete="off" type="textarea"  :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+              <el-input-number v-model="this.knowlScore1" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
 
               <template>
                 <div v-for="(imgs, index) in knowlid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
-                    <li><el-image  z-index="9999" :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + knowlid[index]+'.jpg'" style="width:150px;height:150px;"/></li>
+                    <li><el-image  z-index="3000" :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + knowlid[index]+'.jpg'" style="width:200px;height:150px;"/></li>
                   </ul>
                 </div>
               </template>
             </el-form-item>
           </el-row>
           <el-row>
-            <el-form-item label="15、日常操行减分">
-              <el-input v-model="this.daily" autocomplete="off" type="textarea"  :disabled="true" :autosize="{ minRows: 1}" style="width:350px; vertical-align: middle"/>
-              <el-input v-model="this.dailyScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>
+            <el-form-item class="reMarginLeft" >
+
+              <el-sl-panel class="TitleMsg" >15、日常操行减分 </el-sl-panel>
+              <el-input v-model="this.daily" autocomplete="off" type="textarea"  :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+              <el-input-number v-model="this.dailyScore1" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
 
             </el-form-item>
           </el-row>
           <el-row>
-            <el-form-item label="16、期末成绩">
+            <el-form-item class="reMarginLeft">
+              <el-sl-panel class="TitleMsg" >16、期末成绩 </el-sl-panel>
               <el-input v-model="this.achievement" autocomplete="off" type="textarea"  :disabled="true" :autosize="{ minRows: 1}" ></el-input>
               <el-label >加权平均分为：</el-label>
               <el-label style="color:red">{{this.score}}/100</el-label>
             </el-form-item>
           </el-row>
           <el-row>
-            <el-form-item label="17、总评">
+            <el-form-item class="reMarginLeft">
+              <el-sl-panel class="TitleMsg" >17、总评 </el-sl-panel>
               <el-label style="color: red">总评为：{{ this.totalscore }}</el-label>
             </el-form-item>
           </el-row>
@@ -368,7 +403,7 @@
         <el-button @click="outerVisible = false" type="info">取消</el-button>
         <el-button type="warning" @click="innerVisible = true">驳回</el-button>
         <!--<el-button @click="dialogFormVisible = false" type="warning">驳回</el-button>-->
-        <el-button @click="handleAccess2(form.no)" type="success">通过</el-button>
+        <el-button @click="handleAccess2(form.no,form.id,form.score)" type="success">通过</el-button>
       </div>
     </el-dialog>
   </div>
@@ -395,9 +430,32 @@
     margin: 10px;
   }
 
+  /*各个点内容的input的样式*/
+  .inputMsg {
+    width:300px;
+    margin-right: 5px;
+    vertical-align: middle;
+  }
+  /*将el-form-item__content的margin-left为120px修改为10px*/
+  .reMarginLeft .el-form-item__content {
+    margin-left: 10px !important;
+  }
+  /*各个点前面字体的样式*/
+  .TitleMsg {
+    vertical-align: middle;
+    font-size: 14px;
+    font-weight: 700;
+    margin-right: 5px;
+    color:#606266;
+    width: 130px;
+    display: inline-block;
+    text-align: right
+  }
+
+
 </style>
 <script>
-  import { TestUser,  backUser, accessUser, accessUser2, getAwards} from "@/api/test/class";
+  import { TestUser,  backUser, accessUser, accessUser2, getAwards,updateScore} from "@/api/test/class";
   import { getToken } from "@/utils/auth";
   import EditTable from "../../tool/gen/editTable.vue";
   import * as ElementUI from "element-ui";
@@ -645,6 +703,11 @@
       handleBack(no,reason) {
         backUser(no,reason);
         this.getList();
+        this.reason=''; /*驳回后重置驳回原因*/
+      },
+
+      updateAllScore(id,score) {
+        updateScore(id,score);
       },
 
       /**
@@ -682,17 +745,14 @@
         this.resetScore();
         await getAwards(no).then(response => {
           this.awardsList = response;
-          console.log("---------------------")
-          console.log(this.awardsList)
-          console.log("---------------------")
-
           for(var i = 0; i < this.awardsList.length; i++){
             switch (this.awardsList[i].module){
               case "politics":
                 this.politics = this.politics+' '+this.awardsList[i].title;
                 this.politicsid.push(this.awardsList[i].id)
-
+                this.politicsScore1 = 0
                 this.politicsScore.push(this.awardsList[i].score)
+                this.politicsScore.map(Number)
                 for (let j = 0; j < this.politicsScore.length; j++) {
                   this.politicsScore1 = this.politicsScore[j]+this.politicsScore1
                 }
@@ -701,8 +761,9 @@
               case "morality":
                 this.morality = this.morality+' '+this.awardsList[i].title;
                 this.moralityid.push(this.awardsList[i].id)
-
+                this.moralityScore1 = 0
                 this.moralityScore.push(this.awardsList[i].score)
+                this.moralityScore.map(Number)
                 for (let j = 0; j < this.moralityScore.length; j++) {
                   this.moralityScore1 = this.moralityScore[j]+this.moralityScore1
                 }
@@ -713,6 +774,9 @@
                 this.organ = this.organ+' '+this.awardsList[i].title
                 this.organid.push(this.awardsList[i].id)
                 this.organScore.push(this.awardsList[i].score)
+                this.organScore.map(Number)
+                this.organScore1 = 0
+                console.log(this.organScore)
                 for (let z = 0; z < this.organScore.length; z++) {
                   this.organScore1 = this.organScore1+this.organScore[z]
                 }
@@ -721,7 +785,7 @@
               case "law":
                 this.law = this.law+' '+this.awardsList[i].title;
                 this.lawid.push(this.awardsList[i].id)
-
+                this.lawScore1 = 0
                 this.lawScore.push(this.awardsList[i].score)
                 for (let j = 0; j < this.lawScore.length; j++) {
                   this.lawScore1 = this.lawScore[j]+this.lawScore1
@@ -731,7 +795,7 @@
               case "learning":
                 this.learning = this.awardsList[i].title;
                 this.awardsList[i].id='';
-
+                this.learningScore1 = 0
                 this.learningScore.push(this.awardsList[i].score)
                 for (let j = 0; j < this.learningScore.length; j++) {
                   this.learningScore1 = this.learningScore[j]+this.learningScore1
@@ -742,7 +806,7 @@
               case "development":
                 this.development = this.development+' '+this.awardsList[i].title;
                 this.developmentid.push(this.awardsList[i].id)
-
+                this.developmentScore1 = 0
                 this.developmentScore.push(this.awardsList[i].score)
                 for (let j = 0; j < this.developmentScore.length; j++) {
                   this.developmentScore1 = this.developmentScore[j]+this.developmentScore1
@@ -753,7 +817,7 @@
               case "scientific":
                 this.scientific = this.scientific+' '+this.awardsList[i].title;
                 this.scientificid.push(this.awardsList[i].id)
-
+                this.scientificScore1 = 0
                 this.scientificScore.push(this.awardsList[i].score)
                 for (let j = 0; j < this.scientificScore.length; j++) {
                   this.scientificScore1 = this.scientificScore[j]+this.scientificScore1
@@ -765,7 +829,7 @@
               case "physical":
                 this.physical = this.physical+' '+this.awardsList[i].title;
                 this.physicalid.push(this.awardsList[i].id)
-
+                this.physicalScore1 = 0
                 this.physicalScore.push(this.awardsList[i].score)
                 for (let j = 0; j < this.physicalScore.length; j++) {
                   this.physicalScore1 = this.physicalScore[j]+this.physicalScore1
@@ -777,7 +841,7 @@
               case "mental":
                 this.mental = this.mental+' '+this.awardsList[i].title;
                 this.mentalid.push(this.awardsList[i].id)
-
+                this.mentalScore1 = 0
                 this.mentalScore.push(this.awardsList[i].score)
                 for (let j = 0; j < this.mentalScore.length; j++) {
                   this.mentalScore1 = this.mentalScore[j]+this.mentalScore1
@@ -789,7 +853,7 @@
               case "honorary":
                 this.honorary = this.honorary+' '+this.awardsList[i].title;
                 this.honoraryid.push(this.awardsList[i].id)
-
+                this.honoraryScore1 = 0
                 this.honoraryScore.push(this.awardsList[i].score)
                 for (let j = 0; j < this.honoraryScore.length; j++) {
                   this.honoraryScore1 = this.honoraryScore[j]+this.honoraryScore1
@@ -799,6 +863,7 @@
               case "competition":
                 this.competition = this.competition+' '+this.awardsList[i].title;
                 this.competitionid.push(this.awardsList[i].id)
+                this.competitionScore1 = 0
                 this.competitionScore.push(this.awardsList[i].score)
                 for (let j = 0; j < this.competitionScore.length; j++) {
                   this.competitionScore1 = this.competitionScore[j]+this.competitionScore1
@@ -808,7 +873,7 @@
               case "socialWork":
                 this.socialWork = this.socialWork+' '+this.awardsList[i].title;
                 this.socialWorkid.push(this.awardsList[i].id)
-
+                this.socialWorkScore1 = 0
                 this.socialWorkScore.push(this.awardsList[i].score)
                 for (let j = 0; j < this.socialWorkScore.length; j++) {
                   this.socialWorkScore1 = this.socialWorkScore[j]+this.socialWorkScore1
@@ -819,7 +884,7 @@
               case "knowl":
                 this.knowl = this.knowl+' '+this.awardsList[i].title;
                 this.knowlid.push(this.awardsList[i].id)
-
+                this.knowlScore1 = 0
                 this.knowlScore.push(this.awardsList[i].score)
                 for (let j = 0; j < this.knowlScore.length; j++) {
                   this.knowlScore1 = this.knowlScore[j]+this.knowlScore1
@@ -830,7 +895,7 @@
               case "daily":
                 this.daily = this.daily+' '+this.awardsList[i].title;
                 this.awardsList[i].id='';
-
+                this.dailyScore1 = 0
                 this.dailyScore.push(this.awardsList[i].score)
                 for (let j = 0; j < this.dailyScore.length; j++) {
                   this.dailyScore1 = this.dailyScore[j]+this.dailyScore1
@@ -841,7 +906,7 @@
               case "ideology":
                 this.ideology = this.ideology+' '+this.awardsList[i].title;
                 this.ideologyid.push(this.awardsList[i].id)
-
+                this.ideologyScore1 = 0
                 this.ideologyScore.push(this.awardsList[i].score)
                 for (let j = 0; j < this.ideologyScore.length; j++) {
                   this.ideologyScore1 = this.ideologyScore[j]+this.ideologyScore1
@@ -853,13 +918,12 @@
                 this.achievement = this.awardsList[i].detail;
                 this.score=this.awardsList[i].score/100;
                 this.awardsList[i].id='';
-
+                this.achievementScore1 = 0
                 this.achievementScore.push(this.awardsList[i].score)
                 for (let j = 0; j < this.achievementScore.length; j++) {
                   this.achievementScore1 = this.achievementScore[j]+this.achievementScore1
                 }
                 this.achievementScore1 = this.achievementScore1/100
-
                 break;
             }
           }
