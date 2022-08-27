@@ -19,6 +19,10 @@ public class TestersoureServiceImpl implements ITestersoureService {
     public int updateReasonByNo(Testersoure testersoure) {
         return testersoureMapper.updateReasonByNo(testersoure);
     }
+    @Override
+    public int updateScoreById(Testersoure testersoure) {
+        return testersoureMapper.updateScoreById(testersoure);
+    }
 
 
     @Override

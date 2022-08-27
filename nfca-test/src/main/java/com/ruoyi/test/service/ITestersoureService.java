@@ -9,6 +9,8 @@ public interface ITestersoureService {
 
     int updateReasonByNo(Testersoure testersoure);
 
+    int updateScoreById(Testersoure testersoure);
+
     List<Testersoure> getAwardListByNo(Testersoure testersoure);
 
 //    List<Testersoure> selectTestUserByNo(Testersoure testersoure);
