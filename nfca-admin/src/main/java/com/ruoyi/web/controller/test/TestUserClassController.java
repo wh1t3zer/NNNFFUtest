@@ -3,8 +3,10 @@ package com.ruoyi.web.controller.test;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
+import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.test.domain.Student;
 import com.ruoyi.test.domain.TestUser;
 import com.ruoyi.test.domain.Testersoure;
@@ -27,9 +29,6 @@ import java.util.List;
 @RequestMapping("/test/class")
 public class TestUserClassController extends BaseController
 {
-    @Autowired
-    private ITestUserService testUserService;
-
 
     @Autowired
     private IStudentService studentService;
@@ -73,6 +72,7 @@ public class TestUserClassController extends BaseController
     public AjaxResult backTestUser(@RequestBody Testersoure testersoure){
         Student student = new Student();
         student.setStatus("2");
+        testersoure.setAdopter(2);
         student.setNo(testersoure.getNo());
         studentService.updateStatusByNo(student);
         return toAjax(testersoureService.updateReasonByNo(testersoure));
@@ -124,6 +124,29 @@ public class TestUserClassController extends BaseController
         return testersoureService.getAwardListByNo(testersoure);
 
     }
+
+    /*@Log(title = "用户管理", businessType = BusinessType.EXPORT)
+    @PreAuthorize("@ss.hasPermi('test:class:export')")
+    @GetMapping("/export")
+    public AjaxResult export(SysUser user)
+    {
+        List<SysUser> list = userService.selectUserList(user);
+        ExcelUtil<SysUser> util = new ExcelUtil<SysUser>(SysUser.class);
+        return util.exportExcel(list, "用户数据");
+    }*/
+
+
+    @Log(title = "用户管理", businessType = BusinessType.EXPORT)
+    @PreAuthorize("@ss.hasPermi('test:class:export')")
+    @GetMapping("/export")
+    public AjaxResult export(Student student)
+    {
+        List<Student> list = studentService.selectClassStudents(student);
+        System.out.println(list);
+        ExcelUtil<Student> util = new ExcelUtil<Student>(Student.class);
+        return util.exportExcel(list, "用户数据");
+    }
+
 
 }
 

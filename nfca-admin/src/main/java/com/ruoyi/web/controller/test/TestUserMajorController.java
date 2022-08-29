@@ -108,6 +108,7 @@ public class TestUserMajorController extends BaseController
     public AjaxResult backTestUser(@RequestBody Testersoure testersoure){
         Student student = new Student();
         student.setStatus("2");
+        testersoure.setAdopter(2);
         student.setNo(testersoure.getNo());
         studentService.updateStatusByNo(student);
         return toAjax(testersoureService.updateReasonByNo(testersoure));
@@ -148,6 +149,16 @@ public class TestUserMajorController extends BaseController
 
     }
 
+    /**
+     * 修改各个小点的成绩
+     */
+    @PreAuthorize("@ss.hasPermi('test:major:updateScore')")
+//    @Log(title = "updateScore", businessType = BusinessType.UPDATE)
+    @PutMapping("updateScore")
+
+    public AjaxResult updateScore(@RequestBody Testersoure testersoure){
+        return toAjax(testersoureService.updateScoreById(testersoure));
+    }
 
 }
 

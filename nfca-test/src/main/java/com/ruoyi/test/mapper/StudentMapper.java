@@ -21,5 +21,8 @@ public interface StudentMapper {
 
     public int updateStatusByNos(String nos);
 
+    //测试导出
+    public List<Student> selectStudents(Student student);
+
 
 }

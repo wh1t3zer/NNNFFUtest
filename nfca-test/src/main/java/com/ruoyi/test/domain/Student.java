@@ -1,5 +1,6 @@
 package com.ruoyi.test.domain;
 
+import com.ruoyi.common.annotation.Excel;
 import lombok.*;
 
 @Data
@@ -7,26 +8,51 @@ import lombok.*;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class Student {
+    @Excel(name = "id标识",cellType = Excel.ColumnType.NUMERIC)
     private Integer id;
+
+    @Excel(name = "用户名称")
     private String name;
+
+    @Excel(name = "学号",cellType = Excel.ColumnType.NUMERIC)
     private Integer no;
+
+    @Excel(name = "年级",cellType = Excel.ColumnType.NUMERIC)
     private Integer grade;
+
+    @Excel(name = "openid")
     private String openid;
+
     private Integer room;
+
+
     private String CEE;
+
+
     private String birthday;
+
     //private Integer classId;
     private String classId;
+    @Excel(name = "专业")
     private String major;
+
     private Integer mid;
+
     private Integer cid;
+
     private Integer Tpid;
+
     private Integer state;
+
     private String alipay;
     private String GPA;
+
     private String status;
+
     private String classValue;
+
     private String majorValue;
+
     private String gradeValue;
 
     public Integer getId() {
