@@ -82,12 +82,9 @@ public class TestUserClassController extends BaseController
      * 修改各个小点的成绩
      */
     @PreAuthorize("@ss.hasPermi('test:class:updateScore')")
-    @Log(title = "updateScore", businessType = BusinessType.UPDATE)
+//    @Log(title = "updateScore", businessType = BusinessType.UPDATE)
     @PutMapping("updateScore")
-    /*public AjaxResult backTestUser(@RequestBody TestUser testUser)
-    {
-        return toAjax(testUserService.backTestUser(testUser));
-    }*/
+
     public AjaxResult updateScore(@RequestBody Testersoure testersoure){
         return toAjax(testersoureService.updateScoreById(testersoure));
     }

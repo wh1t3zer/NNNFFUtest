@@ -119,154 +119,558 @@
 
           <el-descriptions title="基础性素质测评（满分60分）"></el-descriptions>
           <el-row >
-            <el-form-item class="reMarginLeft">
-              <el-sl-panel class="TitleMsg" >1、政治素质 </el-sl-panel>
-              <el-input v-model="this.politics" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" :disabled="true" style="width:300px;margin-right: 5px;  vertical-align: middle"/>
-              <el-input-number v-model="this.politicsScore1" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-               <div v-for="(imgs, index) in politicsid" v-viewer="{movable:true}" style="display: inline;  vertical-align: middle">
+            <el-form-item label="1、政治素质">
+              <template v-if="this.politicsScore2.length > 0">
+                <div style="display: inline-block;width: 40%">
+                  <div v-for="(item,index) in this.politicsScore2" style="display: inline; vertical-align: middle ">
+                    <el-input v-model="politicsScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"></el-input>
+                    <el-input-number v-model="politicsScore2[index].score" :precision="1" :step="0.1"  size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+                <!--<el-button type="warning" slot="footer" size="mini" style="margin-left: 5px" @click="politicsdialogVisible = true">驳回</el-button>-->
+                    <el-dialog
+                      width="50%"
+                      title="驳回理由"
+                      :visible.sync="innerVisible"
+                      append-to-body>
+
+                      <el-input
+                        type="textarea"
+                        placeholder="请输入内容"
+                        v-model="Reason"
+                        maxlength="100"
+                        show-word-limit
+                      >
+                      </el-input>
+                      <div slot="footer" class="dialog-footer" >
+                        <el-button @click="innerVisible = false" type="info">取消</el-button>
+                        <el-popconfirm
+                          style="margin-left: 5px"
+                          confirm-button-text='确定咯'
+                          cancel-button-text='取消'
+                          icon="el-icon-info"
+                          icon-color="red"
+                          title="您确定要驳回吗？"
+                          @confirm="double(form.no,reason)"
+                        >
+                          <el-button  type="danger" slot="reference">确定</el-button>
+                        </el-popconfirm>
+
+                      </div>
+                    </el-dialog>
+                    <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
+                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisible = true">驳回</el-button>
+                    </div>
+
+
+                  </div>
+                </div>
+                <div v-for="(imgs, index) in politicsid" v-viewer="{movable:true}" style="display: inline;  vertical-align: middle">
                   <ul id="yihangxianshiduotu" style="display: inline">
                     <li style="display: inline"><el-image z-index="3000" :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + politicsid[index]+'.jpg'" style="width:200px;height:150px;"/></li>
                   </ul>
                 </div>
+              </template>
+              <template v-else>
+                <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
 
+              </template>
             </el-form-item>
           </el-row>
 
           <el-row >
-            <el-form-item class="reMarginLeft">
-              <el-sl-panel class="TitleMsg" >2、思想素质 </el-sl-panel>
+            <el-form-item label="2、思想素质">
+              <template v-if="this.ideologyScore2.length > 0">
+                <div style="display: inline-block;width: 40%">
+                  <div v-for="(item,index) in this.ideologyScore2">
+                    <el-input v-model="ideologyScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+                    <el-input-number v-model="ideologyScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+                    <el-dialog
+                      width="50%"
+                      title="驳回理由"
+                      :visible.sync="innerVisible"
+                      append-to-body>
 
-              <template>
-                <el-input v-model="this.ideology" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" :disabled="true" class="inputMsg"/>
-                <el-input-number v-model="this.ideologyScore1" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+                      <el-input
+                        type="textarea"
+                        placeholder="请输入内容"
+                        v-model="Reason"
+                        maxlength="100"
+                        show-word-limit
+                      >
+                      </el-input>
+                      <div slot="footer" class="dialog-footer" >
+                        <el-button @click="innerVisible = false" type="info">取消</el-button>
+                        <el-popconfirm
+                          style="margin-left: 5px"
+                          confirm-button-text='确定咯'
+                          cancel-button-text='取消'
+                          icon="el-icon-info"
+                          icon-color="red"
+                          title="您确定要驳回吗？"
+                          @confirm="double(form.no,reason)"
+                        >
+                          <el-button  type="danger" slot="reference">确定</el-button>
+                        </el-popconfirm>
 
+                      </div>
+                    </el-dialog>
+                    <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
+                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisible = true">驳回</el-button>
+                    </div>
+                  </div>
+                </div>
                 <div v-for="(imgs, index) in ideologyid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
                     <li><el-image  z-index="3000" :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + ideologyid[index]+'.jpg'" style="width:200px;height:150px;"/></li>
                   </ul>
                 </div>
               </template>
+              <template v-else>
+                <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+
+              </template>
             </el-form-item>
           </el-row>
           <el-row >
-            <el-form-item  class="reMarginLeft">
-              <el-sl-panel class="TitleMsg" >3、道德素质</el-sl-panel>
-              <el-input v-model="this.morality" autocomplete="off" type="textarea" :autosize="{ minRows: 1}" :disabled="true"  class="inputMsg"/>
-              <el-input-number v-model="this.moralityScore1" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+            <el-form-item  label="3、道德素质">
+              <template v-if="this.moralityScore2.length > 0">
+                <div style="display: inline-block;width: 40%">
+                  <div v-for="(item,index) in this.moralityScore2">
+                    <el-input v-model="moralityScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+                    <el-input-number v-model="moralityScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+                    <el-dialog
+                      width="50%"
+                      title="驳回理由"
+                      :visible.sync="innerVisible"
+                      append-to-body>
 
-              <template>
+                      <el-input
+                        type="textarea"
+                        placeholder="请输入内容"
+                        v-model="Reason"
+                        maxlength="100"
+                        show-word-limit
+                      >
+                      </el-input>
+                      <div slot="footer" class="dialog-footer" >
+                        <el-button @click="innerVisible = false" type="info">取消</el-button>
+                        <el-popconfirm
+                          style="margin-left: 5px"
+                          confirm-button-text='确定咯'
+                          cancel-button-text='取消'
+                          icon="el-icon-info"
+                          icon-color="red"
+                          title="您确定要驳回吗？"
+                          @confirm="double(form.no,reason)"
+                        >
+                          <el-button  type="danger" slot="reference">确定</el-button>
+                        </el-popconfirm>
+
+                      </div>
+                    </el-dialog>
+                    <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
+                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisible = true">驳回</el-button>
+                    </div>
+                  </div>
+                </div>
                 <div v-for="(imgs, index) in moralityid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
-                    <li><el-image z-index="3000"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + moralityid[index]+'.jpg'" style="width:200px;height:150px;"/></li>
+                    <li><el-image  z-index="3000" :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + ideologyid[index]+'.jpg'" style="width:200px;height:150px;"/></li>
                   </ul>
                 </div>
+              </template>
+              <template v-else>
+                <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+
               </template>
             </el-form-item>
           </el-row>
           <el-row >
-            <el-form-item  class="reMarginLeft">
+            <el-form-item  label="4、组织素质">
 
-              <el-sl-panel class="TitleMsg" >4、组织素质</el-sl-panel>
-              <el-input v-model="this.organ" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" class="inputMsg"/>
-<!--              <el-input v-model="this.organScore1" style="width:100px; vertical-align: middle"/>-->
-              <el-input-number v-model="this.organScore1" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+              <template v-if="this.organScore2.length > 0" >
+                <div style="display: inline-block;width: 40%">
+                  <div v-for="(item,index) in this.organScore2">
+                    <el-input v-model="organScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+                    <el-input-number v-model="organScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+                    <el-dialog
+                      width="50%"
+                      title="驳回理由"
+                      :visible.sync="innerVisible"
+                      append-to-body>
 
-              <template>
-                <div v-for="(imgs, index) in organid" v-viewer="{movable:true}"  style="display: inline;vertical-align: middle">
+                      <el-input
+                        type="textarea"
+                        placeholder="请输入内容"
+                        v-model="Reason"
+                        maxlength="100"
+                        show-word-limit
+                      >
+                      </el-input>
+                      <div slot="footer" class="dialog-footer" >
+                        <el-button @click="innerVisible = false" type="info">取消</el-button>
+                        <el-popconfirm
+                          style="margin-left: 5px"
+                          confirm-button-text='确定咯'
+                          cancel-button-text='取消'
+                          icon="el-icon-info"
+                          icon-color="red"
+                          title="您确定要驳回吗？"
+                          @confirm="double(form.no,reason)"
+                        >
+                          <el-button  type="danger" slot="reference">确定</el-button>
+                        </el-popconfirm>
+
+                      </div>
+                    </el-dialog>
+                    <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
+                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisible = true">驳回</el-button>
+                    </div>
+                  </div>
+                </div>
+                <div v-for="(imgs, index) in organid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
-                    <li><el-image z-index="3000"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + organid[index]+'.jpg'" style="width:200px;height:150px;"/></li>
+                    <li>
+                    <el-image z-index="3000"  v-viewer="{movable:true}" :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + organScore2[index].id+'.jpg'" style="width:200px;height:150px;"/>
+                    </li>
                   </ul>
                 </div>
+              </template>
+              <template v-else>
+                <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+
               </template>
             </el-form-item>
           </el-row>
           <el-row >
-            <el-form-item  class="reMarginLeft">
+            <el-form-item label="5、法纪素质">
+              <template v-if="this.lawScore2.length > 0">
+                <div style="display: inline-block;width: 40%">
+                  <div v-for="(item,index) in this.lawScore2" >
+                    <el-input v-model="lawScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+                    <el-input-number v-model="lawScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+                    <el-dialog
+                      width="50%"
+                      title="驳回理由"
+                      :visible.sync="innerVisible"
+                      append-to-body>
 
-              <el-sl-panel class="TitleMsg" >5、法纪素质</el-sl-panel>
-              <el-input v-model="this.law" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" class="inputMsg"/>
-              <el-input-number v-model="this.lawScore1" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+                      <el-input
+                        type="textarea"
+                        placeholder="请输入内容"
+                        v-model="Reason"
+                        maxlength="100"
+                        show-word-limit
+                      >
+                      </el-input>
+                      <div slot="footer" class="dialog-footer" >
+                        <el-button @click="innerVisible = false" type="info">取消</el-button>
+                        <el-popconfirm
+                          style="margin-left: 5px"
+                          confirm-button-text='确定咯'
+                          cancel-button-text='取消'
+                          icon="el-icon-info"
+                          icon-color="red"
+                          title="您确定要驳回吗？"
+                          @confirm="double(form.no,reason)"
+                        >
+                          <el-button  type="danger" slot="reference">确定</el-button>
+                        </el-popconfirm>
 
-              <template>
+                      </div>
+                    </el-dialog>
+                    <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
+                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisible = true">驳回</el-button>
+                    </div>
+                  </div>
+                </div>
                 <div v-for="(imgs, index) in lawid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
                     <li><el-image z-index="3000"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + lawid[index]+'.jpg'" style="width:200px;height:150px;"/></li>
                   </ul>
                 </div>
               </template>
+              <template v-else>
+                <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+
+              </template>
             </el-form-item>
           </el-row>
           <el-row >
-            <el-form-item class="reMarginLeft" >
 
-              <el-sl-panel class="TitleMsg" >6、学习与生活素质 </el-sl-panel>
-              <el-input v-model="this.learning" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" class="inputMsg"/>
-              <el-input-number v-model="this.learningScore1" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+            <el-form-item label="6、学习与生活素质" >
+              <template v-if="this.learningScore2.length > 0">
+                <div style="display: inline-block;width: 40%">
+                  <div v-for="(item,index) in this.learningScore2" >
+                    <el-input v-model="learningScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+                    <el-input-number v-model="learningScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+                    <el-dialog
+                      width="50%"
+                      title="驳回理由"
+                      :visible.sync="innerVisible"
+                      append-to-body>
 
+                      <el-input
+                        type="textarea"
+                        placeholder="请输入内容"
+                        v-model="Reason"
+                        maxlength="100"
+                        show-word-limit
+                      >
+                      </el-input>
+                      <div slot="footer" class="dialog-footer" >
+                        <el-button @click="innerVisible = false" type="info">取消</el-button>
+                        <el-popconfirm
+                          style="margin-left: 5px"
+                          confirm-button-text='确定咯'
+                          cancel-button-text='取消'
+                          icon="el-icon-info"
+                          icon-color="red"
+                          title="您确定要驳回吗？"
+                          @confirm="double(form.no,reason)"
+                        >
+                          <el-button  type="danger" slot="reference">确定</el-button>
+                        </el-popconfirm>
+
+                      </div>
+                    </el-dialog>
+                    <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
+                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisible = true">驳回</el-button>
+                    </div>
+                  </div>
+                </div>
+              </template>
+              <template v-else>
+                <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+
+              </template>
             </el-form-item>
           </el-row>
           <el-row >
-            <el-form-item class="reMarginLeft" >
+            <el-form-item label="7、实践与创新素质">
+              <template v-if="this.developmentScore2.length > 0">
+                <div style="display: inline-block;width: 40%">
+                  <div v-for="(item,index) in this.developmentScore2" style="margin-top: 10px">
+                    <el-input v-model="developmentScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"></el-input>
+                    <el-input-number v-model="developmentScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+                    <el-dialog
+                      width="50%"
+                      title="驳回理由"
+                      :visible.sync="innerVisible"
+                      append-to-body>
 
-              <el-sl-panel class="TitleMsg" >7、实践与创新素质 </el-sl-panel>
-              <el-input v-model="this.development" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" class="inputMsg"/>
-              <el-input-number v-model="this.developmentScore1" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+                      <el-input
+                        type="textarea"
+                        placeholder="请输入内容"
+                        v-model="Reason"
+                        maxlength="100"
+                        show-word-limit
+                      >
+                      </el-input>
+                      <div slot="footer" class="dialog-footer" >
+                        <el-button @click="innerVisible = false" type="info">取消</el-button>
+                        <el-popconfirm
+                          style="margin-left: 5px"
+                          confirm-button-text='确定咯'
+                          cancel-button-text='取消'
+                          icon="el-icon-info"
+                          icon-color="red"
+                          title="您确定要驳回吗？"
+                          @confirm="double(form.no,reason)"
+                        >
+                          <el-button  type="danger" slot="reference">确定</el-button>
+                        </el-popconfirm>
 
-              <template>
+                      </div>
+                    </el-dialog>
+                    <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
+                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisible = true">驳回</el-button>
+                    </div>
+                  </div>
+                </div>
                 <div v-for="(imgs, index) in developmentid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
                     <li><el-image z-index="3000"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + developmentid[index]+'.jpg'" style="width:200px;height:150px;"/></li>
                   </ul>
                 </div>
               </template>
+              <template v-else>
+                <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+
+              </template>
             </el-form-item>
           </el-row>
           <el-row >
-            <el-form-item class="reMarginLeft">
+            <el-form-item label="8、科学文化素质">
 
-              <el-sl-panel class="TitleMsg" >8、科学文化素质 </el-sl-panel>
-              <el-input v-model="this.scientific" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" class="inputMsg"/>
-<!--              <el-input v-model="this.scientificScore1" autocomplete="off" type="input" :autosize="{ minRows: 1}" style="width:100px; vertical-align: middle"/>-->
-              <el-input-number v-model="this.scientificScore1" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+              <template v-if="this.scientificScore2.length > 0">
+                <div style="display: inline-block;width: 40%">
+                  <div v-for="(item,index) in this.scientificScore2" >
+                    <el-input v-model="scientificScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+                    <el-input-number v-model="scientificScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+                    <el-dialog
+                      width="50%"
+                      title="驳回理由"
+                      :visible.sync="innerVisible"
+                      append-to-body>
 
-              <template>
+                      <el-input
+                        type="textarea"
+                        placeholder="请输入内容"
+                        v-model="Reason"
+                        maxlength="100"
+                        show-word-limit
+                      >
+                      </el-input>
+                      <div slot="footer" class="dialog-footer" >
+                        <el-button @click="innerVisible = false" type="info">取消</el-button>
+                        <el-popconfirm
+                          style="margin-left: 5px"
+                          confirm-button-text='确定咯'
+                          cancel-button-text='取消'
+                          icon="el-icon-info"
+                          icon-color="red"
+                          title="您确定要驳回吗？"
+                          @confirm="double(form.no,reason)"
+                        >
+                          <el-button  type="danger" slot="reference">确定</el-button>
+                        </el-popconfirm>
+
+                      </div>
+                    </el-dialog>
+                    <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
+                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisible = true">驳回</el-button>
+                    </div>
+                  </div>
+                </div>
                 <div v-for="(imgs, index) in scientificid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
                     <li><el-image z-index="3000"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + scientificid[index]+'.jpg'" style="width:200px;height:150px;"/></li>
                   </ul>
                 </div>
               </template>
+              <template v-else>
+                <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+
+              </template>
             </el-form-item>
           </el-row>
           <el-row >
-            <el-form-item class="reMarginLeft">
+            <el-form-item label="9、身体素质">
 
-              <el-sl-panel class="TitleMsg" >9、身体素质 </el-sl-panel>
-              <el-input v-model="this.physical" autocomplete="off" type="textarea"  :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-              <el-input-number v-model="this.physicalScore1" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+              <template v-if="this.physicalScore2.length > 0">
+                  <div style="display: inline-block;width: 40%">
+                  <div v-for="(item,index) in this.physicalScore2" >
+                    <el-input v-model="physicalScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+                    <el-input-number v-model="physicalScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+                    <el-dialog
+                      width="50%"
+                      title="驳回理由"
+                      :visible.sync="innerVisible"
+                      append-to-body>
 
-              <template>
+                      <el-input
+                        type="textarea"
+                        placeholder="请输入内容"
+                        v-model="Reason"
+                        maxlength="100"
+                        show-word-limit
+                      >
+                      </el-input>
+                      <div slot="footer" class="dialog-footer" >
+                        <el-button @click="innerVisible = false" type="info">取消</el-button>
+                        <el-popconfirm
+                          style="margin-left: 5px"
+                          confirm-button-text='确定咯'
+                          cancel-button-text='取消'
+                          icon="el-icon-info"
+                          icon-color="red"
+                          title="您确定要驳回吗？"
+                          @confirm="double(form.no,reason)"
+                        >
+                          <el-button  type="danger" slot="reference">确定</el-button>
+                        </el-popconfirm>
+
+                      </div>
+                    </el-dialog>
+                    <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
+                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisible = true">驳回</el-button>
+                    </div>
+                  </div>
+                </div>
                 <div v-for="(imgs, index) in physicalid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
                     <li><el-image z-index="3000"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + physicalid[index]+'.jpg'" style="width:200px;height:150px;"/></li>
                   </ul>
                 </div>
               </template>
+              <template v-else>
+                <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+
+              </template>
             </el-form-item>
           </el-row>
           <el-row >
-            <el-form-item class="reMarginLeft">
+            <el-form-item label="10、心理素质">
 
-              <el-sl-panel class="TitleMsg" >10、心理素质 </el-sl-panel>
-              <el-input v-model="this.mental" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" class="inputMsg"/>
-              <el-input-number v-model="this.mentalScore1" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+              <template v-if="this.mentalScore2.length > 0">
+                <div style="display: inline-block;width: 40%">
+                  <div v-for="(item,index) in this.mentalScore2" >
+                    <el-input v-model="mentalScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+                    <el-input-number v-model="mentalScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+                    <el-dialog
+                      width="50%"
+                      title="驳回理由"
+                      :visible.sync="innerVisible"
+                      append-to-body>
 
-              <template>
+                      <el-input
+                        type="textarea"
+                        placeholder="请输入内容"
+                        v-model="Reason"
+                        maxlength="100"
+                        show-word-limit
+                      >
+                      </el-input>
+                      <div slot="footer" class="dialog-footer" >
+                        <el-button @click="innerVisible = false" type="info">取消</el-button>
+                        <el-popconfirm
+                          style="margin-left: 5px"
+                          confirm-button-text='确定咯'
+                          cancel-button-text='取消'
+                          icon="el-icon-info"
+                          icon-color="red"
+                          title="您确定要驳回吗？"
+                          @confirm="double(form.no,reason)"
+                        >
+                          <el-button  type="danger" slot="reference">确定</el-button>
+                        </el-popconfirm>
+
+                      </div>
+                    </el-dialog>
+                    <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
+                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisible = true">驳回</el-button>
+                    </div>
+                  </div>
+                </div>
                 <div v-for="(imgs, index) in mentalid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
                     <li><el-image z-index="3000"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + mentalid[index]+'.jpg'" style="width:200px;height:150px;"/></li>
                   </ul>
                 </div>
+              </template>
+              <template v-else>
+                <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+
               </template>
             </el-form-item>
           </el-row>
@@ -274,89 +678,282 @@
           <el-descriptions title="发展性素质测评（满分40 分）"></el-descriptions>
 
           <el-row>
-            <el-form-item class="reMarginLeft">
+            <el-form-item label="11、荣誉称号加分">
 
-              <el-sl-panel class="TitleMsg" >11、荣誉称号加分 </el-sl-panel>
-              <el-input v-model="this.honorary" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-              <el-input-number v-model="this.honoraryScore1" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+              <template v-if="this.honoraryScore2.length > 0">
+                <div style="display: inline-block;width: 40%">
+                  <div v-for="(item,index) in this.honoraryScore2" >
+                    <el-input v-model="honoraryScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+                    <el-input-number v-model="honoraryScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+                    <el-dialog
+                      width="50%"
+                      title="驳回理由"
+                      :visible.sync="innerVisible"
+                      append-to-body>
+                      <el-input
+                        type="textarea"
+                        placeholder="请输入内容"
+                        v-model="Reason"
+                        maxlength="100"
+                        show-word-limit
+                      >
+                      </el-input>
+                      <div slot="footer" class="dialog-footer" >
+                        <el-button @click="innerVisible = false" type="info">取消</el-button>
+                        <el-popconfirm
+                          style="margin-left: 5px"
+                          confirm-button-text='确定咯'
+                          cancel-button-text='取消'
+                          icon="el-icon-info"
+                          icon-color="red"
+                          title="您确定要驳回吗？"
+                          @confirm="double(form.no,reason)"
+                        >
+                          <el-button  type="danger" slot="reference">确定</el-button>
+                        </el-popconfirm>
 
-              <template>
+                      </div>
+                    </el-dialog>
+                    <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
+                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisible = true">驳回</el-button>
+                    </div>
+                  </div>
+                </div>
                 <div v-for="(imgs, index) in honoraryid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
                     <li><el-image z-index="3000"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + honoraryid[index]+'.jpg'" style="width:200px;height:150px;"/></li>
                   </ul>
                 </div>
               </template>
+              <template v-else>
+                <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+              </template>
+
             </el-form-item>
           </el-row>
           <el-row>
-            <el-form-item class="reMarginLeft">
+            <el-form-item label="12、文体艺术等竞赛或活动加分">
 
-              <el-sl-panel class="TitleMsg" >12、文体艺术等竞赛或活动加分 </el-sl-panel>
-              <el-input v-model="this.competition" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" class="inputMsg"/>
-              <el-input-number v-model="this.competitionScore1" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+              <template v-if="this.competitionScore2.length > 0">
+                <div style="display: inline-block;width: 40%">
+                  <div v-for="(item,index) in this.competitionScore2" >
+                    <el-input v-model="competitionScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+                    <el-input-number v-model="competitionScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+                    <el-dialog
+                      width="50%"
+                      title="驳回理由"
+                      :visible.sync="innerVisible"
+                      append-to-body>
 
-              <template>
+                      <el-input
+                        type="textarea"
+                        placeholder="请输入内容"
+                        v-model="Reason"
+                        maxlength="100"
+                        show-word-limit
+                      >
+                      </el-input>
+                      <div slot="footer" class="dialog-footer" >
+                        <el-button @click="innerVisible = false" type="info">取消</el-button>
+                        <el-popconfirm
+                          style="margin-left: 5px"
+                          confirm-button-text='确定咯'
+                          cancel-button-text='取消'
+                          icon="el-icon-info"
+                          icon-color="red"
+                          title="您确定要驳回吗？"
+                          @confirm="double(form.no,reason)"
+                        >
+                          <el-button  type="danger" slot="reference">确定</el-button>
+                        </el-popconfirm>
+
+                      </div>
+                    </el-dialog>
+                    <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
+                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisible = true">驳回</el-button>
+                    </div>
+                  </div>
+                </div>
                 <div v-for="(imgs, index) in competitionid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
                     <li><el-image  z-index="3000" :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + competitionid[index]+'.jpg'" style="width:200px;height:150px;"/></li>
                   </ul>
                 </div>
               </template>
+              <template v-else>
+                <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+
+              </template>
             </el-form-item>
           </el-row>
           <el-row>
-            <el-form-item class="reMarginLeft">
+            <el-form-item label="13、社会工作加分">
 
-              <el-sl-panel class="TitleMsg" >13、社会工作加分 </el-sl-panel>
-              <el-input v-model="this.socialWork" autocomplete="off" type="textarea" :disabled="true"  :autosize="{ minRows: 1}" class="inputMsg"/>
-              <el-input-number v-model="this.socialWorkScore1" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+              <template v-if="this.socialWorkScore2.length > 0">
+                <div style="display: inline-block;width: 40%">
+                  <div v-for="(item,index) in this.socialWorkScore2" >
+                    <el-input v-model="socialWorkScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+                    <el-input-number v-model="socialWorkScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+                    <el-dialog
+                      width="50%"
+                      title="驳回理由"
+                      :visible.sync="innerVisible"
+                      append-to-body>
 
-              <template>
+                      <el-input
+                        type="textarea"
+                        placeholder="请输入内容"
+                        v-model="Reason"
+                        maxlength="100"
+                        show-word-limit
+                      >
+                      </el-input>
+                      <div slot="footer" class="dialog-footer" >
+                        <el-button @click="innerVisible = false" type="info">取消</el-button>
+                        <el-popconfirm
+                          style="margin-left: 5px"
+                          confirm-button-text='确定咯'
+                          cancel-button-text='取消'
+                          icon="el-icon-info"
+                          icon-color="red"
+                          title="您确定要驳回吗？"
+                          @confirm="double(form.no,reason)"
+                        >
+                          <el-button  type="danger" slot="reference">确定</el-button>
+                        </el-popconfirm>
+
+                      </div>
+                    </el-dialog>
+                    <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
+                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisible = true">驳回</el-button>
+                    </div>
+                  </div>
+                </div>
                 <div v-for="(imgs, index) in socialWorkid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
                     <li><el-image z-index="3000"  :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + socialWorkid[index]+'.jpg'" style="width:200px;height:150px;"/></li>
                   </ul>
                 </div>
               </template>
+              <template v-else>
+                <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+
+              </template>
             </el-form-item>
           </el-row>
           <el-row>
-            <el-form-item class="reMarginLeft">
+            <el-form-item label="14、知识与技能加分">
+              <template v-if="this.knowlScore2.length > 0">
+                <div style="display: inline-block;width: 40%">
+                  <div v-for="(item,index) in this.knowlScore2" >
+                    <el-input v-model="knowlScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+                    <el-input-number v-model="knowlScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+                    <el-dialog
+                      width="50%"
+                      title="驳回理由"
+                      :visible.sync="innerVisible"
+                      append-to-body>
+                      <el-input
+                        type="textarea"
+                        placeholder="请输入内容"
+                        v-model="Reason"
+                        maxlength="100"
+                        show-word-limit
+                      >
+                      </el-input>
+                      <div slot="footer" class="dialog-footer" >
+                        <el-button @click="innerVisible = false" type="info">取消</el-button>
+                        <el-popconfirm
+                          style="margin-left: 5px"
+                          confirm-button-text='确定咯'
+                          cancel-button-text='取消'
+                          icon="el-icon-info"
+                          icon-color="red"
+                          title="您确定要驳回吗？"
+                          @confirm="double(form.no,reason)"
+                        >
+                          <el-button  type="danger" slot="reference">确定</el-button>
+                        </el-popconfirm>
 
-              <el-sl-panel class="TitleMsg" >14、知识与技能加分 </el-sl-panel>
-              <el-input v-model="this.knowl" autocomplete="off" type="textarea"  :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-              <el-input-number v-model="this.knowlScore1" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-
-              <template>
+                      </div>
+                    </el-dialog>
+                    <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
+                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisible = true">驳回</el-button>
+                    </div>
+                  </div>
+                </div>
                 <div v-for="(imgs, index) in knowlid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
                     <li><el-image  z-index="3000" :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + knowlid[index]+'.jpg'" style="width:200px;height:150px;"/></li>
                   </ul>
                 </div>
               </template>
-            </el-form-item>
-          </el-row>
-          <el-row>
-            <el-form-item class="reMarginLeft" >
+              <template v-else>
+                <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
 
-              <el-sl-panel class="TitleMsg" >15、日常操行减分 </el-sl-panel>
-              <el-input v-model="this.daily" autocomplete="off" type="textarea"  :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-              <el-input-number v-model="this.dailyScore1" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+              </template>
 
             </el-form-item>
           </el-row>
           <el-row>
-            <el-form-item class="reMarginLeft">
-              <el-sl-panel class="TitleMsg" >16、期末成绩 </el-sl-panel>
+            <el-form-item label="15、日常操行减分" >
+              <template v-if="this.dailyScore2.length > 0">
+                <div style="display: inline-block;width: 40%">
+                  <div v-for="(item,index) in this.dailyScore2" >
+                    <el-input v-model="dailyScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+                    <el-input-number v-model="dailyScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+                    <el-dialog
+                      width="50%"
+                      title="驳回理由"
+                      :visible.sync="innerVisible"
+                      append-to-body>
+                      <el-input
+                        type="textarea"
+                        placeholder="请输入内容"
+                        v-model="Reason"
+                        maxlength="100"
+                        show-word-limit
+                      >
+                      </el-input>
+                      <div slot="footer" class="dialog-footer" >
+                        <el-button @click="innerVisible = false" type="info">取消</el-button>
+                        <el-popconfirm
+                          style="margin-left: 5px"
+                          confirm-button-text='确定咯'
+                          cancel-button-text='取消'
+                          icon="el-icon-info"
+                          icon-color="red"
+                          title="您确定要驳回吗？"
+                          @confirm="double(form.no,reason)"
+                        >
+                          <el-button  type="danger" slot="reference">确定</el-button>
+                        </el-popconfirm>
+                      </div>
+                    </el-dialog>
+                    <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
+                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisible = true">驳回</el-button>
+                    </div>
+                  </div>
+                </div>
+              </template>
+              <template v-else>
+                <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
+              </template>
+            </el-form-item>
+          </el-row>
+          <el-row>
+            <el-form-item label="16、期末成绩">
               <el-input v-model="this.achievement" autocomplete="off" type="textarea"  :disabled="true" :autosize="{ minRows: 1}" ></el-input>
               <el-label >加权平均分为：</el-label>
               <el-label style="color:red">{{this.score}}/100</el-label>
             </el-form-item>
           </el-row>
           <el-row>
-            <el-form-item class="reMarginLeft">
-              <el-sl-panel class="TitleMsg" >17、总评 </el-sl-panel>
+            <el-form-item label="17、总评">
               <el-label style="color: red">总评为：{{ this.totalscore }}</el-label>
             </el-form-item>
           </el-row>
@@ -365,45 +962,10 @@
 
 
 
-
-
-
       </el-form>
-      <el-dialog
-        width="50%"
-        title="驳回理由"
-        :visible.sync="innerVisible"
-        append-to-body>
-
-        <el-input
-          type="textarea"
-          placeholder="请输入内容"
-          v-model="reason"
-          maxlength="100"
-          show-word-limit
-        >
-        </el-input>
-        <div slot="footer" class="dialog-footer">
-          <el-button @click="innerVisible = false" type="info">取消</el-button>
-          <el-popconfirm
-            style="margin-left: 5px"
-            confirm-button-text='确定咯'
-            cancel-button-text='取消'
-            icon="el-icon-info"
-            icon-color="red"
-            title="您确定要驳回吗？"
-            @confirm="double(form.no,reason)"
-          >
-            <el-button  type="danger" slot="reference">确定</el-button>
-          </el-popconfirm>
-
-        </div>
-      </el-dialog>
       <div slot="footer" class="dialog-footer">
         <el-button @click="outerVisible = false" type="info">取消</el-button>
-        <el-button type="warning" @click="innerVisible = true">驳回</el-button>
-        <!--<el-button @click="dialogFormVisible = false" type="warning">驳回</el-button>-->
-        <el-button @click="handleAccess2(form.no,form.id,form.score)" type="success">通过</el-button>
+        <el-button @click="handleAccess2(form.no,form.id,form.score)" type="success" style="margin: 0 100px 0 50px">通过</el-button>
       </div>
     </el-dialog>
   </div>
@@ -461,9 +1023,6 @@
   import * as ElementUI from "element-ui";
 
 
-  ElementUI.Dialog.props.closeOnClickModal.default = true; //弹框点及其他区域不关闭
-
-
   export default {
     name: "user",
     data() {
@@ -500,6 +1059,8 @@
         testList: [],
         //用户奖项数据
         awardsList: [],
+        //驳回原因
+        Reason:"",
         /*
         * 各个小点的名称
         * */
@@ -557,6 +1118,25 @@
         dailyScore: [],
         achievementScore: [],
         /*
+       * 各个小点的成绩数组
+       * */
+        politicsScore2:[],
+        ideologyScore2: [],
+        moralityScore2: [],
+        organScore2: [],
+        lawScore2: [],
+        learningScore2: [],
+        developmentScore2: [],
+        scientificScore2: [],
+        physicalScore2: [],
+        mentalScore2: [],
+        honoraryScore2: [],
+        competitionScore2: [],
+        socialWorkScore2: [],
+        knowlScore2: [],
+        dailyScore2: [],
+        achievementScore2: [],
+        /*
         * 各个小点的成绩
         * */
         politicsScore1:0,
@@ -575,7 +1155,6 @@
         knowlScore1: 0,
         dailyScore1: 0,
         achievementScore1: 0,
-
         // 弹出层标题
         title: "",
         // 是否显示弹出层
@@ -706,9 +1285,6 @@
         this.reason=''; /*驳回后重置驳回原因*/
       },
 
-      updateAllScore(id,score) {
-        updateScore(id,score);
-      },
 
       /**
        * 批量通过按钮
@@ -716,7 +1292,6 @@
        */
       handleAccess(row) {
         const nos = row.no || this.nos;
-
         accessUser(nos)
         this.getList();
 
@@ -728,6 +1303,7 @@
        */
       handleAccess2(no){
         accessUser2(no)
+        this.updateAllScore();
         this.outerVisible = false
         this.getList()
       },
@@ -740,193 +1316,103 @@
        *
        * 代码笨重 后期修改
        */
-      async handleGetAwards(no){
+       handleGetAwards(no){
         this.resetAwards();
         this.resetScore();
-        await getAwards(no).then(response => {
+         getAwards(no).then(response => {
           this.awardsList = response;
+
           for(var i = 0; i < this.awardsList.length; i++){
             switch (this.awardsList[i].module){
               case "politics":
-                this.politics = this.politics+' '+this.awardsList[i].title;
                 this.politicsid.push(this.awardsList[i].id)
-                this.politicsScore1 = 0
-                this.politicsScore.push(this.awardsList[i].score)
-                this.politicsScore.map(Number)
-                for (let j = 0; j < this.politicsScore.length; j++) {
-                  this.politicsScore1 = this.politicsScore[j]+this.politicsScore1
-                }
-                this.politicsScore1 = this.politicsScore1/100
+                this.politicsScore2.push(this.awardsList[i])
                 break;
               case "morality":
-                this.morality = this.morality+' '+this.awardsList[i].title;
                 this.moralityid.push(this.awardsList[i].id)
-                this.moralityScore1 = 0
-                this.moralityScore.push(this.awardsList[i].score)
-                this.moralityScore.map(Number)
-                for (let j = 0; j < this.moralityScore.length; j++) {
-                  this.moralityScore1 = this.moralityScore[j]+this.moralityScore1
-                }
-                this.moralityScore1 = this.moralityScore1/100
-
+                this.moralityScore2.push(this.awardsList[i])
                 break;
               case "organ":
-                this.organ = this.organ+' '+this.awardsList[i].title
+                this.organScore2.push(this.awardsList[i])
                 this.organid.push(this.awardsList[i].id)
-                this.organScore.push(this.awardsList[i].score)
-                this.organScore.map(Number)
-                this.organScore1 = 0
-                console.log(this.organScore)
-                for (let z = 0; z < this.organScore.length; z++) {
-                  this.organScore1 = this.organScore1+this.organScore[z]
-                }
-                this.organScore1 = this.organScore1/100
+
                 break;
+
               case "law":
-                this.law = this.law+' '+this.awardsList[i].title;
+                this.lawScore2.push(this.awardsList[i])
                 this.lawid.push(this.awardsList[i].id)
-                this.lawScore1 = 0
-                this.lawScore.push(this.awardsList[i].score)
-                for (let j = 0; j < this.lawScore.length; j++) {
-                  this.lawScore1 = this.lawScore[j]+this.lawScore1
-                }
-                this.lawScore1 = this.lawScore1/100
+
                 break;
               case "learning":
-                this.learning = this.awardsList[i].title;
+                this.learningScore2.push(this.awardsList[i])
                 this.awardsList[i].id='';
-                this.learningScore1 = 0
-                this.learningScore.push(this.awardsList[i].score)
-                for (let j = 0; j < this.learningScore.length; j++) {
-                  this.learningScore1 = this.learningScore[j]+this.learningScore1
-                }
-                this.learningScore1 = this.learningScore1/100
 
                 break;
               case "development":
-                this.development = this.development+' '+this.awardsList[i].title;
+                this.developmentScore2.push(this.awardsList[i])
                 this.developmentid.push(this.awardsList[i].id)
-                this.developmentScore1 = 0
-                this.developmentScore.push(this.awardsList[i].score)
-                for (let j = 0; j < this.developmentScore.length; j++) {
-                  this.developmentScore1 = this.developmentScore[j]+this.developmentScore1
-                }
-                this.developmentScore1 = this.developmentScore1/100
 
                 break;
               case "scientific":
-                this.scientific = this.scientific+' '+this.awardsList[i].title;
+                this.scientificScore2.push(this.awardsList[i])
                 this.scientificid.push(this.awardsList[i].id)
-                this.scientificScore1 = 0
-                this.scientificScore.push(this.awardsList[i].score)
-                for (let j = 0; j < this.scientificScore.length; j++) {
-                  this.scientificScore1 = this.scientificScore[j]+this.scientificScore1
-                }
-                this.scientificScore1 = this.scientificScore1/100
-
 
                 break;
               case "physical":
-                this.physical = this.physical+' '+this.awardsList[i].title;
+                this.physicalScore2.push(this.awardsList[i])
                 this.physicalid.push(this.awardsList[i].id)
-                this.physicalScore1 = 0
-                this.physicalScore.push(this.awardsList[i].score)
-                for (let j = 0; j < this.physicalScore.length; j++) {
-                  this.physicalScore1 = this.physicalScore[j]+this.physicalScore1
-                }
-                this.physicalScore1 = this.physicalScore1/100
-
 
                 break;
               case "mental":
-                this.mental = this.mental+' '+this.awardsList[i].title;
+                this.mentalScore2.push(this.awardsList[i])
                 this.mentalid.push(this.awardsList[i].id)
-                this.mentalScore1 = 0
-                this.mentalScore.push(this.awardsList[i].score)
-                for (let j = 0; j < this.mentalScore.length; j++) {
-                  this.mentalScore1 = this.mentalScore[j]+this.mentalScore1
-                }
-                this.mentalScore1 = this.mentalScore1/100
-
-
                 break;
               case "honorary":
-                this.honorary = this.honorary+' '+this.awardsList[i].title;
+                this.honoraryScore2.push(this.awardsList[i])
                 this.honoraryid.push(this.awardsList[i].id)
-                this.honoraryScore1 = 0
-                this.honoraryScore.push(this.awardsList[i].score)
-                for (let j = 0; j < this.honoraryScore.length; j++) {
-                  this.honoraryScore1 = this.honoraryScore[j]+this.honoraryScore1
-                }
-                this.honoraryScore1 = this.honoraryScore1/100
+
                 break;
               case "competition":
-                this.competition = this.competition+' '+this.awardsList[i].title;
+                this.competitionScore2.push(this.awardsList[i])
                 this.competitionid.push(this.awardsList[i].id)
-                this.competitionScore1 = 0
-                this.competitionScore.push(this.awardsList[i].score)
-                for (let j = 0; j < this.competitionScore.length; j++) {
-                  this.competitionScore1 = this.competitionScore[j]+this.competitionScore1
-                }
-                this.competitionScore1 = this.competitionScore1/100
+
                 break;
               case "socialWork":
-                this.socialWork = this.socialWork+' '+this.awardsList[i].title;
+                this.socialWorkScore2.push(this.awardsList[i])
                 this.socialWorkid.push(this.awardsList[i].id)
-                this.socialWorkScore1 = 0
-                this.socialWorkScore.push(this.awardsList[i].score)
-                for (let j = 0; j < this.socialWorkScore.length; j++) {
-                  this.socialWorkScore1 = this.socialWorkScore[j]+this.socialWorkScore1
-                }
-                this.socialWorkScore1 = this.socialWorkScore1/100
+
 
                 break;
               case "knowl":
-                this.knowl = this.knowl+' '+this.awardsList[i].title;
+                this.knowlScore2.push(this.awardsList[i])
                 this.knowlid.push(this.awardsList[i].id)
-                this.knowlScore1 = 0
-                this.knowlScore.push(this.awardsList[i].score)
-                for (let j = 0; j < this.knowlScore.length; j++) {
-                  this.knowlScore1 = this.knowlScore[j]+this.knowlScore1
-                }
-                this.knowlScore1 = this.knowlScore1/100
 
                 break;
               case "daily":
-                this.daily = this.daily+' '+this.awardsList[i].title;
+                this.dailyScore2.push(this.awardsList[i])
                 this.awardsList[i].id='';
-                this.dailyScore1 = 0
-                this.dailyScore.push(this.awardsList[i].score)
-                for (let j = 0; j < this.dailyScore.length; j++) {
-                  this.dailyScore1 = this.dailyScore[j]+this.dailyScore1
-                }
-                this.dailyScore1 = this.dailyScore1/100
 
                 break;
               case "ideology":
-                this.ideology = this.ideology+' '+this.awardsList[i].title;
+                this.ideologyScore2.push(this.awardsList[i])
                 this.ideologyid.push(this.awardsList[i].id)
-                this.ideologyScore1 = 0
-                this.ideologyScore.push(this.awardsList[i].score)
-                for (let j = 0; j < this.ideologyScore.length; j++) {
-                  this.ideologyScore1 = this.ideologyScore[j]+this.ideologyScore1
-                }
-                this.ideologyScore1 = this.ideologyScore1/100
-
                 break;
               case "achievement":
                 this.achievement = this.awardsList[i].detail;
-                this.score=this.awardsList[i].score/100;
+                this.score =this.awardsList[i].score/100;
                 this.awardsList[i].id='';
-                this.achievementScore1 = 0
-                this.achievementScore.push(this.awardsList[i].score)
-                for (let j = 0; j < this.achievementScore.length; j++) {
-                  this.achievementScore1 = this.achievementScore[j]+this.achievementScore1
-                }
-                this.achievementScore1 = this.achievementScore1/100
+                console.log(this.score)
+                console.log(this.awardsList[i].score)
+                console.log(this.achievement)
                 break;
             }
+
+
           }
+
+          this.updateAllPointScore()
+
+
 
           let result = this.awardsList.map(current => {return {id: current.id}});
           for(let i=result.length-1;i>=0;i--){
@@ -940,25 +1426,196 @@
           // console.log(result)
           this.img=result
 
-          /**
-           * 计算总评成绩
-           * @type {number}
-           */
-          var totalscore=0;
-          var total = 0;
-          for (var i = 0; i < this.awardsList.length; i++) {
-            total += this.awardsList[i].score
-          }
-          this.totalscore = (((total-this.score*100)*0.15)/100 + (this.score*0.85)).toFixed(2)
-        })
-      },
+           /**
+            * 计算总评成绩
+            * @type {number}
+            */
+           var totalscore=0;
+           var total = 0;
+           for (var i = 0; i < this.awardsList.length; i++) {
+             total += this.awardsList[i].score
+           }
+           console.log(this.score)
+           this.totalscore = (((total-this.score*100)*0.15)/100 + (this.score*0.85)).toFixed(2)
+         })
 
+      },
+      /*
+      * 修改分数为个位数
+      * */
+      updateAllPointScore(){
+        if (this.organScore2.length>0){
+          for (let j = 0; j < this.organScore2.length; j++) {
+            this.organScore2[j].score = this.organScore2[j].score/100
+            console.log(this.organScore2[j].score)
+          }
+        }
+        if(this.politicsScore2.length>0){
+          for (let j = 0; j < this.politicsScore2.length; j++) {
+            this.politicsScore2[j].score = this.politicsScore2[j].score/100
+          }
+        }
+        if(this.ideologyScore2.length>0){
+          for (let j = 0; j < this.ideologyScore2.length; j++) {
+            this.ideologyScore2[j].score = this.ideologyScore2[j].score/100
+          }
+        }
+        if(this.moralityScore2.length>0){
+          for (let j = 0; j < this.moralityScore2.length; j++) {
+            this.moralityScore2[j].score = this.moralityScore2[j].score/100
+          }
+        }
+        if(this.lawScore2.length>0){
+          for (let j = 0; j < this.lawScore2.length; j++) {
+            this.lawScore2[j].score = this.lawScore2[j].score/100
+          }
+        }
+        if(this.learningScore2.length>0){
+          for (let j = 0; j < this.learningScore2.length; j++) {
+            this.learningScore2[j].score = this.learningScore2[j].score/100
+          }
+        }
+        if(this.developmentScore2.length>0){
+          for (let j = 0; j < this.developmentScore2.length; j++) {
+            this.developmentScore2[j].score = this.developmentScore2[j].score/100
+          }
+        }
+        if(this.scientificScore2.length>0){
+          for (let j = 0; j < this.scientificScore2.length; j++) {
+            this.scientificScore2[j].score = this.scientificScore2[j].score/100
+          }
+        }
+        if(this.mentalScore2.length>0){
+          for (let j = 0; j < this.mentalScore2.length; j++) {
+            this.mentalScore2[j].score = this.mentalScore2[j].score/100
+          }
+        }
+        if(this.honoraryScore2.length>0){
+          for (let j = 0; j < this.honoraryScore2.length; j++) {
+            this.honoraryScore2[j].score = this.honoraryScore2[j].score/100
+          }
+        }
+        if(this.competitionScore2.length>0){
+          for (let j = 0; j < this.competitionScore2.length; j++) {
+            this.competitionScore2[j].score = this.competitionScore2[j].score/100
+          }
+        }
+        if(this.socialWorkScore2.length>0){
+          for (let j = 0; j < this.socialWorkScore2.length; j++) {
+            this.socialWorkScore2[j].score = this.socialWorkScore2[j].score/100
+          }
+        }
+        if(this.knowlScore2.length>0){
+          for (let j = 0; j < this.knowlScore2.length; j++) {
+            this.knowlScore2[j].score = this.knowlScore2[j].score/100
+          }
+        }
+        if(this.dailyScore2.length>0){
+          for (let j = 0; j < this.dailyScore2.length; j++) {
+            this.dailyScore2[j].score = this.dailyScore2[j].score/100
+          }
+
+        }
+
+        if(this.physicalScore2.length>0){
+          for (let j = 0; j < this.physicalScore2.length; j++) {
+            this.physicalScore2[j].score = this.physicalScore2[j].score/100
+          }
+        }
+
+
+      },
 
       //编辑
       handleEdit(row){
         this.handleGetAwards(row.no);
         this.form = Object.assign({},row)
         this.outerVisible = true
+      },
+      //获取所有修改后或者没有修改的成绩
+      updateAllScore(){
+
+        if(this.politicsScore2.length>0){
+          for (let i = 0; i < this.politicsScore2.length; i++) {
+            let id = this.politicsScore2[i].id;
+            let score = this.politicsScore2[i].score*100;
+            updateScore(id,score);
+          }
+        }
+
+        if(this.organScore2.length>0){
+          for (let i = 0; i < this.organScore2.length; i++) {
+            updateScore(this.organScore2[i].id,this.organScore2[i].score*100);
+          }
+        }
+
+        if(this.ideologyScore2.length>0){
+          for (let i = 0; i < this.ideologyScore2.length; i++) {
+            updateScore(this.ideologyScore2[i].id,this.ideologyScore2[i].score*100);
+          }
+        }
+         if(this.moralityScore2.length>0){
+           for (let i = 0; i < this.moralityScore2.length; i++) {
+             updateScore(this.moralityScore2[i].id,this.moralityScore2[i].score*100);
+           }
+         }
+         if(this.lawScore2.length>0){
+           for (let i = 0; i < this.lawScore2.length; i++) {
+             updateScore(this.lawScore2[i].id,this.lawScore2[i].score*100);
+           }
+         }
+         if(this.learningScore2.length>0){
+           for (let i = 0; i < this.learningScore2.length; i++) {
+             updateScore(this.learningScore2[i].id,this.learningScore2[i].score*100);
+           }
+         }
+         if(this.developmentScore2.length>0){
+           for (let i = 0; i < this.developmentScore2.length; i++) {
+             updateScore(this.developmentScore2[i].id,this.developmentScore2[i].score*100);
+           }
+         }
+         if(this.scientificScore2.length>0){
+           for (let i = 0; i < this.scientificScore2.length; i++) {
+             updateScore(this.scientificScore2[i].id,this.scientificScore2[i].score*100);
+           }
+         }
+         if(this.mentalScore2.length>0){
+           for (let i = 0; i < this.mentalScore2.length; i++) {
+             updateScore(this.mentalScore2[i].id,this.mentalScore2[i].score*100);
+           }
+         }
+         if(this.honoraryScore2.length>0){
+           for (let i = 0; i < this.honoraryScore2.length; i++) {
+             updateScore(this.honoraryScore2[i].id,this.honoraryScore2[i].score*100);
+           }
+         }
+         if(this.competitionScore2.length>0){
+           for (let i = 0; i < this.competitionScore2.length; i++) {
+             updateScore(this.competitionScore2[i].id,this.competitionScore2[i].score*100);
+           }
+         }
+         if(this.socialWorkScore2.length>0){
+           for (let i = 0; i < this.socialWorkScore2.length; i++) {
+             updateScore(this.socialWorkScore2[i].id,this.socialWorkScore2[i].score*100);
+           }
+        }
+         if(this.knowlScore2.length>0){
+           for (let i = 0; i < this.knowlScore2.length; i++) {
+             updateScore(this.knowlScore2[i].id,this.knowlScore2[i].score*100);
+           }
+        }
+         if(this.dailyScore2.length>0){
+           for (let i = 0; i < this.dailyScore2.length; i++) {
+             updateScore(this.dailyScore2[i].id,this.dailyScore2[i].score*100);
+           }
+
+        }
+
+         if(this.physicalScore2.length>0){
+           for (let i = 0; i < this.physicalScore2.length; i++) {
+             updateScore(this.physicalScore2[i].id,this.physicalScore2[i].score*100);
+           }
+        }
       },
 
 
@@ -1000,6 +1657,22 @@
         this.mentalid=[];
         this.moralityid=[];
         this.honoraryid=[];
+        this.politicsScore2=[],
+        this.ideologyScore2=[],
+        this.moralityScore2=[],
+        this.organScore2=[],
+        this.lawScore2=[],
+        this.learningScore2=[],
+        this.developmentScore2= [],
+        this.scientificScore=[],
+        this.physicalScore2=[],
+        this.mentalScore2=[],
+        this.honoraryScore2= [],
+        this.competitionScore2= [],
+        this.socialWorkScore2= [],
+        this.knowlScore2= [],
+        this.dailyScore2= [],
+        this.achievementScore2=[]
       },
 
       /*
