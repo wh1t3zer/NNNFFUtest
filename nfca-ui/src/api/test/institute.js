@@ -102,10 +102,10 @@ export function exportUser(query) {
 /*
 * 推送接口
 * */
-export function pushmsg(openid){
+export function pushmsg(){
   return request({
     url:'/push',
-    method:'post',
+    method:'get',
   })
 }
 

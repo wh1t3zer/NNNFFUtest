@@ -8,6 +8,9 @@ import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * @ClassName：PushController
  * @Description：微信推送
@@ -30,14 +33,19 @@ public class PushController {
         WxMpService wxMpService = new WxMpServiceImpl();
         wxMpService.setWxMpConfigStorage(wxStorage);
 
+        Date date = new Date();
+        SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd  hh:mm:ss");
+        System.out.println(dateFormat.format(date));
         //2,推送消息
         WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
-                .toUser(openid)//要推送的用户openid
+                .toUser("oDqCmuBN1tdZQwMtwtS1jeAJDNKo")//要推送的用户openid
                 .templateId("MRYhAWll_4lyns0kEwpKXqYu3MW0JMOqRkqDf_SmAqA")//模版id
                 .url("https://h5.nfuca.com/ncg/tester.html")//点击模版消息要访问的网址
                 .build();
         //3,如果是正式版发送模版消息，这里需要配置你的信息
-                templateMessage.addData(new WxMpTemplateData("123", "123", "#FF00FF"));
+                templateMessage.addData(new WxMpTemplateData("keyword1", "123", "#FF00FF"));
+                templateMessage.addData(new WxMpTemplateData("keyword2", dateFormat.format(date), "#FF00FF"));
+        templateMessage.addData(new WxMpTemplateData("remark", "789", "#FF00FF"));
         try {
             wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage);
             return "推送成功";

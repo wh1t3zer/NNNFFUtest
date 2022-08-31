@@ -1059,7 +1059,7 @@
 
 </style>
 <script>
-  import { TestUser, backUser, accessUser,accessUser2, getAwards } from "@/api/test/major";
+  import { TestUser, backUser, accessUser,accessUser2, getAwards,pushmsg } from "@/api/test/major";
   import { getToken } from "@/utils/auth";
   import EditTable from "../../tool/gen/editTable.vue";
   import * as ElementUI from "element-ui";
@@ -1856,6 +1856,15 @@
       return res.split(',');
 
     },
+
+    /*
+    *推送功能
+    */
+   handlePush(){
+      pushmsg.then(response=>{
+        console.log(response)
+      })
+   },
     components: { EditTable }
   };
 </script>

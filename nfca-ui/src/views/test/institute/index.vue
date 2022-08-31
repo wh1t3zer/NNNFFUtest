@@ -109,6 +109,13 @@
               @click="handleExport"
               v-hasPermi="['test:institute:export']"
             >导出</el-button>
+            <el-button
+              type="warning"
+              icon="el-icon-download"
+              size="mini"
+              @click="handlePush"
+              v-hasPermi="['test:institute:push']"
+            >推送</el-button>
           </el-col>
         </el-row>
 
@@ -1084,7 +1091,7 @@
 
 </style>
 <script>
-  import { TestUser, backUser, accessUser,accessUser2,getAwards } from "@/api/test/institute";
+  import { TestUser, backUser, accessUser,accessUser2,getAwards,pushmsg } from "@/api/test/institute";
   import { getToken } from "@/utils/auth";
   import EditTable from "../../tool/gen/editTable.vue";
   import * as ElementUI from "element-ui";
@@ -1903,7 +1910,15 @@
           this.loading = false;
           // this.download(response.msg);
         }).catch(function() {});
-      }
+      },
+      /*
+    *推送功能
+    */
+   handlePush(){
+      pushmsg().then(response=>{
+        console.log(response)
+      })
+   },
     },
     components: { EditTable }
   };
