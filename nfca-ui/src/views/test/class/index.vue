@@ -70,6 +70,15 @@
               @click="handleExport"
             >导出</el-button>
           </el-col>
+
+          <el-col :span="1.5">
+            <el-button
+              type="warning"
+              icon="el-icon-download"
+              size="mini"
+              @click="handlePush"
+            >发送</el-button>
+          </el-col>
         </el-row>
 
         <el-table v-loading="loading" :data="testList" @selection-change="handleSelectionChange">
@@ -128,7 +137,6 @@
               <el-tag size="small">{{form.classId}}</el-tag>
             </el-descriptions-item>
           </el-descriptions>
-
           <el-descriptions title="基础性素质测评（满分60分）"></el-descriptions>
           <el-row >
             <el-form-item label="1、政治素质">
@@ -160,7 +168,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="doublePolitics(politicsScore2[index].id,form.no,Reason)"
+                          @confirm="doublePolitics(politicsScore2[index].id,form.no,Reason,politicsScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -181,8 +189,7 @@
               </template>
               <template v-else>
                 <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-
+                <el-input-number value="3.0" :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
               </template>
             </el-form-item>
           </el-row>
@@ -217,7 +224,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="doubleIdeology(ideologyScore2[index].id,form.no,Reason)"
+                          @confirm="doubleIdeology(ideologyScore2[index].id,form.no,Reason,ideologyScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -239,7 +246,7 @@
               </template>
               <template v-else>
                 <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+                <el-input-number value="3.0" :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
               </template>
             </el-form-item>
           </el-row>
@@ -274,7 +281,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="doubleMorality(moralityScore2[index].id,form.no,Reason)"
+                          @confirm="doubleMorality(moralityScore2[index].id,form.no,Reason,moralityScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -296,8 +303,7 @@
               </template>
               <template v-else>
                 <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-
+                <el-input-number value="6.0" :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
               </template>
             </el-form-item>
           </el-row>
@@ -331,7 +337,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="doubleOrgan(organScore2[index].id,form.no,Reason)"
+                          @confirm="doubleOrgan(organScore2[index].id,form.no,Reason,organScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -347,15 +353,14 @@
                 <div v-for="(imgs, index) in organid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
                   <ul id="yihangxianshiduotu">
                     <li>
-                    <el-image z-index="3000"  v-viewer="{movable:true}" :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + organScore2[index].id+'.jpg'" style="width:200px;height:150px;"/>
+                      <el-image z-index="3000"  v-viewer="{movable:true}" :fit="fit" :src="'https://static-nfuca-1302505692.cos-website.ap-guangzhou.myqcloud.com/img/upload/raw/' + organScore2[index].id+'.jpg'" style="width:200px;height:150px;"/>
                     </li>
                   </ul>
                 </div>
               </template>
               <template v-else>
                 <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-
+                <el-input-number value="3.0" :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
               </template>
             </el-form-item>
           </el-row>
@@ -390,7 +395,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="doubleLaw(lawScore2[index].id,form.no,Reason)"
+                          @confirm="doubleLaw(lawScore2[index].id,form.no,Reason,lawScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -412,8 +417,7 @@
               </template>
               <template v-else>
                 <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-
+                <el-input-number value="6.0" :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
               </template>
             </el-form-item>
           </el-row>
@@ -448,7 +452,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="doubleLearning(learningScore2[index].id,form.no,Reason)"
+                          @confirm="doubleLearning(learningScore2[index].id,form.no,Reason,learningScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -459,14 +463,12 @@
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleLearning = true">驳回</el-button>
                     </div>
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{learningScore2[index].operator}}</el-button>
-
                   </div>
                 </div>
               </template>
               <template v-else>
                 <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-
+                <el-input-number value="6.0" :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
               </template>
             </el-form-item>
           </el-row>
@@ -501,7 +503,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="doubleDevelopment(developmentScore2[index].id,form.no,Reason)"
+                          @confirm="doubleDevelopment(developmentScore2[index].id,form.no,Reason,developmentScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -523,8 +525,7 @@
               </template>
               <template v-else>
                 <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-
+                <el-input-number value="0.0" :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
               </template>
             </el-form-item>
           </el-row>
@@ -558,7 +559,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="doubleScientific(scientificScore2[index].id,form.no,Reason)"
+                          @confirm="doubleScientific(scientificScore2[index].id,form.no,Reason,scientificScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -580,8 +581,7 @@
               </template>
               <template v-else>
                 <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-
+                <el-input-number value="3.6" :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
               </template>
             </el-form-item>
           </el-row>
@@ -589,7 +589,7 @@
           <el-row >
             <el-form-item label="9、身体素质">
               <template v-if="this.physicalScore2.length > 0">
-                  <div style="display: inline-block;width: 45%">
+                <div style="display: inline-block;width: 45%">
                   <div v-for="(item,index) in this.physicalScore2" >
                     <el-input v-model="physicalScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="physicalScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
@@ -616,7 +616,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="doublePhysical(physicalScore2[index].id,form.no,Reason)"
+                          @confirm="doublePhysical(physicalScore2[index].id,form.no,Reason,physicalScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -638,8 +638,7 @@
               </template>
               <template v-else>
                 <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-
+                <el-input-number value="4.8" :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
               </template>
             </el-form-item>
           </el-row>
@@ -673,7 +672,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="doubleMental(mentalScore2[index].id,form.no,Reason)"
+                          @confirm="doubleMental(mentalScore2[index].id,form.no,Reason,mentalScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -694,8 +693,7 @@
               </template>
               <template v-else>
                 <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-
+                <el-input-number value="6.0" :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
               </template>
             </el-form-item>
           </el-row>
@@ -733,7 +731,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="doubleHonorary(honoraryScore2[index].id,form.no,Reason)"
+                          @confirm="doubleHonorary(honoraryScore2[index].id,form.no,Reason,honoraryScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -755,7 +753,7 @@
               </template>
               <template v-else>
                 <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+                <el-input-number value="0.0" :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
               </template>
 
             </el-form-item>
@@ -790,7 +788,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="doubleCompetition(competitionScore2[index].id,form.no,Reason)"
+                          @confirm="doubleCompetition(competitionScore2[index].id,form.no,Reason,competitionScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -812,8 +810,7 @@
               </template>
               <template v-else>
                 <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-
+                <el-input-number value="0.0" :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
               </template>
             </el-form-item>
           </el-row>
@@ -848,7 +845,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="doubleSocialWork(socialWorkScore2[index].id,form.no,Reason)"
+                          @confirm="doubleSocialWork(socialWorkScore2[index].id,form.no,Reason,socialWorkScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -870,8 +867,7 @@
               </template>
               <template v-else>
                 <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-
+                <el-input-number value="0.0" :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
               </template>
             </el-form-item>
           </el-row>
@@ -905,7 +901,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="doubleKnowl(knowlScore2[index].id,form.no,Reason)"
+                          @confirm="doubleKnowl(knowlScore2[index].id,form.no,Reason,knowlScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -927,8 +923,7 @@
               </template>
               <template v-else>
                 <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-
+                <el-input-number value="0.0" :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
               </template>
 
             </el-form-item>
@@ -963,7 +958,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="doubleDaily(dailyScore2[index].id,form.no,Reason)"
+                          @confirm="doubleDaily(dailyScore2[index].id,form.no,Reason,dailyScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -1056,7 +1051,7 @@
 
 </style>
 <script>
-  import { TestUser,  backUser, accessUser, accessUser2, getAwards,updateScore,exportUser} from "@/api/test/class";
+  import { TestUser,  backUser, accessUser, accessUser2, getAwards,updateScore,exportUser,pushmsg} from "@/api/test/class";
   import { getToken } from "@/utils/auth";
   import EditTable from "../../tool/gen/editTable.vue";
   import * as ElementUI from "element-ui";
@@ -1893,6 +1888,11 @@
         }).then(response => {
           this.download(response.msg);
         }).catch(function() {});
+      },
+      handlePush(){
+        pushmsg('12324','1123').then(res=>{
+          console.log(res)
+        })
       }
     },
 

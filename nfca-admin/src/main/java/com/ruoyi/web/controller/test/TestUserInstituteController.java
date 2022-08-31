@@ -113,6 +113,7 @@ public class TestUserInstituteController extends BaseController
         testersoure.setAdopter("2");
         student.setNo(testersoure.getNo());
         studentService.updateStatusByNo(student);
+        testersoureService.updateAdopterById(testersoure);
         return toAjax(testersoureService.updateReasonByNo(testersoure));
     }
 

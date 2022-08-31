@@ -80,11 +80,11 @@ public class Testersoure {
     }
 
     public String getReason() {
-        return reason;
+        return Reason;
     }
 
-    public void setReason(String reason) {
-        this.reason = reason;
+    public void setReason(String Reason) {
+        this.Reason = Reason;
     }
 
     public String getAdopter() {

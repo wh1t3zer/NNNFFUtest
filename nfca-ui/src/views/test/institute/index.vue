@@ -1818,7 +1818,7 @@
         this.innerVisibleLearning = false;
         this.outerVisible = false;
       },
-      doubleDevelopment(id,no,Reaso,openIdn){
+      doubleDevelopment(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
         this.handlePush(openId,Reason)
         this.Reason=''

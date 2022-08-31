@@ -109,3 +109,15 @@ export function exportUser(query) {
   })
 }
 
+export function pushmsg(reason,openid){
+  const data={
+    reason,
+    openid,
+  }
+  return request({
+    url:'/push',
+    method:'post',
+    data:data
+  })
+}
+

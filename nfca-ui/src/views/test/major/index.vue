@@ -1738,7 +1738,6 @@
       doublePolitics(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
         this.handlePush(openId,Reason)
-        console.log(id,no,Reason,openId)
         this.Reason=''
         this.innerVisiblePolitics = false;
         this.outerVisible = false;
@@ -1827,6 +1826,7 @@
       doubleSocialWork(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
         this.handlePush(openId,Reason)
+        console.log(id,no,Reason,openId)
         this.Reason=''
         this.innerVisibleSocialWork = false;
         this.outerVisible = false;
