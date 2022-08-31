@@ -217,7 +217,9 @@
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisiblePolitics = true">驳回</el-button>
                     </div>
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{politicsScore2[index].operator}}</el-button>
-
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="politicsScore2[index].adopter2 == '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="politicsScore2[index].adopter2 == '1'">审核状态: <span style="color: green ">通过</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="politicsScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回中</span></span>
                   </div>
                 </div>
                 <div v-for="(imgs, index) in politicsid" v-viewer="{movable:true}" style="display: inline;  vertical-align: middle">
@@ -274,7 +276,9 @@
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleIdeology = true">驳回</el-button>
                     </div>
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{ideologyScore2[index].operator}}</el-button>
-
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="ideologyScore2[index].adopter2 == '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="ideologyScore2[index].adopter2 == '1'">审核状态: <span style="color: green ">通过</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="ideologyScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回中</span></span>
                   </div>
                 </div>
                 <div v-for="(imgs, index) in ideologyid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -331,7 +335,9 @@
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleMorality = true">驳回</el-button>
                     </div>
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{moralityScore2[index].operator}}</el-button>
-
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="moralityScore2[index].adopter2 == '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="moralityScore2[index].adopter2 == '1'">审核状态: <span style="color: green ">通过</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="moralityScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回中</span></span>
                   </div>
                 </div>
                 <div v-for="(imgs, index) in moralityid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -387,6 +393,9 @@
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleOrgan = true">驳回</el-button>
                     </div>
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{organScore2[index].operator}}</el-button>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="organScore2[index].adopter2 == '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="organScore2[index].adopter2 == '1'">审核状态: <span style="color: green ">通过</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="organScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回中</span></span>
                   </div>
                 </div>
                 <div v-for="(imgs, index) in organid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -445,7 +454,9 @@
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleLaw = true">驳回</el-button>
                     </div>
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{lawScore2[index].operator}}</el-button>
-
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="lawScore2[index].adopter2 == '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="lawScore2[index].adopter2 == '1'">审核状态: <span style="color: green ">通过</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="lawScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回中</span></span>
                   </div>
                 </div>
                 <div v-for="(imgs, index) in lawid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -502,6 +513,9 @@
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleLearning = true">驳回</el-button>
                     </div>
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{learningScore2[index].operator}}</el-button>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="learningScore2[index].adopter2 == '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="learningScore2[index].adopter2 == '1'">审核状态: <span style="color: green ">通过</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="learningScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回中</span></span>
                   </div>
                 </div>
               </template>
@@ -553,7 +567,9 @@
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleDevelopment = true">驳回</el-button>
                     </div>
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{developmentScore2[index].operator}}</el-button>
-
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="developmentScore2[index].adopter2 == '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="developmentScore2[index].adopter2 == '1'">审核状态: <span style="color: green ">通过</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="developmentScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回中</span></span>
                   </div>
                 </div>
                 <div v-for="(imgs, index) in developmentid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -609,7 +625,9 @@
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleScientific = true">驳回</el-button>
                     </div>
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{scientificScore2[index].operator}}</el-button>
-
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="scientificScore2[index].adopter2 == '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="scientificScore2[index].adopter2 == '1'">审核状态: <span style="color: green ">通过</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="scientificScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回中</span></span>
                   </div>
                 </div>
                 <div v-for="(imgs, index) in scientificid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -666,7 +684,9 @@
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisiblePhysical = true">驳回</el-button>
                     </div>
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{physicalScore2[index].operator}}</el-button>
-
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="physicalScore2[index].adopter2 == '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="physicalScore2[index].adopter2 == '1'">审核状态: <span style="color: green ">通过</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="physicalScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回中</span></span>
                   </div>
                 </div>
                 <div v-for="(imgs, index) in physicalid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -721,7 +741,9 @@
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleMental = true">驳回</el-button>
                     </div>
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{mentalScore2[index].operator}}</el-button>
-
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="mentalScore2[index].adopter2 == '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="mentalScore2[index].adopter2 == '1'">审核状态: <span style="color: green ">通过</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="mentalScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回中</span></span>
                   </div>
                 </div>
                 <div v-for="(imgs, index) in mentalid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -781,7 +803,9 @@
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleHonorary = true">驳回</el-button>
                     </div>
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{honoraryScore2[index].operator}}</el-button>
-
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="honoraryScore2[index].adopter2 == '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="honoraryScore2[index].adopter2 == '1'">审核状态: <span style="color: green ">通过</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="honoraryScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回中</span></span>
                   </div>
                 </div>
                 <div v-for="(imgs, index) in honoraryid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -838,7 +862,9 @@
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleCompetition = true">驳回</el-button>
                     </div>
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{competitionScore2[index].operator}}</el-button>
-
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="competitionScore2[index].adopter2 == '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="competitionScore2[index].adopter2 == '1'">审核状态: <span style="color: green ">通过</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="competitionScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回中</span></span>
                   </div>
                 </div>
                 <div v-for="(imgs, index) in competitionid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -895,7 +921,9 @@
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleSocialWork = true">驳回</el-button>
                     </div>
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{socialWorkScore2[index].operator}}</el-button>
-
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="socialWorkScore2[index].adopter2 == '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="socialWorkScore2[index].adopter2 == '1'">审核状态: <span style="color: green ">通过</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="socialWorkScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回中</span></span>
                   </div>
                 </div>
                 <div v-for="(imgs, index) in socialWorkid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -951,7 +979,9 @@
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleKnowl = true">驳回</el-button>
                     </div>
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{knowlScore2[index].operator}}</el-button>
-
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="knowlScore2[index].adopter2 == '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="knowlScore2[index].adopter2 == '1'">审核状态: <span style="color: green ">通过</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="knowlScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回中</span></span>
                   </div>
                 </div>
                 <div v-for="(imgs, index) in knowlid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -1007,7 +1037,9 @@
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleDaily = true">驳回</el-button>
                     </div>
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{dailyScore2[index].operator}}</el-button>
-
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="dailyScore2[index].adopter2 == '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="dailyScore2[index].adopter2 == '1'">审核状态: <span style="color: green ">通过</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="dailyScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回中</span></span>
                   </div>
                 </div>
               </template>
@@ -1777,6 +1809,7 @@
       doublePolitics(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
         this.handlePush(openId,Reason)
+        console.log("Reason:"+Reason)
         this.Reason=''
         this.innerVisiblePolitics = false;
         this.outerVisible = false;
@@ -1854,7 +1887,7 @@
         this.innerVisibleHonorary = false;
         this.outerVisible = false;
       },
-      doubleCompetition(id,no,Reaso,openIdn){
+      doubleCompetition(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
         this.handlePush(openId,Reason)
         this.Reason=''
@@ -1932,6 +1965,7 @@
      handlePush(openId,Reason){
         pushmsg(openId,Reason).then(response=>{
           console.log(response)
+          console.log(Reason)
         })
      },
     },

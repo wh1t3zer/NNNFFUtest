@@ -88,6 +88,23 @@ export function accessUser2(no) {
     data: data
   })
 }
+/**
+ * 修改各个小点的成绩
+ * @param id 图片的id,唯一标识
+ * @param score 图片的id对应的小点成绩(各个小点的成绩)
+ * @returns {*}
+ */
+export function updateScore(id,score) {
+  const data = {
+    id,
+    score,
+  }
+  return request({
+    url: '/test/class/updateScore',
+    method: 'put',
+    data: data
+  })
+}
 /*
 * 导出功能接口
 * */

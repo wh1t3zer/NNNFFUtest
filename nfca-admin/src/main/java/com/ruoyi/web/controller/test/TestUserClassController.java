@@ -137,13 +137,15 @@ public class TestUserClassController extends BaseController
     }*/
 
 
+    /*
+    * 导出
+    * */
     @Log(title = "用户管理", businessType = BusinessType.EXPORT)
     @PreAuthorize("@ss.hasPermi('test:class:export')")
     @GetMapping("/export")
     public AjaxResult export(Student student)
     {
         List<Student> list = studentService.selectClassStudents(student);
-        System.out.println(list);
         ExcelUtil<Student> util = new ExcelUtil<Student>(Student.class);
         return util.exportExcel(list, "用户数据");
     }

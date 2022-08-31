@@ -23,9 +23,11 @@ public class PushController extends BaseController{
     @PostMapping("/push")
     public String push(@RequestBody Testersoure testersoure) {
         String openid = testersoure.getOpenId();
-        String reason = testersoure.getReason();
+        String Reason = testersoure.getReason();
+        String reason1 = testersoure.getReason1();
         System.out.println(openid);
-        System.out.println(reason);
+        System.out.println(Reason);
+        System.out.println(reason1);
         System.out.println(testersoure);
 //        //1，配置
 //        WxMpInMemoryConfigStorage wxStorage = new WxMpInMemoryConfigStorage();
