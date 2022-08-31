@@ -24,6 +24,11 @@ public class TestersoureServiceImpl implements ITestersoureService {
         return testersoureMapper.updateScoreById(testersoure);
     }
 
+    @Override
+    public int updateAdopterById(Testersoure testersoure) {
+       return  testersoureMapper.updateAdopterById(testersoure);
+    }
+
 
     @Override
     public List<Testersoure> getAwardListByNo(Testersoure testersoure) {

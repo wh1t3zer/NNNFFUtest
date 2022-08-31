@@ -28,7 +28,7 @@ public class PushController extends BaseController {
     @PostMapping("/push")
     public String push(@RequestBody Testersoure testersoure ) {
         String openid = testersoure.getOpenId();
-        String reason = testersoure.getReason();
+        String reason = testersoure.getReason1();
         System.out.println(reason);
         //1，配置
         WxMpInMemoryConfigStorage wxStorage = new WxMpInMemoryConfigStorage();
@@ -39,7 +39,6 @@ public class PushController extends BaseController {
 
         Date date = new Date();
         SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd  hh:mm:ss");
-        System.out.println(dateFormat.format(date));
         //2,推送消息
         WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
                 .toUser(openid)//要推送的用户openid

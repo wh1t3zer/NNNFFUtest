@@ -11,6 +11,8 @@ public interface ITestersoureService {
 
     int updateScoreById(Testersoure testersoure);
 
+    int updateAdopterById(Testersoure testersoure);
+
     List<Testersoure> getAwardListByNo(Testersoure testersoure);
 
 //    List<Testersoure> selectTestUserByNo(Testersoure testersoure);

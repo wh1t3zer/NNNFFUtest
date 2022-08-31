@@ -15,7 +15,7 @@ public class Testersoure {
     private String title;
     private String detail;
     private String reason;
-    private Integer adopter;
+    private String adopter;
     private Integer adopter2;
     private String operator;
     private String Reason;
@@ -80,18 +80,18 @@ public class Testersoure {
     }
 
     public String getReason() {
-        return Reason;
+        return reason;
     }
 
-    public void setReason(String Reason) {
-        this.Reason = Reason;
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 
-    public Integer getAdopter() {
+    public String getAdopter() {
         return adopter;
     }
 
-    public void setAdopter(Integer adopter) {
+    public void setAdopter(String adopter) {
         this.adopter = adopter;
     }
 
@@ -111,13 +111,13 @@ public class Testersoure {
         this.operator = operator;
     }
 
-//    public String getReason1() {
-//        return Reason;
-//    }
-//
-//    public void setReason1(String Reason) {
-//        this.Reason = Reason;
-//    }
+    public String getReason1() {
+        return Reason;
+    }
+
+    public void setReason1(String Reason) {
+        this.Reason = Reason;
+    }
 
     @Override
     public String toString() {

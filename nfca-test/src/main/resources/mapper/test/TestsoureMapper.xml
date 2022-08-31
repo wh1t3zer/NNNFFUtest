@@ -27,6 +27,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             update testerSoure set score = #{score} where id = #{id}
         </update>
 
+    <update id="updateAdopterById" parameterType="com.ruoyi.test.domain.Testersoure">
+        update testerSoure set adopter = #{adopter} where id = #{id}
+    </update>
 
 
     <select id="queryTitlesListByNo" parameterType="com.ruoyi.test.domain.Testersoure" resultMap="TestersoureResult">

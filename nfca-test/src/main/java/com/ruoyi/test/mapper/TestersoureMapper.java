@@ -16,6 +16,8 @@ public interface TestersoureMapper {
 
     int updateScoreById(Testersoure testersoure);
 
+    int updateAdopterById(Testersoure testersoure);
+
 
     List<Testersoure> queryTitlesListByNo(Testersoure testersoure);
 
