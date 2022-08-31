@@ -88,5 +88,27 @@ export function accessUser2(no) {
     data: data
   })
 }
+/*
+* 导出功能接口
+* */
+export function exportUser(query) {
+  return request({
+    url:'/test/institute/export',
+    method:'get',
+    params:query
+  })
+}
+
+/*
+* 推送接口
+* */
+export function pushmsg(){
+  return request({
+    url:'/push',
+    method:'get',
+  })
+}
+
+
 
 

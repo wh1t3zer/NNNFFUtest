@@ -88,3 +88,13 @@ export function accessUser2(no) {
     data: data
   })
 }
+
+/*
+* 推送接口
+* */
+export function pushmsg(openid){
+  return request({
+    url:'/push',
+    method:'post',
+  })
+}
