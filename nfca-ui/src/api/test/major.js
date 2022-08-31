@@ -93,8 +93,12 @@ export function accessUser2(no) {
 * 推送接口
 * */
 export function pushmsg(openId,Reason){
+  const data={
+    openId,Reason
+  }
   return request({
     url:'/push',
-    method:'get',
+    method:'post',
+    data:data
   })
 }

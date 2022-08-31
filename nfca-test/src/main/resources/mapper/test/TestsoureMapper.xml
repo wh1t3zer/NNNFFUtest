@@ -30,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
     <select id="queryTitlesListByNo" parameterType="com.ruoyi.test.domain.Testersoure" resultMap="TestersoureResult">
-        select t.id ,t.no,t.score,t.module,t.detail,t.title,u.openid,
+        select t.id ,t.no,t.score,t.module,t.detail,t.title,u.openid,t.adopter,t.adopter2,
         (select name from testerMember where no = t.operator limit 1) as operator
         from ncg.testerSoure t
         join account.user_info u

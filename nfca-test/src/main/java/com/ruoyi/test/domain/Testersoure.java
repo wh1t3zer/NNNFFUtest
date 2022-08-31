@@ -18,6 +18,7 @@ public class Testersoure {
     private Integer adopter;
     private Integer adopter2;
     private String operator;
+    private String Reason;
 
 
     private String openId;
@@ -27,11 +28,6 @@ public class Testersoure {
     public void setOpenId(String openId) {
         this.openId = openId;
     }
-
-
-
-
-
 
 
 
@@ -84,11 +80,11 @@ public class Testersoure {
     }
 
     public String getReason() {
-        return reason;
+        return Reason;
     }
 
-    public void setReason(String reason) {
-        this.reason = reason;
+    public void setReason(String Reason) {
+        this.Reason = Reason;
     }
 
     public Integer getAdopter() {
@@ -114,6 +110,14 @@ public class Testersoure {
     public void setOperator(String operator) {
         this.operator = operator;
     }
+
+//    public String getReason1() {
+//        return Reason;
+//    }
+//
+//    public void setReason1(String Reason) {
+//        this.Reason = Reason;
+//    }
 
     @Override
     public String toString() {

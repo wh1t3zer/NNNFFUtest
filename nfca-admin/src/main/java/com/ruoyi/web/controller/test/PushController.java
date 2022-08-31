@@ -8,10 +8,7 @@ import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,10 +25,11 @@ public class PushController extends BaseController {
     /*
      * 微信测试账号推送
      * */
-    @GetMapping("/push")
+    @PostMapping("/push")
     public String push(@RequestBody Testersoure testersoure ) {
-        String openid = testersoure.getOpenId()
-        System.out.println(openid);
+        String openid = testersoure.getOpenId();
+        String reason = testersoure.getReason();
+        System.out.println(reason);
         //1，配置
         WxMpInMemoryConfigStorage wxStorage = new WxMpInMemoryConfigStorage();
         wxStorage.setAppId("wxd04a21bf789bf6fa");
@@ -44,14 +42,14 @@ public class PushController extends BaseController {
         System.out.println(dateFormat.format(date));
         //2,推送消息
         WxMpTemplateMessage templateMessage = WxMpTemplateMessage.builder()
-                .toUser("oDqCmuBN1tdZQwMtwtS1jeAJDNKo")//要推送的用户openid
+                .toUser(openid)//要推送的用户openid
                 .templateId("MRYhAWll_4lyns0kEwpKXqYu3MW0JMOqRkqDf_SmAqA")//模版id
                 .url("https://h5.nfuca.com/ncg/tester.html")//点击模版消息要访问的网址
                 .build();
         //3,如果是正式版发送模版消息，这里需要配置你的信息
-                templateMessage.addData(new WxMpTemplateData("keyword1", "123", "#FF00FF"));
+                templateMessage.addData(new WxMpTemplateData("keyword1", reason, "#FF00FF"));
                 templateMessage.addData(new WxMpTemplateData("keyword2", dateFormat.format(date), "#FF00FF"));
-                templateMessage.addData(new WxMpTemplateData("remark", "789", "#FF00FF"));
+                templateMessage.addData(new WxMpTemplateData("remark", "", "#FF00FF"));
         try {
             wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage);
             return "推送成功";

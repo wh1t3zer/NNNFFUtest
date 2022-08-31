@@ -1341,7 +1341,7 @@
         this.resetScore();
         getAwards(no).then(response => {
           this.awardsList = response;
-
+          console.log(response)
           for(var i = 0; i < this.awardsList.length; i++){
             switch (this.awardsList[i].module){
               case "politics":
@@ -1780,9 +1780,10 @@
         this.innerVisibleLearning = false;
         this.outerVisible = false;
       },
-      doubleDevelopment(id,no,Reaso,openIdn){
+      doubleDevelopment(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
         this.handlePush(openId,Reason)
+        console.log(openId,Reason)
         this.Reason=''
         this.innerVisibleDevelopment = false;
         this.outerVisible = false;
