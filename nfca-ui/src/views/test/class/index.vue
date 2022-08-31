@@ -146,37 +146,7 @@
                     <el-input v-model="politicsScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"></el-input>
                     <el-input-number v-model="politicsScore2[index].score" :precision="1" :step="0.1"  size="mini" style="width:100px; vertical-align: middle "></el-input-number>
                     <!--<el-button type="warning" slot="footer" size="mini" style="margin-left: 5px" @click="politicsdialogVisible = true">驳回</el-button>-->
-                    <el-dialog
-                      width="50%"
-                      title="驳回理由"
-                      :visible.sync="innerVisiblePolitics"
-                      append-to-body>
-                      <el-input
-                        type="textarea"
-                        placeholder="请输入内容"
-                        v-model="Reason"
-                        maxlength="100"
-                        show-word-limit
-                      >
-                      </el-input>
-                      <div slot="footer" class="dialog-footer" >
-                        <el-button @click="innerVisiblePolitics = false" type="info">取消</el-button>
-                        <el-popconfirm
-                          style="margin-left: 5px"
-                          confirm-button-text='确定咯'
-                          cancel-button-text='取消'
-                          icon="el-icon-info"
-                          icon-color="red"
-                          title="您确定要驳回吗？"
-                          @confirm="doublePolitics(politicsScore2[index].id,form.no,Reason,politicsScore2[index].openId)"
-                        >
-                          <el-button  type="danger" slot="reference">确定</el-button>
-                        </el-popconfirm>
-                      </div>
-                    </el-dialog>
-                    <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
-                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisiblePolitics = true">驳回</el-button>
-                    </div>
+                    
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{politicsScore2[index].operator}}</el-button>
 
                   </div>
@@ -201,39 +171,7 @@
                   <div v-for="(item,index) in this.ideologyScore2">
                     <el-input v-model="ideologyScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="ideologyScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-                    <el-dialog
-                      width="50%"
-                      title="驳回理由"
-                      :visible.sync="innerVisibleIdeology"
-                      append-to-body>
-
-                      <el-input
-                        type="textarea"
-                        placeholder="请输入内容"
-                        v-model="Reason"
-                        maxlength="100"
-                        show-word-limit
-                      >
-                      </el-input>
-                      <div slot="footer" class="dialog-footer" >
-                        <el-button @click="innerVisibleIdeology = false" type="info">取消</el-button>
-                        <el-popconfirm
-                          style="margin-left: 5px"
-                          confirm-button-text='确定咯'
-                          cancel-button-text='取消'
-                          icon="el-icon-info"
-                          icon-color="red"
-                          title="您确定要驳回吗？"
-                          @confirm="doubleIdeology(ideologyScore2[index].id,form.no,Reason,ideologyScore2[index].openId)"
-                        >
-                          <el-button  type="danger" slot="reference">确定</el-button>
-                        </el-popconfirm>
-
-                      </div>
-                    </el-dialog>
-                    <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
-                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleIdeology = true">驳回</el-button>
-                    </div>
+                    
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{ideologyScore2[index].operator}}</el-button>
 
                   </div>
@@ -315,38 +253,7 @@
                   <div v-for="(item,index) in this.organScore2">
                     <el-input v-model="organScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="organScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-                    <el-dialog
-                      width="50%"
-                      title="驳回理由"
-                      :visible.sync="innerVisibleOrgan"
-                      append-to-body>
-                      <el-input
-                        type="textarea"
-                        placeholder="请输入内容"
-                        v-model="Reason"
-                        maxlength="100"
-                        show-word-limit
-                      >
-                      </el-input>
-                      <div slot="footer" class="dialog-footer" >
-                        <el-button @click="innerVisibleOrgan = false" type="info">取消</el-button>
-                        <el-popconfirm
-                          style="margin-left: 5px"
-                          confirm-button-text='确定咯'
-                          cancel-button-text='取消'
-                          icon="el-icon-info"
-                          icon-color="red"
-                          title="您确定要驳回吗？"
-                          @confirm="doubleOrgan(organScore2[index].id,form.no,Reason,organScore2[index].openId)"
-                        >
-                          <el-button  type="danger" slot="reference">确定</el-button>
-                        </el-popconfirm>
-
-                      </div>
-                    </el-dialog>
-                    <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
-                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleOrgan = true">驳回</el-button>
-                    </div>
+                    
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{organScore2[index].operator}}</el-button>
                   </div>
                 </div>
@@ -372,39 +279,7 @@
                   <div v-for="(item,index) in this.lawScore2" >
                     <el-input v-model="lawScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="lawScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-                    <el-dialog
-                      width="50%"
-                      title="驳回理由"
-                      :visible.sync="innerVisibleLaw"
-                      append-to-body>
-
-                      <el-input
-                        type="textarea"
-                        placeholder="请输入内容"
-                        v-model="Reason"
-                        maxlength="100"
-                        show-word-limit
-                      >
-                      </el-input>
-                      <div slot="footer" class="dialog-footer" >
-                        <el-button @click="innerVisibleLaw = false" type="info">取消</el-button>
-                        <el-popconfirm
-                          style="margin-left: 5px"
-                          confirm-button-text='确定咯'
-                          cancel-button-text='取消'
-                          icon="el-icon-info"
-                          icon-color="red"
-                          title="您确定要驳回吗？"
-                          @confirm="doubleLaw(lawScore2[index].id,form.no,Reason,lawScore2[index].openId)"
-                        >
-                          <el-button  type="danger" slot="reference">确定</el-button>
-                        </el-popconfirm>
-
-                      </div>
-                    </el-dialog>
-                    <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
-                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleLaw = true">驳回</el-button>
-                    </div>
+                    
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{lawScore2[index].operator}}</el-button>
 
                   </div>
@@ -429,39 +304,7 @@
                   <div v-for="(item,index) in this.learningScore2" >
                     <el-input v-model="learningScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="learningScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-                    <el-dialog
-                      width="50%"
-                      title="驳回理由"
-                      :visible.sync="innerVisibleLearning"
-                      append-to-body>
-
-                      <el-input
-                        type="textarea"
-                        placeholder="请输入内容"
-                        v-model="Reason"
-                        maxlength="100"
-                        show-word-limit
-                      >
-                      </el-input>
-                      <div slot="footer" class="dialog-footer" >
-                        <el-button @click="innerVisibleLearning = false" type="info">取消</el-button>
-                        <el-popconfirm
-                          style="margin-left: 5px"
-                          confirm-button-text='确定咯'
-                          cancel-button-text='取消'
-                          icon="el-icon-info"
-                          icon-color="red"
-                          title="您确定要驳回吗？"
-                          @confirm="doubleLearning(learningScore2[index].id,form.no,Reason,learningScore2[index].openId)"
-                        >
-                          <el-button  type="danger" slot="reference">确定</el-button>
-                        </el-popconfirm>
-
-                      </div>
-                    </el-dialog>
-                    <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
-                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleLearning = true">驳回</el-button>
-                    </div>
+                    
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{learningScore2[index].operator}}</el-button>
                   </div>
                 </div>
@@ -480,39 +323,7 @@
                   <div v-for="(item,index) in this.developmentScore2" style="margin-top: 10px">
                     <el-input v-model="developmentScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"></el-input>
                     <el-input-number v-model="developmentScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-                    <el-dialog
-                      width="50%"
-                      title="驳回理由"
-                      :visible.sync="innerVisibleDevelopment"
-                      append-to-body>
-
-                      <el-input
-                        type="textarea"
-                        placeholder="请输入内容"
-                        v-model="Reason"
-                        maxlength="100"
-                        show-word-limit
-                      >
-                      </el-input>
-                      <div slot="footer" class="dialog-footer" >
-                        <el-button @click="innerVisibleDevelopment = false" type="info">取消</el-button>
-                        <el-popconfirm
-                          style="margin-left: 5px"
-                          confirm-button-text='确定咯'
-                          cancel-button-text='取消'
-                          icon="el-icon-info"
-                          icon-color="red"
-                          title="您确定要驳回吗？"
-                          @confirm="doubleDevelopment(developmentScore2[index].id,form.no,Reason,developmentScore2[index].openId)"
-                        >
-                          <el-button  type="danger" slot="reference">确定</el-button>
-                        </el-popconfirm>
-
-                      </div>
-                    </el-dialog>
-                    <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
-                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleDevelopment = true">驳回</el-button>
-                    </div>
+                   
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{developmentScore2[index].operator}}</el-button>
 
                   </div>
@@ -537,38 +348,7 @@
                   <div v-for="(item,index) in this.scientificScore2" >
                     <el-input v-model="scientificScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="scientificScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-                    <el-dialog
-                      width="50%"
-                      title="驳回理由"
-                      :visible.sync="innerVisibleScientific"
-                      append-to-body>
-                      <el-input
-                        type="textarea"
-                        placeholder="请输入内容"
-                        v-model="Reason"
-                        maxlength="100"
-                        show-word-limit
-                      >
-                      </el-input>
-                      <div slot="footer" class="dialog-footer" >
-                        <el-button @click="innerVisibleScientific = false" type="info">取消</el-button>
-                        <el-popconfirm
-                          style="margin-left: 5px"
-                          confirm-button-text='确定咯'
-                          cancel-button-text='取消'
-                          icon="el-icon-info"
-                          icon-color="red"
-                          title="您确定要驳回吗？"
-                          @confirm="doubleScientific(scientificScore2[index].id,form.no,Reason,scientificScore2[index].openId)"
-                        >
-                          <el-button  type="danger" slot="reference">确定</el-button>
-                        </el-popconfirm>
-
-                      </div>
-                    </el-dialog>
-                    <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
-                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleScientific = true">驳回</el-button>
-                    </div>
+                    
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{scientificScore2[index].operator}}</el-button>
 
                   </div>
@@ -593,39 +373,7 @@
                   <div v-for="(item,index) in this.physicalScore2" >
                     <el-input v-model="physicalScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="physicalScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-                    <el-dialog
-                      width="50%"
-                      title="驳回理由"
-                      :visible.sync="innerVisiblePhysical"
-                      append-to-body>
-
-                      <el-input
-                        type="textarea"
-                        placeholder="请输入内容"
-                        v-model="Reason"
-                        maxlength="100"
-                        show-word-limit
-                      >
-                      </el-input>
-                      <div slot="footer" class="dialog-footer" >
-                        <el-button @click="innerVisiblePhysical = false" type="info">取消</el-button>
-                        <el-popconfirm
-                          style="margin-left: 5px"
-                          confirm-button-text='确定咯'
-                          cancel-button-text='取消'
-                          icon="el-icon-info"
-                          icon-color="red"
-                          title="您确定要驳回吗？"
-                          @confirm="doublePhysical(physicalScore2[index].id,form.no,Reason,physicalScore2[index].openId)"
-                        >
-                          <el-button  type="danger" slot="reference">确定</el-button>
-                        </el-popconfirm>
-
-                      </div>
-                    </el-dialog>
-                    <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
-                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisiblePhysical = true">驳回</el-button>
-                    </div>
+                    
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{physicalScore2[index].operator}}</el-button>
 
                   </div>
@@ -650,37 +398,7 @@
                   <div v-for="(item,index) in this.mentalScore2" >
                     <el-input v-model="mentalScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="mentalScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-                    <el-dialog
-                      width="50%"
-                      title="驳回理由"
-                      :visible.sync="innerVisibleMental"
-                      append-to-body>
-                      <el-input
-                        type="textarea"
-                        placeholder="请输入内容"
-                        v-model="Reason"
-                        maxlength="100"
-                        show-word-limit
-                      >
-                      </el-input>
-                      <div slot="footer" class="dialog-footer" >
-                        <el-button @click="innerVisibleMental = false" type="info">取消</el-button>
-                        <el-popconfirm
-                          style="margin-left: 5px"
-                          confirm-button-text='确定咯'
-                          cancel-button-text='取消'
-                          icon="el-icon-info"
-                          icon-color="red"
-                          title="您确定要驳回吗？"
-                          @confirm="doubleMental(mentalScore2[index].id,form.no,Reason,mentalScore2[index].openId)"
-                        >
-                          <el-button  type="danger" slot="reference">确定</el-button>
-                        </el-popconfirm>
-                      </div>
-                    </el-dialog>
-                    <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
-                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleMental = true">驳回</el-button>
-                    </div>
+                   
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{mentalScore2[index].operator}}</el-button>
 
                   </div>
@@ -709,38 +427,7 @@
 
                     <el-input v-model="honoraryScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="honoraryScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-                    <el-dialog
-                      width="50%"
-                      title="驳回理由"
-                      :visible.sync="innerVisibleHonorary"
-                      append-to-body>
-                      <el-input
-                        type="textarea"
-                        placeholder="请输入内容"
-                        v-model="Reason"
-                        maxlength="100"
-                        show-word-limit
-                      >
-                      </el-input>
-                      <div slot="footer" class="dialog-footer" >
-                        <el-button @click="innerVisibleHonorary = false" type="info">取消</el-button>
-                        <el-popconfirm
-                          style="margin-left: 5px"
-                          confirm-button-text='确定咯'
-                          cancel-button-text='取消'
-                          icon="el-icon-info"
-                          icon-color="red"
-                          title="您确定要驳回吗？"
-                          @confirm="doubleHonorary(honoraryScore2[index].id,form.no,Reason,honoraryScore2[index].openId)"
-                        >
-                          <el-button  type="danger" slot="reference">确定</el-button>
-                        </el-popconfirm>
-
-                      </div>
-                    </el-dialog>
-                    <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
-                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleHonorary = true">驳回</el-button>
-                    </div>
+                    
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{honoraryScore2[index].operator}}</el-button>
 
                   </div>
@@ -766,38 +453,7 @@
                   <div v-for="(item,index) in this.competitionScore2" >
                     <el-input v-model="competitionScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="competitionScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-                    <el-dialog
-                      width="50%"
-                      title="驳回理由"
-                      :visible.sync="innerVisibleCompetition"
-                      append-to-body>
-                      <el-input
-                        type="textarea"
-                        placeholder="请输入内容"
-                        v-model="Reason"
-                        maxlength="100"
-                        show-word-limit
-                      >
-                      </el-input>
-                      <div slot="footer" class="dialog-footer" >
-                        <el-button @click="innerVisibleCompetition = false" type="info">取消</el-button>
-                        <el-popconfirm
-                          style="margin-left: 5px"
-                          confirm-button-text='确定咯'
-                          cancel-button-text='取消'
-                          icon="el-icon-info"
-                          icon-color="red"
-                          title="您确定要驳回吗？"
-                          @confirm="doubleCompetition(competitionScore2[index].id,form.no,Reason,competitionScore2[index].openId)"
-                        >
-                          <el-button  type="danger" slot="reference">确定</el-button>
-                        </el-popconfirm>
-
-                      </div>
-                    </el-dialog>
-                    <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
-                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleCompetition = true">驳回</el-button>
-                    </div>
+                    
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{competitionScore2[index].operator}}</el-button>
 
                   </div>
@@ -822,39 +478,7 @@
                   <div v-for="(item,index) in this.socialWorkScore2" >
                     <el-input v-model="socialWorkScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="socialWorkScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-                    <el-dialog
-                      width="50%"
-                      title="驳回理由"
-                      :visible.sync="innerVisibleSocialWork"
-                      append-to-body>
-
-                      <el-input
-                        type="textarea"
-                        placeholder="请输入内容"
-                        v-model="Reason"
-                        maxlength="100"
-                        show-word-limit
-                      >
-                      </el-input>
-                      <div slot="footer" class="dialog-footer" >
-                        <el-button @click="innerVisibleSocialWork = false" type="info">取消</el-button>
-                        <el-popconfirm
-                          style="margin-left: 5px"
-                          confirm-button-text='确定咯'
-                          cancel-button-text='取消'
-                          icon="el-icon-info"
-                          icon-color="red"
-                          title="您确定要驳回吗？"
-                          @confirm="doubleSocialWork(socialWorkScore2[index].id,form.no,Reason,socialWorkScore2[index].openId)"
-                        >
-                          <el-button  type="danger" slot="reference">确定</el-button>
-                        </el-popconfirm>
-
-                      </div>
-                    </el-dialog>
-                    <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
-                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleSocialWork = true">驳回</el-button>
-                    </div>
+                    
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{socialWorkScore2[index].operator}}</el-button>
 
                   </div>
@@ -879,38 +503,7 @@
                   <div v-for="(item,index) in this.knowlScore2" >
                     <el-input v-model="knowlScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="knowlScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-                    <el-dialog
-                      width="50%"
-                      title="驳回理由"
-                      :visible.sync="innerVisibleKnowl"
-                      append-to-body>
-                      <el-input
-                        type="textarea"
-                        placeholder="请输入内容"
-                        v-model="Reason"
-                        maxlength="100"
-                        show-word-limit
-                      >
-                      </el-input>
-                      <div slot="footer" class="dialog-footer" >
-                        <el-button @click="innerVisibleKnowl = false" type="info">取消</el-button>
-                        <el-popconfirm
-                          style="margin-left: 5px"
-                          confirm-button-text='确定咯'
-                          cancel-button-text='取消'
-                          icon="el-icon-info"
-                          icon-color="red"
-                          title="您确定要驳回吗？"
-                          @confirm="doubleKnowl(knowlScore2[index].id,form.no,Reason,knowlScore2[index].openId)"
-                        >
-                          <el-button  type="danger" slot="reference">确定</el-button>
-                        </el-popconfirm>
-
-                      </div>
-                    </el-dialog>
-                    <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
-                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleKnowl = true">驳回</el-button>
-                    </div>
+                    
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{knowlScore2[index].operator}}</el-button>
 
                   </div>
@@ -936,37 +529,7 @@
                   <div v-for="(item,index) in this.dailyScore2" >
                     <el-input v-model="dailyScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="dailyScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-                    <el-dialog
-                      width="50%"
-                      title="驳回理由"
-                      :visible.sync="innerVisibleDaily"
-                      append-to-body>
-                      <el-input
-                        type="textarea"
-                        placeholder="请输入内容"
-                        v-model="Reason"
-                        maxlength="100"
-                        show-word-limit
-                      >
-                      </el-input>
-                      <div slot="footer" class="dialog-footer" >
-                        <el-button @click="innerVisibleDaily = false" type="info">取消</el-button>
-                        <el-popconfirm
-                          style="margin-left: 5px"
-                          confirm-button-text='确定咯'
-                          cancel-button-text='取消'
-                          icon="el-icon-info"
-                          icon-color="red"
-                          title="您确定要驳回吗？"
-                          @confirm="doubleDaily(dailyScore2[index].id,form.no,Reason,dailyScore2[index].openId)"
-                        >
-                          <el-button  type="danger" slot="reference">确定</el-button>
-                        </el-popconfirm>
-                      </div>
-                    </el-dialog>
-                    <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
-                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleDaily = true">驳回</el-button>
-                    </div>
+                   
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{dailyScore2[index].operator}}</el-button>
 
                   </div>
