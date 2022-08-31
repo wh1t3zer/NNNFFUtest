@@ -27,6 +27,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="mid" column="mid"/>
         <result property="cid" column="cid"/>
         <result property="status" column="status"/>
+        <result property="title" column="title"/>
+        <result property="totalScore" column="totalScore"/>
     </resultMap>
 
 
@@ -143,6 +145,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{no}
         </foreach>
     </update>
+
+    <select id="exportExcel" resultType="com.ruoyi.test.domain.Student">
+        select t.no,s.name,s.major,c.name as classId,GROUP_CONCAT(t.title SEPARATOR ',') as title,
+               s.status,SUM(score)/100 as totalScore
+        from testerSoure t
+        join student s
+        on s.no = t.no
+        join classes c
+        on c.id=s.classId
+        group by t.no
+        limit 1,10
+    </select>
 
 </mapper>
 

@@ -16,6 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="operator"    column="operator"    />
         <result property="updateTime"    column="updateTime"    />
         <result property="createTime"    column="createTime"    />
+        <result property="openId"    column="openId"    />
     </resultMap>
     
     <update id="updateReasonByNo" parameterType="com.ruoyi.test.domain.Testersoure">
@@ -29,11 +30,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
     <select id="queryTitlesListByNo" parameterType="com.ruoyi.test.domain.Testersoure" resultMap="TestersoureResult">
-    select t.id ,t.no,t.score,t.module,t.detail,t.title,
-    (select name from testerMember where no = t.operator limit 1) as operator
-    from testerSoure t
-    where t.no = #{no}
+        select t.id ,t.no,t.score,t.module,t.detail,t.title,u.openid,
+        (select name from testerMember where no = t.operator limit 1) as operator
+        from ncg.testerSoure t
+        join account.user_info u
+        on t.no = u.no
+        where t.no = #{no}
     </select>
+
 
 
 

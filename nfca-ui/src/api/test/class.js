@@ -80,6 +80,7 @@ export function getAwards(no) {
   })
 }
 
+
 /**
  * 修改各个小点的成绩
  * @param id 图片的id,唯一标识

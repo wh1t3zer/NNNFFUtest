@@ -50,5 +50,10 @@ public class StudentServiceImpl implements IStudentService {
         return studentMapper.updateStatusByNos(nos);
     }
 
+    @Override
+    public List<Student> exportExcel(Student student) {
+        return studentMapper.exportExcel(student);
+    }
+
 
 }

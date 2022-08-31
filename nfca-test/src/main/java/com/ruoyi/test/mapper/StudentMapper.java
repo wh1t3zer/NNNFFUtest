@@ -24,5 +24,6 @@ public interface StudentMapper {
     //测试导出
     public List<Student> selectStudents(Student student);
 
+    public List<Student> exportExcel(Student student);
 
 }

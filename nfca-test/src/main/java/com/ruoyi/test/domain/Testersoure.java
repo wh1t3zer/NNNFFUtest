@@ -19,6 +19,22 @@ public class Testersoure {
     private Integer adopter2;
     private String operator;
 
+
+    private String openId;
+    public String getOpenId() {
+        return openId;
+    }
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
+
+
+
+
+
+
+
+
     public String getId() {
         return id;
     }
@@ -115,3 +131,8 @@ public class Testersoure {
                 '}';
     }
 }
+
+
+
+
+

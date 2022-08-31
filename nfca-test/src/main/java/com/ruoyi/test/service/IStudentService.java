@@ -23,4 +23,6 @@ public interface IStudentService {
 
     public int updateStatusByNos(String nos);
 
+    public List<Student> exportExcel(Student student);
+
 }

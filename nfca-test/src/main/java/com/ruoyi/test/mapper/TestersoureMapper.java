@@ -20,6 +20,8 @@ public interface TestersoureMapper {
     List<Testersoure> queryTitlesListByNo(Testersoure testersoure);
 
 
+    String selectOpenIdByNo(int no);
+
 
 //    List<Testersoure> selectTestUserByNo(Testersoure testersoure);
 }

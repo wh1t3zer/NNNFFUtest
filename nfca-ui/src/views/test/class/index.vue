@@ -68,7 +68,6 @@
               icon="el-icon-download"
               size="mini"
               @click="handleExport"
-              v-hasPermi="['test:class:export']"
             >导出</el-button>
           </el-col>
         </el-row>
@@ -182,7 +181,8 @@
               </template>
               <template v-else>
                 <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-                <el-input-number value="3.0" :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+
               </template>
             </el-form-item>
           </el-row>
@@ -239,8 +239,8 @@
               </template>
               <template v-else>
                 <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-                <el-input-number value="3.0" :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-</template>
+                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+              </template>
             </el-form-item>
           </el-row>
 
@@ -296,7 +296,8 @@
               </template>
               <template v-else>
                 <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-                <el-input-number value="6.0" :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+
               </template>
             </el-form-item>
           </el-row>
@@ -353,7 +354,8 @@
               </template>
               <template v-else>
                 <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-                <el-input-number value="3.0" :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+
               </template>
             </el-form-item>
           </el-row>
@@ -410,8 +412,9 @@
               </template>
               <template v-else>
                 <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-                <el-input-number value="6.0" :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-</template>
+                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+
+              </template>
             </el-form-item>
           </el-row>
 
@@ -456,12 +459,14 @@
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleLearning = true">驳回</el-button>
                     </div>
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{learningScore2[index].operator}}</el-button>
+
                   </div>
                 </div>
               </template>
               <template v-else>
                 <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-                <el-input-number value="6.0" :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+
               </template>
             </el-form-item>
           </el-row>
@@ -518,8 +523,9 @@
               </template>
               <template v-else>
                 <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-                <el-input-number value="0.0" :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-</template>
+                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+
+              </template>
             </el-form-item>
           </el-row>
 
@@ -574,8 +580,9 @@
               </template>
               <template v-else>
                 <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-                <el-input-number value="3.6" :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-</template>
+                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+
+              </template>
             </el-form-item>
           </el-row>
 
@@ -631,8 +638,9 @@
               </template>
               <template v-else>
                 <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-                <el-input-number value="4.8" :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-</template>
+                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+
+              </template>
             </el-form-item>
           </el-row>
 
@@ -686,8 +694,9 @@
               </template>
               <template v-else>
                 <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-                <el-input-number value="6.0" :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-</template>
+                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+
+              </template>
             </el-form-item>
           </el-row>
 
@@ -746,8 +755,8 @@
               </template>
               <template v-else>
                 <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-                <el-input-number value="0.0" :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-</template>
+                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+              </template>
 
             </el-form-item>
           </el-row>
@@ -803,8 +812,9 @@
               </template>
               <template v-else>
                 <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-                <el-input-number value="0.0" :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-</template>
+                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+
+              </template>
             </el-form-item>
           </el-row>
 
@@ -860,8 +870,9 @@
               </template>
               <template v-else>
                 <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-                <el-input-number value="0.0" :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-</template>
+                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+
+              </template>
             </el-form-item>
           </el-row>
 
@@ -916,8 +927,9 @@
               </template>
               <template v-else>
                 <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
-                <el-input-number value="0.0" :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-</template>
+                <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
+
+              </template>
 
             </el-form-item>
           </el-row>
@@ -995,7 +1007,6 @@
         <el-button @click="handleAccess2(form.no,form.id,form.score)" type="success" style="margin: 0 100px 0 50px">通过</el-button>
       </div>
     </el-dialog>
-
   </div>
 </template>
 
@@ -1199,12 +1210,8 @@
         queryParams: {
           pageNum: 1,
           pageSize: 10,
-          id:"",
-          name: '',
           no:'',
-          grade:'',
-          openid:'',
-          major:'',
+          name: undefined,
           status: undefined,
           majorValue:[],
         },
@@ -1877,19 +1884,14 @@
       * */
       handleExport(){
         const queryParams = this.queryParams;
-        this.$modal.confirm('是否确认导出所有用户数据项？',"警告",{     //弹窗提示
+        this.$confirm('是否确认导出所有用户数据项?', "警告", {
           confirmButtonText: "确定",
           cancelButtonText: "取消",
           type: "warning"
-        }).then(() => {
-          this.loading = true;
-          console.log(exportUser(queryParams));
+        }).then(function() {
           return exportUser(queryParams);
         }).then(response => {
-          console.log(response);
-          this.$download.name(response.msg);
-          this.loading = false;
-          // this.download(response.msg);
+          this.download(response.msg);
         }).catch(function() {});
       }
     },
