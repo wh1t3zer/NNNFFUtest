@@ -5,6 +5,7 @@ import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
+import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.test.domain.Student;
 import com.ruoyi.test.domain.TestUser;
 import com.ruoyi.test.domain.Testersoure;
@@ -159,6 +160,18 @@ public class TestUserMajorController extends BaseController
     public AjaxResult updateScore(@RequestBody Testersoure testersoure){
         return toAjax(testersoureService.updateScoreById(testersoure));
     }
+
+    @Log(title = "用户管理", businessType = BusinessType.EXPORT)
+    @PreAuthorize("@ss.hasPermi('test:major:export')")
+    @GetMapping("/export")
+    public AjaxResult export(Student student)
+    {
+        List<Student> list = studentService.selectClassStudents(student);
+        System.out.println(list);
+        ExcelUtil<Student> util = new ExcelUtil<Student>(Student.class);
+        return util.exportExcel(list, "用户数据");
+    }
+
 
 }
 
