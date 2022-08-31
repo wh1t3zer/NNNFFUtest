@@ -886,16 +886,7 @@
 
 
 
-      /**
-       * 驳回按钮操作
-       * @param id 唯一标识(图片id)
-       * @param reason 驳回原因
-       */
-      handleBack(id,no,reason) {
-        backUser(id,no,reason);
-        this.getList();
-        this.reason=''; /*驳回后重置驳回原因*/
-      },
+      
 
 
       /**
@@ -1326,102 +1317,7 @@
           this.achievementScore1= 0
       },
 
-      /*
-      *所有小点的驳回按钮
-      * */
-      doublePolitics(id,no,Reason){
-        this.handleBack(id,no,Reason)
-        this.Reason=''
-        this.innerVisiblePolitics = false;
-        this.outerVisible = false;
-      },
-
-      doubleIdeology(id,no,Reason){
-        this.handleBack(id,no,Reason)
-        this.Reason=''
-        this.innerVisibleIdeology = false;
-        this.outerVisible = false;
-      },
-      doubleMorality(id,no,Reason){
-        this.handleBack(id,no,Reason)
-        this.Reason=''
-        this.innerVisibleMorality = false;
-        this.outerVisible = false;
-      },
-      doubleOrgan(id,no,Reason){
-        this.handleBack(id,no,Reason)
-        this.Reason=''
-        this.innerVisibleOrgan = false;
-        this.outerVisible = false;
-      },
-
-      doubleLaw(id,no,Reason){
-        this.handleBack(id,no,Reason)
-        this.Reason=''
-        this.innerVisibleLaw = false;
-        this.outerVisible = false;
-      },
-      doubleLearning(id,no,Reason){
-        this.handleBack(id,no,Reason)
-        this.Reason=''
-        this.innerVisibleLearning = false;
-        this.outerVisible = false;
-      },
-      doubleDevelopment(id,no,Reason){
-        this.handleBack(id,no,Reason)
-        this.Reason=''
-        this.innerVisibleDevelopment = false;
-        this.outerVisible = false;
-      },
-      doubleScientific(id,no,Reason){
-        this.handleBack(id,no,Reason)
-        this.Reason=''
-        this.innerVisibleScientific = false;
-        this.outerVisible = false;
-      },
-
-      doublePhysical(id,no,Reason){
-        this.handleBack(id,no,Reason)
-        this.Reason=''
-        this.innerVisiblePhysical = false;
-        this.outerVisible = false;
-      },
-      doubleMental(id,no,Reason){
-        this.handleBack(id,no,Reason)
-        this.Reason=''
-        this.innerVisibleMental = false;
-        this.outerVisible = false;
-      },
-      doubleHonorary(id,no,Reason){
-        this.handleBack(id,no,Reason)
-        this.Reason=''
-        this.innerVisibleHonorary = false;
-        this.outerVisible = false;
-      },
-      doubleCompetition(id,no,Reason){
-        this.handleBack(id,no,Reason)
-        this.Reason=''
-        this.innerVisibleCompetition = false;
-        this.outerVisible = false;
-      },
-      doubleSocialWork(id,no,Reason){
-        this.handleBack(id,no,Reason)
-        this.Reason=''
-        this.innerVisibleSocialWork = false;
-        this.outerVisible = false;
-      },
-      doubleKnowl(id,no,Reason){
-        this.handleBack(id,no,Reason)
-        this.Reason=''
-        this.innerVisibleKnowl = false;
-        this.outerVisible = false;
-      },
-      doubleDaily(id,no,Reason){
-        this.handleBack(id,no,Reason)
-        this.Reason=''
-        this.innerVisibleDaily = false;
-        this.outerVisible = false;
-      },
+     
       //重置按钮
       reset(){
         this.queryParams.name =''

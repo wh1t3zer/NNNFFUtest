@@ -102,3 +102,20 @@ export function pushmsg(openId,Reason){
     data:data
   })
 }
+/**
+ * 修改各个小点的成绩
+ * @param id 图片的id,唯一标识
+ * @param score 图片的id对应的小点成绩(各个小点的成绩)
+ * @returns {*}
+ */
+ export function updateScore(id,score) {
+  const data = {
+    id,
+    score,
+  }
+  return request({
+    url: '/test/major/updateScore',
+    method: 'put',
+    data: data
+  })
+}

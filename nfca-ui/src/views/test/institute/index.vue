@@ -1090,7 +1090,7 @@
 
 </style>
 <script>
-  import { TestUser, backUser, accessUser,accessUser2,getAwards,pushmsg } from "@/api/test/institute";
+  import { TestUser, backUser, accessUser,accessUser2,getAwards,pushmsg,updateScore } from "@/api/test/institute";
   import { getToken } from "@/utils/auth";
   import EditTable from "../../tool/gen/editTable.vue";
   import * as ElementUI from "element-ui";
