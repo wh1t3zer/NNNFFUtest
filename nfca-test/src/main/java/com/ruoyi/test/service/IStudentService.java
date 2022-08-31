@@ -10,6 +10,8 @@ public interface IStudentService {
     * */
     public List<Student> selectAllStudents(Student student);
 
+    public List<Student> selectStudents(Student student);
+
     public List<Student> selectClassStudents(Student student);
 
     public List<Student> selectMajorStudents(Student student);

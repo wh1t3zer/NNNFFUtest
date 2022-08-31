@@ -1,4 +1,5 @@
 <template>
+
   <div class="app-container">
     <el-row :gutter="20">
       <!--班级学生数据-->
@@ -46,7 +47,7 @@
           </el-form-item>
         </el-form>
 
-        <el-row :gutter="10" class="mb8">
+        <el-row :gutter="10" class="mb8" style="display: inline-block">
           <el-col :span="1.5">
 
             <el-button
@@ -56,10 +57,21 @@
               size="mini"
               :disabled="multiple"
               @click="handleAccess"
-              v-hasPermi="['test:class:access']"
+              v-hasPermi="['test:institute:access']"
             >通过</el-button>
           </el-col>
         </el-row>
+        <el-row :gutter="10" class="mb8" style="display: inline-block; margin-left: 20px">
+          <el-col :span="1.5">
+            <el-button
+              type="warning"
+              icon="el-icon-download"
+              size="mini"
+              @click="handleExport"
+            >导出</el-button>
+          </el-col>
+        </el-row>
+
         <el-table v-loading="loading" :data="testList" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="50" align="center" />
           <!--          <el-table-column label="用户id" align="center" key="userId" prop="userId" v-if="columns[0].visible" />-->
@@ -121,17 +133,16 @@
           <el-row >
             <el-form-item label="1、政治素质">
               <template v-if="this.politicsScore2.length > 0">
-                <div style="display: inline-block;width: 40%">
+                <div style="display: inline-block;width: 45%">
                   <div v-for="(item,index) in this.politicsScore2" style="display: inline; vertical-align: middle ">
                     <el-input v-model="politicsScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"></el-input>
                     <el-input-number v-model="politicsScore2[index].score" :precision="1" :step="0.1"  size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-                <!--<el-button type="warning" slot="footer" size="mini" style="margin-left: 5px" @click="politicsdialogVisible = true">驳回</el-button>-->
+                    <!--<el-button type="warning" slot="footer" size="mini" style="margin-left: 5px" @click="politicsdialogVisible = true">驳回</el-button>-->
                     <el-dialog
                       width="50%"
                       title="驳回理由"
-                      :visible.sync="innerVisible"
+                      :visible.sync="innerVisiblePolitics"
                       append-to-body>
-
                       <el-input
                         type="textarea"
                         placeholder="请输入内容"
@@ -141,7 +152,7 @@
                       >
                       </el-input>
                       <div slot="footer" class="dialog-footer" >
-                        <el-button @click="innerVisible = false" type="info">取消</el-button>
+                        <el-button @click="innerVisiblePolitics = false" type="info">取消</el-button>
                         <el-popconfirm
                           style="margin-left: 5px"
                           confirm-button-text='确定咯'
@@ -149,17 +160,16 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="double(form.no,reason)"
+                          @confirm="doublePolitics(politicsScore2[index].id,form.no,Reason)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
-
                       </div>
                     </el-dialog>
                     <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
-                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisible = true">驳回</el-button>
+                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisiblePolitics = true">驳回</el-button>
                     </div>
-
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{politicsScore2[index].operator}}</el-button>
 
                   </div>
                 </div>
@@ -180,14 +190,14 @@
           <el-row >
             <el-form-item label="2、思想素质">
               <template v-if="this.ideologyScore2.length > 0">
-                <div style="display: inline-block;width: 40%">
+                <div style="display: inline-block;width: 45%">
                   <div v-for="(item,index) in this.ideologyScore2">
                     <el-input v-model="ideologyScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="ideologyScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
                     <el-dialog
                       width="50%"
                       title="驳回理由"
-                      :visible.sync="innerVisible"
+                      :visible.sync="innerVisibleIdeology"
                       append-to-body>
 
                       <el-input
@@ -199,7 +209,7 @@
                       >
                       </el-input>
                       <div slot="footer" class="dialog-footer" >
-                        <el-button @click="innerVisible = false" type="info">取消</el-button>
+                        <el-button @click="innerVisibleIdeology = false" type="info">取消</el-button>
                         <el-popconfirm
                           style="margin-left: 5px"
                           confirm-button-text='确定咯'
@@ -207,7 +217,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="double(form.no,reason)"
+                          @confirm="doubleIdeology(ideologyScore2[index].id,form.no,Reason)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -215,8 +225,10 @@
                       </div>
                     </el-dialog>
                     <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
-                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisible = true">驳回</el-button>
+                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleIdeology = true">驳回</el-button>
                     </div>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{ideologyScore2[index].operator}}</el-button>
+
                   </div>
                 </div>
                 <div v-for="(imgs, index) in ideologyid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -228,21 +240,21 @@
               <template v-else>
                 <el-input autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                 <el-input-number :precision="1" :step="0.1" :disabled="true" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-
               </template>
             </el-form-item>
           </el-row>
+
           <el-row >
             <el-form-item  label="3、道德素质">
               <template v-if="this.moralityScore2.length > 0">
-                <div style="display: inline-block;width: 40%">
+                <div style="display: inline-block;width: 45%">
                   <div v-for="(item,index) in this.moralityScore2">
                     <el-input v-model="moralityScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="moralityScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
                     <el-dialog
                       width="50%"
                       title="驳回理由"
-                      :visible.sync="innerVisible"
+                      :visible.sync="innerVisibleMorality"
                       append-to-body>
 
                       <el-input
@@ -254,7 +266,7 @@
                       >
                       </el-input>
                       <div slot="footer" class="dialog-footer" >
-                        <el-button @click="innerVisible = false" type="info">取消</el-button>
+                        <el-button @click="innerVisibleMorality = false" type="info">取消</el-button>
                         <el-popconfirm
                           style="margin-left: 5px"
                           confirm-button-text='确定咯'
@@ -262,7 +274,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="double(form.no,reason)"
+                          @confirm="doubleMorality(moralityScore2[index].id,form.no,Reason)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -270,8 +282,10 @@
                       </div>
                     </el-dialog>
                     <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
-                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisible = true">驳回</el-button>
+                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleMorality = true">驳回</el-button>
                     </div>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{moralityScore2[index].operator}}</el-button>
+
                   </div>
                 </div>
                 <div v-for="(imgs, index) in moralityid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -287,20 +301,19 @@
               </template>
             </el-form-item>
           </el-row>
+
           <el-row >
             <el-form-item  label="4、组织素质">
-
               <template v-if="this.organScore2.length > 0" >
-                <div style="display: inline-block;width: 40%">
+                <div style="display: inline-block;width: 45%">
                   <div v-for="(item,index) in this.organScore2">
                     <el-input v-model="organScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="organScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
                     <el-dialog
                       width="50%"
                       title="驳回理由"
-                      :visible.sync="innerVisible"
+                      :visible.sync="innerVisibleOrgan"
                       append-to-body>
-
                       <el-input
                         type="textarea"
                         placeholder="请输入内容"
@@ -310,7 +323,7 @@
                       >
                       </el-input>
                       <div slot="footer" class="dialog-footer" >
-                        <el-button @click="innerVisible = false" type="info">取消</el-button>
+                        <el-button @click="innerVisibleOrgan = false" type="info">取消</el-button>
                         <el-popconfirm
                           style="margin-left: 5px"
                           confirm-button-text='确定咯'
@@ -318,7 +331,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="double(form.no,reason)"
+                          @confirm="doubleOrgan(organScore2[index].id,form.no,Reason)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -326,8 +339,9 @@
                       </div>
                     </el-dialog>
                     <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
-                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisible = true">驳回</el-button>
+                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleOrgan = true">驳回</el-button>
                     </div>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{organScore2[index].operator}}</el-button>
                   </div>
                 </div>
                 <div v-for="(imgs, index) in organid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -345,17 +359,18 @@
               </template>
             </el-form-item>
           </el-row>
+
           <el-row >
             <el-form-item label="5、法纪素质">
               <template v-if="this.lawScore2.length > 0">
-                <div style="display: inline-block;width: 40%">
+                <div style="display: inline-block;width: 45%">
                   <div v-for="(item,index) in this.lawScore2" >
                     <el-input v-model="lawScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="lawScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
                     <el-dialog
                       width="50%"
                       title="驳回理由"
-                      :visible.sync="innerVisible"
+                      :visible.sync="innerVisibleLaw"
                       append-to-body>
 
                       <el-input
@@ -367,7 +382,7 @@
                       >
                       </el-input>
                       <div slot="footer" class="dialog-footer" >
-                        <el-button @click="innerVisible = false" type="info">取消</el-button>
+                        <el-button @click="innerVisibleLaw = false" type="info">取消</el-button>
                         <el-popconfirm
                           style="margin-left: 5px"
                           confirm-button-text='确定咯'
@@ -375,7 +390,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="double(form.no,reason)"
+                          @confirm="doubleLaw(lawScore2[index].id,form.no,Reason)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -383,8 +398,10 @@
                       </div>
                     </el-dialog>
                     <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
-                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisible = true">驳回</el-button>
+                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleLaw = true">驳回</el-button>
                     </div>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{lawScore2[index].operator}}</el-button>
+
                   </div>
                 </div>
                 <div v-for="(imgs, index) in lawid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -400,18 +417,18 @@
               </template>
             </el-form-item>
           </el-row>
-          <el-row >
 
+          <el-row >
             <el-form-item label="6、学习与生活素质" >
               <template v-if="this.learningScore2.length > 0">
-                <div style="display: inline-block;width: 40%">
+                <div style="display: inline-block;width: 45%">
                   <div v-for="(item,index) in this.learningScore2" >
                     <el-input v-model="learningScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="learningScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
                     <el-dialog
                       width="50%"
                       title="驳回理由"
-                      :visible.sync="innerVisible"
+                      :visible.sync="innerVisibleLearning"
                       append-to-body>
 
                       <el-input
@@ -423,7 +440,7 @@
                       >
                       </el-input>
                       <div slot="footer" class="dialog-footer" >
-                        <el-button @click="innerVisible = false" type="info">取消</el-button>
+                        <el-button @click="innerVisibleLearning = false" type="info">取消</el-button>
                         <el-popconfirm
                           style="margin-left: 5px"
                           confirm-button-text='确定咯'
@@ -431,7 +448,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="double(form.no,reason)"
+                          @confirm="doubleLearning(learningScore2[index].id,form.no,Reason)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -439,8 +456,10 @@
                       </div>
                     </el-dialog>
                     <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
-                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisible = true">驳回</el-button>
+                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleLearning = true">驳回</el-button>
                     </div>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{learningScore2[index].operator}}</el-button>
+
                   </div>
                 </div>
               </template>
@@ -451,17 +470,18 @@
               </template>
             </el-form-item>
           </el-row>
+
           <el-row >
             <el-form-item label="7、实践与创新素质">
               <template v-if="this.developmentScore2.length > 0">
-                <div style="display: inline-block;width: 40%">
+                <div style="display: inline-block;width: 45%">
                   <div v-for="(item,index) in this.developmentScore2" style="margin-top: 10px">
                     <el-input v-model="developmentScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"></el-input>
                     <el-input-number v-model="developmentScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
                     <el-dialog
                       width="50%"
                       title="驳回理由"
-                      :visible.sync="innerVisible"
+                      :visible.sync="innerVisibleDevelopment"
                       append-to-body>
 
                       <el-input
@@ -473,7 +493,7 @@
                       >
                       </el-input>
                       <div slot="footer" class="dialog-footer" >
-                        <el-button @click="innerVisible = false" type="info">取消</el-button>
+                        <el-button @click="innerVisibleDevelopment = false" type="info">取消</el-button>
                         <el-popconfirm
                           style="margin-left: 5px"
                           confirm-button-text='确定咯'
@@ -481,7 +501,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="double(form.no,reason)"
+                          @confirm="doubleDevelopment(developmentScore2[index].id,form.no,Reason)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -489,8 +509,10 @@
                       </div>
                     </el-dialog>
                     <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
-                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisible = true">驳回</el-button>
+                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleDevelopment = true">驳回</el-button>
                     </div>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{developmentScore2[index].operator}}</el-button>
+
                   </div>
                 </div>
                 <div v-for="(imgs, index) in developmentid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -506,20 +528,19 @@
               </template>
             </el-form-item>
           </el-row>
+
           <el-row >
             <el-form-item label="8、科学文化素质">
-
               <template v-if="this.scientificScore2.length > 0">
-                <div style="display: inline-block;width: 40%">
+                <div style="display: inline-block;width: 45%">
                   <div v-for="(item,index) in this.scientificScore2" >
                     <el-input v-model="scientificScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="scientificScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
                     <el-dialog
                       width="50%"
                       title="驳回理由"
-                      :visible.sync="innerVisible"
+                      :visible.sync="innerVisibleScientific"
                       append-to-body>
-
                       <el-input
                         type="textarea"
                         placeholder="请输入内容"
@@ -529,7 +550,7 @@
                       >
                       </el-input>
                       <div slot="footer" class="dialog-footer" >
-                        <el-button @click="innerVisible = false" type="info">取消</el-button>
+                        <el-button @click="innerVisibleScientific = false" type="info">取消</el-button>
                         <el-popconfirm
                           style="margin-left: 5px"
                           confirm-button-text='确定咯'
@@ -537,7 +558,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="double(form.no,reason)"
+                          @confirm="doubleScientific(scientificScore2[index].id,form.no,Reason)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -545,8 +566,10 @@
                       </div>
                     </el-dialog>
                     <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
-                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisible = true">驳回</el-button>
+                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleScientific = true">驳回</el-button>
                     </div>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{scientificScore2[index].operator}}</el-button>
+
                   </div>
                 </div>
                 <div v-for="(imgs, index) in scientificid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -562,18 +585,18 @@
               </template>
             </el-form-item>
           </el-row>
+
           <el-row >
             <el-form-item label="9、身体素质">
-
               <template v-if="this.physicalScore2.length > 0">
-                  <div style="display: inline-block;width: 40%">
+                  <div style="display: inline-block;width: 45%">
                   <div v-for="(item,index) in this.physicalScore2" >
                     <el-input v-model="physicalScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="physicalScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
                     <el-dialog
                       width="50%"
                       title="驳回理由"
-                      :visible.sync="innerVisible"
+                      :visible.sync="innerVisiblePhysical"
                       append-to-body>
 
                       <el-input
@@ -585,7 +608,7 @@
                       >
                       </el-input>
                       <div slot="footer" class="dialog-footer" >
-                        <el-button @click="innerVisible = false" type="info">取消</el-button>
+                        <el-button @click="innerVisiblePhysical = false" type="info">取消</el-button>
                         <el-popconfirm
                           style="margin-left: 5px"
                           confirm-button-text='确定咯'
@@ -593,7 +616,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="double(form.no,reason)"
+                          @confirm="doublePhysical(physicalScore2[index].id,form.no,Reason)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -601,8 +624,10 @@
                       </div>
                     </el-dialog>
                     <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
-                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisible = true">驳回</el-button>
+                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisiblePhysical = true">驳回</el-button>
                     </div>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{physicalScore2[index].operator}}</el-button>
+
                   </div>
                 </div>
                 <div v-for="(imgs, index) in physicalid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -618,20 +643,19 @@
               </template>
             </el-form-item>
           </el-row>
+
           <el-row >
             <el-form-item label="10、心理素质">
-
               <template v-if="this.mentalScore2.length > 0">
-                <div style="display: inline-block;width: 40%">
+                <div style="display: inline-block;width: 45%">
                   <div v-for="(item,index) in this.mentalScore2" >
                     <el-input v-model="mentalScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="mentalScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
                     <el-dialog
                       width="50%"
                       title="驳回理由"
-                      :visible.sync="innerVisible"
+                      :visible.sync="innerVisibleMental"
                       append-to-body>
-
                       <el-input
                         type="textarea"
                         placeholder="请输入内容"
@@ -641,7 +665,7 @@
                       >
                       </el-input>
                       <div slot="footer" class="dialog-footer" >
-                        <el-button @click="innerVisible = false" type="info">取消</el-button>
+                        <el-button @click="innerVisibleMental = false" type="info">取消</el-button>
                         <el-popconfirm
                           style="margin-left: 5px"
                           confirm-button-text='确定咯'
@@ -649,16 +673,17 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="double(form.no,reason)"
+                          @confirm="doubleMental(mentalScore2[index].id,form.no,Reason)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
-
                       </div>
                     </el-dialog>
                     <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
-                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisible = true">驳回</el-button>
+                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleMental = true">驳回</el-button>
                     </div>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{mentalScore2[index].operator}}</el-button>
+
                   </div>
                 </div>
                 <div v-for="(imgs, index) in mentalid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -675,20 +700,21 @@
             </el-form-item>
           </el-row>
 
-          <el-descriptions title="发展性素质测评（满分40 分）"></el-descriptions>
+          <el-descriptions title="发展性素质测评（满分45 分）"></el-descriptions>
+
 
           <el-row>
             <el-form-item label="11、荣誉称号加分">
-
               <template v-if="this.honoraryScore2.length > 0">
-                <div style="display: inline-block;width: 40%">
+                <div style="display: inline-block;width: 45%">
                   <div v-for="(item,index) in this.honoraryScore2" >
+
                     <el-input v-model="honoraryScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="honoraryScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
                     <el-dialog
                       width="50%"
                       title="驳回理由"
-                      :visible.sync="innerVisible"
+                      :visible.sync="innerVisibleHonorary"
                       append-to-body>
                       <el-input
                         type="textarea"
@@ -699,7 +725,7 @@
                       >
                       </el-input>
                       <div slot="footer" class="dialog-footer" >
-                        <el-button @click="innerVisible = false" type="info">取消</el-button>
+                        <el-button @click="innerVisibleHonorary = false" type="info">取消</el-button>
                         <el-popconfirm
                           style="margin-left: 5px"
                           confirm-button-text='确定咯'
@@ -707,7 +733,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="double(form.no,reason)"
+                          @confirm="doubleHonorary(honoraryScore2[index].id,form.no,Reason)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -715,8 +741,10 @@
                       </div>
                     </el-dialog>
                     <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
-                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisible = true">驳回</el-button>
+                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleHonorary = true">驳回</el-button>
                     </div>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{honoraryScore2[index].operator}}</el-button>
+
                   </div>
                 </div>
                 <div v-for="(imgs, index) in honoraryid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -732,20 +760,19 @@
 
             </el-form-item>
           </el-row>
+
           <el-row>
             <el-form-item label="12、文体艺术等竞赛或活动加分">
-
               <template v-if="this.competitionScore2.length > 0">
-                <div style="display: inline-block;width: 40%">
+                <div style="display: inline-block;width: 45%">
                   <div v-for="(item,index) in this.competitionScore2" >
                     <el-input v-model="competitionScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="competitionScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
                     <el-dialog
                       width="50%"
                       title="驳回理由"
-                      :visible.sync="innerVisible"
+                      :visible.sync="innerVisibleCompetition"
                       append-to-body>
-
                       <el-input
                         type="textarea"
                         placeholder="请输入内容"
@@ -755,7 +782,7 @@
                       >
                       </el-input>
                       <div slot="footer" class="dialog-footer" >
-                        <el-button @click="innerVisible = false" type="info">取消</el-button>
+                        <el-button @click="innerVisibleCompetition = false" type="info">取消</el-button>
                         <el-popconfirm
                           style="margin-left: 5px"
                           confirm-button-text='确定咯'
@@ -763,7 +790,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="double(form.no,reason)"
+                          @confirm="doubleCompetition(competitionScore2[index].id,form.no,Reason)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -771,8 +798,10 @@
                       </div>
                     </el-dialog>
                     <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
-                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisible = true">驳回</el-button>
+                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleCompetition = true">驳回</el-button>
                     </div>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{competitionScore2[index].operator}}</el-button>
+
                   </div>
                 </div>
                 <div v-for="(imgs, index) in competitionid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -788,18 +817,18 @@
               </template>
             </el-form-item>
           </el-row>
+
           <el-row>
             <el-form-item label="13、社会工作加分">
-
               <template v-if="this.socialWorkScore2.length > 0">
-                <div style="display: inline-block;width: 40%">
+                <div style="display: inline-block;width: 45%">
                   <div v-for="(item,index) in this.socialWorkScore2" >
                     <el-input v-model="socialWorkScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="socialWorkScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
                     <el-dialog
                       width="50%"
                       title="驳回理由"
-                      :visible.sync="innerVisible"
+                      :visible.sync="innerVisibleSocialWork"
                       append-to-body>
 
                       <el-input
@@ -811,7 +840,7 @@
                       >
                       </el-input>
                       <div slot="footer" class="dialog-footer" >
-                        <el-button @click="innerVisible = false" type="info">取消</el-button>
+                        <el-button @click="innerVisibleSocialWork = false" type="info">取消</el-button>
                         <el-popconfirm
                           style="margin-left: 5px"
                           confirm-button-text='确定咯'
@@ -819,7 +848,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="double(form.no,reason)"
+                          @confirm="doubleSocialWork(socialWorkScore2[index].id,form.no,Reason)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -827,8 +856,10 @@
                       </div>
                     </el-dialog>
                     <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
-                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisible = true">驳回</el-button>
+                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleSocialWork = true">驳回</el-button>
                     </div>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{socialWorkScore2[index].operator}}</el-button>
+
                   </div>
                 </div>
                 <div v-for="(imgs, index) in socialWorkid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -844,17 +875,18 @@
               </template>
             </el-form-item>
           </el-row>
+
           <el-row>
             <el-form-item label="14、知识与技能加分">
               <template v-if="this.knowlScore2.length > 0">
-                <div style="display: inline-block;width: 40%">
+                <div style="display: inline-block;width: 45%">
                   <div v-for="(item,index) in this.knowlScore2" >
                     <el-input v-model="knowlScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="knowlScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
                     <el-dialog
                       width="50%"
                       title="驳回理由"
-                      :visible.sync="innerVisible"
+                      :visible.sync="innerVisibleKnowl"
                       append-to-body>
                       <el-input
                         type="textarea"
@@ -865,7 +897,7 @@
                       >
                       </el-input>
                       <div slot="footer" class="dialog-footer" >
-                        <el-button @click="innerVisible = false" type="info">取消</el-button>
+                        <el-button @click="innerVisibleKnowl = false" type="info">取消</el-button>
                         <el-popconfirm
                           style="margin-left: 5px"
                           confirm-button-text='确定咯'
@@ -873,7 +905,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="double(form.no,reason)"
+                          @confirm="doubleKnowl(knowlScore2[index].id,form.no,Reason)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -881,8 +913,10 @@
                       </div>
                     </el-dialog>
                     <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
-                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisible = true">驳回</el-button>
+                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleKnowl = true">驳回</el-button>
                     </div>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{knowlScore2[index].operator}}</el-button>
+
                   </div>
                 </div>
                 <div v-for="(imgs, index) in knowlid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -899,17 +933,18 @@
 
             </el-form-item>
           </el-row>
+
           <el-row>
             <el-form-item label="15、日常操行减分" >
               <template v-if="this.dailyScore2.length > 0">
-                <div style="display: inline-block;width: 40%">
+                <div style="display: inline-block;width: 45%">
                   <div v-for="(item,index) in this.dailyScore2" >
                     <el-input v-model="dailyScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="dailyScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
                     <el-dialog
                       width="50%"
                       title="驳回理由"
-                      :visible.sync="innerVisible"
+                      :visible.sync="innerVisibleDaily"
                       append-to-body>
                       <el-input
                         type="textarea"
@@ -920,7 +955,7 @@
                       >
                       </el-input>
                       <div slot="footer" class="dialog-footer" >
-                        <el-button @click="innerVisible = false" type="info">取消</el-button>
+                        <el-button @click="innerVisibleDaily = false" type="info">取消</el-button>
                         <el-popconfirm
                           style="margin-left: 5px"
                           confirm-button-text='确定咯'
@@ -928,15 +963,17 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="double(form.no,reason)"
+                          @confirm="doubleDaily(dailyScore2[index].id,form.no,Reason)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
                       </div>
                     </el-dialog>
                     <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
-                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisible = true">驳回</el-button>
+                      <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleDaily = true">驳回</el-button>
                     </div>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{dailyScore2[index].operator}}</el-button>
+
                   </div>
                 </div>
               </template>
@@ -945,6 +982,7 @@
               </template>
             </el-form-item>
           </el-row>
+
           <el-row>
             <el-form-item label="16、期末成绩">
               <el-input v-model="this.achievement" autocomplete="off" type="textarea"  :disabled="true" :autosize="{ minRows: 1}" ></el-input>
@@ -952,12 +990,13 @@
               <el-label style="color:red">{{this.score}}/100</el-label>
             </el-form-item>
           </el-row>
+
           <el-row>
             <el-form-item label="17、总评">
               <el-label style="color: red">总评为：{{ this.totalscore }}</el-label>
             </el-form-item>
           </el-row>
-          <!-- </el-row> -->
+
         </el-col>
 
 
@@ -1017,7 +1056,7 @@
 
 </style>
 <script>
-  import { TestUser,  backUser, accessUser, accessUser2, getAwards,updateScore} from "@/api/test/class";
+  import { TestUser,  backUser, accessUser, accessUser2, getAwards,updateScore,exportUser} from "@/api/test/class";
   import { getToken } from "@/utils/auth";
   import EditTable from "../../tool/gen/editTable.vue";
   import * as ElementUI from "element-ui";
@@ -1174,6 +1213,7 @@
           no:'',
           name: undefined,
           status: undefined,
+          majorValue:[],
         },
         // 表单校验
         rules: {
@@ -1194,7 +1234,23 @@
           { key: 7, label: `状态`, visible: true }
         ],
         outerVisible: false,
-        innerVisible: false
+        innerVisible: false,
+
+        innerVisiblePolitics: false,
+        innerVisibleIdeology: false,
+        innerVisibleMorality: false,
+        innerVisibleOrgan: false,
+        innerVisibleLaw: false,
+        innerVisibleLearning: false,
+        innerVisibleDevelopment: false,
+        innerVisibleScientific: false,
+        innerVisiblePhysical: false,
+        innerVisibleMental: false,
+        innerVisibleHonorary: false,
+        innerVisibleCompetition: false,
+        innerVisibleSocialWork: false,
+        innerVisibleKnowl: false,
+        innerVisibleDaily: false,
       };
     },
     created() {
@@ -1212,10 +1268,8 @@
           this.testList = response.rows;
           this.total = response.total;
           this.loading = false;
-          // console.log(this.testList)  //一页的数据
         });
       },
-
 
       // 筛选节点
       filterNode(value, data) {
@@ -1276,11 +1330,11 @@
 
       /**
        * 驳回按钮操作
-       * @param no 学生学号
+       * @param id 唯一标识(图片id)
        * @param reason 驳回原因
        */
-      handleBack(no,reason) {
-        backUser(no,reason);
+      handleBack(id,no,reason) {
+        backUser(id,no,reason);
         this.getList();
         this.reason=''; /*驳回后重置驳回原因*/
       },
@@ -1657,22 +1711,23 @@
         this.mentalid=[];
         this.moralityid=[];
         this.honoraryid=[];
-        this.politicsScore2=[],
-        this.ideologyScore2=[],
-        this.moralityScore2=[],
-        this.organScore2=[],
-        this.lawScore2=[],
-        this.learningScore2=[],
-        this.developmentScore2= [],
-        this.scientificScore=[],
-        this.physicalScore2=[],
-        this.mentalScore2=[],
-        this.honoraryScore2= [],
-        this.competitionScore2= [],
-        this.socialWorkScore2= [],
-        this.knowlScore2= [],
-        this.dailyScore2= [],
-        this.achievementScore2=[]
+        this.politicsScore2=[];
+        this.ideologyScore2=[];
+        this.moralityScore2=[];
+        this.organScore2=[];
+        this.lawScore2=[];
+        this.learningScore2=[];
+        this.developmentScore2= [];
+        this.scientificScore=[];
+        this.physicalScore2=[];
+        this.mentalScore2=[];
+        this.honoraryScore2= [];
+        this.competitionScore2= [];
+        this.socialWorkScore2= [];
+        this.knowlScore2= [];
+        this.dailyScore2= [];
+        this.achievementScore2=[];
+        this.scientificScore2=[];
       },
 
       /*
@@ -1713,13 +1768,101 @@
           this.achievementScore1= 0
       },
 
-      //驳回提示按钮
-      double(no,reason){
-        this.handleBack(no,reason)
-
-        this.innerVisible = false;
+      /*
+      *所有小点的驳回按钮
+      * */
+      doublePolitics(id,no,Reason){
+        this.handleBack(id,no,Reason)
+        this.Reason=''
+        this.innerVisiblePolitics = false;
         this.outerVisible = false;
+      },
 
+      doubleIdeology(id,no,Reason){
+        this.handleBack(id,no,Reason)
+        this.Reason=''
+        this.innerVisibleIdeology = false;
+        this.outerVisible = false;
+      },
+      doubleMorality(id,no,Reason){
+        this.handleBack(id,no,Reason)
+        this.Reason=''
+        this.innerVisibleMorality = false;
+        this.outerVisible = false;
+      },
+      doubleOrgan(id,no,Reason){
+        this.handleBack(id,no,Reason)
+        this.Reason=''
+        this.innerVisibleOrgan = false;
+        this.outerVisible = false;
+      },
+
+      doubleLaw(id,no,Reason){
+        this.handleBack(id,no,Reason)
+        this.Reason=''
+        this.innerVisibleLaw = false;
+        this.outerVisible = false;
+      },
+      doubleLearning(id,no,Reason){
+        this.handleBack(id,no,Reason)
+        this.Reason=''
+        this.innerVisibleLearning = false;
+        this.outerVisible = false;
+      },
+      doubleDevelopment(id,no,Reason){
+        this.handleBack(id,no,Reason)
+        this.Reason=''
+        this.innerVisibleDevelopment = false;
+        this.outerVisible = false;
+      },
+      doubleScientific(id,no,Reason){
+        this.handleBack(id,no,Reason)
+        this.Reason=''
+        this.innerVisibleScientific = false;
+        this.outerVisible = false;
+      },
+
+      doublePhysical(id,no,Reason){
+        this.handleBack(id,no,Reason)
+        this.Reason=''
+        this.innerVisiblePhysical = false;
+        this.outerVisible = false;
+      },
+      doubleMental(id,no,Reason){
+        this.handleBack(id,no,Reason)
+        this.Reason=''
+        this.innerVisibleMental = false;
+        this.outerVisible = false;
+      },
+      doubleHonorary(id,no,Reason){
+        this.handleBack(id,no,Reason)
+        this.Reason=''
+        this.innerVisibleHonorary = false;
+        this.outerVisible = false;
+      },
+      doubleCompetition(id,no,Reason){
+        this.handleBack(id,no,Reason)
+        this.Reason=''
+        this.innerVisibleCompetition = false;
+        this.outerVisible = false;
+      },
+      doubleSocialWork(id,no,Reason){
+        this.handleBack(id,no,Reason)
+        this.Reason=''
+        this.innerVisibleSocialWork = false;
+        this.outerVisible = false;
+      },
+      doubleKnowl(id,no,Reason){
+        this.handleBack(id,no,Reason)
+        this.Reason=''
+        this.innerVisibleKnowl = false;
+        this.outerVisible = false;
+      },
+      doubleDaily(id,no,Reason){
+        this.handleBack(id,no,Reason)
+        this.Reason=''
+        this.innerVisibleDaily = false;
+        this.outerVisible = false;
       },
       //重置按钮
       reset(){
@@ -1735,10 +1878,24 @@
 
         console.log(value)
 
+      },
+      /*
+      * 导出功能
+      * */
+      handleExport(){
+        const queryParams = this.queryParams;
+        this.$confirm('是否确认导出所有用户数据项?', "警告", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
+        }).then(function() {
+          return exportUser(queryParams);
+        }).then(response => {
+          this.download(response.msg);
+        }).catch(function() {});
       }
     },
 
-    components: { EditTable }
   };
 
 

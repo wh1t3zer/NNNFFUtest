@@ -38,6 +38,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         and major in('计算机科学与技术','电子信息科学与技术','通信工程','电气工程及其自动化','软件工程','智能科学与技术','数据科学与大数据技术')
     </sql>
 
+    <select id="selectStudents" resultType="com.ruoyi.test.domain.Student">
+        select * from student where no = '2020170038'
+    </select>
 
     <select id="selectAllStudentList" resultType="com.ruoyi.test.domain.Student">
         select

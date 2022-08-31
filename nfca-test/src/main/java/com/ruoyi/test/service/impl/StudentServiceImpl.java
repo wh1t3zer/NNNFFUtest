@@ -21,6 +21,11 @@ public class StudentServiceImpl implements IStudentService {
     }
 
     @Override
+    public List<Student> selectStudents(Student student) {
+        return studentMapper.selectStudents(student);
+    }
+
+    @Override
     public List<Student> selectClassStudents(Student student) {
         return studentMapper.selectClassStudentList(student);
     }

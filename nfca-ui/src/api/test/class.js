@@ -14,11 +14,13 @@ export function TestUser(query) {
 /**
  * 驳回学生申请
  * @param no 学生学号
+ * @param id 图片唯一标识
  * @param reason 驳回原因
  * @returns {*}
  */
-export function backUser(no,reason) {
+export function backUser(id,no,reason) {
   const data = {
+    id,
     no,
     reason,
   }
@@ -93,6 +95,16 @@ export function updateScore(id,score) {
     url: '/test/class/updateScore',
     method: 'put',
     data: data
+  })
+}
+/*
+* 导出功能
+* */
+export function exportUser(query) {
+  return request({
+    url:'/test/class/export',
+    method:'get',
+    params:query
   })
 }
 

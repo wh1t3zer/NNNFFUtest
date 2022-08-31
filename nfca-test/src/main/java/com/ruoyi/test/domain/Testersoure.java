@@ -17,7 +17,7 @@ public class Testersoure {
     private String reason;
     private Integer adopter;
     private Integer adopter2;
-    private Integer operator;
+    private String operator;
 
     public String getId() {
         return id;
@@ -91,11 +91,11 @@ public class Testersoure {
         this.adopter2 = adopter2;
     }
 
-    public Integer getOperator() {
+    public String getOperator() {
         return operator;
     }
 
-    public void setOperator(Integer operator) {
+    public void setOperator(String operator) {
         this.operator = operator;
     }
 

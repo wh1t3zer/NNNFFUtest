@@ -96,6 +96,7 @@ public class TestUserInstituteController extends BaseController
 
 
 
+
     /**
      * 驳回学生申请
      */
@@ -109,6 +110,7 @@ public class TestUserInstituteController extends BaseController
     public AjaxResult backTestUser(@RequestBody Testersoure testersoure){
         Student student = new Student();
         student.setStatus("2");
+        testersoure.setAdopter(2);
         student.setNo(testersoure.getNo());
         studentService.updateStatusByNo(student);
         return toAjax(testersoureService.updateReasonByNo(testersoure));
@@ -147,6 +149,17 @@ public class TestUserInstituteController extends BaseController
 
         return testersoureService.getAwardListByNo(testersoure);
 
+    }
+
+    /**
+     * 修改各个小点的成绩
+     */
+    @PreAuthorize("@ss.hasPermi('test:institute:updateScore')")
+//    @Log(title = "updateScore", businessType = BusinessType.UPDATE)
+    @PutMapping("updateScore")
+
+    public AjaxResult updateScore(@RequestBody Testersoure testersoure){
+        return toAjax(testersoureService.updateScoreById(testersoure));
     }
 
 

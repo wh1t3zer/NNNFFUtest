@@ -22,20 +22,18 @@ export function getTestUser(userId) {
 /**
  * 驳回学生申请
  * @param no 学生学号
+ * @param id 图片唯一标识
  * @param reason 驳回原因
  * @returns {*}
  */
-export function backUser(no,reason) {
+export function backUser(id,no,reason) {
   const data = {
+    id,
     no,
     reason,
-    // userId,
-    // status
-    //infoIdList:infoId.join(','),
-    //status:status
   }
   return request({
-    url: '/test/major/backUser',
+    url: '/test/class/backUser',
     method: 'put',
     data: data
   })
