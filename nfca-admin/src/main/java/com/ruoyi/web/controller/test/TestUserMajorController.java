@@ -133,6 +133,7 @@ public class TestUserMajorController extends BaseController
     @Log(title = "access2", businessType = BusinessType.UPDATE)
     @PutMapping("accessUser2")
     public AjaxResult accessUser2(@RequestBody Student student){
+        Testersoure testersoure = new Testersoure();
         student.setStatus("1");
         return toAjax(studentService.updateStatusByNo(student));
     }

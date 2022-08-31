@@ -16,7 +16,7 @@ public class Testersoure {
     private String detail;
     private String reason;
     private String adopter;
-    private Integer adopter2;
+    private String adopter2;
     private String operator;
     private String Reason;
 
@@ -95,11 +95,11 @@ public class Testersoure {
         this.adopter = adopter;
     }
 
-    public Integer getAdopter2() {
+    public String getAdopter2() {
         return adopter2;
     }
 
-    public void setAdopter2(Integer adopter2) {
+    public void setAdopter2(String adopter2) {
         this.adopter2 = adopter2;
     }
 
