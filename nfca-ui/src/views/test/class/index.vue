@@ -1375,7 +1375,7 @@
         this.resetScore();
          getAwards(no).then(response => {
           this.awardsList = response;
-
+          console.log(response)
           for(var i = 0; i < this.awardsList.length; i++){
             switch (this.awardsList[i].module){
               case "politics":

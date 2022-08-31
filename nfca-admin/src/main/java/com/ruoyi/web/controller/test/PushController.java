@@ -1,11 +1,16 @@
 package com.ruoyi.web.controller.test;
 
+import com.ruoyi.common.core.controller.BaseController;
+import com.ruoyi.common.core.domain.AjaxResult;
+import com.ruoyi.test.domain.Testersoure;
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateData;
 import me.chanjar.weixin.mp.bean.template.WxMpTemplateMessage;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.SimpleDateFormat;
@@ -19,13 +24,14 @@ import java.util.Date;
  * @Versiion：1.0
  */
 @RestController
-public class PushController {
+public class PushController extends BaseController {
     /*
      * 微信测试账号推送
      * */
     @GetMapping("/push")
-    public String push() {
-        String openid="";
+    public String push(@RequestBody Testersoure testersoure ) {
+        String openid = testersoure.getOpenId()
+        System.out.println(openid);
         //1，配置
         WxMpInMemoryConfigStorage wxStorage = new WxMpInMemoryConfigStorage();
         wxStorage.setAppId("wxd04a21bf789bf6fa");
