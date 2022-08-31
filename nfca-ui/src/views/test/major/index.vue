@@ -143,7 +143,6 @@
               <el-tag size="small">{{form.classId}}</el-tag>
             </el-descriptions-item>
           </el-descriptions>
-
           <el-descriptions title="基础性素质测评（满分60分）"></el-descriptions>
           <el-row >
             <el-form-item label="1、政治素质">
@@ -175,7 +174,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="doublePolitics(politicsScore2[index].id,form.no,Reason)"
+                          @confirm="doublePolitics(politicsScore2[index].id,form.no,Reason,politicsScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -231,7 +230,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="doubleIdeology(ideologyScore2[index].id,form.no,Reason)"
+                          @confirm="doubleIdeology(ideologyScore2[index].id,form.no,Reason,ideologyScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -288,7 +287,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="doubleMorality(moralityScore2[index].id,form.no,Reason)"
+                          @confirm="doubleMorality(moralityScore2[index].id,form.no,Reason,moralityScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -344,7 +343,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="doubleOrgan(organScore2[index].id,form.no,Reason)"
+                          @confirm="doubleOrgan(organScore2[index].id,form.no,Reason,organScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -402,7 +401,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="doubleLaw(lawScore2[index].id,form.no,Reason)"
+                          @confirm="doubleLaw(lawScore2[index].id,form.no,Reason,lawScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -459,7 +458,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="doubleLearning(learningScore2[index].id,form.no,Reason)"
+                          @confirm="doubleLearning(learningScore2[index].id,form.no,Reason,learningScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -510,7 +509,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="doubleDevelopment(developmentScore2[index].id,form.no,Reason)"
+                          @confirm="doubleDevelopment(developmentScore2[index].id,form.no,Reason,developmentScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -566,7 +565,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="doubleScientific(scientificScore2[index].id,form.no,Reason)"
+                          @confirm="doubleScientific(scientificScore2[index].id,form.no,Reason,scientificScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -623,7 +622,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="doublePhysical(physicalScore2[index].id,form.no,Reason)"
+                          @confirm="doublePhysical(physicalScore2[index].id,form.no,Reason,physicalScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -679,7 +678,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="doubleMental(mentalScore2[index].id,form.no,Reason)"
+                          @confirm="doubleMental(mentalScore2[index].id,form.no,Reason,mentalScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -738,7 +737,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="doubleHonorary(honoraryScore2[index].id,form.no,Reason)"
+                          @confirm="doubleHonorary(honoraryScore2[index].id,form.no,Reason,honoraryScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -795,7 +794,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="doubleCompetition(competitionScore2[index].id,form.no,Reason)"
+                          @confirm="doubleCompetition(competitionScore2[index].id,form.no,Reason,competitionScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -852,7 +851,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="doubleSocialWork(socialWorkScore2[index].id,form.no,Reason)"
+                          @confirm="doubleSocialWork(socialWorkScore2[index].id,form.no,Reason,socialWorkScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -908,7 +907,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="doubleKnowl(knowlScore2[index].id,form.no,Reason)"
+                          @confirm="doubleKnowl(knowlScore2[index].id,form.no,Reason,knowlScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -965,7 +964,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          @confirm="doubleDaily(dailyScore2[index].id,form.no,Reason)"
+                          @confirm="doubleDaily(dailyScore2[index].id,form.no,Reason,dailyScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
                         </el-popconfirm>
@@ -1736,95 +1735,111 @@
       /*
       *所有小点的驳回按钮
       * */
-      doublePolitics(id,no,Reason){
+      doublePolitics(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
+        this.handlePush(openId,Reason)
+        console.log(id,no,Reason,openId)
         this.Reason=''
         this.innerVisiblePolitics = false;
         this.outerVisible = false;
       },
 
-      doubleIdeology(id,no,Reason){
+      doubleIdeology(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
+        this.handlePush(openId,Reason)
         this.Reason=''
         this.innerVisibleIdeology = false;
         this.outerVisible = false;
       },
-      doubleMorality(id,no,Reason){
+      doubleMorality(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
+        this.handlePush(openId,Reason)
         this.Reason=''
         this.innerVisibleMorality = false;
         this.outerVisible = false;
       },
-      doubleOrgan(id,no,Reason){
+      doubleOrgan(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
+        this.handlePush(openId,Reason)
         this.Reason=''
         this.innerVisibleOrgan = false;
         this.outerVisible = false;
       },
 
-      doubleLaw(id,no,Reason){
+      doubleLaw(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
+        this.handlePush(openId,Reason)
         this.Reason=''
         this.innerVisibleLaw = false;
         this.outerVisible = false;
       },
-      doubleLearning(id,no,Reason){
+      doubleLearning(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
+        this.handlePush(openId,Reason)
         this.Reason=''
         this.innerVisibleLearning = false;
         this.outerVisible = false;
       },
-      doubleDevelopment(id,no,Reason){
+      doubleDevelopment(id,no,Reaso,openIdn){
         this.handleBack(id,no,Reason)
+        this.handlePush(openId,Reason)
         this.Reason=''
         this.innerVisibleDevelopment = false;
         this.outerVisible = false;
       },
-      doubleScientific(id,no,Reason){
+      doubleScientific(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
+        this.handlePush(openId,Reason)
         this.Reason=''
         this.innerVisibleScientific = false;
         this.outerVisible = false;
       },
 
-      doublePhysical(id,no,Reason){
+      doublePhysical(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
+        this.handlePush(openId,Reason)
         this.Reason=''
         this.innerVisiblePhysical = false;
         this.outerVisible = false;
       },
-      doubleMental(id,no,Reason){
+      doubleMental(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
+        this.handlePush(openId,Reason)
         this.Reason=''
         this.innerVisibleMental = false;
         this.outerVisible = false;
       },
-      doubleHonorary(id,no,Reason){
+      doubleHonorary(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
+        this.handlePush(openId,Reason)
         this.Reason=''
         this.innerVisibleHonorary = false;
         this.outerVisible = false;
       },
-      doubleCompetition(id,no,Reason){
+      doubleCompetition(id,no,Reaso,openIdn){
         this.handleBack(id,no,Reason)
+        this.handlePush(openId,Reason)
         this.Reason=''
         this.innerVisibleCompetition = false;
         this.outerVisible = false;
       },
-      doubleSocialWork(id,no,Reason){
+      doubleSocialWork(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
+        this.handlePush(openId,Reason)
         this.Reason=''
         this.innerVisibleSocialWork = false;
         this.outerVisible = false;
       },
-      doubleKnowl(id,no,Reason){
+      doubleKnowl(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
+        this.handlePush(openId,Reason)
         this.Reason=''
         this.innerVisibleKnowl = false;
         this.outerVisible = false;
       },
-      doubleDaily(id,no,Reason){
+      doubleDaily(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
+        this.handlePush(openId,Reason)
         this.Reason=''
         this.innerVisibleDaily = false;
         this.outerVisible = false;
@@ -1849,22 +1864,21 @@
       //选择状态按钮
       selectGrade(gradeValue){
         console.log(gradeValue)
-      }
+      },
+      /*
+      *推送功能
+      */
+      handlePush(openId,Reason){
+        pushmsg(openId,Reason).then(response=>{
+          console.log(response)
+        })
+      },
     },
     //截取逗号
     splitJoin(res){
       return res.split(',');
 
     },
-
-    /*
-    *推送功能
-    */
-   handlePush(){
-      pushmsg.then(response=>{
-        console.log(response)
-      })
-   },
     components: { EditTable }
   };
 </script>

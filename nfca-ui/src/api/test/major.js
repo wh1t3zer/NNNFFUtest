@@ -92,9 +92,9 @@ export function accessUser2(no) {
 /*
 * 推送接口
 * */
-export function pushmsg(openid){
+export function pushmsg(openId,Reason){
   return request({
     url:'/push',
-    method:'post',
+    method:'get',
   })
 }

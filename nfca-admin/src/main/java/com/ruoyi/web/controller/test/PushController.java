@@ -51,7 +51,7 @@ public class PushController extends BaseController {
         //3,如果是正式版发送模版消息，这里需要配置你的信息
                 templateMessage.addData(new WxMpTemplateData("keyword1", "123", "#FF00FF"));
                 templateMessage.addData(new WxMpTemplateData("keyword2", dateFormat.format(date), "#FF00FF"));
-        templateMessage.addData(new WxMpTemplateData("remark", "789", "#FF00FF"));
+                templateMessage.addData(new WxMpTemplateData("remark", "789", "#FF00FF"));
         try {
             wxMpService.getTemplateMsgService().sendTemplateMsg(templateMessage);
             return "推送成功";

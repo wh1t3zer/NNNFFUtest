@@ -102,7 +102,7 @@ export function exportUser(query) {
 /*
 * 推送接口
 * */
-export function pushmsg(){
+export function pushmsg(openId,Reason){
   return request({
     url:'/push',
     method:'get',
