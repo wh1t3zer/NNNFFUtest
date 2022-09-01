@@ -108,17 +108,12 @@ public class TestUserInstituteController extends BaseController
         return toAjax(testUserService.backTestUser(testUser));
     }*/
     public AjaxResult backUser(@RequestBody Testersoure testersoure){
-        System.out.println("------------1111----------------");
         System.out.println(testersoure);
         Student student = new Student();
         student.setStatus("2");
         testersoure.setAdopter2("2");
         student.setNo(testersoure.getNo());
         studentService.updateStatusByNo(student);
-        System.out.println("----------------------------");
-        System.out.println(testersoure.getOperator());
-        System.out.println("----------------------------");
-
         return toAjax(testersoureService.updateReasonByNo2(testersoure));
     }
 

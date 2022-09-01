@@ -208,6 +208,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
+                          v-hasPermi="['test:class:back']"
                           @confirm="doublePolitics(politicsScore2[index].id,form.no,Reason,politicsScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
