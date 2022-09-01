@@ -1770,112 +1770,129 @@
       doublePolitics(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
         this.handlePush(openId,Reason)
+        this.handleGetAwards(no);
+        this.handleGetAwards(no);
         this.Reason=''
+
         this.innerVisiblePolitics = false;
-        this.outerVisible = false;
+
       },
 
       doubleIdeology(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
         this.handlePush(openId,Reason)
+        this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleIdeology = false;
-        this.outerVisible = false;
+
       },
       doubleMorality(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
         this.handlePush(openId,Reason)
+        this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleMorality = false;
-        this.outerVisible = false;
+
       },
       doubleOrgan(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
         this.handlePush(openId,Reason)
+        this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleOrgan = false;
-        this.outerVisible = false;
+
       },
 
       doubleLaw(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
         this.handlePush(openId,Reason)
+        this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleLaw = false;
-        this.outerVisible = false;
+
       },
       doubleLearning(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
         this.handlePush(openId,Reason)
+        this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleLearning = false;
-        this.outerVisible = false;
+
       },
       doubleDevelopment(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
         this.handlePush(openId,Reason)
+        this.handleGetAwards(no);
         console.log(openId,Reason)
         this.Reason=''
         this.innerVisibleDevelopment = false;
-        this.outerVisible = false;
+
       },
       doubleScientific(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
         this.handlePush(openId,Reason)
+        this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleScientific = false;
-        this.outerVisible = false;
+
       },
 
       doublePhysical(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
         this.handlePush(openId,Reason)
+        this.handleGetAwards(no);
         this.Reason=''
         this.innerVisiblePhysical = false;
-        this.outerVisible = false;
+
       },
       doubleMental(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
         this.handlePush(openId,Reason)
+        this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleMental = false;
-        this.outerVisible = false;
+
       },
       doubleHonorary(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
         this.handlePush(openId,Reason)
+        this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleHonorary = false;
-        this.outerVisible = false;
+
       },
       doubleCompetition(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
         this.handlePush(openId,Reason)
+        this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleCompetition = false;
-        this.outerVisible = false;
+
       },
       doubleSocialWork(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
         this.handlePush(openId,Reason)
+        this.handleGetAwards(no);
         console.log(id,no,Reason,openId)
         this.Reason=''
         this.innerVisibleSocialWork = false;
-        this.outerVisible = false;
+
       },
       doubleKnowl(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
         this.handlePush(openId,Reason)
+        this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleKnowl = false;
-        this.outerVisible = false;
+
       },
       doubleDaily(id,no,Reason,openId){
         this.handleBack(id,no,Reason)
         this.handlePush(openId,Reason)
+        this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleDaily = false;
-        this.outerVisible = false;
+
       },
       //重置按钮
       reset(){

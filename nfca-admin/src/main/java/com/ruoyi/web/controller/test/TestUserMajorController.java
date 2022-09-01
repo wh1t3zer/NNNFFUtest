@@ -107,6 +107,7 @@ public class TestUserMajorController extends BaseController
         return toAjax(testUserService.backTestUser(testUser));
     }*/
     public AjaxResult backTestUser(@RequestBody Testersoure testersoure){
+        System.out.println("------------222222----------------");
         Student student = new Student();
         student.setStatus("2");
         testersoure.setAdopter("2");

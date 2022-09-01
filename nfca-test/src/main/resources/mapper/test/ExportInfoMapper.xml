@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.test.mapper.ExportInfoMapper">
+    
+    <resultMap type="ExportInfo" id="ExportInfoResult">
+        <result property="name"    column="name"    />
+        <result property="no"    column="no"    />
+        <result property="className"    column="className"    />
+        <result property="grade"    column="grade"    />
+        <result property="score1"    column="score1"    />
+        <result property="score2"    column="score2"    />
+
+    </resultMap>
+
+
+
+    <select id="selectExportInfo"  resultMap="ExportInfoResult">
+        select s.name,t1.no,s.grade, c.name as className, t1.score1 as score2,t2.score2 as score1
+        from
+            (select  no,sum(score) as score1 from testerSoure where module  in ('knowl','socialWork','competition',   'honorary')  GROUP BY no) t1
+        join (select no, sum(score) as score2 from testerSoure where module  in ('politics','ideology','morality',   'organ',
+                'law','learning','development','scientific','physical','mental') GROUP BY no) t2
+        on t1.no = t2.no
+        join student s
+        on t1.no = s.no
+        join classes c
+        on c.id=s.classid
+        where s.grade =  19 or s.grade = 20
+    </select>
+
+
+
+
+</mapper>

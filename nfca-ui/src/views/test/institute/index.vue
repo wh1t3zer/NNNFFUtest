@@ -177,6 +177,7 @@
             </el-descriptions-item>
           </el-descriptions>
           <el-descriptions title="基础性素质测评（满分60分）"></el-descriptions>
+
           <el-row >
             <el-form-item label="1、政治素质">
               <template v-if="this.politicsScore2.length > 0">
@@ -240,6 +241,7 @@
               <template v-if="this.ideologyScore2.length > 0">
                 <div style="display: inline-block;width: 45%">
                   <div v-for="(item,index) in this.ideologyScore2">
+
                     <el-input v-model="ideologyScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="ideologyScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
                     <el-dialog
@@ -1037,9 +1039,9 @@
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleDaily = true">驳回</el-button>
                     </div>
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{dailyScore2[index].operator}}</el-button>
-                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="dailyScore2[index].adopter2 == '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
-                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="dailyScore2[index].adopter2 == '1'">审核状态: <span style="color: green ">通过</span></span>
-                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="dailyScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="dailyScore2[index].adopter2 === '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="dailyScore2[index].adopter2 === '1'">审核状态: <span style="color: green ">通过</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="dailyScore2[index].adopter2 === '2'">审核状态: <span style="color: red ">驳回中</span></span>
                   </div>
                 </div>
               </template>
@@ -1122,7 +1124,7 @@
 
 </style>
 <script>
-  import { TestUser, backUser, accessUser,accessUser2,getAwards,pushmsg,updateScore } from "@/api/test/institute";
+  import { TestUser, backUser, accessUser,accessUser2,getAwards,pushmsg,updateScore,exportUser } from "@/api/test/institute";
   import { getToken } from "@/utils/auth";
   import EditTable from "../../tool/gen/editTable.vue";
   import * as ElementUI from "element-ui";
@@ -1183,6 +1185,19 @@
         form: {},
         //用户奖项数据
         awardsList: [],
+
+        operatorAll:[
+          {operatorid:18059,operatorname:'曲楠楠'},
+          {operatorid:19027,operatorname:'曹永荣'},
+          {operatorid:19026,operatorname:'张文婷'},
+          {operatorid:19028,operatorname:'陈金涛'},
+          {operatorid:19133,operatorname:'朱业顺'},
+          {operatorid:20002,operatorname:'翟晓涵'},
+          {operatorid:20283,operatorname:'王孟阳'},
+          {operatorid:21155,operatorname:'穆小青'},
+          {operatorid:22074,operatorname:'徐慧玲'}
+        ],
+
         //驳回原因
         Reason:"",
         politics: "",
@@ -1247,9 +1262,14 @@
         queryParams: {
           pageNum: 1,
           pageSize: 10,
+
           no:'',
           name: undefined,
-          status: undefined,
+          className: undefined,
+          grade: undefined,
+          score1: undefined,
+          score2: undefined,
+
           major: undefined,
         },
         // 表单校验
@@ -1370,8 +1390,8 @@
        * @param no 学生学号
        * @param reason 驳回原因
        */
-      handleBack(id,no,reason) {
-        backUser(id,no,reason);
+      handleBack(id,no,reason,operatorid) {
+        backUser(id,no,reason,operatorid);
         this.getList();
         this.reason=''; /*驳回后重置驳回原因*/
       },
@@ -1806,114 +1826,146 @@
       /*
       *所有小点的驳回按钮
       * */
+      /*
+*所有小点的驳回按钮
+* */
       doublePolitics(id,no,Reason,openId){
-        this.handleBack(id,no,Reason)
+        var testid = this.$store.state.user.name;
+        this.handleBack(id,no,Reason,testid)
         this.handlePush(openId,Reason)
-        console.log("Reason:"+Reason)
+        this.handleGetAwards(no);
         this.Reason=''
         this.innerVisiblePolitics = false;
-        this.outerVisible = false;
+
       },
 
-      doubleIdeology(id,no,Reason,openId){
-        this.handleBack(id,no,Reason)
+      doubleIdeology(id,no,Reason,openId,operator){
+        this.handleBack(id,no,Reason,this.pushOperator(operator))
         this.handlePush(openId,Reason)
+        this.handleGetAwards(no);
         this.Reason=''
+
         this.innerVisibleIdeology = false;
-        this.outerVisible = false;
+
       },
-      doubleMorality(id,no,Reason,openId){
-        this.handleBack(id,no,Reason)
+      doubleMorality(id,no,Reason,openId,operator){
+        this.handleBack(id,no,Reason,this.pushOperator(operator))
         this.handlePush(openId,Reason)
+        this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleMorality = false;
-        this.outerVisible = false;
+
       },
-      doubleOrgan(id,no,Reason,openId){
-        this.handleBack(id,no,Reason)
+      doubleOrgan(id,no,Reason,openId,operator){
+        this.handleBack(id,no,Reason,this.pushOperator(operator))
         this.handlePush(openId,Reason)
+        this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleOrgan = false;
-        this.outerVisible = false;
+
       },
 
-      doubleLaw(id,no,Reason,openId){
-        this.handleBack(id,no,Reason)
+      doubleLaw(id,no,Reason,openId,operator){
+        this.handleBack(id,no,Reason,this.pushOperator(operator))
         this.handlePush(openId,Reason)
+        this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleLaw = false;
-        this.outerVisible = false;
+
       },
-      doubleLearning(id,no,Reason,openId){
-        this.handleBack(id,no,Reason)
+      doubleLearning(id,no,Reason,openId,operator){
+        this.handleBack(id,no,Reason,this.pushOperator(operator))
         this.handlePush(openId,Reason)
+        this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleLearning = false;
-        this.outerVisible = false;
+
       },
-      doubleDevelopment(id,no,Reason,openId){
-        this.handleBack(id,no,Reason)
+      doubleDevelopment(id,no,Reason,openId,operator){
+        this.handleBack(id,no,Reason,this.pushOperator(operator))
         this.handlePush(openId,Reason)
+        this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleDevelopment = false;
-        this.outerVisible = false;
+
       },
-      doubleScientific(id,no,Reason,openId){
-        this.handleBack(id,no,Reason)
+      doubleScientific(id,no,Reason,openId,operator){
+        this.handleBack(id,no,Reason,this.pushOperator(operator))
         this.handlePush(openId,Reason)
+        this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleScientific = false;
-        this.outerVisible = false;
+
       },
 
-      doublePhysical(id,no,Reason,openId){
-        this.handleBack(id,no,Reason)
+      doublePhysical(id,no,Reason,openId,operator){
+        this.handleBack(id,no,Reason,this.pushOperator(operator))
         this.handlePush(openId,Reason)
+        this.handleGetAwards(no);
         this.Reason=''
         this.innerVisiblePhysical = false;
-        this.outerVisible = false;
+
       },
-      doubleMental(id,no,Reason,openId){
-        this.handleBack(id,no,Reason)
+      doubleMental(id,no,Reason,openId,operator){
+        this.handleBack(id,no,Reason,this.pushOperator(operator))
         this.handlePush(openId,Reason)
+        this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleMental = false;
-        this.outerVisible = false;
+
       },
-      doubleHonorary(id,no,Reason,openId){
-        this.handleBack(id,no,Reason)
+      doubleHonorary(id,no,Reason,openId,operator){
+        this.handleBack(id,no,Reason,this.pushOperator(operator))
         this.handlePush(openId,Reason)
+        this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleHonorary = false;
-        this.outerVisible = false;
+
       },
-      doubleCompetition(id,no,Reason,openId){
-        this.handleBack(id,no,Reason)
+      doubleCompetition(id,no,Reason,openId,operator){
+        this.handleBack(id,no,Reason,this.pushOperator(operator))
         this.handlePush(openId,Reason)
+        this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleCompetition = false;
-        this.outerVisible = false;
+
       },
-      doubleSocialWork(id,no,Reason,openId){
-        this.handleBack(id,no,Reason)
+      doubleSocialWork(id,no,Reason,openId,operator){
+        this.handleBack(id,no,Reason,this.pushOperator(operator))
         this.handlePush(openId,Reason)
+        this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleSocialWork = false;
-        this.outerVisible = false;
+
       },
-      doubleKnowl(id,no,Reason,openId){
-        this.handleBack(id,no,Reason)
+      doubleKnowl(id,no,Reason,openId,operator){
+        this.handleBack(id,no,Reason,this.pushOperator(operator))
         this.handlePush(openId,Reason)
+        this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleKnowl = false;
-        this.outerVisible = false;
+
       },
-      doubleDaily(id,no,Reason,openId){
-        this.handleBack(id,no,Reason)
+      doubleDaily(id,no,Reason,openId,operator){
+        this.handleBack(id,no,Reason,this.pushOperator(operator))
         this.handlePush(openId,Reason)
+        this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleDaily = false;
-        this.outerVisible = false;
+
+      },
+
+      /*
+      * 查询Operator
+      * */
+      pushOperator(operator){
+        var op = 0;
+        for (let i = 0; i < this.operatorAll.length; i++) {
+          if (operator === this.operatorAll[i].operatorname){
+            op = this.operatorAll[i].operatorid
+          }
+        }
+        return op;
       },
 
       //重置按钮
@@ -1956,7 +2008,7 @@
           console.log(response);
           this.$download.name(response.msg);
           this.loading = false;
-          // this.download(response.msg);
+           //this.download(response.msg);
         }).catch(function() {});
       },
       /*

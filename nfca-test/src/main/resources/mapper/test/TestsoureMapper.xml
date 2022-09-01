@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.test.mapper.TestersoureMapper">
     <resultMap type="TesterSoure" id="TestersoureResult">
         <result property="id"    column="id"    />
@@ -18,28 +18,61 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="createTime"    column="createTime"    />
         <result property="openId"    column="openId"    />
     </resultMap>
-    
+
     <update id="updateReasonByNo" parameterType="com.ruoyi.test.domain.Testersoure">
-        update testerSoure set reason = #{reason} where id = #{id}
+        update testerSoure set reason = #{reason},adopter = #{adopter} where id = #{id}
     </update>
 
-     <update id="updateScoreById" parameterType="com.ruoyi.test.domain.Testersoure">
-            update testerSoure set score = #{score} where id = #{id}
-        </update>
+    <update id="updateReasonByNo2" parameterType="com.ruoyi.test.domain.Testersoure">
+        update testerSoure set reason = #{reason},adopter2 = #{adopter2} where id = #{id}
+    </update>
+
+    <update id="updateScoreById" parameterType="com.ruoyi.test.domain.Testersoure">
+        update testerSoure set score = #{score} where id = #{id}
+    </update>
 
     <update id="updateAdopterById" parameterType="com.ruoyi.test.domain.Testersoure">
         update testerSoure set adopter = #{adopter} where id = #{id}
     </update>
 
+    <update id="updateAdopter2ById" parameterType="com.ruoyi.test.domain.Testersoure">
+        update testerSoure set adopter2 = #{adopter2} where id = #{id}
+    </update>
+
 
     <select id="queryTitlesListByNo" parameterType="com.ruoyi.test.domain.Testersoure" resultMap="TestersoureResult">
         select t.id ,t.no,t.score,t.module,t.detail,t.title,u.openid,t.adopter,t.adopter2,
-        (select name from testerMember where no = t.operator limit 1) as operator
+               (select name from testerMember where no = t.operator limit 1) as operator
         from ncg.testerSoure t
-        join account.user_info u
-        on t.no = u.no
+                 join account.user_info u
+                      on t.no = u.no
         where t.no = #{no}
     </select>
+
+
+
+    <update id="updateAdopt2ByNo" parameterType="com.ruoyi.test.domain.Testersoure">
+        update testerSoure set adopter2 = #{adopter2} where no = #{no}
+    </update>
+
+    <update id="updateAdoptByNo" parameterType="com.ruoyi.test.domain.Testersoure">
+        update testerSoure set adopter = #{adopter} where no = #{no}
+    </update>
+
+
+    <update id="updateAdopt2ByNos" parameterType="string">
+        update testerSoure set adopter2 = 1 where no in
+        <foreach collection="nos.split(',')" separator="," open="(" close=")" item="no">
+            #{no}
+        </foreach>
+    </update>
+
+    <update id="updateAdoptByNos" parameterType="string">
+        update testerSoure set adopter = 1 where no in
+        <foreach collection="nos.split(',')" separator="," open="(" close=")" item="no">
+            #{no}
+        </foreach>
+    </update>
 
 
 

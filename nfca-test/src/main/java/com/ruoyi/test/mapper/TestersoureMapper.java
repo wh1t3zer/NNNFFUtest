@@ -14,6 +14,8 @@ public interface TestersoureMapper {
 
     int updateReasonByNo(Testersoure testersoure);
 
+    int updateReasonByNo2(Testersoure testersoure);
+
     int updateScoreById(Testersoure testersoure);
 
     int updateAdopterById(Testersoure testersoure);

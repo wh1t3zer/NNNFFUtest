@@ -146,7 +146,7 @@
                     <el-input v-model="politicsScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"></el-input>
                     <el-input-number v-model="politicsScore2[index].score" :precision="1" :step="0.1"  size="mini" style="width:100px; vertical-align: middle "></el-input-number>
                     <!--<el-button type="warning" slot="footer" size="mini" style="margin-left: 5px" @click="politicsdialogVisible = true">驳回</el-button>-->
-                    
+
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{politicsScore2[index].operator}}</el-button>
 
                   </div>
@@ -171,7 +171,7 @@
                   <div v-for="(item,index) in this.ideologyScore2">
                     <el-input v-model="ideologyScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="ideologyScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-                    
+
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{ideologyScore2[index].operator}}</el-button>
 
                   </div>
@@ -253,7 +253,7 @@
                   <div v-for="(item,index) in this.organScore2">
                     <el-input v-model="organScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="organScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-                    
+
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{organScore2[index].operator}}</el-button>
                   </div>
                 </div>
@@ -279,7 +279,7 @@
                   <div v-for="(item,index) in this.lawScore2" >
                     <el-input v-model="lawScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="lawScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-                    
+
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{lawScore2[index].operator}}</el-button>
 
                   </div>
@@ -304,7 +304,7 @@
                   <div v-for="(item,index) in this.learningScore2" >
                     <el-input v-model="learningScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="learningScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-                    
+
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{learningScore2[index].operator}}</el-button>
                   </div>
                 </div>
@@ -323,7 +323,7 @@
                   <div v-for="(item,index) in this.developmentScore2" style="margin-top: 10px">
                     <el-input v-model="developmentScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"></el-input>
                     <el-input-number v-model="developmentScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-                   
+
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{developmentScore2[index].operator}}</el-button>
 
                   </div>
@@ -348,7 +348,7 @@
                   <div v-for="(item,index) in this.scientificScore2" >
                     <el-input v-model="scientificScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="scientificScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-                    
+
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{scientificScore2[index].operator}}</el-button>
 
                   </div>
@@ -373,7 +373,7 @@
                   <div v-for="(item,index) in this.physicalScore2" >
                     <el-input v-model="physicalScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="physicalScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-                    
+
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{physicalScore2[index].operator}}</el-button>
 
                   </div>
@@ -398,7 +398,7 @@
                   <div v-for="(item,index) in this.mentalScore2" >
                     <el-input v-model="mentalScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="mentalScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-                   
+
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{mentalScore2[index].operator}}</el-button>
 
                   </div>
@@ -427,7 +427,7 @@
 
                     <el-input v-model="honoraryScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="honoraryScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-                    
+
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{honoraryScore2[index].operator}}</el-button>
 
                   </div>
@@ -453,7 +453,7 @@
                   <div v-for="(item,index) in this.competitionScore2" >
                     <el-input v-model="competitionScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="competitionScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-                    
+
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{competitionScore2[index].operator}}</el-button>
 
                   </div>
@@ -478,7 +478,7 @@
                   <div v-for="(item,index) in this.socialWorkScore2" >
                     <el-input v-model="socialWorkScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="socialWorkScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-                    
+
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{socialWorkScore2[index].operator}}</el-button>
 
                   </div>
@@ -503,7 +503,7 @@
                   <div v-for="(item,index) in this.knowlScore2" >
                     <el-input v-model="knowlScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="knowlScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-                    
+
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{knowlScore2[index].operator}}</el-button>
 
                   </div>
@@ -529,7 +529,7 @@
                   <div v-for="(item,index) in this.dailyScore2" >
                     <el-input v-model="dailyScore2[index].title" autocomplete="off" type="textarea" :disabled="true" :autosize="{ minRows: 1}" class="inputMsg"/>
                     <el-input-number v-model="dailyScore2[index].score" :precision="1" :step="0.1" :max="6" size="mini" style="width:100px; vertical-align: middle "></el-input-number>
-                   
+
                     <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{dailyScore2[index].operator}}</el-button>
 
                   </div>
@@ -658,6 +658,7 @@
         awardsList: [],
         //驳回原因
         Reason:"",
+        operator:this.$store.state.user.name,
         /*
         * 各个小点的名称
         * */
@@ -771,7 +772,6 @@
           no:'',
           name: undefined,
           status: undefined,
-          majorValue:[],
         },
         // 表单校验
         rules: {
@@ -820,6 +820,10 @@
         this.loading = true;
         const classId = this.$store.state.user.classname;
         const major = this.$store.state.user.major;
+
+        const operator = this.$store.state.user.name;
+
+
         this.queryParams.major=major
         this.queryParams.classId=classId
         TestUser(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
@@ -886,7 +890,7 @@
 
 
 
-      
+
 
 
       /**
@@ -904,11 +908,12 @@
        * 通过按钮
        * @param no 学生学号
        */
-      handleAccess2(no){
+       handleAccess2(no){
         accessUser2(no)
         this.updateAllScore();
         this.outerVisible = false
         this.getList()
+        
       },
 
       /**
@@ -1136,89 +1141,92 @@
         this.outerVisible = true
       },
       //获取所有修改后或者没有修改的成绩
-      updateAllScore(){
-
+       async updateAllScore(){
+        const operator=this.$store.state.user.name
+        console.log(operator)
         if(this.politicsScore2.length>0){
           for (let i = 0; i < this.politicsScore2.length; i++) {
             let id = this.politicsScore2[i].id;
             let score = this.politicsScore2[i].score*100;
-            updateScore(id,score);
+            await updateScore(id,score,operator);
           }
         }
 
         if(this.organScore2.length>0){
           for (let i = 0; i < this.organScore2.length; i++) {
-            updateScore(this.organScore2[i].id,this.organScore2[i].score*100);
+            await updateScore(this.organScore2[i].id,this.organScore2[i].score*100,operator);
           }
         }
 
         if(this.ideologyScore2.length>0){
           for (let i = 0; i < this.ideologyScore2.length; i++) {
-            updateScore(this.ideologyScore2[i].id,this.ideologyScore2[i].score*100);
+            await updateScore(this.ideologyScore2[i].id,this.ideologyScore2[i].score*100,operator);
           }
         }
          if(this.moralityScore2.length>0){
            for (let i = 0; i < this.moralityScore2.length; i++) {
-             updateScore(this.moralityScore2[i].id,this.moralityScore2[i].score*100);
+            await updateScore(this.moralityScore2[i].id,this.moralityScore2[i].score*100,operator);
            }
          }
          if(this.lawScore2.length>0){
            for (let i = 0; i < this.lawScore2.length; i++) {
-             updateScore(this.lawScore2[i].id,this.lawScore2[i].score*100);
+            await updateScore(this.lawScore2[i].id,this.lawScore2[i].score*100,operator);
            }
          }
          if(this.learningScore2.length>0){
            for (let i = 0; i < this.learningScore2.length; i++) {
-             updateScore(this.learningScore2[i].id,this.learningScore2[i].score*100);
+            await updateScore(this.learningScore2[i].id,this.learningScore2[i].score*100,operator);
            }
          }
          if(this.developmentScore2.length>0){
            for (let i = 0; i < this.developmentScore2.length; i++) {
-             updateScore(this.developmentScore2[i].id,this.developmentScore2[i].score*100);
+            await updateScore(this.developmentScore2[i].id,this.developmentScore2[i].score*100,operator);
            }
          }
          if(this.scientificScore2.length>0){
            for (let i = 0; i < this.scientificScore2.length; i++) {
-             updateScore(this.scientificScore2[i].id,this.scientificScore2[i].score*100);
+            await updateScore(this.scientificScore2[i].id,this.scientificScore2[i].score*100,operator);
            }
          }
          if(this.mentalScore2.length>0){
            for (let i = 0; i < this.mentalScore2.length; i++) {
-             updateScore(this.mentalScore2[i].id,this.mentalScore2[i].score*100);
+            await updateScore(this.mentalScore2[i].id,this.mentalScore2[i].score*100,operator);
            }
          }
          if(this.honoraryScore2.length>0){
            for (let i = 0; i < this.honoraryScore2.length; i++) {
-             updateScore(this.honoraryScore2[i].id,this.honoraryScore2[i].score*100);
+            await updateScore(this.honoraryScore2[i].id,this.honoraryScore2[i].score*100,operator);
            }
          }
          if(this.competitionScore2.length>0){
            for (let i = 0; i < this.competitionScore2.length; i++) {
-             updateScore(this.competitionScore2[i].id,this.competitionScore2[i].score*100);
+            await updateScore(this.competitionScore2[i].id,this.competitionScore2[i].score*100,operator);
            }
          }
          if(this.socialWorkScore2.length>0){
            for (let i = 0; i < this.socialWorkScore2.length; i++) {
-             updateScore(this.socialWorkScore2[i].id,this.socialWorkScore2[i].score*100);
+            await updateScore(this.socialWorkScore2[i].id,this.socialWorkScore2[i].score*100,operator);
            }
         }
          if(this.knowlScore2.length>0){
            for (let i = 0; i < this.knowlScore2.length; i++) {
-             updateScore(this.knowlScore2[i].id,this.knowlScore2[i].score*100);
+            await updateScore(this.knowlScore2[i].id,this.knowlScore2[i].score*100,operator);
            }
         }
          if(this.dailyScore2.length>0){
            for (let i = 0; i < this.dailyScore2.length; i++) {
-             updateScore(this.dailyScore2[i].id,this.dailyScore2[i].score*100);
+            await updateScore(this.dailyScore2[i].id,this.dailyScore2[i].score*100,operator);
            }
 
         }
 
          if(this.physicalScore2.length>0){
            for (let i = 0; i < this.physicalScore2.length; i++) {
-             updateScore(this.physicalScore2[i].id,this.physicalScore2[i].score*100);
+            await updateScore(this.physicalScore2[i].id,this.physicalScore2[i].score*100,operator);
            }
         }
+      
+      
       },
 
 
@@ -1317,7 +1325,7 @@
           this.achievementScore1= 0
       },
 
-     
+
       //重置按钮
       reset(){
         this.queryParams.name =''

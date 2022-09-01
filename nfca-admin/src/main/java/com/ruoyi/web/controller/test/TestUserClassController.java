@@ -21,7 +21,7 @@ import java.util.List;
 
 /**
  * testController
- * 
+ *
  * @author nfca
  * @date 2022-07-12
  */
@@ -64,18 +64,22 @@ public class TestUserClassController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('test:class:back')")
     @Log(title = "back", businessType = BusinessType.UPDATE)
-    @PutMapping("backUser")
+    @PutMapping("/backUser")
     /*public AjaxResult backTestUser(@RequestBody TestUser testUser)
     {
         return toAjax(testUserService.backTestUser(testUser));
     }*/
     public AjaxResult backTestUser(@RequestBody Testersoure testersoure){
+        System.out.println("------------333333---------------");
+
         Student student = new Student();
         student.setStatus("2");
-        testersoure.setAdopter("2");
+        testersoure.setAdopter2("2");
         student.setNo(testersoure.getNo());
         studentService.updateStatusByNo(student);
-        return toAjax(testersoureService.updateReasonByNo(testersoure));
+        System.out.println(testersoure);
+        System.out.println(testersoure.getOperator());
+        return toAjax(testersoureService.updateReasonByNo2(testersoure));
     }
 
     /**

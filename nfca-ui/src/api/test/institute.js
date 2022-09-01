@@ -26,14 +26,15 @@ export function getTestUser(userId) {
  * @param reason 驳回原因
  * @returns {*}
  */
-export function backUser(id,no,reason) {
+export function backUser(id,no,reason,opertor) {
   const data = {
     id,
     no,
     reason,
+    opertor
   }
   return request({
-    url: '/test/class/backUser',
+    url: '/test/institute/backUser',
     method: 'put',
     data: data
   })

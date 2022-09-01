@@ -102,19 +102,24 @@ public class TestUserInstituteController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('test:institute:back')")
     @Log(title = "back", businessType = BusinessType.UPDATE)
-    @PutMapping("backUser")
+    @PutMapping("/backUser")
     /*public AjaxResult backTestUser(@RequestBody TestUser testUser)
     {
         return toAjax(testUserService.backTestUser(testUser));
     }*/
-    public AjaxResult backTestUser(@RequestBody Testersoure testersoure){
+    public AjaxResult backUser(@RequestBody Testersoure testersoure){
+        System.out.println("------------1111----------------");
+        System.out.println(testersoure);
         Student student = new Student();
         student.setStatus("2");
         testersoure.setAdopter2("2");
         student.setNo(testersoure.getNo());
         studentService.updateStatusByNo(student);
-        testersoureService.updateAdopterById(testersoure);
-        return toAjax(testersoureService.updateReasonByNo(testersoure));
+        System.out.println("----------------------------");
+        System.out.println(testersoure.getOperator());
+        System.out.println("----------------------------");
+
+        return toAjax(testersoureService.updateReasonByNo2(testersoure));
     }
 
     /**
@@ -132,7 +137,7 @@ public class TestUserInstituteController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('test:institute:access2')")
     @Log(title = "access2", businessType = BusinessType.UPDATE)
-    @PutMapping("accessUser2")
+    @PutMapping("/accessUser2")
     public AjaxResult accessUser2(@RequestBody Student student){
         student.setStatus("1");
         return toAjax(studentService.updateStatusByNo(student));
@@ -157,7 +162,7 @@ public class TestUserInstituteController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('test:institute:updateScore')")
 //    @Log(title = "updateScore", businessType = BusinessType.UPDATE)
-    @PutMapping("updateScore")
+    @PutMapping("/updateScore")
 
     public AjaxResult updateScore(@RequestBody Testersoure testersoure){
         return toAjax(testersoureService.updateScoreById(testersoure));
