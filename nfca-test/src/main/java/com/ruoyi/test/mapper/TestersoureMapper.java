@@ -35,7 +35,7 @@ public interface TestersoureMapper {
 
     int updateAdopt2ByNos(Testersoure testersoure);
 
-    int updateAdoptByNos(String string);
+    int updateAdoptByNos(Testersoure testersoure);
 
 //    List<Testersoure> selectTestUserByNo(Testersoure testersoure);
 }

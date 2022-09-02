@@ -57,7 +57,7 @@
               size="mini"
               :disabled="multiple"
               @click="handleAccess"
-              v-hasPermi="['test:institute:access']"
+              v-hasPermi="['test:class:access']"
             >通过</el-button>
           </el-col>
         </el-row>

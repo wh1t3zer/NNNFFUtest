@@ -23,7 +23,7 @@ public interface ITestersoureService {
     int updateAdoptByNo(Testersoure testersoure);
     //批量修改adopt2的值为1    (string 为学号数组)
     int updateAdopt2ByNos(Testersoure testersoure);
-    int updateAdoptByNos(String string);
+    int updateAdoptByNos(Testersoure testersoure);
 
 
 }

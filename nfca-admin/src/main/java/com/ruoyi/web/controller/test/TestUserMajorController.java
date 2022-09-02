@@ -116,21 +116,16 @@ public class TestUserMajorController extends BaseController
         return toAjax(testersoureService.updateReasonByNo(testersoure));
     }
 
-    /**
-     * 批量通过学生申请
-     */
-    @PreAuthorize("@ss.hasPermi('test:major:access')")
+    /*批量通过学生申请*/
+    //@PreAuthorize("@ss.hasPermi('test:institute:access')")
     @Log(title = "access", businessType = BusinessType.UPDATE)
-    @PutMapping("/{nos}")
-    public AjaxResult accessUser(@PathVariable String nos){
-        testersoureService.updateAdoptByNos(nos);
-        System.out.println("-----------------------");
-        System.out.println(nos);
-        System.out.println("-----------------------");
+    @PutMapping("/access")
+    public AjaxResult accessUser(@RequestBody Testersoure testersoure){
 
-        return toAjax(studentService.updateStatusByNos(nos));
-
+        testersoureService.updateAdoptByNos(testersoure);
+        return toAjax(studentService.updateStatusByNos(testersoure.getNos()));
     }
+
 
     /**
      * 通过单个学生

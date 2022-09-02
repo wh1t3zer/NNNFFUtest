@@ -41,25 +41,28 @@ export function backUser(id,no,reason,operator) {
   })
 }
 
-/**
+
+/*
+*
  * 批量通过学生申请
  * nos 为所选学生no数组
  * @param nos
+ * @param operator 操作员
  * @returns {*}
  */
-export function accessUser(nos) {
+
+export function accessUser(nos,operator) {
   const data = {
     nos,
+    operator,
+
   }
-  console.log(nos)
-  console.log(typeof nos)
   return request({
-    url: '/test/major/' + parseStrEmpty(nos),
+    url: '/test/major/access',
     method: 'put',
-    //data: data
+    data: data
   })
 }
-
 
 /**
  * 通过单个学生

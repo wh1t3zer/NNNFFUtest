@@ -1506,8 +1506,9 @@
        */
       handleAccess(row) {
         const nos = row.no || this.nos;
-
-        accessUser(nos);
+        let operator =Number(this.$store.state.user.name)
+        let zifupingjie = nos.toString();
+        accessUser(zifupingjie,operator)
         this.getList();
       },
 

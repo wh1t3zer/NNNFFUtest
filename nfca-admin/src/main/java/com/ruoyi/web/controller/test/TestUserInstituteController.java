@@ -134,12 +134,6 @@ public class TestUserInstituteController extends BaseController
     @Log(title = "access", businessType = BusinessType.UPDATE)
     @PutMapping("/access")
     public AjaxResult accessUser(@RequestBody Testersoure testersoure){
-        System.out.println("------------------------");
-        System.out.println(testersoure);
-        System.out.println("------------------------");
-        System.out.println("前端的数组是:"+testersoure.getNos());
-        System.out.println(testersoure.getOperator());
-        System.out.println("------------------------");
         testersoureService.updateAdopt2ByNos(testersoure);
         return toAjax(studentService.updateStatusByNos(testersoure.getNos()));
     }

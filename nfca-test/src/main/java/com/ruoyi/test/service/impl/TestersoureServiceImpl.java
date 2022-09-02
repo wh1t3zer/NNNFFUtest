@@ -56,8 +56,8 @@ public class TestersoureServiceImpl implements ITestersoureService {
     }
 
     @Override
-    public int updateAdoptByNos(String string) {
-        return testersoureMapper.updateAdoptByNos(string);
+    public int updateAdoptByNos(Testersoure testersoure) {
+        return testersoureMapper.updateAdoptByNos(testersoure);
     }
 
 }

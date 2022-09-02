@@ -70,16 +70,16 @@
     <!--institute的批量通过-->
     <update id="updateAdopt2ByNos" parameterType="com.ruoyi.test.domain.Testersoure">
         update testerSoure set adopter2 = 1 ,operator=#{operator} where no in
-        <foreach collection="nos.split(',')" separator="," open="(" close=")" item="no">
+        <foreach collection="nos.split(',')" separator="," open="(" close=")" item="nos">
             #{nos}
         </foreach>
     </update>
 
     <!--major的批量通过-->
     <update id="updateAdoptByNos" parameterType="string">
-        update testerSoure set adopter = 1 where no in
-        <foreach collection="nos.split(',')" open="(" separator="," close=")" item="no">
-            #{no}
+        update testerSoure set adopter = 1 ,operator=#{operator} where no in
+        <foreach collection="nos.split(',')" separator="," open="(" close=")" item="nos">
+            #{nos}
         </foreach>
     </update>
 
