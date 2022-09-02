@@ -107,10 +107,9 @@ public class TestUserMajorController extends BaseController
         return toAjax(testUserService.backTestUser(testUser));
     }*/
     public AjaxResult backTestUser(@RequestBody Testersoure testersoure){
-        System.out.println("------------222222----------------");
         Student student = new Student();
         student.setStatus("2");
-        testersoure.setAdopter("2");
+        testersoure.setAdopter(2);
         student.setNo(testersoure.getNo());
         studentService.updateStatusByNo(student);
         testersoureService.updateAdopterById(testersoure);
@@ -124,7 +123,13 @@ public class TestUserMajorController extends BaseController
     @Log(title = "access", businessType = BusinessType.UPDATE)
     @PutMapping("/{nos}")
     public AjaxResult accessUser(@PathVariable String nos){
+        testersoureService.updateAdoptByNos(nos);
+        System.out.println("-----------------------");
+        System.out.println(nos);
+        System.out.println("-----------------------");
+
         return toAjax(studentService.updateStatusByNos(nos));
+
     }
 
     /**
@@ -132,13 +137,17 @@ public class TestUserMajorController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('test:major:access2')")
     @Log(title = "access2", businessType = BusinessType.UPDATE)
-    @PutMapping("accessUser2")
+    @PutMapping("/accessUser2")
     public AjaxResult accessUser2(@RequestBody Student student){
-        Testersoure testersoure = new Testersoure();
+
         student.setStatus("1");
+        Testersoure testersoure = new Testersoure();
+        testersoure.setNo(student.getNo());
+        testersoure.setAdopter(1);
+        testersoure.setOperator(student.getOperator());
+        testersoureService.updateAdoptByNo(testersoure);
         return toAjax(studentService.updateStatusByNo(student));
     }
-
 
     /**
      * 查询奖项
@@ -156,7 +165,7 @@ public class TestUserMajorController extends BaseController
     /**
      * 修改各个小点的成绩
      */
-    @PreAuthorize("@ss.hasPermi('test:major:updateScore')")
+    //@PreAuthorize("@ss.hasPermi('test:major:updateScore')")
 //    @Log(title = "updateScore", businessType = BusinessType.UPDATE)
     @PutMapping("updateScore")
 

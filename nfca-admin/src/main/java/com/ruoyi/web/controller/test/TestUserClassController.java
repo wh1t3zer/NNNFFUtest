@@ -70,14 +70,16 @@ public class TestUserClassController extends BaseController
         return toAjax(testUserService.backTestUser(testUser));
     }*/
     public AjaxResult backTestUser(@RequestBody Testersoure testersoure){
-        System.out.println("------------333333---------------");
+
 
         Student student = new Student();
         student.setStatus("2");
-        testersoure.setAdopter2("2");
+        testersoure.setAdopter2(2);
         student.setNo(testersoure.getNo());
         studentService.updateStatusByNo(student);
+        System.out.println("------------333333---------------");
         System.out.println(testersoure);
+        System.out.println("------------333333---------------");
         System.out.println(testersoure.getOperator());
         return toAjax(testersoureService.updateReasonByNo2(testersoure));
     }
@@ -87,7 +89,7 @@ public class TestUserClassController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('test:class:updateScore')")
 //    @Log(title = "updateScore", businessType = BusinessType.UPDATE)
-    @PutMapping("updateScore")
+    @PutMapping("/updateScore")
 
     public AjaxResult updateScore(@RequestBody Testersoure testersoure){
         return toAjax(testersoureService.updateScoreById(testersoure));
@@ -109,7 +111,7 @@ public class TestUserClassController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('test:class:access2')")
     @Log(title = "access2", businessType = BusinessType.UPDATE)
-    @PutMapping("accessUser2")
+    @PutMapping("/accessUser2")
     public AjaxResult accessUser2(@RequestBody Student student){
         student.setStatus("1");
         return toAjax(studentService.updateStatusByNo(student));
@@ -140,19 +142,6 @@ public class TestUserClassController extends BaseController
         return util.exportExcel(list, "用户数据");
     }*/
 
-
-    /*
-    * 导出
-    * */
-    @Log(title = "用户管理", businessType = BusinessType.EXPORT)
-    @PreAuthorize("@ss.hasPermi('test:class:export')")
-    @GetMapping("/export")
-    public AjaxResult export(Student student)
-    {
-        List<Student> list = studentService.selectClassStudents(student);
-        ExcelUtil<Student> util = new ExcelUtil<Student>(Student.class);
-        return util.exportExcel(list, "用户数据");
-    }
 
 
 

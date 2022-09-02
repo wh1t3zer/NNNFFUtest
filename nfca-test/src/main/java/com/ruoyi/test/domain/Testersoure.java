@@ -14,11 +14,21 @@ public class Testersoure {
     private String module;
     private String title;
     private String detail;
+    private String nos;
     private String reason;
-    private String adopter;
-    private String adopter2;
-    private String operator;
-    private String Reason;
+    private Integer adopter;
+    private Integer adopter2;
+
+    public String getNos() {
+        return nos;
+    }
+
+    public void setNos(String nos) {
+        this.nos = nos;
+    }
+
+    private Integer operator;
+    private static String Reason;
 
 
     private String openId;
@@ -87,27 +97,27 @@ public class Testersoure {
         this.Reason = Reason;
     }
 
-    public String getAdopter() {
+    public Integer getAdopter() {
         return adopter;
     }
 
-    public void setAdopter(String adopter) {
+    public void setAdopter(Integer adopter) {
         this.adopter = adopter;
     }
 
-    public String getAdopter2() {
+    public Integer getAdopter2() {
         return adopter2;
     }
 
-    public void setAdopter2(String adopter2) {
+    public void setAdopter2(Integer adopter2) {
         this.adopter2 = adopter2;
     }
 
-    public String getOperator() {
+    public Integer getOperator() {
         return operator;
     }
 
-    public void setOperator(String operator) {
+    public void setOperator(Integer operator) {
         this.operator = operator;
     }
 

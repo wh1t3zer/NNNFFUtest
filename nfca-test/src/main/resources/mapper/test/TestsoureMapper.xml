@@ -20,11 +20,11 @@
     </resultMap>
 
     <update id="updateReasonByNo" parameterType="com.ruoyi.test.domain.Testersoure">
-        update testerSoure set reason = #{reason},adopter = #{adopter} where id = #{id}
+        update testerSoure set reason = #{reason},adopter = #{adopter},operator=#{operator} where id = #{id}
     </update>
 
     <update id="updateReasonByNo2" parameterType="com.ruoyi.test.domain.Testersoure">
-        update testerSoure set reason = #{reason},adopter2 = #{adopter2} where id = #{id}
+        update testerSoure set reason = #{reason},adopter2 = #{adopter2},operator=#{operator} where id = #{id}
     </update>
 
     <update id="updateScoreById" parameterType="com.ruoyi.test.domain.Testersoure">
@@ -41,35 +41,44 @@
 
 
     <select id="queryTitlesListByNo" parameterType="com.ruoyi.test.domain.Testersoure" resultMap="TestersoureResult">
-        select t.id ,t.no,t.score,t.module,t.detail,t.title,u.openid,t.adopter,t.adopter2,
-               (select name from testerMember where no = t.operator limit 1) as operator
+        select t.id ,t.no,t.score,t.module,t.detail,t.title,u.openid,t.adopter,t.adopter2,t.operator
         from ncg.testerSoure t
-                 join account.user_info u
-                      on t.no = u.no
+        join account.user_info u
+        on t.no = u.no
         where t.no = #{no}
     </select>
 
 
-
+    <!--institute的单个通过-->
     <update id="updateAdopt2ByNo" parameterType="com.ruoyi.test.domain.Testersoure">
-        update testerSoure set adopter2 = #{adopter2} where no = #{no}
+        update testerSoure set adopter2 = #{adopter2},operator=#{operator} where no = #{no}
     </update>
-
+    <!--major的单个通过-->
     <update id="updateAdoptByNo" parameterType="com.ruoyi.test.domain.Testersoure">
-        update testerSoure set adopter = #{adopter} where no = #{no}
+        update testerSoure set adopter = #{adopter},operator=#{operator} where no = #{no}
     </update>
 
+    <!--institute的批量通过-->
+<!--    <update id="updateAdopt2ByNos" parameterType="com.ruoyi.test.domain.Testersoure">-->
+<!--        update testerSoure set adopter2 = 1,operator=#{operator} where no in-->
+<!--        <foreach collection="nos.split(',')" separator="," open="(" close=")" item="no">-->
+<!--            #{nos}-->
+<!--        </foreach>-->
+<!--    </update>-->
 
-    <update id="updateAdopt2ByNos" parameterType="string">
-        update testerSoure set adopter2 = 1 where no in
+
+    <!--institute的批量通过-->
+    <update id="updateAdopt2ByNos" parameterType="com.ruoyi.test.domain.Testersoure">
+        update testerSoure set adopter2 = 1 ,operator=#{operator} where no in
         <foreach collection="nos.split(',')" separator="," open="(" close=")" item="no">
-            #{no}
+            #{nos}
         </foreach>
     </update>
 
+    <!--major的批量通过-->
     <update id="updateAdoptByNos" parameterType="string">
         update testerSoure set adopter = 1 where no in
-        <foreach collection="nos.split(',')" separator="," open="(" close=")" item="no">
+        <foreach collection="nos.split(',')" open="(" separator="," close=")" item="no">
             #{no}
         </foreach>
     </update>

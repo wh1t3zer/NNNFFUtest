@@ -61,25 +61,6 @@
             >通过</el-button>
           </el-col>
         </el-row>
-        <el-row :gutter="10" class="mb8" style="display: inline-block; margin-left: 20px">
-          <el-col :span="1.5">
-            <el-button
-              type="warning"
-              icon="el-icon-download"
-              size="mini"
-              @click="handleExport"
-            >导出</el-button>
-          </el-col>
-
-          <el-col :span="1.5">
-            <el-button
-              type="warning"
-              icon="el-icon-download"
-              size="mini"
-              @click="handlePush"
-            >发送</el-button>
-          </el-col>
-        </el-row>
 
         <el-table v-loading="loading" :data="testList" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="50" align="center" />
@@ -106,7 +87,10 @@
             class-name="small-padding fixed-width"
           >
             <template slot-scope="scope" >
-              <el-button type="success" @click="handleEdit(scope.row)">编辑<i class="el-icon-edit"></i></el-button>
+              <el-button
+                type="success"
+                @click="handleEdit(scope.row)"
+                v-hasPermi="['test:class:edit']">编辑<i class="el-icon-edit"></i></el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -614,7 +598,7 @@
 
 </style>
 <script>
-  import { TestUser,  backUser, accessUser, accessUser2, getAwards,updateScore,exportUser,pushmsg} from "@/api/test/class";
+  import { TestUser,  backUser, accessUser, accessUser2, getAwards,updateScore} from "@/api/test/class";
   import { getToken } from "@/utils/auth";
   import EditTable from "../../tool/gen/editTable.vue";
   import * as ElementUI from "element-ui";
@@ -734,6 +718,7 @@
         knowlScore2: [],
         dailyScore2: [],
         achievementScore2: [],
+        dailyScore2id:'',
         /*
         * 各个小点的成绩
         * */
@@ -913,7 +898,7 @@
         this.updateAllScore();
         this.outerVisible = false
         this.getList()
-        
+
       },
 
       /**
@@ -951,11 +936,7 @@
                 this.lawid.push(this.awardsList[i].id)
 
                 break;
-              case "learning":
-                this.learningScore2.push(this.awardsList[i])
-                this.awardsList[i].id='';
 
-                break;
               case "development":
                 this.developmentScore2.push(this.awardsList[i])
                 this.developmentid.push(this.awardsList[i].id)
@@ -998,7 +979,8 @@
                 break;
               case "daily":
                 this.dailyScore2.push(this.awardsList[i])
-                this.awardsList[i].id='';
+                this.dailyScore2id=this.awardsList[i].id
+
 
                 break;
               case "ideology":
@@ -1078,11 +1060,7 @@
             this.lawScore2[j].score = this.lawScore2[j].score/100
           }
         }
-        if(this.learningScore2.length>0){
-          for (let j = 0; j < this.learningScore2.length; j++) {
-            this.learningScore2[j].score = this.learningScore2[j].score/100
-          }
-        }
+
         if(this.developmentScore2.length>0){
           for (let j = 0; j < this.developmentScore2.length; j++) {
             this.developmentScore2[j].score = this.developmentScore2[j].score/100
@@ -1141,94 +1119,86 @@
         this.outerVisible = true
       },
       //获取所有修改后或者没有修改的成绩
-       async updateAllScore(){
-        const operator=this.$store.state.user.name
-        console.log(operator)
+      updateAllScore(){
+
         if(this.politicsScore2.length>0){
           for (let i = 0; i < this.politicsScore2.length; i++) {
             let id = this.politicsScore2[i].id;
             let score = this.politicsScore2[i].score*100;
-            await updateScore(id,score,operator);
+            updateScore(id,score);
           }
         }
 
         if(this.organScore2.length>0){
           for (let i = 0; i < this.organScore2.length; i++) {
-            await updateScore(this.organScore2[i].id,this.organScore2[i].score*100,operator);
+            updateScore(this.organScore2[i].id,this.organScore2[i].score*100);
           }
         }
 
         if(this.ideologyScore2.length>0){
           for (let i = 0; i < this.ideologyScore2.length; i++) {
-            await updateScore(this.ideologyScore2[i].id,this.ideologyScore2[i].score*100,operator);
+            updateScore(this.ideologyScore2[i].id,this.ideologyScore2[i].score*100);
           }
         }
-         if(this.moralityScore2.length>0){
-           for (let i = 0; i < this.moralityScore2.length; i++) {
-            await updateScore(this.moralityScore2[i].id,this.moralityScore2[i].score*100,operator);
-           }
-         }
-         if(this.lawScore2.length>0){
-           for (let i = 0; i < this.lawScore2.length; i++) {
-            await updateScore(this.lawScore2[i].id,this.lawScore2[i].score*100,operator);
-           }
-         }
-         if(this.learningScore2.length>0){
-           for (let i = 0; i < this.learningScore2.length; i++) {
-            await updateScore(this.learningScore2[i].id,this.learningScore2[i].score*100,operator);
-           }
-         }
-         if(this.developmentScore2.length>0){
-           for (let i = 0; i < this.developmentScore2.length; i++) {
-            await updateScore(this.developmentScore2[i].id,this.developmentScore2[i].score*100,operator);
-           }
-         }
-         if(this.scientificScore2.length>0){
-           for (let i = 0; i < this.scientificScore2.length; i++) {
-            await updateScore(this.scientificScore2[i].id,this.scientificScore2[i].score*100,operator);
-           }
-         }
-         if(this.mentalScore2.length>0){
-           for (let i = 0; i < this.mentalScore2.length; i++) {
-            await updateScore(this.mentalScore2[i].id,this.mentalScore2[i].score*100,operator);
-           }
-         }
-         if(this.honoraryScore2.length>0){
-           for (let i = 0; i < this.honoraryScore2.length; i++) {
-            await updateScore(this.honoraryScore2[i].id,this.honoraryScore2[i].score*100,operator);
-           }
-         }
-         if(this.competitionScore2.length>0){
-           for (let i = 0; i < this.competitionScore2.length; i++) {
-            await updateScore(this.competitionScore2[i].id,this.competitionScore2[i].score*100,operator);
-           }
-         }
-         if(this.socialWorkScore2.length>0){
-           for (let i = 0; i < this.socialWorkScore2.length; i++) {
-            await updateScore(this.socialWorkScore2[i].id,this.socialWorkScore2[i].score*100,operator);
-           }
+        if(this.moralityScore2.length>0){
+          for (let i = 0; i < this.moralityScore2.length; i++) {
+            updateScore(this.moralityScore2[i].id,this.moralityScore2[i].score*100);
+          }
         }
-         if(this.knowlScore2.length>0){
-           for (let i = 0; i < this.knowlScore2.length; i++) {
-            await updateScore(this.knowlScore2[i].id,this.knowlScore2[i].score*100,operator);
-           }
+        if(this.lawScore2.length>0){
+          for (let i = 0; i < this.lawScore2.length; i++) {
+            updateScore(this.lawScore2[i].id,this.lawScore2[i].score*100);
+          }
         }
-         if(this.dailyScore2.length>0){
-           for (let i = 0; i < this.dailyScore2.length; i++) {
-            await updateScore(this.dailyScore2[i].id,this.dailyScore2[i].score*100,operator);
-           }
+
+        if(this.developmentScore2.length>0){
+          for (let i = 0; i < this.developmentScore2.length; i++) {
+            updateScore(this.developmentScore2[i].id,this.developmentScore2[i].score*100);
+          }
+        }
+        if(this.scientificScore2.length>0){
+          for (let i = 0; i < this.scientificScore2.length; i++) {
+            updateScore(this.scientificScore2[i].id,this.scientificScore2[i].score*100);
+          }
+        }
+        if(this.mentalScore2.length>0){
+          for (let i = 0; i < this.mentalScore2.length; i++) {
+            updateScore(this.mentalScore2[i].id,this.mentalScore2[i].score*100);
+          }
+        }
+        if(this.honoraryScore2.length>0){
+          for (let i = 0; i < this.honoraryScore2.length; i++) {
+            updateScore(this.honoraryScore2[i].id,this.honoraryScore2[i].score*100);
+          }
+        }
+        if(this.competitionScore2.length>0){
+          for (let i = 0; i < this.competitionScore2.length; i++) {
+            updateScore(this.competitionScore2[i].id,this.competitionScore2[i].score*100);
+          }
+        }
+        if(this.socialWorkScore2.length>0){
+          for (let i = 0; i < this.socialWorkScore2.length; i++) {
+            updateScore(this.socialWorkScore2[i].id,this.socialWorkScore2[i].score*100);
+          }
+        }
+        if(this.knowlScore2.length>0){
+          for (let i = 0; i < this.knowlScore2.length; i++) {
+            updateScore(this.knowlScore2[i].id,this.knowlScore2[i].score*100);
+          }
+        }
+        if(this.dailyScore2.length>0){
+          for (let i = 0; i < this.dailyScore2.length; i++) {
+            updateScore(this.dailyScore2id,this.dailyScore2[i].score*100);
+          }
 
         }
 
-         if(this.physicalScore2.length>0){
-           for (let i = 0; i < this.physicalScore2.length; i++) {
-            await updateScore(this.physicalScore2[i].id,this.physicalScore2[i].score*100,operator);
-           }
+        if(this.physicalScore2.length>0){
+          for (let i = 0; i < this.physicalScore2.length; i++) {
+            updateScore(this.physicalScore2[i].id,this.physicalScore2[i].score*100);
+          }
         }
-      
-      
       },
-
 
 
       /**
@@ -1285,6 +1255,7 @@
         this.dailyScore2= [];
         this.achievementScore2=[];
         this.scientificScore2=[];
+        this.dailyScore2id='';
       },
 
       /*

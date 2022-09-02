@@ -22,16 +22,18 @@ export function getTestUser(userId) {
 
 /**
  * 驳回学生申请
+ * @param id 唯一标识
  * @param no 学生学号
  * @param reason 驳回原因
+ * @param operator 操作员
  * @returns {*}
  */
-export function backUser(id,no,reason,opertor) {
+export function backUser(id,no,reason,operator) {
   const data = {
     id,
     no,
     reason,
-    opertor
+    operator
   }
   return request({
     url: '/test/institute/backUser',
@@ -40,32 +42,70 @@ export function backUser(id,no,reason,opertor) {
   })
 }
 
-/**
+/*
+*
  * 批量通过学生申请
  * nos 为所选学生no数组
  * @param nos
+ * @param operator 操作员
  * @returns {*}
  */
-export function accessUser(nos) {
+
+export function accessUser(nos,operator) {
   const data = {
     nos,
+    operator,
+
   }
   return request({
+    // url: '/test/institute/' + parseStrEmpty(nos),
+
+  url: '/test/institute/access',
+    method: 'put',
+    data: data
+  }).then(res=>{
+    console.log(res)
+  })
+  /*return request({
     url: '/test/institute/' + parseStrEmpty(nos),
     method: 'put',
-    //data: data
-  })
+    data: data
+  })*/
 }
+
+/*
+
+export function accessUser(nos,operator) {
+  const data = {
+    nos,
+    operator
+  }
+
+  return request({
+    url: '/test/institute/access',
+    method: 'put',
+    data: data
+  })
+  /!*return request({
+    url: '/test/institute/' + parseStrEmpty(nos,operator),
+    method: 'put',
+    data: data
+  })*!/
+}
+
+*/
 
 
 /**
  * 通过单个学生
  * @param no 学生学号
+ * @param operator 操作人员
  * @returns {*}
  */
-export function accessUser2(no) {
+export function accessUser2(no,operator) {
   const data = {
     no,
+    operator
   }
   return request({
     url: '/test/institute/accessUser2',
@@ -101,10 +141,20 @@ export function updateScore(id,score) {
     score,
   }
   return request({
-    url: '/test/class/updateScore',
+    url: '/test/institute/updateScore',
     method: 'put',
     data: data
   })
+  /*return request({
+    url: '/test/institute/updateScore',
+    method: 'put',
+    data: data
+  }).then(res=>{
+    if(res.code==200){
+      console.log(id)
+      console.log(score)
+    }
+  })*/
 }
 /*
 * 导出功能接口

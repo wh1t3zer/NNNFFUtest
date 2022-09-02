@@ -28,6 +28,15 @@ public class Student {
     private String classValue;
     private String majorValue;
     private String gradeValue;
+    private Integer operator;
+
+    public Integer getOperator() {
+        return operator;
+    }
+
+    public void setOperator(Integer operator) {
+        this.operator = operator;
+    }
 
     public Integer getId() {
         return id;

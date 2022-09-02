@@ -95,8 +95,8 @@
               icon="el-icon-check"
               size="mini"
               :disabled="multiple"
-              @click="handleAccess"
               v-hasPermi="['test:institute:access']"
+              @click="handleAccess"
             >通过</el-button>
           </el-col>
         </el-row>
@@ -145,7 +145,10 @@
             class-name="small-padding fixed-width"
           >
             <template slot-scope="scope" >
-              <el-button type="success" @click="handleEdit(scope.row)">编辑<i class="el-icon-edit"></i></el-button>
+              <el-button
+                type="success"
+                @click="handleEdit(scope.row)"
+                v-hasPermi="['test:institute:edit']">编辑<i class="el-icon-edit"></i></el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -208,7 +211,8 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
-                          v-hasPermi="['test:class:back']"
+                          v-hasPermi="['test:institute:back']"
+
                           @confirm="doublePolitics(politicsScore2[index].id,form.no,Reason,politicsScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
@@ -218,10 +222,20 @@
                     <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisiblePolitics = true">驳回</el-button>
                     </div>
-                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{politicsScore2[index].operator}}</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="politicsScore2[index].operator === 13060">唐玉婷</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="politicsScore2[index].operator === 18059">曲楠楠</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="politicsScore2[index].operator === 19027">曹永荣</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="politicsScore2[index].operator === 19026">张文婷</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="politicsScore2[index].operator === 19028">陈金涛</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="politicsScore2[index].operator === 19133">朱业顺</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="politicsScore2[index].operator === 20002">翟晓涵</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="politicsScore2[index].operator === 20283">王孟阳</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="politicsScore2[index].operator === 21155">穆小青</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="politicsScore2[index].operator === 22074">徐慧玲</el-button>
+
                     <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="politicsScore2[index].adopter2 == '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
                     <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="politicsScore2[index].adopter2 == '1'">审核状态: <span style="color: green ">通过</span></span>
-                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="politicsScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="politicsScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回</span></span>
                   </div>
                 </div>
                 <div v-for="(imgs, index) in politicsid" v-viewer="{movable:true}" style="display: inline;  vertical-align: middle">
@@ -268,6 +282,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
+                          v-hasPermi="['test:institute:back']"
                           @confirm="doubleIdeology(ideologyScore2[index].id,form.no,Reason,ideologyScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
@@ -278,10 +293,19 @@
                     <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleIdeology = true">驳回</el-button>
                     </div>
-                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{ideologyScore2[index].operator}}</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="ideologyScore2[index].operator === 13060">唐玉婷</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="ideologyScore2[index].operator === 18059">曲楠楠</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="ideologyScore2[index].operator === 19027">曹永荣</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="ideologyScore2[index].operator === 19026">张文婷</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="ideologyScore2[index].operator === 19028">陈金涛</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="ideologyScore2[index].operator === 19133">朱业顺</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="ideologyScore2[index].operator === 20002">翟晓涵</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="ideologyScore2[index].operator === 20283">王孟阳</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="ideologyScore2[index].operator === 21155">穆小青</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="ideologyScore2[index].operator === 22074">徐慧玲</el-button>
                     <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="ideologyScore2[index].adopter2 == '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
                     <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="ideologyScore2[index].adopter2 == '1'">审核状态: <span style="color: green ">通过</span></span>
-                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="ideologyScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="ideologyScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回</span></span>
                   </div>
                 </div>
                 <div v-for="(imgs, index) in ideologyid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -327,6 +351,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
+                          v-hasPermi="['test:institute:back']"
                           @confirm="doubleMorality(moralityScore2[index].id,form.no,Reason,moralityScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
@@ -337,10 +362,19 @@
                     <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleMorality = true">驳回</el-button>
                     </div>
-                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{moralityScore2[index].operator}}</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="moralityScore2[index].operator === 13060">唐玉婷</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="moralityScore2[index].operator === 18059">曲楠楠</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="moralityScore2[index].operator === 19027">曹永荣</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="moralityScore2[index].operator === 19026">张文婷</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="moralityScore2[index].operator === 19028">陈金涛</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="moralityScore2[index].operator === 19133">朱业顺</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="moralityScore2[index].operator === 20002">翟晓涵</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="moralityScore2[index].operator === 20283">王孟阳</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="moralityScore2[index].operator === 21155">穆小青</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="moralityScore2[index].operator === 22074">徐慧玲</el-button>
                     <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="moralityScore2[index].adopter2 == '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
                     <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="moralityScore2[index].adopter2 == '1'">审核状态: <span style="color: green ">通过</span></span>
-                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="moralityScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="moralityScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回</span></span>
                   </div>
                 </div>
                 <div v-for="(imgs, index) in moralityid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -385,6 +419,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
+                          v-hasPermi="['test:institute:back']"
                           @confirm="doubleOrgan(organScore2[index].id,form.no,Reason,organScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
@@ -395,10 +430,19 @@
                     <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleOrgan = true">驳回</el-button>
                     </div>
-                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{organScore2[index].operator}}</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="organScore2[index].operator === 13060">唐玉婷</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="organScore2[index].operator === 18059">曲楠楠</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="organScore2[index].operator === 19027">曹永荣</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="organScore2[index].operator === 19026">张文婷</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="organScore2[index].operator === 19028">陈金涛</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="organScore2[index].operator === 19133">朱业顺</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="organScore2[index].operator === 20002">翟晓涵</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="organScore2[index].operator === 20283">王孟阳</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="organScore2[index].operator === 21155">穆小青</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="organScore2[index].operator === 22074">徐慧玲</el-button>
                     <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="organScore2[index].adopter2 == '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
                     <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="organScore2[index].adopter2 == '1'">审核状态: <span style="color: green ">通过</span></span>
-                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="organScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="organScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回</span></span>
                   </div>
                 </div>
                 <div v-for="(imgs, index) in organid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -446,6 +490,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
+                          v-hasPermi="['test:institute:back']"
                           @confirm="doubleLaw(lawScore2[index].id,form.no,Reason,lawScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
@@ -456,10 +501,19 @@
                     <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleLaw = true">驳回</el-button>
                     </div>
-                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{lawScore2[index].operator}}</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="lawScore2[index].operator === 13060">唐玉婷</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="lawScore2[index].operator === 18059">曲楠楠</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="lawScore2[index].operator === 19027">曹永荣</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="lawScore2[index].operator === 19026">张文婷</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="lawScore2[index].operator === 19028">陈金涛</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="lawScore2[index].operator === 19133">朱业顺</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="lawScore2[index].operator === 20002">翟晓涵</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="lawScore2[index].operator === 20283">王孟阳</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="lawScore2[index].operator === 21155">穆小青</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="lawScore2[index].operator === 22074">徐慧玲</el-button>
                     <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="lawScore2[index].adopter2 == '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
                     <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="lawScore2[index].adopter2 == '1'">审核状态: <span style="color: green ">通过</span></span>
-                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="lawScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="lawScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回</span></span>
                   </div>
                 </div>
                 <div v-for="(imgs, index) in lawid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -505,6 +559,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
+                          v-hasPermi="['test:institute:back']"
                           @confirm="doubleLearning(learningScore2[index].id,form.no,Reason,learningScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
@@ -515,10 +570,19 @@
                     <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleLearning = true">驳回</el-button>
                     </div>
-                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{learningScore2[index].operator}}</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="learningScore2[index].operator === 13060">唐玉婷</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="learningScore2[index].operator === 18059">曲楠楠</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="learningScore2[index].operator === 19027">曹永荣</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="learningScore2[index].operator === 19026">张文婷</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="learningScore2[index].operator === 19028">陈金涛</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="learningScore2[index].operator === 19133">朱业顺</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="learningScore2[index].operator === 20002">翟晓涵</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="learningScore2[index].operator === 20283">王孟阳</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="learningScore2[index].operator === 21155">穆小青</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="learningScore2[index].operator === 22074">徐慧玲</el-button>
                     <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="learningScore2[index].adopter2 == '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
                     <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="learningScore2[index].adopter2 == '1'">审核状态: <span style="color: green ">通过</span></span>
-                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="learningScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="learningScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回</span></span>
                   </div>
                 </div>
               </template>
@@ -559,6 +623,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
+                          v-hasPermi="['test:institute:back']"
                           @confirm="doubleDevelopment(developmentScore2[index].id,form.no,Reason,developmentScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
@@ -569,10 +634,19 @@
                     <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleDevelopment = true">驳回</el-button>
                     </div>
-                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{developmentScore2[index].operator}}</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="developmentScore2[index].operator === 13060">唐玉婷</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="developmentScore2[index].operator === 18059">曲楠楠</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="developmentScore2[index].operator === 19027">曹永荣</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="developmentScore2[index].operator === 19026">张文婷</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="developmentScore2[index].operator === 19028">陈金涛</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="developmentScore2[index].operator === 19133">朱业顺</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="developmentScore2[index].operator === 20002">翟晓涵</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="developmentScore2[index].operator === 20283">王孟阳</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="developmentScore2[index].operator === 21155">穆小青</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="developmentScore2[index].operator === 22074">徐慧玲</el-button>
                     <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="developmentScore2[index].adopter2 == '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
                     <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="developmentScore2[index].adopter2 == '1'">审核状态: <span style="color: green ">通过</span></span>
-                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="developmentScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="developmentScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回</span></span>
                   </div>
                 </div>
                 <div v-for="(imgs, index) in developmentid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -617,6 +691,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
+                          v-hasPermi="['test:institute:back']"
                           @confirm="doubleScientific(scientificScore2[index].id,form.no,Reason,scientificScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
@@ -627,10 +702,19 @@
                     <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleScientific = true">驳回</el-button>
                     </div>
-                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{scientificScore2[index].operator}}</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="scientificScore2[index].operator === 13060">唐玉婷</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="scientificScore2[index].operator === 18059">曲楠楠</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="scientificScore2[index].operator === 19027">曹永荣</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="scientificScore2[index].operator === 19026">张文婷</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="scientificScore2[index].operator === 19028">陈金涛</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="scientificScore2[index].operator === 19133">朱业顺</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="scientificScore2[index].operator === 20002">翟晓涵</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="scientificScore2[index].operator === 20283">王孟阳</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="scientificScore2[index].operator === 21155">穆小青</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="scientificScore2[index].operator === 22074">徐慧玲</el-button>
                     <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="scientificScore2[index].adopter2 == '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
                     <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="scientificScore2[index].adopter2 == '1'">审核状态: <span style="color: green ">通过</span></span>
-                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="scientificScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="scientificScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回</span></span>
                   </div>
                 </div>
                 <div v-for="(imgs, index) in scientificid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -676,6 +760,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
+                          v-hasPermi="['test:institute:back']"
                           @confirm="doublePhysical(physicalScore2[index].id,form.no,Reason,physicalScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
@@ -686,10 +771,19 @@
                     <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisiblePhysical = true">驳回</el-button>
                     </div>
-                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{physicalScore2[index].operator}}</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="physicalScore2[index].operator === 13060">唐玉婷</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="physicalScore2[index].operator === 18059">曲楠楠</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="physicalScore2[index].operator === 19027">曹永荣</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="physicalScore2[index].operator === 19026">张文婷</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="physicalScore2[index].operator === 19028">陈金涛</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="physicalScore2[index].operator === 19133">朱业顺</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="physicalScore2[index].operator === 20002">翟晓涵</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="physicalScore2[index].operator === 20283">王孟阳</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="physicalScore2[index].operator === 21155">穆小青</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="physicalScore2[index].operator === 22074">徐慧玲</el-button>
                     <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="physicalScore2[index].adopter2 == '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
                     <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="physicalScore2[index].adopter2 == '1'">审核状态: <span style="color: green ">通过</span></span>
-                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="physicalScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="physicalScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回</span></span>
                   </div>
                 </div>
                 <div v-for="(imgs, index) in physicalid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -734,6 +828,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
+                          v-hasPermi="['test:institute:back']"
                           @confirm="doubleMental(mentalScore2[index].id,form.no,Reason,mentalScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
@@ -743,10 +838,19 @@
                     <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleMental = true">驳回</el-button>
                     </div>
-                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{mentalScore2[index].operator}}</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="mentalScore2[index].operator === 13060">唐玉婷</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="mentalScore2[index].operator === 18059">曲楠楠</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="mentalScore2[index].operator === 19027">曹永荣</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="mentalScore2[index].operator === 19026">张文婷</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="mentalScore2[index].operator === 19028">陈金涛</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="mentalScore2[index].operator === 19133">朱业顺</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="mentalScore2[index].operator === 20002">翟晓涵</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="mentalScore2[index].operator === 20283">王孟阳</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="mentalScore2[index].operator === 21155">穆小青</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="mentalScore2[index].operator === 22074">徐慧玲</el-button>
                     <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="mentalScore2[index].adopter2 == '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
                     <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="mentalScore2[index].adopter2 == '1'">审核状态: <span style="color: green ">通过</span></span>
-                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="mentalScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="mentalScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回</span></span>
                   </div>
                 </div>
                 <div v-for="(imgs, index) in mentalid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -795,6 +899,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
+                          v-hasPermi="['test:institute:back']"
                           @confirm="doubleHonorary(honoraryScore2[index].id,form.no,Reason,honoraryScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
@@ -805,10 +910,19 @@
                     <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleHonorary = true">驳回</el-button>
                     </div>
-                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{honoraryScore2[index].operator}}</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="honoraryScore2[index].operator === 13060">唐玉婷</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="honoraryScore2[index].operator === 18059">曲楠楠</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="honoraryScore2[index].operator === 19027">曹永荣</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="honoraryScore2[index].operator === 19026">张文婷</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="honoraryScore2[index].operator === 19028">陈金涛</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="honoraryScore2[index].operator === 19133">朱业顺</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="honoraryScore2[index].operator === 20002">翟晓涵</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="honoraryScore2[index].operator === 20283">王孟阳</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="honoraryScore2[index].operator === 21155">穆小青</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="honoraryScore2[index].operator === 22074">徐慧玲</el-button>
                     <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="honoraryScore2[index].adopter2 == '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
                     <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="honoraryScore2[index].adopter2 == '1'">审核状态: <span style="color: green ">通过</span></span>
-                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="honoraryScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="honoraryScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回</span></span>
                   </div>
                 </div>
                 <div v-for="(imgs, index) in honoraryid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -854,6 +968,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
+                          v-hasPermi="['test:institute:back']"
                           @confirm="doubleCompetition(competitionScore2[index].id,form.no,Reason,competitionScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
@@ -864,10 +979,19 @@
                     <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleCompetition = true">驳回</el-button>
                     </div>
-                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{competitionScore2[index].operator}}</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="competitionScore2[index].operator === 13060">唐玉婷</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="competitionScore2[index].operator === 18059">曲楠楠</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="competitionScore2[index].operator === 19027">曹永荣</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="competitionScore2[index].operator === 19026">张文婷</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="competitionScore2[index].operator === 19028">陈金涛</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="competitionScore2[index].operator === 19133">朱业顺</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="competitionScore2[index].operator === 20002">翟晓涵</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="competitionScore2[index].operator === 20283">王孟阳</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="competitionScore2[index].operator === 21155">穆小青</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="competitionScore2[index].operator === 22074">徐慧玲</el-button>
                     <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="competitionScore2[index].adopter2 == '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
                     <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="competitionScore2[index].adopter2 == '1'">审核状态: <span style="color: green ">通过</span></span>
-                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="competitionScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="competitionScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回</span></span>
                   </div>
                 </div>
                 <div v-for="(imgs, index) in competitionid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -913,6 +1037,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
+                          v-hasPermi="['test:institute:back']"
                           @confirm="doubleSocialWork(socialWorkScore2[index].id,form.no,Reason,socialWorkScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
@@ -923,10 +1048,19 @@
                     <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleSocialWork = true">驳回</el-button>
                     </div>
-                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{socialWorkScore2[index].operator}}</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="socialWorkScore2[index].operator === 13060">唐玉婷</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="socialWorkScore2[index].operator === 18059">曲楠楠</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="socialWorkScore2[index].operator === 19027">曹永荣</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="socialWorkScore2[index].operator === 19026">张文婷</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="socialWorkScore2[index].operator === 19028">陈金涛</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="socialWorkScore2[index].operator === 19133">朱业顺</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="socialWorkScore2[index].operator === 20002">翟晓涵</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="socialWorkScore2[index].operator === 20283">王孟阳</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="socialWorkScore2[index].operator === 21155">穆小青</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="socialWorkScore2[index].operator === 22074">徐慧玲</el-button>
                     <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="socialWorkScore2[index].adopter2 == '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
                     <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="socialWorkScore2[index].adopter2 == '1'">审核状态: <span style="color: green ">通过</span></span>
-                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="socialWorkScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="socialWorkScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回</span></span>
                   </div>
                 </div>
                 <div v-for="(imgs, index) in socialWorkid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -971,6 +1105,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
+                          v-hasPermi="['test:institute:back']"
                           @confirm="doubleKnowl(knowlScore2[index].id,form.no,Reason,knowlScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
@@ -981,10 +1116,19 @@
                     <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleKnowl = true">驳回</el-button>
                     </div>
-                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{knowlScore2[index].operator}}</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="knowlScore2[index].operator === 13060">唐玉婷</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="knowlScore2[index].operator === 18059">曲楠楠</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="knowlScore2[index].operator === 19027">曹永荣</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="knowlScore2[index].operator === 19026">张文婷</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="knowlScore2[index].operator === 19028">陈金涛</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="knowlScore2[index].operator === 19133">朱业顺</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="knowlScore2[index].operator === 20002">翟晓涵</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="knowlScore2[index].operator === 20283">王孟阳</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="knowlScore2[index].operator === 21155">穆小青</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="knowlScore2[index].operator === 22074">徐慧玲</el-button>
                     <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="knowlScore2[index].adopter2 == '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
                     <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="knowlScore2[index].adopter2 == '1'">审核状态: <span style="color: green ">通过</span></span>
-                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="knowlScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="knowlScore2[index].adopter2 == '2'">审核状态: <span style="color: red ">驳回</span></span>
                   </div>
                 </div>
                 <div v-for="(imgs, index) in knowlid" v-viewer="{movable:true}" style="display: inline;vertical-align: middle">
@@ -1030,6 +1174,7 @@
                           icon="el-icon-info"
                           icon-color="red"
                           title="您确定要驳回吗？"
+                          v-hasPermi="['test:institute:back']"
                           @confirm="doubleDaily(dailyScore2[index].id,form.no,Reason,dailyScore2[index].openId)"
                         >
                           <el-button  type="danger" slot="reference">确定</el-button>
@@ -1039,10 +1184,19 @@
                     <div slot="footer" class="dialog-footer" style="display: inline;  vertical-align: middle" >
                       <el-button type="warning" size="mini" style="margin-left: 5px" @click="innerVisibleDaily = true">驳回</el-button>
                     </div>
-                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle ">{{dailyScore2[index].operator}}</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="dailyScore2[index].operator === 13060">唐玉婷</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="dailyScore2[index].operator === 18059">曲楠楠</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="dailyScore2[index].operator === 19027">曹永荣</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="dailyScore2[index].operator === 19026">张文婷</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="dailyScore2[index].operator === 19028">陈金涛</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="dailyScore2[index].operator === 19133">朱业顺</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="dailyScore2[index].operator === 20002">翟晓涵</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="dailyScore2[index].operator === 20283">王孟阳</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="dailyScore2[index].operator === 21155">穆小青</el-button>
+                    <el-button size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-else-if="dailyScore2[index].operator === 22074">徐慧玲</el-button>
                     <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="dailyScore2[index].adopter2 === '0'">审核状态: <span style="color: lightsalmon ">审核中</span></span>
                     <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="dailyScore2[index].adopter2 === '1'">审核状态: <span style="color: green ">通过</span></span>
-                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="dailyScore2[index].adopter2 === '2'">审核状态: <span style="color: red ">驳回中</span></span>
+                    <span size="mini" style="width:70px;margin-left: 5px; vertical-align: middle " v-if="dailyScore2[index].adopter2 === '2'">审核状态: <span style="color: red ">驳回</span></span>
                   </div>
                 </div>
               </template>
@@ -1073,7 +1227,11 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="outerVisible = false" type="info">取消</el-button>
-        <el-button @click="handleAccess2(form.no,form.id,form.score)" type="success" style="margin: 0 100px 0 50px">通过</el-button>
+        <el-button
+          @click="handleAccess2(form.no,form.id,form.score)"
+          type="success"
+          v-has-permi="['test:institute:access2']"
+          style="margin: 0 100px 0 50px" >通过</el-button>
       </div>
     </el-dialog>
 
@@ -1125,7 +1283,7 @@
 
 </style>
 <script>
-  import { TestUser, backUser, accessUser,accessUser2,getAwards,pushmsg,updateScore,exportUser } from "@/api/test/institute";
+  import { TestUser, backUser,accessUser,accessUser2,getAwards,pushmsg,updateScore,exportUser } from "@/api/test/institute";
   import { getToken } from "@/utils/auth";
   import EditTable from "../../tool/gen/editTable.vue";
   import * as ElementUI from "element-ui";
@@ -1187,7 +1345,10 @@
         //用户奖项数据
         awardsList: [],
 
+        operator_name:"",
+
         operatorAll:[
+          {operatorid:13060,operatorname:'唐玉婷'},
           {operatorid:18059,operatorname:'曲楠楠'},
           {operatorid:19027,operatorname:'曹永荣'},
           {operatorid:19026,operatorname:'张文婷'},
@@ -1254,6 +1415,7 @@
         knowlScore2: [],
         dailyScore2: [],
         achievementScore2: [],
+        dailyScore2id:'',
 
         defaultProps: {
           children: "children",
@@ -1270,7 +1432,6 @@
           grade: undefined,
           score1: undefined,
           score2: undefined,
-
           major: undefined,
         },
         // 表单校验
@@ -1391,8 +1552,8 @@
        * @param no 学生学号
        * @param reason 驳回原因
        */
-      handleBack(id,no,reason,operatorid) {
-        backUser(id,no,reason,operatorid);
+      handleBack(id,no,reason,operator) {
+        backUser(id,no,reason,operator);
         this.getList();
         this.reason=''; /*驳回后重置驳回原因*/
       },
@@ -1403,8 +1564,9 @@
        */
       handleAccess(row) {
         const nos = row.no || this.nos;
-
-        accessUser(nos)
+        let operator =Number(this.$store.state.user.name)
+        let zifupingjie = nos.toString();
+        accessUser(zifupingjie,operator)
         this.getList();
       },
 
@@ -1413,7 +1575,8 @@
        * @param no 学生学号
        */
       handleAccess2(no){
-        accessUser2(no);
+        var testid = this.$store.state.user.name;
+        accessUser2(no,Number(testid));
         this.updateAllScore();
         this.outerVisible = false
         this.getList();
@@ -1454,11 +1617,7 @@
                 this.lawid.push(this.awardsList[i].id)
 
                 break;
-              case "learning":
-                this.learningScore2.push(this.awardsList[i])
-                this.awardsList[i].id='';
 
-                break;
               case "development":
                 this.developmentScore2.push(this.awardsList[i])
                 this.developmentid.push(this.awardsList[i].id)
@@ -1501,7 +1660,7 @@
                 break;
               case "daily":
                 this.dailyScore2.push(this.awardsList[i])
-                this.awardsList[i].id='';
+                this.dailyScore2id=this.awardsList[i].id
 
                 break;
               case "ideology":
@@ -1522,6 +1681,7 @@
           }
 
           this.updateAllPointScore()
+
 
 
 
@@ -1557,80 +1717,103 @@
       updateAllPointScore(){
         if (this.organScore2.length>0){
           for (let j = 0; j < this.organScore2.length; j++) {
-            this.organScore2[j].score = this.organScore2[j].score/100
-            console.log(this.organScore2[j].score)
+            if (this.organScore2[j].score != 0){
+              this.organScore2[j].score = this.organScore2[j].score/100
+            }
           }
         }
         if(this.politicsScore2.length>0){
           for (let j = 0; j < this.politicsScore2.length; j++) {
-            this.politicsScore2[j].score = this.politicsScore2[j].score/100
+            if (this.politicsScore2[j].score != 0){
+              this.politicsScore2[j].score = this.politicsScore2[j].score/100
+            }
           }
         }
         if(this.ideologyScore2.length>0){
           for (let j = 0; j < this.ideologyScore2.length; j++) {
-            this.ideologyScore2[j].score = this.ideologyScore2[j].score/100
+            if (this.ideologyScore2[j].score != 0){
+              this.ideologyScore2[j].score = this.ideologyScore2[j].score/100
+            }
           }
         }
         if(this.moralityScore2.length>0){
           for (let j = 0; j < this.moralityScore2.length; j++) {
-            this.moralityScore2[j].score = this.moralityScore2[j].score/100
+            if (this.moralityScore2[j].score != 0){
+              this.moralityScore2[j].score = this.moralityScore2[j].score/100
+            }
           }
         }
         if(this.lawScore2.length>0){
           for (let j = 0; j < this.lawScore2.length; j++) {
-            this.lawScore2[j].score = this.lawScore2[j].score/100
+            if (this.lawScore2[j].score != 0){
+              this.lawScore2[j].score = this.lawScore2[j].score/100
+            }
           }
         }
-        if(this.learningScore2.length>0){
-          for (let j = 0; j < this.learningScore2.length; j++) {
-            this.learningScore2[j].score = this.learningScore2[j].score/100
-          }
-        }
+
         if(this.developmentScore2.length>0){
           for (let j = 0; j < this.developmentScore2.length; j++) {
-            this.developmentScore2[j].score = this.developmentScore2[j].score/100
+            if (this.developmentScore2[j].score != 0){
+              this.developmentScore2[j].score = this.developmentScore2[j].score/100
+            }
           }
         }
         if(this.scientificScore2.length>0){
           for (let j = 0; j < this.scientificScore2.length; j++) {
-            this.scientificScore2[j].score = this.scientificScore2[j].score/100
+            if (this.scientificScore2[j].score != 0){
+              this.scientificScore2[j].score = this.scientificScore2[j].score/100
+            }
           }
         }
         if(this.mentalScore2.length>0){
           for (let j = 0; j < this.mentalScore2.length; j++) {
-            this.mentalScore2[j].score = this.mentalScore2[j].score/100
+            if (this.mentalScore2[j].score != 0){
+              this.mentalScore2[j].score = this.mentalScore2[j].score/100
+            }
           }
         }
         if(this.honoraryScore2.length>0){
           for (let j = 0; j < this.honoraryScore2.length; j++) {
-            this.honoraryScore2[j].score = this.honoraryScore2[j].score/100
+            if (this.honoraryScore2[j].score != 0){
+              this.honoraryScore2[j].score = this.honoraryScore2[j].score/100
+            }
           }
         }
         if(this.competitionScore2.length>0){
           for (let j = 0; j < this.competitionScore2.length; j++) {
-            this.competitionScore2[j].score = this.competitionScore2[j].score/100
+            if (this.competitionScore2[j].score != 0){
+              this.competitionScore2[j].score = this.competitionScore2[j].score/100
+            }
           }
         }
         if(this.socialWorkScore2.length>0){
           for (let j = 0; j < this.socialWorkScore2.length; j++) {
-            this.socialWorkScore2[j].score = this.socialWorkScore2[j].score/100
+            if (this.socialWorkScore2[j].score != 0){
+              this.socialWorkScore2[j].score = this.socialWorkScore2[j].score/100
+            }
           }
         }
         if(this.knowlScore2.length>0){
           for (let j = 0; j < this.knowlScore2.length; j++) {
-            this.knowlScore2[j].score = this.knowlScore2[j].score/100
+            if (this.knowlScore2[j].score != 0){
+              this.knowlScore2[j].score = this.knowlScore2[j].score/100
+            }
           }
         }
         if(this.dailyScore2.length>0){
           for (let j = 0; j < this.dailyScore2.length; j++) {
-            this.dailyScore2[j].score = this.dailyScore2[j].score/100
+            if (this.dailyScore2[j].score != 0){
+              this.dailyScore2[j].score = this.dailyScore2[j].score/100
+            }
           }
 
         }
 
         if(this.physicalScore2.length>0){
           for (let j = 0; j < this.physicalScore2.length; j++) {
-            this.physicalScore2[j].score = this.physicalScore2[j].score/100
+            if (this.physicalScore2[j].score != 0){
+              this.physicalScore2[j].score = this.physicalScore2[j].score/100
+            }
           }
         }
 
@@ -1676,11 +1859,7 @@
             updateScore(this.lawScore2[i].id,this.lawScore2[i].score*100);
           }
         }
-        if(this.learningScore2.length>0){
-          for (let i = 0; i < this.learningScore2.length; i++) {
-            updateScore(this.learningScore2[i].id,this.learningScore2[i].score*100);
-          }
-        }
+
         if(this.developmentScore2.length>0){
           for (let i = 0; i < this.developmentScore2.length; i++) {
             updateScore(this.developmentScore2[i].id,this.developmentScore2[i].score*100);
@@ -1718,7 +1897,7 @@
         }
         if(this.dailyScore2.length>0){
           for (let i = 0; i < this.dailyScore2.length; i++) {
-            updateScore(this.dailyScore2[i].id,this.dailyScore2[i].score*100);
+              updateScore(this.dailyScore2id,this.dailyScore2[i].score*100);
           }
 
         }
@@ -1785,6 +1964,7 @@
         this.dailyScore2= [];
         this.achievementScore2=[];
         this.scientificScore2=[];
+        this.dailyScore2id='';
       },
       /*
            * 重置成绩
@@ -1827,12 +2007,12 @@
       /*
       *所有小点的驳回按钮
       * */
-      /*
-*所有小点的驳回按钮
-* */
+
       doublePolitics(id,no,Reason,openId){
         var testid = this.$store.state.user.name;
-        this.handleBack(id,no,Reason,testid)
+        var num = Number(testid)
+        this.handleBack(id,no,Reason,Number(testid))
+        this.operator_name = this.pushOperator(num)
         this.handlePush(openId,Reason)
         this.handleGetAwards(no);
         this.Reason=''
@@ -1840,8 +2020,9 @@
 
       },
 
-      doubleIdeology(id,no,Reason,openId,operator){
-        this.handleBack(id,no,Reason,this.pushOperator(operator))
+      doubleIdeology(id,no,Reason,openId){
+        var testid = this.$store.state.user.name;
+        this.handleBack(id,no,Reason,Number(testid))
         this.handlePush(openId,Reason)
         this.handleGetAwards(no);
         this.Reason=''
@@ -1849,16 +2030,18 @@
         this.innerVisibleIdeology = false;
 
       },
-      doubleMorality(id,no,Reason,openId,operator){
-        this.handleBack(id,no,Reason,this.pushOperator(operator))
+      doubleMorality(id,no,Reason,openId){
+        var testid = this.$store.state.user.name;
+        this.handleBack(id,no,Reason,Number(testid))
         this.handlePush(openId,Reason)
         this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleMorality = false;
 
       },
-      doubleOrgan(id,no,Reason,openId,operator){
-        this.handleBack(id,no,Reason,this.pushOperator(operator))
+      doubleOrgan(id,no,Reason,openId){
+        var testid = this.$store.state.user.name;
+        this.handleBack(id,no,Reason,Number(testid))
         this.handlePush(openId,Reason)
         this.handleGetAwards(no);
         this.Reason=''
@@ -1866,32 +2049,36 @@
 
       },
 
-      doubleLaw(id,no,Reason,openId,operator){
-        this.handleBack(id,no,Reason,this.pushOperator(operator))
+      doubleLaw(id,no,Reason,openId){
+        var testid = this.$store.state.user.name;
+        this.handleBack(id,no,Reason,Number(testid))
         this.handlePush(openId,Reason)
         this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleLaw = false;
 
       },
-      doubleLearning(id,no,Reason,openId,operator){
-        this.handleBack(id,no,Reason,this.pushOperator(operator))
+      doubleLearning(id,no,Reason,openId){
+        var testid = this.$store.state.user.name;
+        this.handleBack(id,no,Reason,Number(testid))
         this.handlePush(openId,Reason)
         this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleLearning = false;
 
       },
-      doubleDevelopment(id,no,Reason,openId,operator){
-        this.handleBack(id,no,Reason,this.pushOperator(operator))
+      doubleDevelopment(id,no,Reason,openId){
+        var testid = this.$store.state.user.name;
+        this.handleBack(id,no,Reason,Number(testid))
         this.handlePush(openId,Reason)
         this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleDevelopment = false;
 
       },
-      doubleScientific(id,no,Reason,openId,operator){
-        this.handleBack(id,no,Reason,this.pushOperator(operator))
+      doubleScientific(id,no,Reason,openId){
+        var testid = this.$store.state.user.name;
+        this.handleBack(id,no,Reason,Number(testid))
         this.handlePush(openId,Reason)
         this.handleGetAwards(no);
         this.Reason=''
@@ -1899,56 +2086,63 @@
 
       },
 
-      doublePhysical(id,no,Reason,openId,operator){
-        this.handleBack(id,no,Reason,this.pushOperator(operator))
+      doublePhysical(id,no,Reason,openId){
+        var testid = this.$store.state.user.name;
+        this.handleBack(id,no,Reason,Number(testid))
         this.handlePush(openId,Reason)
         this.handleGetAwards(no);
         this.Reason=''
         this.innerVisiblePhysical = false;
 
       },
-      doubleMental(id,no,Reason,openId,operator){
-        this.handleBack(id,no,Reason,this.pushOperator(operator))
+      doubleMental(id,no,Reason,openId){
+        var testid = this.$store.state.user.name;
+        this.handleBack(id,no,Reason,Number(testid))
         this.handlePush(openId,Reason)
         this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleMental = false;
 
       },
-      doubleHonorary(id,no,Reason,openId,operator){
-        this.handleBack(id,no,Reason,this.pushOperator(operator))
+      doubleHonorary(id,no,Reason,openId){
+        var testid = this.$store.state.user.name;
+        this.handleBack(id,no,Reason,Number(testid))
         this.handlePush(openId,Reason)
         this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleHonorary = false;
 
       },
-      doubleCompetition(id,no,Reason,openId,operator){
-        this.handleBack(id,no,Reason,this.pushOperator(operator))
+      doubleCompetition(id,no,Reason,openId){
+        var testid = this.$store.state.user.name;
+        this.handleBack(id,no,Reason,Number(testid))
         this.handlePush(openId,Reason)
         this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleCompetition = false;
 
       },
-      doubleSocialWork(id,no,Reason,openId,operator){
-        this.handleBack(id,no,Reason,this.pushOperator(operator))
+      doubleSocialWork(id,no,Reason,openId){
+        var testid = this.$store.state.user.name;
+        this.handleBack(id,no,Reason,Number(testid))
         this.handlePush(openId,Reason)
         this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleSocialWork = false;
 
       },
-      doubleKnowl(id,no,Reason,openId,operator){
-        this.handleBack(id,no,Reason,this.pushOperator(operator))
+      doubleKnowl(id,no,Reason,openId){
+        var testid = this.$store.state.user.name;
+        this.handleBack(id,no,Reason,Number(testid))
         this.handlePush(openId,Reason)
         this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleKnowl = false;
 
       },
-      doubleDaily(id,no,Reason,openId,operator){
-        this.handleBack(id,no,Reason,this.pushOperator(operator))
+      doubleDaily(id,no,Reason,openId){
+        var testid = this.$store.state.user.name;
+        this.handleBack(id,no,Reason,Number(testid))
         this.handlePush(openId,Reason)
         this.handleGetAwards(no);
         this.Reason=''
@@ -1959,14 +2153,12 @@
       /*
       * 查询Operator
       * */
-      pushOperator(operator){
-        var op = 0;
+      pushOperator(num){
         for (let i = 0; i < this.operatorAll.length; i++) {
-          if (operator === this.operatorAll[i].operatorname){
-            op = this.operatorAll[i].operatorid
+          if (num === this.operatorAll[i].operatorid){
+            return this.operatorAll[i].operatorname;
           }
         }
-        return op;
       },
 
       //重置按钮
