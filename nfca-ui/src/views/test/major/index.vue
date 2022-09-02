@@ -1181,12 +1181,6 @@
             </el-form-item>
           </el-row>
 
-          <el-row>
-            <el-form-item label="17、总评">
-              <el-label style="color: red">总评为：{{ this.totalscore }}</el-label>
-            </el-form-item>
-          </el-row>
-
         </el-col>
 
 
@@ -1561,7 +1555,6 @@
                 break;
               case "learning":
                 this.learningScore2.push(this.awardsList[i])
-                this.awardsList[i].id='';
 
                 break;
               case "development":
@@ -1925,26 +1918,31 @@
       *所有小点的驳回按钮
       * */
       doublePolitics(id,no,Reason,openId){
-        this.handleBack(id,no,Reason)
+        var testid = this.$store.state.user.name;
+        var num = Number(testid)
+        this.innerVisiblePolitics = false;
+        this.handleBack(id,no,Reason,Number(testid))
+        this.operator_name = this.pushOperator(num)
         this.handlePush(openId,Reason)
-        this.handleGetAwards(no);
         this.handleGetAwards(no);
         this.Reason=''
 
-        this.innerVisiblePolitics = false;
 
       },
 
       doubleIdeology(id,no,Reason,openId){
-        this.handleBack(id,no,Reason)
+        var testid = this.$store.state.user.name;
+        this.handleBack(id,no,Reason,Number(testid))
         this.handlePush(openId,Reason)
         this.handleGetAwards(no);
         this.Reason=''
+
         this.innerVisibleIdeology = false;
 
       },
       doubleMorality(id,no,Reason,openId){
-        this.handleBack(id,no,Reason)
+        var testid = this.$store.state.user.name;
+        this.handleBack(id,no,Reason,Number(testid))
         this.handlePush(openId,Reason)
         this.handleGetAwards(no);
         this.Reason=''
@@ -1952,7 +1950,8 @@
 
       },
       doubleOrgan(id,no,Reason,openId){
-        this.handleBack(id,no,Reason)
+        var testid = this.$store.state.user.name;
+        this.handleBack(id,no,Reason,Number(testid))
         this.handlePush(openId,Reason)
         this.handleGetAwards(no);
         this.Reason=''
@@ -1961,7 +1960,8 @@
       },
 
       doubleLaw(id,no,Reason,openId){
-        this.handleBack(id,no,Reason)
+        var testid = this.$store.state.user.name;
+        this.handleBack(id,no,Reason,Number(testid))
         this.handlePush(openId,Reason)
         this.handleGetAwards(no);
         this.Reason=''
@@ -1969,7 +1969,8 @@
 
       },
       doubleLearning(id,no,Reason,openId){
-        this.handleBack(id,no,Reason)
+        var testid = this.$store.state.user.name;
+        this.handleBack(id,no,Reason,Number(testid))
         this.handlePush(openId,Reason)
         this.handleGetAwards(no);
         this.Reason=''
@@ -1977,16 +1978,17 @@
 
       },
       doubleDevelopment(id,no,Reason,openId){
-        this.handleBack(id,no,Reason)
+        var testid = this.$store.state.user.name;
+        this.handleBack(id,no,Reason,Number(testid))
         this.handlePush(openId,Reason)
         this.handleGetAwards(no);
-        console.log(openId,Reason)
         this.Reason=''
         this.innerVisibleDevelopment = false;
 
       },
       doubleScientific(id,no,Reason,openId){
-        this.handleBack(id,no,Reason)
+        var testid = this.$store.state.user.name;
+        this.handleBack(id,no,Reason,Number(testid))
         this.handlePush(openId,Reason)
         this.handleGetAwards(no);
         this.Reason=''
@@ -1995,7 +1997,8 @@
       },
 
       doublePhysical(id,no,Reason,openId){
-        this.handleBack(id,no,Reason)
+        var testid = this.$store.state.user.name;
+        this.handleBack(id,no,Reason,Number(testid))
         this.handlePush(openId,Reason)
         this.handleGetAwards(no);
         this.Reason=''
@@ -2003,7 +2006,8 @@
 
       },
       doubleMental(id,no,Reason,openId){
-        this.handleBack(id,no,Reason)
+        var testid = this.$store.state.user.name;
+        this.handleBack(id,no,Reason,Number(testid))
         this.handlePush(openId,Reason)
         this.handleGetAwards(no);
         this.Reason=''
@@ -2011,7 +2015,8 @@
 
       },
       doubleHonorary(id,no,Reason,openId){
-        this.handleBack(id,no,Reason)
+        var testid = this.$store.state.user.name;
+        this.handleBack(id,no,Reason,Number(testid))
         this.handlePush(openId,Reason)
         this.handleGetAwards(no);
         this.Reason=''
@@ -2019,7 +2024,8 @@
 
       },
       doubleCompetition(id,no,Reason,openId){
-        this.handleBack(id,no,Reason)
+        var testid = this.$store.state.user.name;
+        this.handleBack(id,no,Reason,Number(testid))
         this.handlePush(openId,Reason)
         this.handleGetAwards(no);
         this.Reason=''
@@ -2027,16 +2033,17 @@
 
       },
       doubleSocialWork(id,no,Reason,openId){
-        this.handleBack(id,no,Reason)
+        var testid = this.$store.state.user.name;
+        this.handleBack(id,no,Reason,Number(testid))
         this.handlePush(openId,Reason)
         this.handleGetAwards(no);
-        console.log(id,no,Reason,openId)
         this.Reason=''
         this.innerVisibleSocialWork = false;
 
       },
       doubleKnowl(id,no,Reason,openId){
-        this.handleBack(id,no,Reason)
+        var testid = this.$store.state.user.name;
+        this.handleBack(id,no,Reason,Number(testid))
         this.handlePush(openId,Reason)
         this.handleGetAwards(no);
         this.Reason=''
@@ -2044,13 +2051,14 @@
 
       },
       doubleDaily(id,no,Reason,openId){
-        this.handleBack(id,no,Reason)
+        var testid = this.$store.state.user.name;
+        this.handleBack(id,no,Reason,Number(testid))
         this.handlePush(openId,Reason)
         this.handleGetAwards(no);
         this.Reason=''
         this.innerVisibleDaily = false;
-
       },
+
       //重置按钮
       reset(){
         this.queryParams.name =''

@@ -533,11 +533,6 @@
             </el-form-item>
           </el-row>
 
-          <el-row>
-            <el-form-item label="17、总评">
-              <el-label style="color: red">总评为：{{ this.totalscore }}</el-label>
-            </el-form-item>
-          </el-row>
 
         </el-col>
 
@@ -546,7 +541,11 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="outerVisible = false" type="info">取消</el-button>
-        <el-button @click="handleAccess2(form.no,form.id,form.score)" type="success" style="margin: 0 100px 0 50px">通过</el-button>
+        <el-button
+                @click="handleAccess2(form.no,form.id,form.score)"
+                type="success"
+                style="margin: 0 100px 0 50px"
+                v-hasPermi="['test:class:access2']">确认</el-button>
       </div>
     </el-dialog>
   </div>

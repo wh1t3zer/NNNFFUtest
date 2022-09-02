@@ -130,7 +130,6 @@ public class TestUserInstituteController extends BaseController
 
 
       /*批量通过学生申请*/
-    //@PreAuthorize("@ss.hasPermi('test:institute:access')")
     @Log(title = "access", businessType = BusinessType.UPDATE)
     @PutMapping("/access")
     public AjaxResult accessUser(@RequestBody Testersoure testersoure){
@@ -141,7 +140,7 @@ public class TestUserInstituteController extends BaseController
     /**
      * 通过单个学生
      */
-    @PreAuthorize("@ss.hasPermi('test:institute:access2')")
+
     @Log(title = "access2", businessType = BusinessType.UPDATE)
     @PutMapping("/accessUser2")
     public AjaxResult accessUser2(@RequestBody Student student){
@@ -170,8 +169,7 @@ public class TestUserInstituteController extends BaseController
     /**
      * 修改各个小点的成绩
      */
-//    @PreAuthorize("@ss.hasPermi('test:institute:updateScore')")
-//    @Log(title = "updateScore", businessType = BusinessType.UPDATE)
+    @Log(title = "updateScore", businessType = BusinessType.UPDATE)
     @PutMapping("/updateScore")
 
     public AjaxResult updateScore(@RequestBody Testersoure testersoure){

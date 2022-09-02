@@ -109,13 +109,7 @@
               @click="handleExport"
               v-hasPermi="['test:institute:export']"
             >导出</el-button>
-            <el-button
-              type="warning"
-              icon="el-icon-download"
-              size="mini"
-              @click="handlePush"
-              v-hasPermi="['test:institute:push']"
-            >推送</el-button>
+
           </el-col>
         </el-row>
 
@@ -1214,11 +1208,6 @@
             </el-form-item>
           </el-row>
 
-          <el-row>
-            <el-form-item label="17、总评">
-              <el-label style="color: red">总评为：{{ this.totalscore }}</el-label>
-            </el-form-item>
-          </el-row>
 
         </el-col>
 

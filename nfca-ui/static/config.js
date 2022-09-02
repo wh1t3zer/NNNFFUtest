@@ -116,22 +116,22 @@ export const classOptionsini = {
       classValue: '20电子4班',
       label: '20电子4班'
     },
-    {
-      classValue: '20电子商务1班',
-      label: '20电子商务1班'
-    },
-    {
-      classValue: '20电子商务2班',
-      label: '20电子商务2'
-    },
-    {
-      classValue: '20电子商务3班',
-      label: '20电子商务3班'
-    },
-    {
-      classValue: '20电子商务4班',
-      label: '20电子商务4班'
-    },
+    // {
+    //   classValue: '20电子商务1班',
+    //   label: '20电子商务1班'
+    // },
+    // {
+    //   classValue: '20电子商务2班',
+    //   label: '20电子商务2'
+    // },
+    // {
+    //   classValue: '20电子商务3班',
+    //   label: '20电子商务3班'
+    // },
+    // {
+    //   classValue: '20电子商务4班',
+    //   label: '20电子商务4班'
+    // },
     {
       classValue: '20电气1班',
       label: '20电气1班'

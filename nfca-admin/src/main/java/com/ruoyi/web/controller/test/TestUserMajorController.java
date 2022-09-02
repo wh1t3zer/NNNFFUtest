@@ -117,7 +117,6 @@ public class TestUserMajorController extends BaseController
     }
 
     /*批量通过学生申请*/
-    //@PreAuthorize("@ss.hasPermi('test:institute:access')")
     @Log(title = "access", businessType = BusinessType.UPDATE)
     @PutMapping("/access")
     public AjaxResult accessUser(@RequestBody Testersoure testersoure){
@@ -130,7 +129,6 @@ public class TestUserMajorController extends BaseController
     /**
      * 通过单个学生
      */
-    @PreAuthorize("@ss.hasPermi('test:major:access2')")
     @Log(title = "access2", businessType = BusinessType.UPDATE)
     @PutMapping("/accessUser2")
     public AjaxResult accessUser2(@RequestBody Student student){
@@ -149,7 +147,7 @@ public class TestUserMajorController extends BaseController
      * @param
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('test:major:getAwards')")
+
     @PostMapping("/getAwards")
     public List<Testersoure> handleGetAwards(@RequestBody Testersoure testersoure){
 
@@ -160,24 +158,14 @@ public class TestUserMajorController extends BaseController
     /**
      * 修改各个小点的成绩
      */
-    //@PreAuthorize("@ss.hasPermi('test:major:updateScore')")
-//    @Log(title = "updateScore", businessType = BusinessType.UPDATE)
+
+    @Log(title = "updateScore", businessType = BusinessType.UPDATE)
     @PutMapping("updateScore")
 
     public AjaxResult updateScore(@RequestBody Testersoure testersoure){
         return toAjax(testersoureService.updateScoreById(testersoure));
     }
 
-    @Log(title = "用户管理", businessType = BusinessType.EXPORT)
-    @PreAuthorize("@ss.hasPermi('test:major:export')")
-    @GetMapping("/export")
-    public AjaxResult export(Student student)
-    {
-        List<Student> list = studentService.selectClassStudents(student);
-        System.out.println(list);
-        ExcelUtil<Student> util = new ExcelUtil<Student>(Student.class);
-        return util.exportExcel(list, "用户数据");
-    }
 
 
 }
