@@ -40,6 +40,24 @@ public class TestersoureServiceImpl implements ITestersoureService {
     public List<Testersoure> getAwardListByNo(Testersoure testersoure) {
         return testersoureMapper.queryTitlesListByNo(testersoure);
     }
+    @Override
+    public int updateAdopt2ByNo(Testersoure testersoure) {
+        return testersoureMapper.updateAdopt2ByNo(testersoure);
+    }
 
+    @Override
+    public int updateAdoptByNo(Testersoure testersoure) {
+        return testersoureMapper.updateAdoptByNo(testersoure);
+    }
+
+    @Override
+    public int updateAdopt2ByNos(String string) {
+        return testersoureMapper.updateAdopt2ByNos(string);
+    }
+
+    @Override
+    public int updateAdoptByNos(String string) {
+        return testersoureMapper.updateAdoptByNos(string);
+    }
 
 }

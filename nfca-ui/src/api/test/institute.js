@@ -22,16 +22,18 @@ export function getTestUser(userId) {
 
 /**
  * 驳回学生申请
+ * @param id 唯一标识
  * @param no 学生学号
  * @param reason 驳回原因
+ * @param operator 操作员
  * @returns {*}
  */
-export function backUser(id,no,reason,opertor) {
+export function backUser(id,no,reason,operator) {
   const data = {
     id,
     no,
     reason,
-    opertor
+    operator
   }
   return request({
     url: '/test/institute/backUser',
@@ -40,12 +42,12 @@ export function backUser(id,no,reason,opertor) {
   })
 }
 
-/**
+/*
+*
  * 批量通过学生申请
  * nos 为所选学生no数组
  * @param nos
  * @returns {*}
- */
 export function accessUser(nos) {
   const data = {
     nos,
@@ -56,6 +58,7 @@ export function accessUser(nos) {
     //data: data
   })
 }
+*/
 
 
 /**
@@ -101,7 +104,7 @@ export function updateScore(id,score) {
     score,
   }
   return request({
-    url: '/test/class/updateScore',
+    url: '/test/institute/updateScore',
     method: 'put',
     data: data
   })

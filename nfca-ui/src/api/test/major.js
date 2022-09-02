@@ -21,19 +21,21 @@ export function getTestUser(userId) {
 
 /**
  * 驳回学生申请
+ * @param id 唯一标识
  * @param no 学生学号
- * @param id 图片唯一标识
  * @param reason 驳回原因
+ * @param operator 操作员
  * @returns {*}
  */
-export function backUser(id,no,reason) {
+export function backUser(id,no,reason,operator) {
   const data = {
     id,
     no,
     reason,
+    operator
   }
   return request({
-    url: '/test/class/backUser',
+    url: '/test/major/backUser',
     method: 'put',
     data: data
   })
@@ -100,7 +102,7 @@ export function updateScore(id,score) {
     score,
   }
   return request({
-    url: '/test/class/updateScore',
+    url: '/test/major/updateScore',
     method: 'put',
     data: data
   })

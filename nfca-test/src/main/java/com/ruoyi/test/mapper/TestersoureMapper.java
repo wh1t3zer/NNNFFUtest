@@ -26,6 +26,15 @@ public interface TestersoureMapper {
 
     String selectOpenIdByNo(int no);
 
+    int updateAdopter2ById(Testersoure testersoure);
+
+    int updateAdopt2ByNo(Testersoure testersoure);
+    int updateAdoptByNo(Testersoure testersoure);
+
+//    List<Testersoure> selectTestUserByNo(Testersoure testersoure);
+
+    int updateAdopt2ByNos(String string);
+    int updateAdoptByNos(String string);
 
 //    List<Testersoure> selectTestUserByNo(Testersoure testersoure);
 }

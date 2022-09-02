@@ -18,7 +18,12 @@ public interface ITestersoureService {
     List<Testersoure> getAwardListByNo(Testersoure testersoure);
 
 //    List<Testersoure> selectTestUserByNo(Testersoure testersoure);
-
+    //通过学号修改adopt2 adopt
+    int updateAdopt2ByNo(Testersoure testersoure);
+    int updateAdoptByNo(Testersoure testersoure);
+    //批量修改adopt2的值为1    (string 为学号数组)
+    int updateAdopt2ByNos(String string);
+    int updateAdoptByNos(String string);
 
 
 }

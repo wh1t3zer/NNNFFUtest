@@ -61,25 +61,6 @@
             >通过</el-button>
           </el-col>
         </el-row>
-        <el-row :gutter="10" class="mb8" style="display: inline-block; margin-left: 20px">
-          <el-col :span="1.5">
-            <el-button
-              type="warning"
-              icon="el-icon-download"
-              size="mini"
-              @click="handleExport"
-            >导出</el-button>
-          </el-col>
-
-          <el-col :span="1.5">
-            <el-button
-              type="warning"
-              icon="el-icon-download"
-              size="mini"
-              @click="handlePush"
-            >发送</el-button>
-          </el-col>
-        </el-row>
 
         <el-table v-loading="loading" :data="testList" @selection-change="handleSelectionChange">
           <el-table-column type="selection" width="50" align="center" />
@@ -106,7 +87,10 @@
             class-name="small-padding fixed-width"
           >
             <template slot-scope="scope" >
-              <el-button type="success" @click="handleEdit(scope.row)">编辑<i class="el-icon-edit"></i></el-button>
+              <el-button
+                type="success"
+                @click="handleEdit(scope.row)"
+                v-hasPermi="['test:class:edit']">编辑<i class="el-icon-edit"></i></el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -913,7 +897,7 @@
         this.updateAllScore();
         this.outerVisible = false
         this.getList()
-        
+
       },
 
       /**
@@ -1225,8 +1209,8 @@
             await updateScore(this.physicalScore2[i].id,this.physicalScore2[i].score*100,operator);
            }
         }
-      
-      
+
+
       },
 
 

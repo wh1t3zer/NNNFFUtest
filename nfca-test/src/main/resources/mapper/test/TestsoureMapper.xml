@@ -20,11 +20,11 @@
     </resultMap>
 
     <update id="updateReasonByNo" parameterType="com.ruoyi.test.domain.Testersoure">
-        update testerSoure set reason = #{reason},adopter = #{adopter} where id = #{id}
+        update testerSoure set reason = #{reason},adopter = #{adopter},operator=#{operator} where id = #{id}
     </update>
 
     <update id="updateReasonByNo2" parameterType="com.ruoyi.test.domain.Testersoure">
-        update testerSoure set reason = #{reason},adopter2 = #{adopter2} where id = #{id}
+        update testerSoure set reason = #{reason},adopter2 = #{adopter2},operator=#{operator} where id = #{id}
     </update>
 
     <update id="updateScoreById" parameterType="com.ruoyi.test.domain.Testersoure">
@@ -41,11 +41,10 @@
 
 
     <select id="queryTitlesListByNo" parameterType="com.ruoyi.test.domain.Testersoure" resultMap="TestersoureResult">
-        select t.id ,t.no,t.score,t.module,t.detail,t.title,u.openid,t.adopter,t.adopter2,
-               (select name from testerMember where no = t.operator limit 1) as operator
+        select t.id ,t.no,t.score,t.module,t.detail,t.title,u.openid,t.adopter,t.adopter2,t.operator
         from ncg.testerSoure t
-                 join account.user_info u
-                      on t.no = u.no
+        join account.user_info u
+        on t.no = u.no
         where t.no = #{no}
     </select>
 

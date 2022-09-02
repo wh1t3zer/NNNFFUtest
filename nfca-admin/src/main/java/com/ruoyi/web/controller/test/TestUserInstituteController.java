@@ -5,9 +5,12 @@ import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.page.TableDataInfo;
 import com.ruoyi.common.enums.BusinessType;
+import com.ruoyi.common.utils.poi.ExcelUtil;
+import com.ruoyi.test.domain.ExportInfo;
 import com.ruoyi.test.domain.Student;
 import com.ruoyi.test.domain.TestUser;
 import com.ruoyi.test.domain.Testersoure;
+import com.ruoyi.test.service.IExportInfoService;
 import com.ruoyi.test.service.IStudentService;
 import com.ruoyi.test.service.ITestUserService;
 import com.ruoyi.test.service.ITestersoureService;
@@ -33,6 +36,9 @@ public class TestUserInstituteController extends BaseController
 
     @Autowired
     private IStudentService studentService;
+
+    @Autowired
+    private IExportInfoService iexportInfoService;
 
     @Autowired
     private ITestersoureService testersoureService;
@@ -108,24 +114,28 @@ public class TestUserInstituteController extends BaseController
         return toAjax(testUserService.backTestUser(testUser));
     }*/
     public AjaxResult backUser(@RequestBody Testersoure testersoure){
-        System.out.println(testersoure);
+
         Student student = new Student();
         student.setStatus("2");
-        testersoure.setAdopter2("2");
+        testersoure.setAdopter2(2);
         student.setNo(testersoure.getNo());
         studentService.updateStatusByNo(student);
+        testersoureService.updateReasonByNo2(testersoure);
+        System.out.println("--------------------");
+        System.out.println(testersoure);
+        System.out.println("--------------------");
         return toAjax(testersoureService.updateReasonByNo2(testersoure));
     }
 
     /**
      * 批量通过学生申请
-     */
     @PreAuthorize("@ss.hasPermi('test:institute:access')")
     @Log(title = "access", businessType = BusinessType.UPDATE)
     @PutMapping("/{nos}")
     public AjaxResult accessUser(@PathVariable String nos){
+        testersoureService.updateAdoptByNos(nos);
         return toAjax(studentService.updateStatusByNos(nos));
-    }
+    }*/
 
     /**
      * 通过单个学生
@@ -134,17 +144,21 @@ public class TestUserInstituteController extends BaseController
     @Log(title = "access2", businessType = BusinessType.UPDATE)
     @PutMapping("/accessUser2")
     public AjaxResult accessUser2(@RequestBody Student student){
+
         student.setStatus("1");
+        Testersoure testersoure = new Testersoure();
+        testersoure.setNo(student.getNo());
+        testersoure.setAdopter2(1);
+        testersoureService.updateAdopt2ByNo(testersoure);
         return toAjax(studentService.updateStatusByNo(student));
     }
-
 
     /**
      * 查询奖项
      * @param
      * @return
      */
-    @PreAuthorize("@ss.hasPermi('test:institute:getAwards')")
+
     @PostMapping("/getAwards")
     public List<Testersoure> handleGetAwards(@RequestBody Testersoure testersoure){
 
@@ -163,6 +177,19 @@ public class TestUserInstituteController extends BaseController
         return toAjax(testersoureService.updateScoreById(testersoure));
     }
 
+
+    /*
+     * 导出
+     * */
+    @Log(title = "用户管理", businessType = BusinessType.EXPORT)
+    @PreAuthorize("@ss.hasPermi('test:institute:export')")
+    @GetMapping("/export")
+    public AjaxResult export(ExportInfo exportInfo)
+    {
+        List<ExportInfo> ExportInfolist = iexportInfoService.selectExportInfo();
+        ExcelUtil<ExportInfo> util = new ExcelUtil<ExportInfo>(ExportInfo.class);
+        return util.exportExcel(ExportInfolist, "用户数据");
+    }
 
 
 }
