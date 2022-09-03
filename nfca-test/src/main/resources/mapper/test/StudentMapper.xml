@@ -119,13 +119,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 #{classId}
             </foreach>
         </if>
-        /*专业筛选*/
-        <if test="major != null  and major != ''">
-            and s.major in
-            <foreach collection="major.split(',')" item="major" separator="," open="(" close=")">
-                #{major}
-            </foreach>
-        </if>
+       
     </select>
 
 
