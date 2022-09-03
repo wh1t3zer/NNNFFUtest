@@ -17,16 +17,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
     <select id="selectExportInfo"  resultMap="ExportInfoResult">
-        select s.name,t1.no,s.grade, c.name as className, t1.score1 as score2,t2.score2 as score1
+        select s.name,t1.no,s.grade, c.name as className, t1.score1 as score2,t2.score2 as score1,t3.score as score3
         from
-            (select  no,sum(score) as score1 from testerSoure where module  in ('knowl','socialWork','competition',   'honorary')  GROUP BY no) t1
-        join (select no, sum(score) as score2 from testerSoure where module  in ('politics','ideology','morality',   'organ',
-                'law','learning','development','scientific','physical','mental') GROUP BY no) t2
+            (select  no,sum(score) as score1 from testerSoure where module  in ('knowl','socialWork','competition',           'honorary')  GROUP BY no) t1
+        join (select no, sum(score) as score2 from testerSoure where module  in ('politics','ideology','morality',            'organ', 'law','learning','development','scientific','physical','mental') GROUP BY no) t2
         on t1.no = t2.no
         join student s
         on t1.no = s.no
         join classes c
         on c.id=s.classid
+    join (select no,score,title from testerSoure where module = 'achievement') t3
+    on t1.no = t3.no
         where s.grade =  19 or s.grade = 20
     </select>
 

@@ -1421,6 +1421,7 @@
           grade: undefined,
           score1: undefined,
           score2: undefined,
+          score3: undefined,
           major: undefined,
         },
         // 表单校验

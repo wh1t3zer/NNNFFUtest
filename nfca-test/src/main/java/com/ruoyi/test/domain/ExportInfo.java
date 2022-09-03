@@ -27,6 +27,10 @@ public class ExportInfo {
     @Excel(name = "基础性素质测评",cellType = Excel.ColumnType.NUMERIC)
     private Integer score2;     //基础性素质测评
 
+    @Excel(name = "期末成绩",cellType = Excel.ColumnType.NUMERIC)
+    private Integer score3;     //基础性素质测评
+
+
 
 
     public Integer getGrade() {
