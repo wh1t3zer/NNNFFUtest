@@ -110,11 +110,11 @@ public class TestUserMajorController extends BaseController
     public AjaxResult backTestUser(@RequestBody Testersoure testersoure){
         Student student = new Student();
         student.setStatus("2");
-        testersoure.setAdopter(2);
+        testersoure.setAdopter2(2);
         student.setNo(testersoure.getNo());
         studentService.updateStatusByNo(student);
-        testersoureService.updateAdopterById(testersoure);
-        return toAjax(testersoureService.updateReasonByNo(testersoure));
+        testersoureService.updateReasonByNo2(testersoure);
+        return toAjax(testersoureService.updateReasonByNo2(testersoure));
     }
 
     /*批量通过学生申请*/
@@ -122,7 +122,7 @@ public class TestUserMajorController extends BaseController
     @PutMapping("/access")
     public AjaxResult accessUser(@RequestBody Testersoure testersoure){
 
-        testersoureService.updateAdoptByNos(testersoure);
+        testersoureService.updateAdopt2ByNos(testersoure);
         return toAjax(studentService.updateStatusByNos(testersoure.getNos()));
     }
 
@@ -137,9 +137,9 @@ public class TestUserMajorController extends BaseController
         student.setStatus("1");
         Testersoure testersoure = new Testersoure();
         testersoure.setNo(student.getNo());
-        testersoure.setAdopter(1);
+        testersoure.setAdopter2(1);
         testersoure.setOperator(student.getOperator());
-        testersoureService.updateAdoptByNo(testersoure);
+        testersoureService.updateAdopt2ByNo(testersoure);
         return toAjax(studentService.updateStatusByNo(student));
     }
 

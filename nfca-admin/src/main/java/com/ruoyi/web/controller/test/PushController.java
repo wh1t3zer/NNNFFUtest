@@ -22,10 +22,8 @@ public class PushController extends BaseController{
      * */
     @PostMapping("/push")
     public String push(@RequestBody Testersoure testersoure) {
-        //String openid = testersoure.getOpenId();
-        //String reason = testersoure.getReason();
-        String reason = "";
-        String openid = "";
+        String openid = testersoure.getOpenId();
+        String reason = testersoure.getReason();
         System.out.println(openid);
         System.out.println(reason);
         //1，配置
