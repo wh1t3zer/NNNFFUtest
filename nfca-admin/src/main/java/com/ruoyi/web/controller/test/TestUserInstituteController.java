@@ -122,9 +122,6 @@ public class TestUserInstituteController extends BaseController
         student.setNo(testersoure.getNo());
         studentService.updateStatusByNo(student);
         testersoureService.updateReasonByNo2(testersoure);
-        System.out.println("--------------------");
-        System.out.println(testersoure);
-        System.out.println("--------------------");
         return toAjax(testersoureService.updateReasonByNo2(testersoure));
     }
 

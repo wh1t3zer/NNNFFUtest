@@ -63,6 +63,7 @@ public class TestUserMajorController extends BaseController
         return getDataTable(list);
     }
 
+
     /*
      *  ID查询学生
      * */
